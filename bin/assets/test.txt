@@ -1,0 +1,1 @@
+Hola whilelist de gitignore.

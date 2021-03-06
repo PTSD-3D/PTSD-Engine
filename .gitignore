@@ -26,10 +26,16 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+
+# Ignore all bin EXCEPT ASSETS
+[Bb]in/*
+![Bb]in/assets/
+
+
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+[Tt]mp/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
