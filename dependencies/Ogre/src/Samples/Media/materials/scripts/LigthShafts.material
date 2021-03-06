@@ -1,0 +1,101 @@
+// ---------------------------------------------------------------------------------------
+// Light shafts shaders with shadows and noise support
+// Inpirated on the ATI paper https://developer.amd.com/wordpress/media/2012/10/Mitchell_LightShafts.pdf
+// Ogre3D implementation by Xavier Verguín González (xavyiy [at] gmail [dot] com)
+// ---------------------------------------------------------------------------------------
+
+// --------------------- Light shafts material ------------------------
+
+vertex_program LightShafts_VP_GLSL glsl
+{
+    source LightShafts.vert
+}
+
+vertex_program LightShafts_VP_HLSL hlsl
+{
+    source LightShafts.vert
+    target vs_2_0
+}
+
+fragment_program LightShafts_FP_GLSL glsl
+{
+    source LightShafts.frag
+    default_params
+    {
+        param_named uDepthMap int 0
+        param_named uCookieMap int 1
+        param_named uNoiseMap int 2
+    }
+}
+
+fragment_program LightShafts_FP_HLSL hlsl
+{
+    source LightShafts.frag
+    target ps_2_0
+}
+
+vertex_program LightShafts_VP unified
+{
+    delegate LightShafts_VP_GLSL
+    delegate LightShafts_VP_HLSL
+    default_params
+    {
+        param_named_auto uWorldView worldview_matrix
+        param_named_auto uWorldViewProj worldviewproj_matrix
+        param_named_auto uTexWorldViewProj texture_worldviewproj_matrix 0
+    }
+}
+
+fragment_program LightShafts_FP unified
+{
+    delegate LightShafts_FP_GLSL
+    delegate LightShafts_FP_HLSL
+}
+
+material LightShafts
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+
+            depth_write off
+            depth_check on
+
+            scene_blend add
+
+            vertex_program_ref LightShafts_VP
+            {
+            }
+
+            fragment_program_ref LightShafts_FP
+            {
+                param_named_auto uAttenuation light_attenuation 0
+                param_named_auto uLightPosition light_position_view_space 0
+                param_named_auto Time time_0_1 44
+            }
+
+            // Depth map
+            texture_unit
+            {
+                tex_address_mode clamp
+                content_type shadow
+            }
+
+            // Projector cookie
+            texture_unit
+            {
+                tex_address_mode clamp
+                texture Cookie0.png
+            }
+
+            // Noise texture
+            texture_unit
+            {
+                tex_address_mode wrap
+                texture Noise.png
+            }
+        }
+    }
+}

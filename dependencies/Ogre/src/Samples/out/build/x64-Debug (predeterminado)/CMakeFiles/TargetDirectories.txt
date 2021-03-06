@@ -1,0 +1,5 @@
+H:/Universidad/GDV 3/P3 - Proyectos III/PTSD/dependencies/Ogre/src/Samples/out/build/x64-Debug (predeterminado)/CMakeFiles/install/local.dir
+H:/Universidad/GDV 3/P3 - Proyectos III/PTSD/dependencies/Ogre/src/Samples/out/build/x64-Debug (predeterminado)/CMakeFiles/install.dir
+H:/Universidad/GDV 3/P3 - Proyectos III/PTSD/dependencies/Ogre/src/Samples/out/build/x64-Debug (predeterminado)/CMakeFiles/edit_cache.dir
+H:/Universidad/GDV 3/P3 - Proyectos III/PTSD/dependencies/Ogre/src/Samples/out/build/x64-Debug (predeterminado)/CMakeFiles/rebuild_cache.dir
+H:/Universidad/GDV 3/P3 - Proyectos III/PTSD/dependencies/Ogre/src/Samples/out/build/x64-Debug (predeterminado)/CMakeFiles/list_install_components.dir
