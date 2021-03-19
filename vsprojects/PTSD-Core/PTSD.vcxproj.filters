@@ -23,5 +23,8 @@
     <ClCompile Include="..\..\projects\PTSD-Core\src\test.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Core\src\main.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
