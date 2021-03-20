@@ -21,7 +21,9 @@ target_include_directories(PTSD-Core PUBLIC "${MY_INCLUDE}")
 
 #Creo que solo deberían hacer falta includes de PTSD-Modules y librerías de la STL si eso
 target_include_directories(PTSD-Core PUBLIC "${PTSD_ROOT}/dependencies/Ogre/build/include")
-target_include_directories(PTSD-Core PUBLIC "/usr/local/include/OGRE")
+target_include_directories(PTSD-Core PUBLIC "${PTSD_ROOT}/dependencies/Ogre/src/OgreMain/include/")
+#target_include_directories(PTSD-Core PUBLIC "/usr/local/include/OGRE")
+
 
 #-> No debería de linkar con Ogre. Esto es provisional
 target_link_libraries(PTSD-Core LINK_PUBLIC "OgreMain")
