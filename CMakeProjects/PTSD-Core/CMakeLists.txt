@@ -30,3 +30,5 @@ target_link_libraries(PTSD-Core LINK_PUBLIC "OgreMain")
 
 
 target_link_libraries(PTSD-Core LINK_PRIVATE ${PTSD_Modules})
+
+target_link_directories(PTSD-Core PRIVATE "${PTSD_ROOT}dependencies/Ogre/build/lib")
