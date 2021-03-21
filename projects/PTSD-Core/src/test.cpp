@@ -1,7 +1,10 @@
 #include "test.h"
 #include <iostream>
 #include <OgreRoot.h>
-//#include <SDL.c>
+
+#include <SDL.h>
+#include <SDL_video.h>
+#include <SDL_syswm.h>
 
 
 namespace PTSD
@@ -13,26 +16,56 @@ namespace PTSD
 		Ogre::Root* root;
 		root = new Ogre::Root();
 
-		root->createRenderWindow("hola", 400, 300, false);
 
-		//SDL.c esta en PTSD-Engine\dependencies\Ogre\build\SDL2-2.0.10\src\SDL.c
+		SDL_Init(SDL_INIT_EVERYTHING);
 
-		//SDL_Init(SDL_INIT_EVERYTHING);
+		if (!SDL_WasInit(SDL_INIT_VIDEO))
+			SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-		//SDL_Surface* screen = SDL_SetVideoMode(640, 480, 8, SDL_SWSURFACE);;
+		Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
 
-		//Ogre::RenderWindow* window;
-		//root->initialise(false);
+		SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
 
-		//SDL_SysWMinfo wmi;
-		//SDL_VERSION(&wmi.version);
+		SDL_SysWMinfo wmInfo;
+		SDL_VERSION(&wmInfo.version);
+		if (SDL_GetWindowWMInfo(sdlWindow, &wmInfo) == SDL_FALSE) {
+			OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+				"Couldn't get WM Info! (SDL2)",
+				"BaseApplication::setup");
+		}
 
-		//SDL_GetWMInfo(&wmi);
+		Ogre::NameValuePairList params;
+
+		/*params["FSAA"] = CurrentGraphicsConfiguration["FSAA"].currentValue;
+		params["vsync"] = false;
+		params["gamma"] = false;
+
+		params["externalWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));*/
+
+		//root->createRenderWindow("HOLI", 200, 200, false);
 
 
-		//Ogre::NameValuePairList misc;
-		//misc["externalWindowHandle"] = Ogre::StringConverter::toString((unsigned int)wmi.window);
-		//window = root->createRenderWindow("Render Window", 800, 600, false, &misc);
+		//////////por si queremos que la ventana oculte el cursor
+		SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
+		SDL_ShowCursor(false);
+
+		SDL_Event e;
+
+		bool paco = false;
+
+		while (!paco) {
+
+			SDL_PollEvent(&e);
+			if (e.type == SDL_KEYDOWN) {
+				switch (e.key.keysym.sym) {
+				case SDLK_LEFT:
+					std::cout << "Wenas tardes" << "\n";
+					paco = true;
+					break;
+				}
+			}
+			
+		}
 
 		std::cout << "Hola Ogre\n";
 	}
