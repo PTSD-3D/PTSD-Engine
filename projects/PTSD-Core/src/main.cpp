@@ -1,9 +1,10 @@
 #include <iostream>
 #include "test.h"
-#include "PTSDUI.h"
+#include "PTSDLog.h"
 
 int main()
 {
 	PTSD::test();
-	PTSD::UI::Init();
+	PTSD::Log* m_LogSystem = new PTSD::Log();
+	m_LogSystem->Init();
 }

@@ -26,8 +26,8 @@
     <ClCompile Include="..\..\projects\PTSD-Core\src\test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PTSD-UI\PTSD-UI.vcxproj">
-      <Project>{bf836b04-6f79-4b76-bb79-c598b92d2dda}</Project>
+    <ProjectReference Include="..\PTSD-Logger\PTSD-Logger.vcxproj">
+      <Project>{41797280-a7ab-4696-aa4e-8dd149a8a789}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -146,7 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Logger\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,7 +163,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Logger\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
