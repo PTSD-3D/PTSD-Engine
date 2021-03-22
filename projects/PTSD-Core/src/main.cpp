@@ -1,6 +1,6 @@
 #include <iostream>
 #include "test.h"
-#include "PTSDlog.h"
+#include "PTSDLog.h"
 
 int main()
 {
