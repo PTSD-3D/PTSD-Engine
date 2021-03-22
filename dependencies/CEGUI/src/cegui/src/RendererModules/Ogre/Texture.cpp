@@ -243,7 +243,7 @@ void OgreTexture::blitFromMemory(const void* sourceData, const Rectf& area)
     // address the issue as close to the source of the problem as possible.
     Ogre::PixelBox pb(area.getWidth(), area.getHeight(),
                       1, Ogre::PF_A8R8G8B8, const_cast<void*>(sourceData));
-    Ogre::Image::Box box(area.left(), area.top(), area.right(), area.bottom());
+    Ogre::Box box(area.left(), area.top(), area.right(), area.bottom());
     d_texture->getBuffer()->blitFromMemory(pb, box);
 }
 

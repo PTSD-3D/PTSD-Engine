@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\projects\PTSD-UI\include\Header.h">
+    <ClInclude Include="..\..\projects\PTSD-UI\include\PTSDUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-UI\src\Source.cpp">
+    <ClCompile Include="..\..\projects\PTSD-UI\src\PTSDUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
