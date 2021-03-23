@@ -28,16 +28,16 @@ namespace PTSD {
 
 		SDL_Event e;
 
-		bool paco = false;
+		bool salir = false;
 
-		while (!paco) {
+		while (!salir) {
 
 			SDL_PollEvent(&e);
 			if (e.type == SDL_KEYDOWN) {
 				switch (e.key.keysym.sym) {
 				case SDLK_LEFT:
-					std::cout << "Wenas tardes" << "\n";
-					paco = true;
+					std::cout << "Wenas tardes, aqui tu morenito SDL" << "\n";
+					salir = true;
 					break;
 				}
 			}
