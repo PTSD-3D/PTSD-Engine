@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Core", "vsprojects\PTSD-Core\PTSD.vcxproj", "{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSDInput", "vsprojects\PTSDInput\PTSDInput.vcxproj", "{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}.Release|x64.Build.0 = Release|x64
 		{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}.Release|x86.ActiveCfg = Release|Win32
 		{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}.Release|x86.Build.0 = Release|Win32
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Debug|x64.ActiveCfg = Debug|x64
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Debug|x64.Build.0 = Debug|x64
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Debug|x86.ActiveCfg = Debug|Win32
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Debug|x86.Build.0 = Debug|Win32
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Release|x64.ActiveCfg = Release|x64
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Release|x64.Build.0 = Release|x64
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Release|x86.ActiveCfg = Release|Win32
+		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
