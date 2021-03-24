@@ -8,6 +8,8 @@ echo Copiando DLLs...
 copy dependencies\Ogre\build\bin\debug\OgreMain_d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\OgreMain.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
+copy dependencies\Ogre\build\SDL2-build\Debug\SDL2d.dll bin\ 1>NUL
+copy dependencies\Ogre\build\SDL2-build\RelWithDebInfo\SDL2.dll bin\ 1>NUL
 
 echo Copiando DLLs scripting...
 
