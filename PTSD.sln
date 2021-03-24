@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Core", "vsprojects\PTS
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Input", "vsprojects\PTSD-Input\PTSDInput.vcxproj", "{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Logger", "vsprojects\PTSD-Logger\PTSD-Logger.vcxproj", "{41797280-A7AB-4696-AA4E-8DD149A8A789}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Release|x64.Build.0 = Release|x64
 		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Release|x86.ActiveCfg = Release|Win32
 		{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}.Release|x86.Build.0 = Release|Win32
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Debug|x64.ActiveCfg = Debug|x64
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Debug|x64.Build.0 = Debug|x64
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Debug|x86.ActiveCfg = Debug|Win32
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Debug|x86.Build.0 = Debug|Win32
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Release|x64.ActiveCfg = Release|x64
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Release|x64.Build.0 = Release|x64
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Release|x86.ActiveCfg = Release|Win32
+		{41797280-A7AB-4696-AA4E-8DD149A8A789}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
