@@ -10,5 +10,5 @@ int main()
 	m_LogSystem->Init();
 
 	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
-	physicsSystem->init();
+	physicsSystem->test();
 }
