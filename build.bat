@@ -11,4 +11,8 @@ copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
 copy dependencies\Ogre\build\SDL2-build\Debug\SDL2d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\SDL2-build\RelWithDebInfo\SDL2.dll bin\ 1>NUL
 
+echo Copiando DLLs scripting...
+
+copy dependencies\lua\lua54.dll bin\ 1>NUL
+
 PAUSE
