@@ -1,10 +1,16 @@
 #pragma once
-#ifdef _PTSDGRAPHICS
-#define GRAPHICSAPI  __declspec(dllexport)   // export DLL information
-
+#if defined(_MSC_VER)
+	#ifdef _PTSDLOG
+		#define GRAPHICSAPI  __declspec(dllexport)   // export DLL information
+	#else
+		#define GRAPHICSAPI  __declspec(dllimport)   // import DLL information
+	#endif 
 #else
-#define GRAPHICSAPI  __declspec(dllimport)   // import DLL information
-
+	#ifdef _PTSDLOG
+		#define GRAPHICSAPI __attribute__((visibility("default")))
+	#else
+		#define GRAPHICSAPI
+	#endif 
 #endif 
 
 namespace PTSD {
