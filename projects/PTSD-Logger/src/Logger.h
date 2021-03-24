@@ -1,5 +1,5 @@
 namespace PTSD {
 	class Logger {
 
-	}
+	};
 };

@@ -1,0 +1,5 @@
+namespace PTSD {
+	class Graphics {
+
+	};
+};

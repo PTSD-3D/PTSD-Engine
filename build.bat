@@ -10,4 +10,9 @@ copy dependencies\Ogre\build\bin\relwithdebinfo\OgreMain.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
 copy dependencies\bullet\src\bin\pybullet_vs2010_x64_release.dll bin\ 1>NUL
 copy dependencies\bullet\src\bin\pybullet_vs2010_x64_debug.dll bin\ 1>NUL
+
+echo Copiando DLLs scripting...
+
+copy dependencies\lua\lua54.dll bin\ 1>NUL
+
 PAUSE
