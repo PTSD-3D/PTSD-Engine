@@ -2,7 +2,7 @@
    //Esto genera la build. No es necesario utilizar cMake. Esto usa premake que ya viene en el directorio de bullet.
    //La build está localizada en build3/vs2010. Es un poco feo.
 
-2- Se abrirá el directorio vs2010. Abrir 0_BulletSolution.sln y actualizar la solución a la versión más reciente
+2- Se abrirá el directorio vs2010. Abrir 0_Bullet3Solution.sln y actualizar la solución a la versión más reciente
    del SDK de windows (Dejar las opciones por defecto).
 
 3- Compilar SOLO el proyecto pybullet en Debug y en Release. (Recordad cambiar a x64)
