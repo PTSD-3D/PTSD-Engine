@@ -14,10 +14,14 @@ endmacro()
 #My sources
 add_source(Graphics PTSDGraphics)
 
+#Build a lib
 add_library(${NAME} SHARED ${SRCS})
 
 #My include
 target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
+
+#Add compiler definition for macros
+target_compile_definitions(${NAME} PUBLIC _PTSDGRAPHICS)
 
 
 #Link with Ogre and includes
@@ -32,7 +36,7 @@ target_include_directories(${NAME} PUBLIC "${PTSD_ROOT}/dependencies/Ogre/src/Og
 list(APPEND PTSD_MODULES ${NAME})
 set(PTSD_MODULES ${PTSD_MODULES} PARENT_SCOPE)
 
-#Add my self to PTSD INCLUDES listt
+#Add my self to PTSD INCLUDES list
 list(APPEND PTSD_MODULES_INCLUDES ${MY_INCLUDE})
 set(PTSD_MODULES_INCLUDES ${PTSD_MODULES_INCLUDES} PARENT_SCOPE)
 

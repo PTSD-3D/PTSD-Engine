@@ -1,6 +1,7 @@
 #pragma once
+
 #if defined(_MSC_VER)
-	#ifdef _PTSDLOG
+	#ifdef _PTSDGRAPHICS
 		#define GRAPHICSAPI  __declspec(dllexport)   // export DLL information
 	#else
 		#define GRAPHICSAPI  __declspec(dllimport)   // import DLL information
@@ -12,6 +13,7 @@
 		#define GRAPHICSAPI
 	#endif 
 #endif 
+
 
 namespace PTSD {
 	class GRAPHICSAPI Graphics {

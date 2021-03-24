@@ -1,7 +1,6 @@
 #include "test.h"
 #include <iostream>
 
-
 namespace PTSD
 {
 	void test()

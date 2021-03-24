@@ -12,14 +12,24 @@ macro(add_source)
 endmacro()
 				
 #My sources
-#add_source(main.cpp test.cpp)
+add_source( PTSDInput )
 
 add_library(${NAME} SHARED ${SRCS})
 
 #My include
 target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
 
-#probably SDL - target_include_directories(${NAME} PUBLIC "${PTSD-ROOT}/dependencies/Ogre/build/include")
-#probably SDL - target_include_directories(${NAME} PUBLIC "/usr/local/include/OGRE")
-#probably SDL - target_link_libraries(${NAME} LINK_PUBLIC "OgreMain")
-list(APPEND PTSD_Modules ${NAME})
+
+#Link with SDL
+find_package(SDL2 REQUIRED)
+target_include_directories(${NAME} PRIVATE ${SDL2_INCLUDE_DIRS})
+target_link_libraries(${NAME} PRIVATE ${SDL2_LIBRARIES})
+
+
+#Add my self to PTSD MODULES list
+list(APPEND PTSD_MODULES ${NAME})
+set(PTSD_MODULES ${PTSD_MODULES} PARENT_SCOPE)
+
+#Add my self to PTSD INCLUDES list
+list(APPEND PTSD_MODULES_INCLUDES ${MY_INCLUDE})
+set(PTSD_MODULES_INCLUDES ${PTSD_MODULES_INCLUDES} PARENT_SCOPE)
