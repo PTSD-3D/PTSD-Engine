@@ -6,7 +6,7 @@
 int PTSD::UI::Init() {
 
 	CEGUI::BasicImage("PTSD-UI-Test");
-	std::cout << "Hello PTSD-UI" << '\n';
+	std::cout << "UI system initialized\n";
 
 	return 0;
 }
