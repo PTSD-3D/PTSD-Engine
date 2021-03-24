@@ -27,6 +27,7 @@ x86/
 [Aa][Rr][Mm]64/
 bld/
 build/
+vs2010/
 
 # Ignore all bin EXCEPT ASSETS
 [Bb]in/*

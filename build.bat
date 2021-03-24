@@ -8,5 +8,6 @@ echo Copiando DLLs...
 copy dependencies\Ogre\build\bin\debug\OgreMain_d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\OgreMain.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
-
+copy dependencies\bullet\src\bin\pybullet_vs2010_x64_release.dll bin\ 1>NUL
+copy dependencies\bullet\src\bin\pybullet_vs2010_x64_debug.dll bin\ 1>NUL
 PAUSE

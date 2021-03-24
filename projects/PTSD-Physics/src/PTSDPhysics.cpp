@@ -44,6 +44,7 @@ namespace PTSD {
 			{
 				trans = obj->getWorldTransform();
 			}
+			printf("I'm the physics module. I make objects go brrrrr!!!\n");
 			printf(" world pos object %d = %f ,%f ,%f\n", j, float(trans.getOrigin().getX()), float(
 				trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
 		}
