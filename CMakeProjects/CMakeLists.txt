@@ -11,7 +11,7 @@ set(PTSD_MODULES, "")
 link_directories("${PTSD_ROOT}bin/")
 
 #add all PTSD modules before core
-# add_subdirectory(PTSD-Log)
+add_subdirectory(PTSD-Logger)
 # add_subdirectory(PTSD-Render)
 # add_subdirectory(PTSD-Input)
 # add_subdirectory(PTSD-UI)

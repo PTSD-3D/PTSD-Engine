@@ -1,11 +1,117 @@
 #!/bin/bash
-#Call this script to configure project in ./build.
-#cmake --build ./build will compile the project
-dir="build"
 
-if [ ! -d "${dir}" ]; then
-	mkdir "${dir}";
-fi
+# -------------------------------- COLOR VARIABLES
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+#   ------------------------------ UTILITY FUNCTIONS
+function printRed()
+{
+	for arg in "$@"; do
+		printf "${RED}${arg}${NC}\n"
+	done
+}
+
+function printGreen()
+{
+	for arg in "$@"; do
+		printf "${GREEN}${arg}${NC}\n"
+	done
+}
+
+#Checks for dir, otherwise exit
+function checkOrFail(){
+	if [[ ! -d "${1}" ]]; then
+		printRed "Required directory missing: \n${1}"
+		exit 1
+	fi
+}
+
+#Checks for dir, otherwise make it
+function checkOrMake(){
+	if [[ ! -d "${1}" ]]; then
+			mkdir "${1}";
+	fi
+}
+
+#Changes Dir and makes it if needed
+function checkAndCD(){
+	checkOrMake ${1};
+	cd "${1}";
+}
+#-------------------------------------------------------
+
+#-------------------------------------------------------#
+#                       Build Ogre                      #
+#-------------------------------------------------------#
 
 
-cd "${dir}" && cmake ../CMakeProjects/ &>/dev/null;
+# Setup and check dirs
+BinDir="${PWD}/bin/";
+OgreDir="${PWD}/dependencies/Ogre/";
+checkOrMake "${OgreDir}Debug"; 
+checkOrMake "${OgreDir}RelWithDebInfo";
+checkOrMake "${OgreDir}Build";
+checkOrFail "${OgreDir}src";
+
+
+function buildOgreRelease(){
+	cd "${OgreDir}Build";
+	printGreen "Configurando CMake" && cmake -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="0" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_TOOLS:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DCMAKE_BUILD_TYPE:STRING="RelWithDebInfo" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" "../src/";
+	printGreen "Building Ogre en Release" && cmake --build "."
+	printGreen "Installing Ogre en ${OgreDir}RelWithDebInfo/";
+
+	cp -r Dependencies ../RelWithDebInfo/Dependencies;
+	cp -r include ../RelWithDebInfo/include;
+	cp -r lib ../RelWithDebInfo/lib;
+
+	cp  lib/*.so ${BinDir};
+	cd "${OgreDir}Build/Dependencies";
+	cp  lib/*.so ${BinDir} &> /dev/null;
+}
+
+function buildOgreDebug(){
+	cd "${OgreDir}Build";
+	printGreen "Configurando CMake" && cmake -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_BUILD_TOOLS:BOOL="0" -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DCMAKE_BUILD_TYPE:STRING="Debug" -DCMAKE_INSTALL_PREFIX:PATH="/usr/local" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" "../src/";
+	printGreen "Building Ogre en Debug" && cmake  --build "."
+	printGreen "Installing Ogre en ${OgreDir}Debug/";
+
+	cp -r Dependencies ../Debug/Dependencies
+	cp -r include ../Debug/include
+	cp -r lib ../Debug/lib
+
+	cp  lib/*.so ${BinDir};
+	cd "${OgreDir}Build/Dependencies";
+	cp  lib/*.so ${BinDir} &> /dev/null;
+
+}
+
+function readInput(){
+	printf "In wich mode would you like to build PTSD-Engine dependencies:\n"
+	printf "[0] Release\n"
+	printf "[1] Debug\n"
+	printf "[2] Release and Debug\n"
+	printf "[3] Quit\n"
+}
+
+function buildOgre(){
+	readInput;
+	read -n 1 inputVar;
+	if [ ${inputVar} == '0' ]; then
+		buildOgreRelease;
+	elif [ ${inputVar} == '1' ]; then
+		buildOgreDebug;
+	elif [ ${inputVar} == '2' ]; then
+		buildOgreDebug;
+		buildOgreRelease;
+	elif [ ${inputVar} == '3' ]; then
+		return 0;
+	else
+		echo "Option ${inputVar} not supported. Try again.";
+		buildOgre;
+	fi
+}
+
+buildOgre;
+exit 0;

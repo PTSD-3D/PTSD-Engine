@@ -26,7 +26,10 @@ target_include_directories(PTSD-Core PUBLIC "${PTSD_ROOT}/dependencies/Ogre/src/
 
 
 #-> No debería de linkar con Ogre. Esto es provisional
-target_link_libraries(PTSD-Core LINK_PUBLIC "OgreMain")
+IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    set(OGRE_MAIN_DEBUG, "_d")
+ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+target_link_libraries(PTSD-Core LINK_PUBLIC "OgreMain${OGRE_MAIN_DEBUG}")
 
 
 target_link_libraries(PTSD-Core LINK_PRIVATE ${PTSD_Modules})
