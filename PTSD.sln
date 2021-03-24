@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Graphics", "vsprojects
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Scripting", "vsprojects\PTSD-Scripting\PTSD-Scripting.vcxproj", "{999A09D0-B127-4481-926D-E215C121C364}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-UI", "vsprojects\PTSD-UI\PTSD-UI.vcxproj", "{BF836B04-6F79-4B76-BB79-C598B92D2DDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -54,6 +56,14 @@ Global
 		{999A09D0-B127-4481-926D-E215C121C364}.Release|x64.Build.0 = Release|x64
 		{999A09D0-B127-4481-926D-E215C121C364}.Release|x86.ActiveCfg = Release|Win32
 		{999A09D0-B127-4481-926D-E215C121C364}.Release|x86.Build.0 = Release|Win32
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x64.ActiveCfg = Debug|x64
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x64.Build.0 = Debug|x64
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x86.ActiveCfg = Debug|Win32
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x86.Build.0 = Debug|Win32
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Release|x64.ActiveCfg = Release|x64
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Release|x64.Build.0 = Release|x64
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Release|x86.ActiveCfg = Release|Win32
+		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
