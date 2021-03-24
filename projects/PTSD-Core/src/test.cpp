@@ -2,11 +2,6 @@
 #include <iostream>
 #include <OgreRoot.h>
 
-#include <SDL.h>
-#include <SDL_video.h>
-#include <SDL_syswm.h>
-
-
 namespace PTSD
 {
 	void test()

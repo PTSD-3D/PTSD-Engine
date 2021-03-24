@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Core", "vsprojects\PTSD-Core\PTSD.vcxproj", "{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSDInput", "vsprojects\PTSDInput\PTSDInput.vcxproj", "{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Input", "vsprojects\PTSD-Input\PTSDInput.vcxproj", "{6F50BAF9-27CC-4EB7-993A-ABC4AC9D9FA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

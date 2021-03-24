@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\projects\PTSDInput\include\PTSDInput.h" />
+    <ClInclude Include="..\..\projects\PTSD-Input\include\PTSDInput.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSDInput\src\PTSDInput.cpp" />
+    <ClCompile Include="..\..\projects\PTSD-Input\src\PTSDInput.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -30,6 +30,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PTSDInput</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>PTSD-Input</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -102,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_PTSDINPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\src\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,7 +154,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_PTSDINPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\$(ProjectName)\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\$(ProjectName)\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
