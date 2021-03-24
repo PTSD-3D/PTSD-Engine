@@ -1,6 +1,9 @@
 #include "PTSDPhysics.h"
+#include "btBulletDynamicsCommon.h"
+#include "btBulletCollisionCommon.h"
 
 namespace PTSD {
+
 	int PTSDPhysics::init() {
 
 		btDefaultCollisionConfiguration* collisionConfiguration = new
@@ -11,7 +14,6 @@ namespace PTSD {
 
 
 		btBroadphaseInterface* overlappingPairCache = new btDbvtBroadphase();
-
 
 		btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
 

@@ -1,6 +1,4 @@
 #pragma once
-#include "btBulletCollisionCommon.h"
-#include "btBulletDynamicsCommon.h"
 #ifdef _PTSDPHYS
 #define PHYSAPI  __declspec(dllexport)   // export DLL information
 
@@ -13,6 +11,7 @@ namespace PTSD {
 	class PTSDPhysics
 	{
 		public:
+			PTSDPhysics() {};
 			int PHYSAPI init();
 	};
 }

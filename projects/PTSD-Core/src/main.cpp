@@ -9,6 +9,6 @@ int main()
 	PTSD::Log* m_LogSystem = new PTSD::Log();
 	m_LogSystem->Init();
 
-	PTSD::PTSDPhysics* si;
-	si->init();
+	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
+	physicsSystem->init();
 }
