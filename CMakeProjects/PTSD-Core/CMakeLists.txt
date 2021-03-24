@@ -19,6 +19,9 @@ add_executable(PTSD-Core ${SRCS})
 #My include
 target_include_directories(PTSD-Core PUBLIC "${MY_INCLUDE}")
 
+#My modules include
+target_include_directories(PTSD-Core PUBLIC "${PTSD_MODULES_INCLUDES}")
+
 #Creo que solo deberían hacer falta includes de PTSD-Modules y librerías de la STL si eso
 target_include_directories(PTSD-Core PUBLIC "${PTSD_ROOT}/dependencies/Ogre/build/include")
 target_include_directories(PTSD-Core PUBLIC "${PTSD_ROOT}/dependencies/Ogre/src/OgreMain/include/")
@@ -32,6 +35,5 @@ ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
 target_link_libraries(PTSD-Core LINK_PUBLIC "OgreMain${OGRE_MAIN_DEBUG}")
 
 
-target_link_libraries(PTSD-Core LINK_PRIVATE ${PTSD_Modules})
-
+target_link_libraries(PTSD-Core LINK_PRIVATE ${PTSD_MODULES})
 target_link_directories(PTSD-Core PRIVATE "${PTSD_ROOT}dependencies/Ogre/build/lib")

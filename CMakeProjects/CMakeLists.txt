@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(PTSD_ROOT "${PROJECT_SOURCE_DIR}/../")
 set(PTSD_PROJECTS "${PROJECT_SOURCE_DIR}/../projects/")
 set(PTSD_MODULES, "")
+set(PTSD_MODULES_INCLUDES, "")
 
 link_directories("${PTSD_ROOT}bin/")
 

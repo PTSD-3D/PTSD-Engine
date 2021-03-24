@@ -50,14 +50,19 @@ function checkAndCD(){
 # Setup and check dirs
 BinDir="${PWD}/bin/";
 OgreDir="${PWD}/dependencies/Ogre/";
-checkOrMake "${OgreDir}Debug"; 
-checkOrMake "${OgreDir}RelWithDebInfo";
-checkOrMake "${OgreDir}Build";
-checkOrFail "${OgreDir}src";
+SpdlogDir="${PWD}/dependencies/spdlog/";
+
+function setupDirectories()
+{
+	checkOrMake "${1}Debug"; 
+	checkOrMake "${1}RelWithDebInfo";
+	checkOrMake "${1}build";
+	checkOrFail "${1}src";
+}
 
 
 function buildOgreRelease(){
-	cd "${OgreDir}Build";
+	cd "${OgreDir}build";
 	printGreen "Configurando CMake" && cmake -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="0" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_TOOLS:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DCMAKE_BUILD_TYPE:STRING="RelWithDebInfo" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" "../src/";
 	printGreen "Building Ogre en Release" && cmake --build "."
 	printGreen "Installing Ogre en ${OgreDir}RelWithDebInfo/";
@@ -66,25 +71,40 @@ function buildOgreRelease(){
 	cp -r include ../RelWithDebInfo/include;
 	cp -r lib ../RelWithDebInfo/lib;
 
-	cp  lib/*.so ${BinDir};
-	cd "${OgreDir}Build/Dependencies";
-	cp  lib/*.so ${BinDir} &> /dev/null;
+	#Move Shared Libraries to bin
+	cp  lib/*.so* ${BinDir};
+	cd "${OgreDir}build/Dependencies";
+	cp  lib/*.so* ${BinDir} &> /dev/null;
 }
 
 function buildOgreDebug(){
-	cd "${OgreDir}Build";
-	printGreen "Configurando CMake" && cmake -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_BUILD_TOOLS:BOOL="0" -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DCMAKE_BUILD_TYPE:STRING="Debug" -DCMAKE_INSTALL_PREFIX:PATH="/usr/local" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" "../src/";
+	cd "${OgreDir}build";
+	printGreen "Configuring CMake" && cmake -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_BUILD_TOOLS:BOOL="0" -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DCMAKE_BUILD_TYPE:STRING="Debug" -DCMAKE_INSTALL_PREFIX:PATH="/usr/local" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" "../src/";
 	printGreen "Building Ogre en Debug" && cmake  --build "."
 	printGreen "Installing Ogre en ${OgreDir}Debug/";
+		cp -r Dependencies ../Debug/Dependencies
+		cp -r include ../Debug/include
+		cp -r lib ../Debug/lib
 
-	cp -r Dependencies ../Debug/Dependencies
-	cp -r include ../Debug/include
-	cp -r lib ../Debug/lib
-
-	cp  lib/*.so ${BinDir};
+	#Move Shared Libraries to bin
+	cp  lib/*.so* ${BinDir};
 	cd "${OgreDir}Build/Dependencies";
-	cp  lib/*.so ${BinDir} &> /dev/null;
+	cp  lib/*.so* ${BinDir} &> /dev/null;
+}
 
+function buildSpdlogRelease(){
+	cd "${SpdlogDir}build";
+	printGreen "Configuring CMake" && cmake ../src;
+	printGreen "Building Spdlog with Release" && cmake --build ".";
+	cp *.a ../RelWithDebInfo/
+}
+
+
+function buildSpdlogDebug(){
+	cd "${SpdlogDir}build";
+	printGreen "Configuring CMake" && cmake -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DCMAKE_BUILD_TYPE:STRING="Debug" ../src;
+	printGreen "Building Spdlog with Debug" && cmake --build ".";
+	cp *.a ../Debug/
 }
 
 function readInput(){
@@ -95,16 +115,20 @@ function readInput(){
 	printf "[3] Quit\n"
 }
 
-function buildOgre(){
+function buildAll(){
 	readInput;
 	read -n 1 inputVar;
 	if [ ${inputVar} == '0' ]; then
 		buildOgreRelease;
+		buildSpdlogRelease;
 	elif [ ${inputVar} == '1' ]; then
 		buildOgreDebug;
+		buildSpdlogDebug;
 	elif [ ${inputVar} == '2' ]; then
 		buildOgreDebug;
 		buildOgreRelease;
+		buildSpdlogRelease;
+		buildSpdlogDebug;
 	elif [ ${inputVar} == '3' ]; then
 		return 0;
 	else
@@ -113,5 +137,9 @@ function buildOgre(){
 	fi
 }
 
-buildOgre;
+setupDirectories ${OgreDir};
+setupDirectories ${SpdlogDir};
+
+buildAll;
+# buildSpdlogRelease;
 exit 0;

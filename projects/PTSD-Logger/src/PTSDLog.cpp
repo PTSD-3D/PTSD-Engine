@@ -1,6 +1,6 @@
 #include <iostream>
 #include "PTSDLog.h"
-#include "spdlog\spdlog.h"
+#include "spdlog/spdlog.h"
 
 namespace PTSD {
 	int Log::Init() {
