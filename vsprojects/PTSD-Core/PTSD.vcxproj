@@ -29,6 +29,9 @@
     <ProjectReference Include="..\PTSD-Logger\PTSD-Logger.vcxproj">
       <Project>{41797280-a7ab-4696-aa4e-8dd149a8a789}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\PTSD-Physics\PTSD-Physics.vcxproj">
+      <Project>{04cf3f44-77c9-4b6b-b4e8-8a02268fbf45}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
