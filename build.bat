@@ -20,4 +20,8 @@ copy dependencies\CEGUI\src\dependencies\bin\freetype_d.dll bin\ 1>NUL
 copy dependencies\CEGUI\src\dependencies\bin\pcre.dll bin\ 1>NUL
 copy dependencies\CEGUI\src\dependencies\bin\pcre_d.dll bin\ 1>NUL
 
+echo Copiando DLLs scripting...
+
+copy dependencies\lua\lua54.dll bin\ 1>NUL
+
 PAUSE
