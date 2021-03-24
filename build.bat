@@ -11,6 +11,9 @@ copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\debug\RenderSystem_GL_d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\release\RenderSystem_GL.dll bin\ 1>NUL
 
+echo Copiando DLLs de SDL2...
+copy dependencies\Ogre\build\SDL2-build\Debug\SDL2d.dll bin\ 1>NUL
+copy dependencies\Ogre\build\SDL2-build\RelWithDebInfo\SDL2.dll bin\ 1>NUL
 
 echo Copiando DLLs de CEGUI...
 copy dependencies\CEGUI\build\bin\CEGUIBase-0_d.dll bin\ 1>NUL
