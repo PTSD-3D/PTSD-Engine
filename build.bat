@@ -9,4 +9,8 @@ copy dependencies\Ogre\build\bin\debug\OgreMain_d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\OgreMain.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
 
+echo Copiando DLLs scripting...
+
+copy dependencies\lua\lua54.dll bin\ 1>NUL
+
 PAUSE
