@@ -1,0 +1,29 @@
+1- Instalar Python.
+   Si no lo tienes instalado, instalalo directamente en c:, no lo muevas a ningun subdirectorio.
+
+2- Modificar build_visual_studio_vr_pybullet_double.bat en el directorio scr en bullet.
+   Tienes que indicarle la posición de Python al .bat en las líneas 9 y 12.
+   Si has instalado Python directamente en C: , puedes ignorar este paso. No tienes que haberlo metido en ningun subdirectorio, tiene que estar C:/Python39, tal cual.
+   Si tenéis python en, por ejemplo:  C:/myDirectorio1/miDirectorio2, tenéis que modificar las líneas de esta manera:
+   	
+	Línea 9 -
+   	dir c:\python* /b /ad > tmp1234.txt
+	dir c:\miDirectorio1\miDirectorio2\python* /b /ad > tmp1234.txt
+
+	Línea 12 -
+	set myvar=c:/miDirectorio1/miDirectorio2/%myvar1%
+	set myvar=c:/miDirectorio1/miDirectorio2/%myvar1%
+
+3- Ejecutar src/build_visual_studio_vr_pybullet_double.bat
+   //Esto genera la build. No es necesario utilizar cMake. Esto usa premake que ya viene en el directorio de bullet.
+   //La build está localizada en build3/vs2010. Es un poco feo.
+
+4- Se abrirá el directorio vs2010. Abrir 0_Bullet3Solution.sln y actualizar la solución a la versión más reciente
+   del SDK de windows (Dejar las opciones por defecto).
+
+5- Compilar SOLO el proyecto pybullet en Debug y en Release. (Recordad cambiar a x64)
+   //Se generaran las .libs y .dll en el directorio bin
+
+6- Ejecutar build.bat para copiar las .dll necesarias a /bin.
+
+7- Disfrutar de bullet.

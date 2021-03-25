@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+dependencies/bullet/src/build_visual_studio_vr_pybullet_double.bat
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -27,6 +28,7 @@ x86/
 [Aa][Rr][Mm]64/
 bld/
 build/
+vs2010/
 
 # Ignore all bin EXCEPT ASSETS
 [Bb]in/*
