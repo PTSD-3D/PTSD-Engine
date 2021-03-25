@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.10)
+cmake_minimum_required (VERSION 3.12)
 project (PTSD-Engine VERSION 0.1)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -17,7 +17,7 @@ add_subdirectory(PTSD-Graphics)
 add_subdirectory(PTSD-Input)
 # add_subdirectory(PTSD-UI)
 # add_subdirectory(PTSD-Physics)
-# add_subdirectory(PTSD-Script)
+add_subdirectory(PTSD-Scripting)
 #add_subdirectory(PTSD-Audio)
 
 add_subdirectory(PTSD-Core/)

@@ -51,6 +51,7 @@ function checkAndCD(){
 BinDir="${PWD}/bin/";
 OgreDir="${PWD}/dependencies/Ogre/";
 SpdlogDir="${PWD}/dependencies/spdlog/";
+LuaDir="${PWD}/dependencies/lua/lua-5.4.2/";
 
 function setupDirectories()
 {
@@ -107,6 +108,24 @@ function buildSpdlogDebug(){
 	cp *.a ../Debug/
 }
 
+function buildLuaDebug(){
+	cd "${LuaDir}build";
+	cd ..;
+	make MYCFLAGS="-g -ggdb -fPIC" "R=5.4.2" all;
+	mv ./src/liblua.a ./Debug/
+	mv ./src/liblua*.so* ./Debug/
+	make clean;
+}
+
+function buildLuaRelease(){
+	cd "${LuaDir}build";
+	cd ..;
+	make MYCFLAGS="-O3 -fPIC" "R=5.4.2" all;
+	mv ./src/liblua.a ./RelWithDebInfo
+	mv ./src/liblua*.so* ./RelWithDebInfo
+	make clean;
+}
+
 function readInput(){
 	printf "In wich mode would you like to build PTSD-Engine dependencies:\n"
 	printf "[0] Release\n"
@@ -121,14 +140,18 @@ function buildAll(){
 	if [ ${inputVar} == '0' ]; then
 		buildOgreRelease;
 		buildSpdlogRelease;
+		buildLuaRelease
 	elif [ ${inputVar} == '1' ]; then
 		buildOgreDebug;
 		buildSpdlogDebug;
+		buildLuaDebug
 	elif [ ${inputVar} == '2' ]; then
 		buildOgreDebug;
 		buildOgreRelease;
 		buildSpdlogRelease;
 		buildSpdlogDebug;
+		buildLuaDebug;
+		buildLuaRelease;
 	elif [ ${inputVar} == '3' ]; then
 		return 0;
 	else
@@ -139,6 +162,7 @@ function buildAll(){
 
 setupDirectories ${OgreDir};
 setupDirectories ${SpdlogDir};
+setupDirectories ${LuaDir};
 
 buildAll;
 # buildSpdlogRelease;
