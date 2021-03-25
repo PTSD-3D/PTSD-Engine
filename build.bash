@@ -53,6 +53,7 @@ DependenciesDir="${PWD}/dependencies";
 OgreDir="${PWD}/dependencies/Ogre/";
 SpdlogDir="${PWD}/dependencies/spdlog/";
 LuaDir="${PWD}/dependencies/lua/lua-5.4.2/";
+BulletDir="${PWD}/dependencies/bullet/";
 CEGUI="${PWD}/dependencies/CEGUI/";
 
 function setupDirectories()
@@ -124,6 +125,22 @@ function buildCEGUIDebug(){
 	cp  lib/*.so* ${BinDir};
 }
 
+function buildBulletRelease(){
+	cd ${BulletDir}src;
+	printGreen "Executing bullet build_release.sh" && ./build_release.sh;
+	cd ${BulletDir}/src/build_release/;
+	cmake --install .;
+	rm -rf ${BulletDir}src/build_release/;
+}
+function buildBulletDebug(){
+	cd ${BulletDir}src;
+	printGreen "Executing bullet build_debug.sh" && ./build_debug.sh;
+
+	cd ${BulletDir}/src/build_debug/;
+	cmake --install .;
+	rm -rf ${BulletDir}src/build_debug/;
+}
+
 function buildCEGUIRelease(){
 	cd "${CEGUI}build";
 	printGreen "Configuring CMake" && cmake -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/";
@@ -171,25 +188,29 @@ function buildAll(){
 	readInput;
 	read -n 1 inputVar;
 	if [ ${inputVar} == '0' ]; then
-		# buildOgreRelease;
-		# buildSpdlogRelease;
-		# buildLuaRelease;
+		buildOgreRelease;
+		buildSpdlogRelease;
+		buildLuaRelease;
 		buildCEGUIRelease;
-	elif [ ${inputVar} == '1' ]; then
-		# buildOgreDebug;
-		# buildSpdlogDebug;
-		# buildLuaDebug;
-		buildCEGUIDebug;
-	elif [ ${inputVar} == '2' ]; then
-		# buildOgreDebug;
-		# buildOgreRelease;
-		# buildSpdlogRelease;
-		# buildSpdlogDebug;
-		# buildLuaDebug;
-		# buildLuaRelease;
-		buildCEGUIDebug;
-		buildCEGUIRelease;
+		buildBulletRelease;
 
+	elif [ ${inputVar} == '1' ]; then
+		buildOgreDebug;
+		buildSpdlogDebug;
+		buildLuaDebug;
+		buildCEGUIDebug;
+		buildBulletDebug;
+	elif [ ${inputVar} == '2' ]; then
+		buildOgreDebug;
+		buildOgreRelease;
+		buildSpdlogRelease;
+		buildSpdlogDebug;
+		buildLuaDebug;
+		buildLuaRelease;
+		buildCEGUIDebug;
+		buildCEGUIRelease;
+		buildBulletDebug;
+		buildBulletRelease;
 	elif [ ${inputVar} == '3' ]; then
 		return 0;
 	else
@@ -202,7 +223,7 @@ setupDirectories ${OgreDir};
 setupDirectories ${SpdlogDir};
 setupDirectories ${LuaDir};
 setupDirectories ${CEGUI};
+setupDirectories ${BulletDir};
 
 buildAll;
-# buildSpdlogRelease;
 exit 0;
