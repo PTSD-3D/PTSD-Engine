@@ -1,41 +1,51 @@
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PTSD_ROOT}/bin/")
+#################
+#Setup variables#
+#################
 
-set("NAME" "PTSD-Scripting")
-set ("MY_SOURCE" "${PTSD_PROJECTS}${NAME}/src/")
-set ("MY_INCLUDE" "${PTSD_PROJECTS}${NAME}/include/")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PTSD_ROOT}/bin/")
 set(CMAKE_CXX_STANDARD 17)
+set("NAME" "PTSD-Scripting")
+set("MY_SOURCE" "${PTSD_PROJECTS}${NAME}/src/")
+set("MY_INCLUDE" "${PTSD_PROJECTS}${NAME}/include/")
 
 
-#Add all sources
+##################################
+#Add as library with source macro#
+##################################
+
 macro(add_source)
 		foreach (_src ${ARGN})
 				list(APPEND SRCS "${MY_SOURCE}${_src}")
 		endforeach()
 endmacro()
-				
-#My sources
-add_source( PTSDScripting )
-
+add_source( PTSDScripting )#<----- Add al sources here
 add_library(${NAME} SHARED ${SRCS})
+target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
+target_compile_definitions(${NAME} PUBLIC _PTSDSCRIPTING)
 
-#My include
+
+#############
+#Lua include#
+#############
 target_include_directories(${NAME} PRIVATE "${PTSD_ROOT}dependencies/lua/include")
 target_include_directories(${NAME} PUBLIC "${PTSD_ROOT}dependencies/")
-target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
 
-#Link lua
+
+#############
+#Linking lua#
+#############
+
 set(LUA_LIB_DIR "${PTSD_ROOT}dependencies/lua/lua-5.4.2/RelWithDebInfo/liblua5.4.2.so")
 IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
     set(LUA_LIB_DIR, "${PTSD_ROOT}dependencies/lua/lua-5.4.2/Debug/liblua5.4.2.so")
 ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
 target_link_libraries(${NAME} ${LUA_LIB_DIR})
 
-#Compiler defs
-target_compile_definitions(${NAME} PUBLIC _PTSDSCRIPTING)
 
+#######################################################
+#PTSD MODULE variables for PTSD Core to link propertly#
+#######################################################
 
-
-#Add myself to list and includes of modules
 list(APPEND PTSD_MODULES ${NAME})
 set(PTSD_MODULES ${PTSD_MODULES} PARENT_SCOPE)
 
