@@ -1,0 +1,6 @@
+Name: bullet_robotics_gui
+Description: Bullet GUI extras for robotics
+Requires: bullet
+Version: 3.08
+Libs: -L/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/dependencies/bullet/Debug/lib -lBulletRoboticsGUI
+Cflags: -DBT_USE_DOUBLE_PRECISION -I/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/dependencies/bullet/Debug/include/bullet -I/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/dependencies/bullet/Debug/include/bullet_robotics_gui

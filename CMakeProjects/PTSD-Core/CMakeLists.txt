@@ -2,7 +2,7 @@
 #Setup variables#
 #################
 
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PTSD_ROOT}/bin/")
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PTSD_ROOT}/bin/")
 set (CMAKE_CXX_STANDARD 17)
 set ("NAME" "PTSD-Core")
 set ("MY_SOURCE" "${PTSD_PROJECTS}${NAME}/src/")
@@ -18,7 +18,7 @@ macro(add_source)
 		endforeach()
 endmacro()
 add_source( main test )#<----- Add al sources here
-add_library(${NAME} SHARED ${SRCS})
+add_executable(${NAME} ${SRCS})
 target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
 
 

@@ -38,17 +38,14 @@ target_include_directories(${NAME} PUBLIC "${PTSD_ROOT}dependencies/bullet/src/E
 
 #Set the lib directory depending on debug or release
 IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-	set( PYBULLET_LIB_DIR ${PTSD_ROOT}dependencies/bullet/Debug/lib/)
-ELSE()
-	set( PYBULLET_LIB_DIR ${PTSD_ROOT}dependencies/bullet/RelWithDebInfo/lib/)
+	set( PYBULLET_LIB_SUF "_d")
 ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
 
-#Link with directory
 target_link_libraries( ${NAME} 
-															${PYBULLET_LIB_DIR}libLinearMath.so
-															${PYBULLET_LIB_DIR}libBulletCollision.so
-															${PYBULLET_LIB_DIR}libBullet3Geometry.so
-															${PYBULLET_LIB_DIR}libBulletDynamics.so)
+															LinearMath${PYBULLET_LIB_SUF}
+															BulletCollision${PYBULLET_LIB_SUF}
+															Bullet3Geometry${PYBULLET_LIB_SUF}
+															BulletDynamics${PYBULLET_LIB_SUF})
 
 
 #######################################################

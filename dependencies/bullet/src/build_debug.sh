@@ -5,7 +5,7 @@ if [ -e CMakeCache.txt ]; then
 fi
 mkdir -p build_debug
 cd build_debug
-cmake -DCMAKE_INSTALL_PREFIX=${PWD}/../../Debug -DBUILD_PYBULLET=ON -DBUILD_PYBULLET_NUMPY=ON -DUSE_DOUBLE_PRECISION=ON -DBT_USE_EGL=ON -DCMAKE_BUILD_TYPE=Debug .. || exit 1
+cmake -DCMAKE_DEBUG_POSTFIX="_d" -DCMAKE_INSTALL_PREFIX=${PWD}/../../Debug -DBUILD_PYBULLET=ON -DBUILD_PYBULLET_NUMPY=ON -DUSE_DOUBLE_PRECISION=ON -DBT_USE_EGL=ON -DCMAKE_BUILD_TYPE=Debug .. || exit 1
 make -j $(command nproc 2>/dev/null || echo 12) || exit 1
 cd examples
 cd pybullet

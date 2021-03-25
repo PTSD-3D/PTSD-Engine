@@ -35,11 +35,11 @@ target_include_directories(${NAME} PUBLIC "${PTSD_ROOT}dependencies/")
 #Linking lua#
 #############
 
-set(LUA_LIB_DIR "${PTSD_ROOT}dependencies/lua/lua-5.4.2/RelWithDebInfo/liblua5.4.2.so")
+# set(LUA_LIB_DIR "${PTSD_ROOT}dependencies/lua/lua-5.4.2/RelWithDebInfo/liblua5.4.2.so")
 IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    set(LUA_LIB_DIR, "${PTSD_ROOT}dependencies/lua/lua-5.4.2/Debug/liblua5.4.2.so")
+    set(LUA_SUFFIX_DEBUG, "_d")
 ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
-target_link_libraries(${NAME} ${LUA_LIB_DIR})
+target_link_libraries(${NAME} "lua5.4.2${LUA_SUFFIX_DEBUG}")
 
 
 #######################################################
