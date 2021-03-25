@@ -16,7 +16,6 @@ int main()
 	PTSD::Graphics* m_GraphicsSystem = new PTSD::Graphics();
 	PTSD::Scripting* m_ScriptingSystem = new PTSD::Scripting();
 	PTSD::UI* m_UISystem = new PTSD::UI();
-
 	m_InputSystem->Init();
 	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
 	m_LogSystem->Init();
