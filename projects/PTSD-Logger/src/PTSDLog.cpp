@@ -7,7 +7,7 @@ namespace PTSD {
 
 	/**
 	 * \brief filters out messages under level param
-	 * \param level filter 
+	 * \param level filter
 	 */
 	void Log::setLogLevel(LogLevel level)
 	{
@@ -34,11 +34,23 @@ namespace PTSD {
 		}
 	}
 
+	/**
+	 * \brief Creates a new logger WARNING store the id carefully
+	 * \param name of the logger and possible file
+	 * \param individualFile true to store output separately
+	 * \return id of the logger
+	 */
 	size_t Log::createLogger(const char* name, bool individualFile)
 	{
 		return LogImpl::getInstance()->createLogger(name, individualFile);
 	}
 
+	/**
+	 * \brief Prints a debug message
+	 * \param msg message to print
+	 * \param lv importance of the message
+	 * \param logId Engine=0, Client=1, Extra >1
+	 */
 	void LOG(const char* msg, LogLevel lv, size_t logId)
 	{
 		std::shared_ptr<spdlog::logger> lg = LogImpl::getInstance()->getLogger(logId);
@@ -67,14 +79,17 @@ namespace PTSD {
 	/**
 	 * \brief Initializes logging subsystem
 	 * \param level filters lower than level messages
-	 * \return 
+	 * \return 0 on correct
 	 */
-	int Log::Init(LogLevel level){
-		LogImpl::getInstance()->Init();
+	int Log::Init(LogLevel level) {
 		setLogLevel(level);
+		LogImpl::getInstance()->Init(level);
 		return 0;
 	}
-
+	/**
+	 * \brief Deletes the private implementation singleton
+	 * \return 0 on correct
+	 */
 	int Log::Shutdown()
 	{
 		delete LogImpl::getInstance();
