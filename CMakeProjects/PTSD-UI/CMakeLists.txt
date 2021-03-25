@@ -12,7 +12,7 @@ macro(add_source)
 endmacro()
 				
 #My sources
-#add_source(main.cpp test.cpp)
+add_source(PTSDUI)
 
 add_library(${NAME} SHARED ${SRCS})
 
@@ -22,4 +22,24 @@ target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
 #CEGUI - target_include_directories(${NAME} PUBLIC "${PTSD-ROOT}/dependencies/Ogre/build/include")
 #CEGUI - target_include_directories(${NAME} PUBLIC "/usr/local/include/OGRE")
 #CEGUI && OGRE - target_link_libraries(${NAME} LINK_PUBLIC "OgreMain")
-list(APPEND PTSD_Modules ${NAME})
+
+IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    set(CEGUI_DEBUG, "_d")
+ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+target_link_libraries( ${NAME} ${PTSD_ROOT}bin/libCEGUIBase-0${CEGUI_DEBUG}.so)
+
+IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+	target_include_directories(${NAME} PUBLIC ${PTSD_ROOT}dependencies/CEGUI/Debug/include)
+ELSE()
+	target_include_directories(${NAME} PUBLIC ${PTSD_ROOT}dependencies/CEGUI/RelWithDebInfo/include)
+ENDIF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+
+target_include_directories(${NAME} PUBLIC ${PTSD_ROOT}dependencies/CEGUI/src/cegui/include/)
+
+target_compile_definitions(${NAME} PUBLIC _PTSDUI)
+
+list(APPEND PTSD_MODULES ${NAME})
+set(PTSD_MODULES ${PTSD_MODULES} PARENT_SCOPE)
+
+list(APPEND PTSD_MODULES_INCLUDES ${MY_INCLUDE})
+set(PTSD_MODULES_INCLUDES ${PTSD_MODULES_INCLUDES} PARENT_SCOPE)

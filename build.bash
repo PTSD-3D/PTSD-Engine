@@ -49,9 +49,11 @@ function checkAndCD(){
 
 # Setup and check dirs
 BinDir="${PWD}/bin/";
+DependenciesDir="${PWD}/dependencies";
 OgreDir="${PWD}/dependencies/Ogre/";
 SpdlogDir="${PWD}/dependencies/spdlog/";
 LuaDir="${PWD}/dependencies/lua/lua-5.4.2/";
+CEGUI="${PWD}/dependencies/CEGUI/";
 
 function setupDirectories()
 {
@@ -108,6 +110,34 @@ function buildSpdlogDebug(){
 	cp *.a ../Debug/
 }
 
+function buildCEGUIDebug(){
+	cd "${CEGUI}build";
+	printGreen "Configuring CMake" && cmake -DCMAKE_BUILD_TYPE:STRING="Debug" -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/";
+	printGreen "Building CEGUI en Debug \n---------------------------\n" && cmake  --build "."
+	printGreen "Installing Ogre en ${CEGUI}Debug/";
+		
+	cp -r Dependencies ../Debug/Dependencies
+	cp -r cegui/include ../Debug/include
+	cp -r lib ../Debug/lib
+
+	#Move Shared Libraries to bin
+	cp  lib/*.so* ${BinDir};
+}
+
+function buildCEGUIRelease(){
+	cd "${CEGUI}build";
+	printGreen "Configuring CMake" && cmake -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/";
+	printGreen "Building CEGUI en Release \n---------------------------\n" && cmake  --build "."
+	printGreen "Installing Ogre en ${CEGUI}Release/";
+		
+	cp -r Dependencies ../RelWithDebInfo/Dependencies
+	cp -r cegui/include ../RelWithDebInfo/include
+	cp -r lib ../RelWithDebInfo/lib
+
+	#Move Shared Libraries to bin
+	cp  lib/*.so* ${BinDir};
+}
+
 function buildLuaDebug(){
 	cd "${LuaDir}build";
 	cd ..;
@@ -134,24 +164,32 @@ function readInput(){
 	printf "[3] Quit\n"
 }
 
+
+
+
 function buildAll(){
 	readInput;
 	read -n 1 inputVar;
 	if [ ${inputVar} == '0' ]; then
-		buildOgreRelease;
-		buildSpdlogRelease;
-		buildLuaRelease
+		# buildOgreRelease;
+		# buildSpdlogRelease;
+		# buildLuaRelease;
+		buildCEGUIRelease;
 	elif [ ${inputVar} == '1' ]; then
-		buildOgreDebug;
-		buildSpdlogDebug;
-		buildLuaDebug
+		# buildOgreDebug;
+		# buildSpdlogDebug;
+		# buildLuaDebug;
+		buildCEGUIDebug;
 	elif [ ${inputVar} == '2' ]; then
-		buildOgreDebug;
-		buildOgreRelease;
-		buildSpdlogRelease;
-		buildSpdlogDebug;
-		buildLuaDebug;
-		buildLuaRelease;
+		# buildOgreDebug;
+		# buildOgreRelease;
+		# buildSpdlogRelease;
+		# buildSpdlogDebug;
+		# buildLuaDebug;
+		# buildLuaRelease;
+		buildCEGUIDebug;
+		buildCEGUIRelease;
+
 	elif [ ${inputVar} == '3' ]; then
 		return 0;
 	else
@@ -163,6 +201,7 @@ function buildAll(){
 setupDirectories ${OgreDir};
 setupDirectories ${SpdlogDir};
 setupDirectories ${LuaDir};
+setupDirectories ${CEGUI};
 
 buildAll;
 # buildSpdlogRelease;
