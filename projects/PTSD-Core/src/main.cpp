@@ -5,7 +5,6 @@
 #include "PTSDGraphics.h"
 #include "PTSDScripting.h"
 #include "PTSDUI.h"
-
 #include "PTSDInput.h"
 
 int main()
@@ -13,7 +12,6 @@ int main()
 
 	PTSD::Input* m_InputSystem = new PTSD::Input();
 	PTSD::Log* m_LogSystem = new PTSD::Log();
-	PTSD::Input* m_InputSystem = new PTSD::Input();
 	PTSD::Graphics* m_GraphicsSystem = new PTSD::Graphics();
 	PTSD::Scripting* m_ScriptingSystem = new PTSD::Scripting();
 	PTSD::UI* m_UISystem = new PTSD::UI();

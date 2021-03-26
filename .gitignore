@@ -43,6 +43,12 @@ vs2010/
 #Ignore any dependency build
 [Dd]ependencies/*/[Bb]uild*
 
+#Files made by our build.sh
+[Dd]ependencies/*/[Dd]ebug*
+[Dd]ependencies/*/[Rr]elWithDebInfo*
+[Dd]ependencies/*/*/[Dd]ebug*
+[Dd]ependencies/*/*/[Rr]elWithDebInfo*
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 
