@@ -12,3 +12,5 @@
 * Todos los merges de ramas a main han de ser por medio de squash & merge, para facilitar la revisión del historial de commits.
 
 * Para que una tarea se considere acabada tiene que cumplir sus especificaciones y compilar correctamente en Release y Debug.
+
+* El código estará indentado con tabs
