@@ -54,11 +54,7 @@ function printStatus()
 {
 	height=$(tput lines;)
 	height=$(echo "${height}/2" | bc)
-	# echo ${height}
 	printLogo ${height} 
-	# if (( ${height} > 20 )) ;then
-	# 	echo "PTSD-Engine:"\n;
-	# fi;
 }
 
 #Checks for dir, otherwise exit
@@ -125,8 +121,7 @@ function buildOgreRelease(){
 
 	cd "${OgreDir}build";
 	printGreen "Configurando CMake" && cmake -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="0" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="1" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_TOOLS:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DCMAKE_BUILD_TYPE:STRING="RelWithDebInfo" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" "../src/" &> /dev/null;
-	printGreen "Building Ogre en Release" && cmake --build "." &>/dev/null & 
-spinner 
+	printGreen "Building Ogre en Release" && cmake --build "." &>/dev/null & spinner 
 	printGreen "Installing Ogre en ${OgreDir}RelWithDebInfo/";
 
 	cp -r Dependencies ../RelWithDebInfo/Dependencies;
@@ -147,8 +142,7 @@ function buildOgreDebug(){
 	fi;
 	cd "${OgreDir}build";
 	printGreen "Configuring CMake" && cmake -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_BUILD_TOOLS:BOOL="0" -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DCMAKE_BUILD_TYPE:STRING="Debug" -DCMAKE_INSTALL_PREFIX:PATH="/usr/local" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="1" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" "../src/" &>/dev/null;
-	printGreen "Building Ogre en Debug" && cmake  --build "." &>/dev/null & 
-spinner 
+	printGreen "Building Ogre en Debug" && cmake  --build "." &>/dev/null & spinner 
 	printGreen "Installing Ogre en ${OgreDir}Debug/";
 		cp -r Dependencies ../Debug/Dependencies
 		cp -r include ../Debug/include
@@ -170,8 +164,7 @@ function buildSpdlogRelease(){
 	fi;
 	cd "${SpdlogDir}build";
 	printGreen "Configuring CMake" && cmake -DCMAKE_BUILD_TYPE:STRING="Release" ../src
-	printGreen "Building Spdlog with Release" && cmake --build "." &>/dev/null & 
-spinner 
+	printGreen "Building Spdlog with Release" && cmake --build "." &>/dev/null & spinner 
 	cp *.a ../RelWithDebInfo/
 }
 function buildSpdlogDebug(){
@@ -183,8 +176,7 @@ function buildSpdlogDebug(){
 	fi;
 	cd "${SpdlogDir}build";
 	printGreen "Configuring CMake" && cmake -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DCMAKE_BUILD_TYPE:STRING="Debug" ../src &>/dev/null;
-	printGreen "Building Spdlog with Debug" && cmake --build "." & 
-	spinner
+	printGreen "Building Spdlog with Debug" && cmake --build "." & spinner
 	cp *.a ../Debug/
 }
 
@@ -198,8 +190,7 @@ function buildCEGUIDebug(){
 	fi;
 	cd "${CEGUI}build";
 	printGreen "Configuring CMake" && cmake -DCMAKE_BUILD_TYPE:STRING="Debug" -DCMAKE_DEBUG_POSTFIX:STRING="_d" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/" &>/dev/null;
-	printGreen "Building CEGUI en Debug \n---------------------------\n" && cmake  --build "." & 
-	spinner
+	printGreen "Building CEGUI en Debug \n---------------------------\n" && cmake  --build "." &  spinner
 	printGreen "Installing Ogre en ${CEGUI}Debug/";
 		
 	cp -r Dependencies ../Debug/Dependencies
@@ -218,8 +209,7 @@ function buildCEGUIRelease(){
 	fi;
 	cd "${CEGUI}build";
 	printGreen "Configuring CMake" && cmake -DCMAKE_BUILD_TYPE="Release" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/" &>/dev/null;
-	printGreen "Building CEGUI en Release \n---------------------------\n" && cmake  --build "." & 
-	spinner 
+	printGreen "Building CEGUI en Release \n---------------------------\n" && cmake  --build "." &  spinner 
 	printGreen "Installing Ogre en ${CEGUI}Release/";
 		
 	cp -r Dependencies ../RelWithDebInfo/Dependencies
@@ -241,10 +231,9 @@ function buildBulletRelease(){
 
 	cd ${BulletDir}src;
 	printGreen "Executing bullet build_release.sh" && ./build_release.sh &>/dev/null;
-	cd ${BulletDir}/src/build_release/;
-	cmake --install . & 
-	spinner
-	cd ${BulletDir}/RelWithDebInfo/lib;
+	cd ${BulletDir}src/build_release/;
+	cmake --install . &  spinner
+	cd ${BulletDir}RelWithDebInfo/lib;
 	cp	*LinearMath* ${BinDir}
 	cp	*BulletCollision* ${BinDir}
 	cp	*Bullet3Geometry* ${BinDir}
@@ -263,10 +252,9 @@ function buildBulletDebug(){
 	cd ${BulletDir}src;
 	printGreen "Executing bullet build_debug.sh" && ./build_debug.sh &>/dev/null;
 
-	cd ${BulletDir}/src/build_debug/;
-	cmake --install . & 
-	spinner 
-	cd ${BulletDir}/Debug/lib;
+	cd ${BulletDir}src/build_debug/;
+	cmake --install . &  spinner 
+	cd ${BulletDir}Debug/lib;
 	cp	*LinearMath* ${BinDir}
 	cp	*BulletCollision* ${BinDir}
 	cp	*Bullet3Geometry* ${BinDir}
