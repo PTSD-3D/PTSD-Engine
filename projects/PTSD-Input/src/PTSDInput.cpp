@@ -1,4 +1,5 @@
 #include "PTSDInput.h"
+#include "InputImp.h"
 
 #include <SDL.h>
 #include <SDL_video.h>
@@ -10,40 +11,51 @@ namespace PTSD {
 
 	int Input::Init() {
 
-		SDL_Init(SDL_INIT_EVERYTHING);
+		//SDL_Init(SDL_INIT_EVERYTHING);
 
-		if (!SDL_WasInit(SDL_INIT_VIDEO))
-			SDL_InitSubSystem(SDL_INIT_VIDEO);
+		//if (!SDL_WasInit(SDL_INIT_VIDEO))
+		//	SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-		Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
+		//Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
 
-		SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
+		//SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
 
-		SDL_SysWMinfo wmInfo;
-		SDL_VERSION(&wmInfo.version);
+		//SDL_SysWMinfo wmInfo;
+		//SDL_VERSION(&wmInfo.version);
 
-		//////////por si queremos que la ventana oculte el cursor
-		SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
-		SDL_ShowCursor(false);
+		////////////por si queremos que la ventana oculte el cursor
+		//SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
+		//SDL_ShowCursor(false);
 
-		SDL_Event e;
+		//SDL_Event e;
 
-		bool salir = false;
+		//bool salir = false;
 
-		while (!salir) {
+		//while (!salir) {
 
-			SDL_PollEvent(&e);
-			if (e.type == SDL_KEYDOWN) {
-				switch (e.key.keysym.sym) {
-				case SDLK_LEFT:
-					std::cout << "Wenas tardes, aqui tu morenito SDL" << "\n";
-					salir = true;
-					break;
-				}
-			}
+		//	SDL_PollEvent(&e);
+		//	if (e.type == SDL_KEYDOWN) {
+		//		switch (e.key.keysym.sym) {
+		//		case SDLK_LEFT:
+		//			std::cout << "Wenas tardes, aqui tu morenito SDL" << "\n";
+		//			salir = true;
+		//			break;
+		//		}
+		//	}
 
-		}
+		//}
 
+		return 0;
+	}
+
+	size_t Input::createInput(const char* name, bool individualFile)
+	{
+		return InputImp::getInstance()->createLogger(name, individualFile);
+	}
+
+	int Input::Shutdown()
+	{
+		delete InputImp::getInstance();
 		return 0;
 	}
 }

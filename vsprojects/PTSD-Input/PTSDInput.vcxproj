@@ -20,8 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\projects\PTSD-Input\include\PTSDInput.h" />
+    <ClInclude Include="..\..\projects\PTSD-Input\src\InputImp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\projects\PTSD-Input\src\InputImp.cpp" />
     <ClCompile Include="..\..\projects\PTSD-Input\src\PTSDInput.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

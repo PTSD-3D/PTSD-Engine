@@ -8,12 +8,19 @@
 #endif 
 
 namespace PTSD {
+	class InputImp;
+
 	class INPUTAPI Input {
 	private:
 
 	public:
 		static int Init();
+
 		~Input() {}
 		Input() {}
+
+		size_t createInput(const char* name, bool individualFile);
+
+		int Shutdown();
 	};
 }
