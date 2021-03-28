@@ -19,8 +19,10 @@ namespace PTSD {
 		~Input() {}
 		Input() {}
 
-		size_t createInput(const char* name, bool individualFile);
+		size_t createInput();
 
 		int Shutdown();
+
+		static void test(InputImp* aux);
 	};
 }
