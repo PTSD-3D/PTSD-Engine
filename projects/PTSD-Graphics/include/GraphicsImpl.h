@@ -25,18 +25,24 @@ namespace PTSD
 		Ogre::Viewport* mViewPort;
 		Ogre::FileSystemLayer* mFileSystemLayer;
 
-		////TODO wrappers for Camera and Light
+		//TODO Camera class
+		//TODO Light class
+		//TODO Mesh class
 		//Ogre::SceneNode* mLightNode, mCameraNode;
 
-		void setupWindow1();
-		void setupWindow2();
-		void locateResources();
+		void setupLogging();
+		void setupWindow();
+		void loadResources();
 		void testScene();
+		void msgPump();
 	public:
+		void Init();
+		void Shutdown();
+
+		bool renderFrame();
+
 		GraphicsImpl() = default;
 		~GraphicsImpl() = default;
-		void Init();
-		bool renderFrame();
-		void Shutdown();
+
 	};
 }

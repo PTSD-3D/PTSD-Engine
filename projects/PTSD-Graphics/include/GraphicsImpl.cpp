@@ -17,6 +17,7 @@
 #include <OgreFileSystemLayer.h>
 #include <Ogre.h>
 #include <OgrePlugin.h>
+//#include <OgreWindowEventUtilities.h> //haha OgreBites
 
 // OGRE initialization:
 #ifdef WIN32
@@ -33,95 +34,68 @@
 
 namespace PTSD
 {
-	void GraphicsImpl::setupWindow1()
+	/**
+	 * \brief Redirects OGRE logging system to PTSD-Logger
+	 */
+	void GraphicsImpl::setupLogging()
 	{
-		//TODO check one time config
+		//PTSD Logging, before init we will redirect everything to our own logger
+		Ogre::LogManager* logMgr = new Ogre::LogManager();
+		Ogre::Log* log = Ogre::LogManager::getSingleton().createLog("logs/Ogre.log", true, false, true);
+		log->addListener(new PTSDLogListener());
+		Ogre::LogManager::getSingleton().getDefaultLog()->logMessage("GET OUT OF MY SWAMP", Ogre::LML_WARNING);
+	}
 
-		if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	/**
+	 * \brief Creates an SDL window and hooks OGRE to it
+	 */
+	void GraphicsImpl::setupWindow()
+	{
+		mRoot = new Ogre::Root("plugins.cfg", "ogre.cfg", "Ogre.log");
+
+		if (!mRoot->restoreConfig())
+		{
+			mRoot->showConfigDialog(nullptr);
+		}
+
+		//We create Root without a window
+		mRoot->initialise(false);
+
+		// We set up an SDL window
+		if (SDL_InitSubSystem(SDL_INIT_VIDEO) != 0)
 			LOG("Unable to initialise SDL", LogLevel::Critical);
 
-		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 25, 25, 800, 600, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
-		SDL_GL_CreateContext(mSDLWindow);
+		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 25, 25, 800, 600, SDL_WINDOW_RESIZABLE);
 
 		SDL_SysWMinfo wmInfo;
 		SDL_GetVersion(&wmInfo.version);
 
 		if (!SDL_GetWindowWMInfo(mSDLWindow, &wmInfo))
 		{
-			Ogre::LogManager::getSingleton().logMessage(Ogre::String("Couldn't get WM info"));
+			LOG("Couldnt get window info", Critical);
 		}
-
-		mRoot = new Ogre::Root("plugins.cfg", "ogre.cfg", "Ogre.log");
-		//mRoot->setRenderSystem(mRoot->getRenderSystemByName("OpenGL Rendering Subsystem"));
-		mRoot->restoreConfig();
-		mRoot->initialise(false);
 
 		Ogre::NameValuePairList misc;
 #ifdef SDL_VIDEO_DRIVER_WINDOWS
-		HWND hwnd = wmInfo.info.win.window;
-		Ogre::String winHandle = Ogre::StringConverter::toString((unsigned long)wmInfo.info.win.window);
-		//unsigned long winGlContext = reinterpret_cast<unsigned long>(wmInfo.info.win.hdc);
-
-		SDL_GLContext context = SDL_GL_GetCurrentContext();
-		unsigned long winGlContext = (unsigned long)context;
-
-		misc["externalWindowHandle"] = winHandle;
-		misc["externalGLContext"] = Ogre::StringConverter::toString(winGlContext);
-		misc["externalGLControl"] = Ogre::String("True");
+		misc["externalWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));
 #else
 		misc["currentGLContext"] = Ogre::String("True");
 #endif
 
-
+		//We create/hook Ogre to the SDL window
 		mRenderWindow = mRoot->createRenderWindow("PTSD Top Notch Engine", 800, 600, false, &misc);
 
-
+		mRenderWindow->setActive(true);
+		mRenderWindow->setVisible(true);
 	}
 
-	void GraphicsImpl::setupWindow2()
+	
+	/**
+	 * \brief Finds resources stated in resources.cfg
+	 */
+	void GraphicsImpl::loadResources()
 	{
-		// Initialise OGRE
-		char tmp[64] = "HELP";
-		mRenderWindow = mRoot->initialise(true, tmp);
-
-		// Initialise SDL
-#ifdef WIN32
-   // Allow SDL to use the window OGRE just created
-
-   // Old method: do not use this, because it only works
-   //  when there is 1 (one) window with this name!
-   // HWND hWnd = FindWindow(NULL, tmp);
-
-   // New method: As proposed by Sinbad.
-   //  This method always works.
-		HWND hWnd;
-		mRenderWindow->getCustomAttribute("WINDOW", &hWnd);
-
-		// Set the SDL_WINDOWID environment variable
-		//  Please note that later SDL converts the WINDOWID-string back into
-		//  an unsigned long. So make sure you save a valid id by utilizing 
-		//  %u instead of %d.
-		sprintf(tmp, "SDL_WINDOWID=%u", (unsigned long)hWnd);
-		_putenv(tmp);
-
-		//if (!mRenderWindow->isFullScreen())
-		//{
-		//	// This is necessary to allow the window to move
-		//	//  on WIN32 systems. Without this, the window resets
-		//	//  to the smallest possible size after moving.
-		//	mSDL->initialise(mWindow->getWidth(), mWindow->getHeight());
-		//}
-		//else
-		//{
-		//	mSDL->initialise(0, 0);
-		//}
-#else
-		mSDL->initialise();
-#endif
-	}
-
-	void GraphicsImpl::locateResources()
-	{
+		//TODO parametrization and configuration
 		// load resource paths from config file
 		mFileSystemLayer = new Ogre::FileSystemLayer("./assets/");
 		Ogre::ConfigFile cf;
@@ -159,6 +133,8 @@ namespace PTSD
 		const Ogre::ResourceGroupManager::LocationList genLocs = Ogre::ResourceGroupManager::getSingleton().getResourceLocationList(sec);
 
 		OgreAssert(!genLocs.empty(), ("Resource Group '" + sec + "' must contain at least one entry").c_str());
+
+		Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	}
 
 	void GraphicsImpl::testScene()
@@ -167,11 +143,15 @@ namespace PTSD
 		mSceneMgr = mRoot->createSceneManager();
 
 		mCamera = mSceneMgr->createCamera("mainCam");
-		//mCamera->setPosition(0, 0, 80);
-		//mCamera->lookAt(0, 0, -300);
+		Ogre::SceneNode* camNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+		camNode->setPosition(0, 0, 80);
+		camNode->attachObject(mCamera);
+		//camNode->lookAt();
 		mCamera->setNearClipDistance(5);
+
 		mViewPort = mRenderWindow->addViewport(mCamera);
-		mViewPort->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+		mViewPort->setBackgroundColour(Ogre::ColourValue(1, 0, 0));
+		
 		mCamera->setAspectRatio(Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
 
 
@@ -181,57 +161,99 @@ namespace PTSD
 
 		mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
+		Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 		Ogre::Light* light = mSceneMgr->createLight("MainLight");
-		//light->setPosition(20, 80, 50);
+		lightNode->setPosition(20, 80, 50);
+		lightNode->attachObject(light);
+	}
+
+	
+	/**
+	 * \brief Pumps messages, needed for render loop
+	 */
+	void GraphicsImpl::MsgPump()
+	{
+		
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+			// Windows Message Loop (NULL means check all HWNDs belonging to this context)
+			MSG  msg;
+			while (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+#elif OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+			//GLX Message Pump
+			Ogre::RenderWindowList::iterator win = _msWindows.begin();
+			Ogre::RenderWindowList::iterator end = _msWindows.end();
+
+			Display* xDisplay = 0; // same for all windows
+
+			for (; win != end; win++)
+			{
+				XID xid;
+				XEvent event;
+
+				if (!xDisplay)
+					(win)->getCustomAttribute("XDISPLAY", &xDisplay);
+
+				(win)->getCustomAttribute("WINDOW", &xid);
+
+				while (XCheckWindowEvent(xDisplay, xid, StructureNotifyMask | VisibilityChangeMask | FocusChangeMask, &event))
+				{
+					GLXProc(win, event);
+				}
+
+				// The ClientMessage event does not appear under any Event Mask
+				while (XCheckTypedWindowEvent(xDisplay, xid, ClientMessage, &event))
+				{
+					GLXProc(win, event);
+				}
+			}
+#endif
+		
 	}
 
 	void GraphicsImpl::Init()
 	{
-		//PTSD Logging, before init we will redirect everything to our own logger
-		Ogre::LogManager* logMgr = new Ogre::LogManager();
-		Ogre::Log* log = Ogre::LogManager::getSingleton().createLog("logs/Ogre.log", true, false, true);
-		log->addListener(new PTSDLogListener());
-		Ogre::LogManager::getSingleton().getDefaultLog()->logMessage("GET OUT OF MY SWAMP", Ogre::LML_WARNING);
 
-
-
-		//Ogre Tutorial 6 approves
-		//Ogre::ConfigFile cf;
-		//cf.load("resources.cfg");
-		//Ogre::String name, locType;
-		//Ogre::ConfigFile::SectionIterator secIt = cf.getSectionIterator();
-		//while(secIt.hasMoreElements())
-		//{
-		//	Ogre::ConfigFile::SettingsMultiMap* settings = secIt.getNext();
-		//	Ogre::ConfigFile::SettingsMultiMap::iterator it;
-		//	for (it = settings->begin(); it != settings->end(); ++it)
-		//	{
-		//		locType = it->first;
-		//		name = it->second;
-		//		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, locType);
-		//	}
-		//}
-
-		setupWindow1();
-		locateResources();
-		Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+		setupLogging();
+		setupWindow();
+		loadResources();
 		testScene();
 
-		PTSD::LOG("Graphics system initialized");	
+		LOG("Graphics system initialized");	
 	}
 
+	/**
+	 * \brief Renders a frame!
+	 * \return true on success
+	 */
 	bool GraphicsImpl::renderFrame()
 	{
-		//TODO message pump???
-		if (mRenderWindow->isClosed()) 
+		MsgPump();
+
+		if (mRenderWindow->isClosed())
+		{
+			LOG("Window is closed", LogLevel::Warning);
 			return false;
 
-		if (!mRoot->renderOneFrame()) 
+		}
+
+		if (!mRoot->renderOneFrame())
+		{
+			LOG("Couldnt render frame", Error);
 			return false;
+
+		}
+
+		LOG("Frame rendered", Trace);
+		return true;
 	}
 
 	void GraphicsImpl::Shutdown()
 	{
+		//TODO good shutdown
 		delete mRoot;
 	}
 }

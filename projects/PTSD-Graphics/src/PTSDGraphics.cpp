@@ -10,8 +10,12 @@ namespace PTSD {
 		return 0;
 	}
 
-	void Graphics::renderFrame()
+	/**
+	 * \brief Renders a frame!
+	 * \return True on success
+	 */
+	bool Graphics::renderFrame()
 	{
-		m_impl->renderFrame();
+		return m_impl->renderFrame();
 	}
 }

@@ -18,10 +18,14 @@ int main()
 	PTSD::UI* m_UISystem = new PTSD::UI();
 	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
 
-	
-	m_LogSystem->Init(PTSD::Info);
+
+#ifdef _DEBUG
+	m_LogSystem->Init(PTSD::Trace);
+#else
+	m_LogSystem->Init(PTSD::Warning);
+#endif
 	PTSD::LOG("Beginning Initialization");
-	//m_InputSystem->Init();
+	m_InputSystem->Init();
 	physicsSystem->test();
 	m_GraphicsSystem->Init();
 	m_ScriptingSystem->Init();
