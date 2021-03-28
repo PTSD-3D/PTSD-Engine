@@ -121,13 +121,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_PTSDGRAPHICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Logger\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;SDL2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\Debug\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,24 +138,24 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_PTSDGRAPHICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Logger\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OgreMain.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\RelWithDebInfo\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\projects\PTSD-Graphics\include\GraphicsImpl.h" />
     <ClInclude Include="..\..\projects\PTSD-Graphics\include\PTSDGraphics.h" />
-    <ClInclude Include="..\..\projects\PTSD-Graphics\src\Graphics.h" />
     <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsLogger.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Graphics\src\Graphics.cpp" />
+    <ClCompile Include="..\..\projects\PTSD-Graphics\include\GraphicsImpl.cpp" />
     <ClCompile Include="..\..\projects\PTSD-Graphics\src\PTSDGraphics.cpp" />
   </ItemGroup>
   <ItemGroup>
