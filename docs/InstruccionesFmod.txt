@@ -1,0 +1,5 @@
+No hay que buildear nada :)
+
+Darle al .bat para que lleve los .dll a bin.
+
+Deberían aparecer fmod.dll y fmodL.dll
