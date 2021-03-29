@@ -23,8 +23,8 @@ namespace PTSD
 		CameraImpl(Vec3_placeholder v);
 		~CameraImpl();
 		
-		void lookAt(Vec3_placeholder v);
+		void lookAt(Vec3_placeholder pt);
 		void translate(Vec3_placeholder v);
-		void setPosition(Vec3_placeholder v);
+		void setPosition(Vec3_placeholder pos);
 	};
 };
