@@ -10,7 +10,6 @@
 namespace PTSD {
 	class GRAPHICSAPI Graphics {
 	private:
-
 	public:
 		static int Init();
 		~Graphics() {}
