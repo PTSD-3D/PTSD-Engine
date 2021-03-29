@@ -86,10 +86,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\projects\PTSD-Logger\include\PTSDLog.h" />
-    <ClInclude Include="..\..\projects\PTSD-Logger\src\Logger.h" />
+    <ClInclude Include="..\..\projects\PTSD-Logger\src\LogImpl.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Logger\src\Logger.cpp" />
+    <ClCompile Include="..\..\projects\PTSD-Logger\src\LogImpl.cpp" />
     <ClCompile Include="..\..\projects\PTSD-Logger\src\PTSDLog.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
