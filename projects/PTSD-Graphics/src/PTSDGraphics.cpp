@@ -5,7 +5,7 @@
 namespace PTSD {
 	Graphics* Graphics::m_instance = nullptr;
 	int Graphics::Init() {
-		m_impl = new GraphicsImpl();
+		m_impl = PTSD::GraphicsImpl::getInstance();
 		m_impl->Init();
 		return 0;
 	}
@@ -17,5 +17,10 @@ namespace PTSD {
 	bool Graphics::renderFrame()
 	{
 		return m_impl->renderFrame();
+	}
+
+	Camera* Graphics::getCam()
+	{
+		return m_impl->getCamera();
 	}
 }

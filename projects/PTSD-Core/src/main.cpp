@@ -7,17 +7,17 @@
 #include "PTSDUI.h"
 
 #include "PTSDInput.h"
+#include "Camera.h"
+#include "Vec3.h"
 
 int main()
 {
-
 	PTSD::Input* m_InputSystem = new PTSD::Input();
 	PTSD::Log* m_LogSystem = new PTSD::Log();
 	PTSD::Graphics* m_GraphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Scripting* m_ScriptingSystem = new PTSD::Scripting();
 	PTSD::UI* m_UISystem = new PTSD::UI();
 	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
-
 
 #ifdef _DEBUG
 	m_LogSystem->Init(PTSD::Trace);
@@ -31,9 +31,10 @@ int main()
 	m_ScriptingSystem->Init();
 	PTSD::LOG("All subsystems initialized");
 
-
+	PTSD::Camera* myCam = m_GraphicsSystem->getCam();
 	while(true)
 	{
 		m_GraphicsSystem->renderFrame();
+		m_GraphicsSystem->getCam()->translate({ 0,0,0.1 });
 	}
 }

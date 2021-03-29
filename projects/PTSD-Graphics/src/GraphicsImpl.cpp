@@ -17,7 +17,7 @@
 #include <OgreFileSystemLayer.h>
 #include <Ogre.h>
 #include <OgrePlugin.h>
-//#include <OgreWindowEventUtilities.h> //haha OgreBites
+#include "Camera.h"
 
 // OGRE initialization:
 #ifdef WIN32
@@ -34,6 +34,7 @@
 
 namespace PTSD
 {
+	GraphicsImpl* GraphicsImpl::mInstance = nullptr;
 	/**
 	 * \brief Redirects OGRE logging system to PTSD-Logger
 	 */
@@ -142,18 +143,7 @@ namespace PTSD
 
 		mSceneMgr = mRoot->createSceneManager();
 
-		mCamera = mSceneMgr->createCamera("mainCam");
-		Ogre::SceneNode* camNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-		camNode->setPosition(0, 0, 80);
-		camNode->attachObject(mCamera);
-		//camNode->lookAt();
-		mCamera->setNearClipDistance(5);
-
-		mViewPort = mRenderWindow->addViewport(mCamera);
-		mViewPort->setBackgroundColour(Ogre::ColourValue(1, 0, 0));
-		
-		mCamera->setAspectRatio(Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
-
+		mCamera = new Camera({ 0,0,80 });
 
 		Ogre::Entity* ogreEntt = mSceneMgr->createEntity("ogrehead.mesh");
 		Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
@@ -171,7 +161,7 @@ namespace PTSD
 	/**
 	 * \brief Pumps messages, needed for render loop
 	 */
-	void GraphicsImpl::MsgPump()
+	void GraphicsImpl::msgPump()
 	{
 		
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -231,7 +221,7 @@ namespace PTSD
 	 */
 	bool GraphicsImpl::renderFrame()
 	{
-		MsgPump();
+		msgPump();
 
 		if (mRenderWindow->isClosed())
 		{

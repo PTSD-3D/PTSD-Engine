@@ -9,7 +9,7 @@
 
 namespace PTSD {
 	class GraphicsImpl;
-
+	class Camera;
 
 	/**
 	 * \brief Singleton Rendering Manger
@@ -27,6 +27,7 @@ namespace PTSD {
 		}
 		int Init();
 		bool renderFrame();
+		Camera* getCam();
 		~Graphics() = default;
 		Graphics() = default;
 	};
