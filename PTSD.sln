@@ -18,7 +18,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Graphics", "vsprojects
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Scripting", "vsprojects\PTSD-Scripting\PTSD-Scripting.vcxproj", "{999A09D0-B127-4481-926D-E215C121C364}"
 EndProject
+<<<<<<< HEAD
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Sound", "vsprojects\PTSD-Sound\PTSD-Sound.vcxproj", "{3DE5D76F-910F-4B58-BBC3-55151822A4EE}"
+=======
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-UI", "vsprojects\PTSD-UI\PTSD-UI.vcxproj", "{BF836B04-6F79-4B76-BB79-C598B92D2DDA}"
+>>>>>>> main
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +80,14 @@ Global
 		{999A09D0-B127-4481-926D-E215C121C364}.Release|x64.Build.0 = Release|x64
 		{999A09D0-B127-4481-926D-E215C121C364}.Release|x86.ActiveCfg = Release|Win32
 		{999A09D0-B127-4481-926D-E215C121C364}.Release|x86.Build.0 = Release|Win32
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Debug|x64.ActiveCfg = Debug|x64
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Debug|x64.Build.0 = Debug|x64
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Debug|x86.ActiveCfg = Debug|Win32
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Debug|x86.Build.0 = Debug|Win32
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Release|x64.ActiveCfg = Release|x64
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Release|x64.Build.0 = Release|x64
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Release|x86.ActiveCfg = Release|Win32
+		{3DE5D76F-910F-4B58-BBC3-55151822A4EE}.Release|x86.Build.0 = Release|Win32
 		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x64.ActiveCfg = Debug|x64
 		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x64.Build.0 = Debug|x64
 		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x86.ActiveCfg = Debug|Win32

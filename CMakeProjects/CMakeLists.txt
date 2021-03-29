@@ -21,7 +21,7 @@ add_subdirectory(PTSD-Input)
 add_subdirectory(PTSD-UI)
 add_subdirectory(PTSD-Physics)
 add_subdirectory(PTSD-Scripting)
-#add_subdirectory(PTSD-Audio)
+add_subdirectory(PTSD-Sound)
 
 
 ###########
