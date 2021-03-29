@@ -21,6 +21,9 @@
     <ClInclude Include="..\..\projects\PTSD-Graphics\src\Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsLogger.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-Graphics\src\Graphics.cpp">
