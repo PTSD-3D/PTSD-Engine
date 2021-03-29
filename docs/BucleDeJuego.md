@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Lo mejor y más simple de momento es usar 'update capado y FPS descapados', dependiendo de cómo acabemos implementando los componentes relativos al render sería interesante probar 'Update fijo y fps variables con interpolacion'.
+Vamos a usar 'update capado y FPS descapados'
 
 ## Opciones
 
@@ -93,7 +93,7 @@ La interpolacion funciona realizando calculos simples y visibles (por ejemplo po
 
 El mejor sistema sería utilizar la interpolación de fps junto con update constante, para asi poder reducir el numero de updates/segundo al minimo y aumentar el de renders/segundo al maximo. 
 
-Dependiendo de la implementación de nuestros componentes esto puede ser una tarea más fácil o más dificil, por lo que para no complicarnos la vida de momento podemos realizar el mismo sistema pero sin interpolacion (repite frames en hardware rapido) y habria que aumentar el numero de frames por segundo (menos libertad de gasto de tiempo de update en cada frame) para que se vea smooth.
+Debido a la implementación de nuestro ECS el sistema de render no sabe de la velocidad que lleva por ejemplo el transform, por lo que para no complicarnos la vida usaremos el mismo sistema pero sin interpolacion (repite frames en hardware rapido) y hay que aumentar el numero de frames por segundo (menos libertad de gasto de tiempo de update en cada frame) para que se vea smooth.
 
 #### Docs & referencias
 
