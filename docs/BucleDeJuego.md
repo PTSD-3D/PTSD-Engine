@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Vamos a usar 'update capado y FPS descapados'
+Vamos a usar 'update capado y FPS descapados' pero con un fixedUpdate, de manera que siempre se itera con intervalos de tiempo discretos y conocidos. El bucle de updates de logica va independiente del render, y si el render tarda más, update dará más vueltas para compensar.
 
 ## Opciones
 
@@ -91,12 +91,31 @@ La interpolacion funciona realizando calculos simples y visibles (por ejemplo po
 
 ## Conclusión
 
-El mejor sistema sería utilizar la interpolación de fps junto con update constante, para asi poder reducir el numero de updates/segundo al minimo y aumentar el de renders/segundo al maximo. 
+Debido a la implementación de nuestro ECS el sistema de render no sabe de la velocidad que lleva por ejemplo el transform, por lo que para no complicarnos la vida usaremos el mismo sistema pero sin interpolacion (repite frames en hardware rapido) y pondremos un fixedUpdate que realiza la simulacion en pasos discretos que nosotros decidamos.
 
-Debido a la implementación de nuestro ECS el sistema de render no sabe de la velocidad que lleva por ejemplo el transform, por lo que para no complicarnos la vida usaremos el mismo sistema pero sin interpolacion (repite frames en hardware rapido) y hay que aumentar el numero de frames por segundo (menos libertad de gasto de tiempo de update en cada frame) para que se vea smooth.
+```cpp
+deltaTime = X //Constante a un framerate que nosotros decidamos
+while(jugar){
+    nuevoTiempo = tiempo();
+    tiempoFrame = nuevoTiempo-tiempoActual;
+    tiempoActual = nuevoTiempo;
+
+    acumulador += tiempoFrame;
+
+    while(acumulador >= deltaTime){
+        //pedida de input
+        //update de todos los sistemas
+        update(deltaTime);
+        acumulador -= deltaTime;
+    }
+    render();
+}
+```
 
 #### Docs & referencias
 
 * [Un señor que sabe vainas cuya sabiduría robé](https://dewitters.com/dewitters-gameloop/)
 
 * [Stackexchange en el que dan consejos a un tío que se enfrenta a lo mismo](https://gamedev.stackexchange.com/questions/651/what-should-a-main-game-loop-do)
+
+* [Que hacer con el deltatime](https://gafferongames.com/post/fix_your_timestep/)
