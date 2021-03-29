@@ -13,24 +13,33 @@
 namespace PTSD {
 	int PTSDSound::test() {
         
-        std::cout << "Soy el modulo de sonido. Mis creadores casi se olvidan de mi!!";
+        std::cout << "Soy el modulo de sonido. Mis creadores casi se olvidan de mi :/\n";
 
         FMOD_RESULT result;
-        FMOD::System* system = nullptr;
-        result = FMOD::System_Create(&system); // Create the Studio System object.
-        if (result != FMOD_OK)
-        {
-            std::cout << ("FMOD error! (%d) %s\n", result, FMOD_ErrorString(result));
-            exit(-1);
-        }
+        FMOD::System* system = NULL;
 
-        // Initialize FMOD Studio, which will also initialize FMOD Core
-        result = system->init(512, 0, FMOD_INIT_NORMAL);
+        result = FMOD::System_Create(&system);      // Create the main system object.
         if (result != FMOD_OK)
         {
             printf("FMOD error! (%d) %s\n", result, FMOD_ErrorString(result));
             exit(-1);
         }
+
+        result = system->init(512, FMOD_INIT_NORMAL, 0);    // Initialize FMOD.
+        if (result != FMOD_OK)
+        {
+            printf("FMOD error! (%d) %s\n", result, FMOD_ErrorString(result));
+            exit(-1);
+        }
+
+        FMOD::ChannelGroup *channelGroup = nullptr;
+        FMOD::Channel* channel = nullptr;
+        result = system->createChannelGroup("test", &channelGroup);
+
+        FMOD::Sound *sound;
+        result = system->createSound("../../vsprojects/PTSD-Sound/clowning-around.mp3", FMOD_CREATESTREAM, 0, &sound);
+        result = system->playSound(sound, nullptr, false, &channel);
+        result = channel->setChannelGroup(channelGroup);
 
 	}
 }
