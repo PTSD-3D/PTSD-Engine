@@ -37,7 +37,7 @@ namespace PTSD {
         result = system->createChannelGroup("test", &channelGroup);
 
         FMOD::Sound *sound;
-        result = system->createSound("../../bin/assets/clowning-around.mp3", FMOD_CREATESTREAM, 0, &sound);
+        result = system->createSound("./assets/clowning-around.mp3", FMOD_CREATESTREAM, 0, &sound);
         result = system->playSound(sound, nullptr, false, &channel);
         result = channel->setChannelGroup(channelGroup);
 
