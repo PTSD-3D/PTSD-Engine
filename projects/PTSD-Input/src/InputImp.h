@@ -13,6 +13,7 @@
 namespace PTSD {
 	using namespace std;
 
+	//Struct use for axis directions and operations
 	struct Vector2D {
 		float x;
 		float y;
@@ -56,6 +57,7 @@ namespace PTSD {
 		}
 	};
 
+	//Enums for identification of buttons, triggers and states
 	enum MOUSEBUTTON : Uint8 {
 		LEFT = 0, MIDDLE = 1, RIGHT = 2
 	};
@@ -75,43 +77,42 @@ namespace PTSD {
 		static InputImp* m_instance;
 		InputImp();
 
-		//
-		//variables
-		//
-		//keyboard
+		//Generic keyboard press
 		bool isKeyUpEvent_;
 		bool isKeyDownEvent_;
 
 		//---------------------------------------------
-		//mouse
+		//Generic mouse motion
 		bool isMouseMotionEvent_;
 		bool isMouseButtonEvent_;
 		Vector2D mousePos_;
 		std::array<ButtonState, 3> mbState_;
 		//---------------------------------------------
-		//mandos
+
+		//Variables for controller input
 		int numControllers_;
-		std::vector<SDL_GameController*> m_gameControllers; //punteros a los controllers de sdl
-		std::queue<int> disconnectedGameControllers_;//cola de los mandos desconectados
-			//almacenamiento del estado de los mandos
+		std::vector<SDL_GameController*> m_gameControllers; //Pointers for SDL controllers
+		std::queue<int> disconnectedGameControllers_;	//Queue for disconected controllers
+
+		//State of the inputs from a controller
 		std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 		std::vector<std::pair<double*, double*>> m_triggerValues;
 		std::vector<std::vector<ButtonState>> m_buttonStates;
 		std::vector<Vector2D> lastLStickValue_;
 
-		//teclado y raton
-		//almacenamiento del estado de teclado y raton
+		
+		//State of the inputs from a keyboard and mouse
 		ButtonState m_mouseButtonStates[3];
-		std::vector<SDL_Scancode> m_keysJustDown; //vector de teclas recien pulsadas
-		std::vector<SDL_Scancode> m_keysJustUp; //vector de teclas recien soltadas
+		std::vector<SDL_Scancode> m_keysJustDown; 
+		std::vector<SDL_Scancode> m_keysJustUp; 
 		const int kbSize = 300;
 		std::vector<ButtonState> kbState_;
 		std::queue<int> justUpKeys;
 		std::queue<int> justDownKeys;
 
-		//estructuras auxiliares para la reconexion y desconexion de mandos
-		int gameToSystemCtrlId[4] = { -1,-1,-1,-1 }; //guarda las ids con las que sdl reconoce cada mando del que se pide input
-		std::map<int, int> systemToGameCtrlId; //guarda los ids que el juego asocia a cada input fisico
+		//Reconexion of controllers
+		int gameToSystemCtrlId[4] = { -1,-1,-1,-1 }; //Store ids of the different controllers
+		std::map<int, int> systemToGameCtrlId;
 
 		bool debugFlag_ReconectedController = false;
 
@@ -129,11 +130,12 @@ namespace PTSD {
 
 		inline void onJoyAxisChange(SDL_Event& event);
 		inline void onJoyButtonChange(SDL_Event& event, ButtonState just);
-		//inline bool mapJoystick(SDL_GameController* joy, json mapData);
+		//inline bool mapJoystick(SDL_GameController* joy, json mapData);	//For input mapping from json
 		inline void onControllerAddedEvent(const SDL_Event& event);
 		inline void onControllerRemovedEvent(const SDL_Event& event);
 		inline void initialiseNewController(int i);
 		//---------------------------------------------
+
 		//keyboard
 		inline void onKeyDown(SDL_Event& event) {
 			isKeyDownEvent_ = true;
@@ -187,8 +189,6 @@ namespace PTSD {
 		const int m_joystickDeadZone = 10000;
 		const int m_triggerDeadZone = 10000; //trigger deadzone equals threshold
 
-		//InputImp();
-
 		InputImp(InputImp&) = delete;
 		InputImp& operator=(InputImp&) = delete;
 
@@ -197,6 +197,9 @@ namespace PTSD {
 
 		// update the state
 		void update();
+
+		//Methods to get the information about some kind of input
+		//---------------------------------------------
 
 		// keyboard
 		inline bool keyDownEvent() {
@@ -225,6 +228,8 @@ namespace PTSD {
 		inline bool isKeyJustUp(SDL_Keycode key) {
 			return kbState_[SDL_GetScancodeFromKey(key)] == ButtonState::JustUp;
 		}
+		//---------------------------------------------
+
 		// mouse
 		inline bool mouseMotionEvent() {
 			return isMouseMotionEvent_;
@@ -250,7 +255,7 @@ namespace PTSD {
 		inline bool isMouseButtonJustUp(MOUSEBUTTON mb) {
 			return mbState_[mb] == JustUp;
 		}
-
+		//---------------------------------------------
 
 		// Joystick
 		//init

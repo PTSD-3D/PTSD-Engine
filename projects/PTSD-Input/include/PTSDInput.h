@@ -23,6 +23,10 @@ namespace PTSD {
 
 		int Shutdown();
 
-		static void test(InputImp* aux);
+		static void test();
+
+		static bool keyPressed(/*SDL_Scancode key*/);
+
+		/*static*/ void update();
 	};
 }

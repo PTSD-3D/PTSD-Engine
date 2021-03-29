@@ -16,42 +16,34 @@ namespace PTSD {
 		if (!SDL_WasInit(SDL_INIT_VIDEO))
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-		Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
+		//Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
 
-		SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
+		//SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
 
-		SDL_SysWMinfo wmInfo;
-		SDL_VERSION(&wmInfo.version);
+		//SDL_SysWMinfo wmInfo;
+		//SDL_VERSION(&wmInfo.version);
 
-		//////////por si queremos que la ventana oculte el cursor
-		SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
-		SDL_ShowCursor(false);
+		////Additional configuration
+		//SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
+		//SDL_ShowCursor(false);
 
-		SDL_Event e;
+		//SDL_Event e;
 
 		bool salir = false;
+
+		////Input singleton
 		InputImp* aux = nullptr;
 		aux = InputImp::getInstance();
 		aux->createInput();
-		
 		aux->initialiseGamepads();
 
 
-		while (!salir) {
+		//while (!salir) {
 
-			/*SDL_PollEvent(&e);
-			if (e.type == SDL_KEYDOWN) {
-				switch (e.key.keysym.sym) {
-				case SDLK_LEFT:
-					std::cout << "Wenas tardes, aqui tu morenito SDL" << "\n";
-					salir = true;
-					break;
-				}
-			}*/
-			test(aux);
-			aux->update();
-			salir = (aux->isKeyDown(SDL_SCANCODE_LEFT));
-		}
+		//	test(aux);
+		//	aux->update();
+		//	salir = keyPressed(); /*(aux->isKeyDown(SDL_SCANCODE_LEFT))*/
+		//}
 
 		return 0;
 	}
@@ -67,8 +59,8 @@ namespace PTSD {
 		return 0;
 	}
 
-	void Input::test(InputImp* aux) {
-		
+	void Input::test() {
+		InputImp* aux = InputImp::getInstance();
 	/*	Vector2D pos = aux->getMousePos();
 		cout << pos.x << " " << pos.y << endl;*/
 
@@ -89,5 +81,13 @@ namespace PTSD {
 		//cout << aux->getTrigger(0, GAMEPADTRIGGER::RIGHTTRIGGER) << endl;
 
 		
+	}
+
+	bool Input::keyPressed(/*SDL_Scancode key*/) {
+		return InputImp::getInstance()->isKeyDown(SDL_SCANCODE_LEFT);
+	}
+
+	void Input::update() {
+		InputImp::getInstance()->update();
 	}
 }

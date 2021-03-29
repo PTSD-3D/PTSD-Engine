@@ -25,16 +25,22 @@ int main()
 	m_LogSystem->Init(PTSD::Warning);
 #endif
 	PTSD::LOG("Beginning Initialization");
-	m_InputSystem->Init();
 	physicsSystem->test();
 	m_GraphicsSystem->Init();
+	m_InputSystem->Init();
 	m_ScriptingSystem->Init();
 	PTSD::LOG("All subsystems initialized");
 
 	PTSD::Camera* myCam = m_GraphicsSystem->getCam();
-	while(true)
+	bool exit = false;
+
+	while(!exit)
 	{
+		m_InputSystem->update();
+
 		m_GraphicsSystem->renderFrame();
 		m_GraphicsSystem->getCam()->translate({ 0,0,0.1 });
+
+		exit = m_InputSystem->keyPressed();
 	}
 }
