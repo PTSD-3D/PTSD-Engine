@@ -18,15 +18,15 @@
     <ClInclude Include="..\..\projects\PTSD-Logger\include\PTSDLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\projects\PTSD-Logger\src\Logger.h">
+    <ClInclude Include="..\..\projects\PTSD-Logger\src\LogImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Logger\src\Logger.cpp">
+    <ClCompile Include="..\..\projects\PTSD-Logger\src\PTSDLog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\projects\PTSD-Logger\src\PTSDLog.cpp">
+    <ClCompile Include="..\..\projects\PTSD-Logger\src\LogImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
