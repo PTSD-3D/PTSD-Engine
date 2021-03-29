@@ -22,8 +22,8 @@ int main()
 	PTSD::PTSDSound* m_soundSystem = new PTSD::PTSDSound();
 
 	m_LogSystem->Init();
-	m_soundSystem->test();
-	m_physicsSystem->test();
+	m_soundSystem->Init();
+	m_physicsSystem->Init();
 	m_GraphicsSystem->Init();
 	m_ScriptingSystem->Init();
 	m_InputSystem->Init();

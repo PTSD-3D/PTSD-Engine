@@ -12,6 +12,6 @@ namespace PTSD {
 	{
 		public:
 			PTSDPhysics() {};
-			int PHYSAPI test();
+			int PHYSAPI Init();
 	};
 }
