@@ -10,8 +10,6 @@
 
 int main()
 {
-
-	PTSD::Input* m_InputSystem = new PTSD::Input();
 	PTSD::Log* m_LogSystem = new PTSD::Log();
 	PTSD::Input* m_InputSystem = new PTSD::Input();
 	PTSD::Graphics* m_GraphicsSystem = new PTSD::Graphics();
