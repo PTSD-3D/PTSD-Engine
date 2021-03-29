@@ -18,11 +18,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Graphics", "vsprojects
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Scripting", "vsprojects\PTSD-Scripting\PTSD-Scripting.vcxproj", "{999A09D0-B127-4481-926D-E215C121C364}"
 EndProject
-<<<<<<< HEAD
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Sound", "vsprojects\PTSD-Sound\PTSD-Sound.vcxproj", "{3DE5D76F-910F-4B58-BBC3-55151822A4EE}"
-=======
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-UI", "vsprojects\PTSD-UI\PTSD-UI.vcxproj", "{BF836B04-6F79-4B76-BB79-C598B92D2DDA}"
->>>>>>> main
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
