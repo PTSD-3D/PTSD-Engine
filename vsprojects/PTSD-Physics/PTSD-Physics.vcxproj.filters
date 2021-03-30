@@ -18,9 +18,15 @@
     <ClInclude Include="..\..\projects\PTSD-Physics\include\PTSDPhysics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\PhysicsImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-Physics\src\PTSDPhysics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Physics\src\PhysicsImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

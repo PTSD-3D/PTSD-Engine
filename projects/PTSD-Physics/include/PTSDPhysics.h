@@ -8,10 +8,26 @@
 #endif 
 
 namespace PTSD {
-	class PTSDPhysics
+	class PhysicsImpl;
+
+	class PHYSAPI Physics
 	{
-		public:
-			PTSDPhysics() {};
-			int PHYSAPI Init();
+	private:
+		static Physics* mInstance;
+		PhysicsImpl* mImpl = nullptr; //private implementation
+
+	public:
+		static Physics* getInstance() {
+			if (mInstance == nullptr)
+				mInstance = new Physics();
+			return mInstance;
+		}
+
+		void Init();
+		void Update();
+		void Shutdown();
+
+		Physics() = default;
+		~Physics() = default;
 	};
 }

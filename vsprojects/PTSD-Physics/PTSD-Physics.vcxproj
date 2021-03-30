@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\PhysicsImpl.h" />
     <ClInclude Include="..\..\projects\PTSD-Physics\include\PTSDPhysics.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\projects\PTSD-Physics\src\PhysicsImpl.cpp" />
     <ClCompile Include="..\..\projects\PTSD-Physics\src\PTSDPhysics.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
