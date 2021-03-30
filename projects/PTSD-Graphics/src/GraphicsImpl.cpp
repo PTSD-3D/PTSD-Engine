@@ -243,7 +243,6 @@ namespace PTSD
 
 	void GraphicsImpl::Shutdown()
 	{
-		//TODO good shutdown
 		delete mRoot;
 	}
 }

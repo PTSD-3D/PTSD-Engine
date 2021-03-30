@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -41,6 +33,9 @@
     <ProjectReference Include="..\PTSD-Scripting\PTSD-Scripting.vcxproj">
       <Project>{999a09d0-b127-4481-926d-e215c121c364}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\PTSD-Sound\PTSD-Sound.vcxproj">
+      <Project>{3de5d76f-910f-4b58-bbc3-55151822a4ee}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\PTSD-UI\PTSD-UI.vcxproj">
       <Project>{bf836b04-6f79-4b76-bb79-c598b92d2dda}</Project>
     </ProjectReference>
@@ -54,19 +49,6 @@
     <ProjectName>PTSD-Core</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -85,12 +67,6 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -98,18 +74,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)tmp\$(ProjectName)\$(Platform)-$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)bin\</OutDir>
-    <TargetName>$(ProjectName)32_d</TargetName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)tmp\$(ProjectName)\$(Platform)-$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)bin\</OutDir>
-    <TargetName>$(ProjectName)32</TargetName>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(SolutionDir)tmp\$(ProjectName)\$(Platform)-$(Configuration)\</IntDir>
@@ -121,47 +85,13 @@
     <IntDir>$(SolutionDir)tmp\$(ProjectName)\$(Platform)-$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build32\lib\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OgreMain.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build32\lib\$(Configuration)</AdditionalLibraryDirectories>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)projects\PTSD-Scripting\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Input\include\;$(SolutionDir)projects\PTSD-Physics\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)projects\PTSD-Scripting\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Input\include\;$(SolutionDir)projects\PTSD-Sound\include\;$(SolutionDir)projects\PTSD-Physics\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -179,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)projects\PTSD-Scripting\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Input\include\;$(SolutionDir)projects\PTSD-Physics\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)projects\PTSD-Scripting\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Input\include\;$(SolutionDir)projects\PTSD-Sound\include\;$(SolutionDir)projects\PTSD-Physics\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
