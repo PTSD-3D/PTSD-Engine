@@ -19,6 +19,6 @@ namespace PTSD {
 	{
 	public:
 		PTSDSound() {};
-		int SOUNDAPI test();
+		int SOUNDAPI Init();
 	};
 }

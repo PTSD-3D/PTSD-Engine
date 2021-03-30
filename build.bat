@@ -11,11 +11,17 @@ copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\debug\RenderSystem_GL_d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\release\RenderSystem_GL.dll bin\ 1>NUL
 
-echo Copiando DLLs de SDL2...
+echo Copiando DLLs de Bullet...
 copy dependencies\bullet\src\bin\pybullet_vs2010_x64_release.dll bin\ 1>NUL
 copy dependencies\bullet\src\bin\pybullet_vs2010_x64_debug.dll bin\ 1>NUL
+
+echo Copiando DLLs de SDL2...
 copy dependencies\Ogre\build\SDL2-build\Debug\SDL2d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\SDL2-build\RelWithDebInfo\SDL2.dll bin\ 1>NUL
+copy dependencies\fmod\fmod.dll bin\ 1>NUL
+copy dependencies\fmod\fmodL.dll bin\ 1>NUL
+
+echo Copiando DLLs de FMOD...
 copy dependencies\fmod\fmod.dll bin\ 1>NUL
 copy dependencies\fmod\fmodL.dll bin\ 1>NUL
 

@@ -1,4 +1,8 @@
 #pragma once
+
+#include <string>
+#include <memory>
+
 #if defined(_MSC_VER)
 	#ifdef _PTSDLOG
 		#define LOGAPI  __declspec(dllexport)   // export DLL information
@@ -12,7 +16,6 @@
 		#define LOGAPI
 	#endif 
 #endif 
-
 
 namespace PTSD {
 	enum LogLevel
