@@ -1,7 +1,7 @@
 #include <iostream>
 #include "PTSDLog.h"
 #include "LogImpl.h"
-#include "spdlog\spdlog.h"
+#include "spdlog/spdlog.h"
 
 namespace PTSD {
 

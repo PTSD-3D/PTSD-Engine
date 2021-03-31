@@ -6,7 +6,6 @@
 #include "PTSDScripting.h"
 #include "PTSDSound.h"
 #include "PTSDUI.h"
-
 #include "PTSDInput.h"
 
 int main()
@@ -20,7 +19,6 @@ int main()
 	PTSD::PTSDSound* m_soundSystem = new PTSD::PTSDSound();
 	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
 
-	
 	m_LogSystem->Init(PTSD::Info);
 	PTSD::LOG("Beginning Initialization");
 	m_soundSystem->Init();

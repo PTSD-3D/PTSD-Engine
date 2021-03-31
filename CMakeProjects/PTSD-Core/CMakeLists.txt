@@ -1,34 +1,32 @@
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PTSD_ROOT}/bin/")
+#################
+#Setup variables#
+#################
 
-set("NAME" "PTSD-Core")
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PTSD_ROOT}/bin/")
+set (CMAKE_CXX_STANDARD 17)
+set ("NAME" "PTSD-Core")
 set ("MY_SOURCE" "${PTSD_PROJECTS}${NAME}/src/")
 set ("MY_INCLUDE" "${PTSD_PROJECTS}${NAME}/include/")
 
-#Add all sources
+##################################
+#Add as library with source macro#
+##################################
+
 macro(add_source)
 		foreach (_src ${ARGN})
 				list(APPEND SRCS "${MY_SOURCE}${_src}")
 		endforeach()
 endmacro()
-				
-#My sources
-add_source(main.cpp test.cpp)
-
-add_executable(PTSD-Core ${SRCS})
-
-#My include
-target_include_directories(PTSD-Core PUBLIC "${MY_INCLUDE}")
-
-#Creo que solo deberían hacer falta includes de PTSD-Modules y librerías de la STL si eso
-target_include_directories(PTSD-Core PUBLIC "${PTSD_ROOT}/dependencies/Ogre/build/include")
-target_include_directories(PTSD-Core PUBLIC "${PTSD_ROOT}/dependencies/Ogre/src/OgreMain/include/")
-#target_include_directories(PTSD-Core PUBLIC "/usr/local/include/OGRE")
+add_source( main test )#<----- Add al sources here
+add_executable(${NAME} ${SRCS})
+target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
 
 
-#-> No debería de linkar con Ogre. Esto es provisional
-target_link_libraries(PTSD-Core LINK_PUBLIC "OgreMain")
+##################################
+#PTSD-Modules linking and include#
+##################################
 
+target_include_directories(PTSD-Core PUBLIC "${PTSD_MODULES_INCLUDES}")
+target_link_libraries(PTSD-Core LINK_PRIVATE ${PTSD_MODULES})
 
-target_link_libraries(PTSD-Core LINK_PRIVATE ${PTSD_Modules})
-
-target_link_directories(PTSD-Core PRIVATE "${PTSD_ROOT}dependencies/Ogre/build/lib")
+# target_link_directories(PTSD-Core PRIVATE "${PTSD_ROOT}dependencies/Ogre/build/lib")
