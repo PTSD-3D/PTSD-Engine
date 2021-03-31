@@ -21,13 +21,13 @@ int main()
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 
 #ifdef _DEBUG
-	logSystem->Init(PTSD::Trace);
+	logSystem->init(PTSD::Trace);
 #else
-	logSystem->Init(PTSD::Warning);
+	logSystem->init(PTSD::Warning);
 #endif
 	PTSD::LOG("Beginning Initialization");
 	soundSystem->Init();
-	inputSystem->Init();
+	inputSystem->init();
 	physicsSystem->Init();
 	graphicsSystem->init();
 	uiSystem->Init();

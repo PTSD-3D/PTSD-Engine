@@ -30,11 +30,12 @@ namespace PTSD {
 	class LogImpl;
 	class LOGAPI Log {
 	public:
-		int Init(LogLevel level);
-		//this system has no update
-		int Shutdown();
 		~Log() = default;
 		Log() {}
+
+		int init(LogLevel level);
+		//this system has no update
+		int shutdown();
 
 		void setLogLevel(LogLevel level);
 
