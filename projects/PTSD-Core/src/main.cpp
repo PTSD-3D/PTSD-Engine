@@ -26,11 +26,11 @@ int main()
 	logSystem->init(PTSD::Warning);
 #endif
 	PTSD::LOG("Beginning Initialization");
-	soundSystem->Init();
+	soundSystem->init();
 	inputSystem->init();
-	physicsSystem->Init();
+	physicsSystem->init();
 	graphicsSystem->init();
-	uiSystem->Init();
+	uiSystem->init();
 	scriptingSystem->init();
 	PTSD::LOG("All subsystems initialized");
 

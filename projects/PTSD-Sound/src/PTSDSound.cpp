@@ -11,7 +11,7 @@
 //using namespace FMOD;
 
 namespace PTSD {
-	int PTSDSound::Init() {
+	int PTSDSound::init() {
         
         std::cout << "Soy el modulo de sonido. Mis creadores casi se olvidan de mi :/\n";
 
