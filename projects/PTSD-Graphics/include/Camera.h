@@ -12,17 +12,17 @@
 
 namespace PTSD
 {
-	class CameraImpl;
+	class CameraImplementation;
 	class GRAPHICSAPI Camera {
 	private:
-		std::unique_ptr<CameraImpl> mImpl;//private implementation w Ogre
+		std::unique_ptr<CameraImplementation> mImplementation;//private implementation w Ogre
 	public:	
-		Camera(Vec3_placeholder v);
+		Camera(Vec3Placeholder v);
 		~Camera();
 		
-		void lookAt(Vec3_placeholder v);
-		void translate(Vec3_placeholder v);
-		void setPosition(Vec3_placeholder v);
+		void lookAt(Vec3Placeholder v);
+		void translate(Vec3Placeholder v);
+		void setPosition(Vec3Placeholder v);
 		
 	};
 }

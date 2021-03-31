@@ -39,25 +39,25 @@
     <ClInclude Include="..\..\projects\PTSD-Graphics\include\PTSDGraphics.h">
       <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\projects\PTSD-Graphics\src\CameraImpl.h">
+    <ClInclude Include="..\..\projects\PTSD-Graphics\src\CameraImplementation.h">
       <Filter>Header Files\Implementation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsImpl.h">
+    <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsImplementation.h">
       <Filter>Header Files\Implementation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Graphics\src\GraphicsImpl.cpp">
-      <Filter>Source Files\Implementation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\projects\PTSD-Graphics\src\CameraImpl.cpp">
-      <Filter>Source Files\Implementation</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\projects\PTSD-Graphics\src\Camera.cpp">
       <Filter>Source Files\API</Filter>
     </ClCompile>
     <ClCompile Include="..\..\projects\PTSD-Graphics\src\PTSDGraphics.cpp">
       <Filter>Source Files\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Graphics\src\CameraImplementation.cpp">
+      <Filter>Source Files\Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Graphics\src\GraphicsImplementation.cpp">
+      <Filter>Source Files\Implementation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

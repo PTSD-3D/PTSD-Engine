@@ -1,12 +1,12 @@
 #include <iostream>
 #include "PTSDGraphics.h"
-#include "GraphicsImpl.h"
+#include "GraphicsImplementation.h"
 
 namespace PTSD {
-	Graphics* Graphics::m_instance = nullptr;
-	int Graphics::Init() {
-		m_impl = PTSD::GraphicsImpl::getInstance();
-		m_impl->Init();
+	Graphics* Graphics::mInstance = nullptr;
+	int Graphics::init() {
+		mImplementation = PTSD::GraphicsImplementation::getInstance();
+		mImplementation->init();
 		return 0;
 	}
 
@@ -16,11 +16,11 @@ namespace PTSD {
 	 */
 	bool Graphics::renderFrame()
 	{
-		return m_impl->renderFrame();
+		return mImplementation->renderFrame();
 	}
 
 	Camera* Graphics::getCam()
 	{
-		return m_impl->getCamera();
+		return mImplementation->getCamera();
 	}
 }
