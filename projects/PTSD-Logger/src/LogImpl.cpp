@@ -4,7 +4,7 @@
 
 namespace PTSD
 {
-	LogImpl* LogImpl::m_instance = nullptr;
+	LogImpl* LogImpl::mInstance = nullptr;
 
 	spdlog::level::level_enum LogImpl::spdLevel(PTSD::LogLevel level)
 	{
@@ -25,21 +25,21 @@ namespace PTSD
 		}
 	}
 
-	void LogImpl::Init(LogLevel lvl)
+	void LogImpl::init(LogLevel lvl)
 	{
-		m_consoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-		m_defaultLevel = spdLevel(lvl);
+		mConsoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+		mDefaultLevel = spdLevel(lvl);
 		createLogger("Engine", true);
 		createLogger("Client", true);
 	}
 
 	std::shared_ptr<spdlog::logger> LogImpl::getLogger(size_t n)
 	{
-		if (n > m_loggers.size()) {
-			m_loggers[0]->error("Logger not found");
+		if (n > mLoggers.size()) {
+			mLoggers[0]->error("Logger not found");
 			return nullptr;
 		}
-		return m_loggers[n];
+		return mLoggers[n];
 	}
 
 	/**
@@ -51,13 +51,13 @@ namespace PTSD
 	size_t LogImpl::createLogger(const std::string& name, bool separateLog)
 	{
 		std::vector<spdlog::sink_ptr> sinkVec;
-		sinkVec.push_back(m_consoleSink);
+		sinkVec.push_back(mConsoleSink);
 		if (separateLog)
 			sinkVec.push_back(std::make_shared<spdlog::sinks::basic_file_sink_st>("logs/" + name + ".log"));
 
-		m_loggers.push_back(std::make_shared<spdlog::logger>(name, sinkVec.begin(), sinkVec.end()));
-		m_loggers.back()->set_pattern("%^[%T] %n: %v%$");
-		m_loggers.back()->set_level(m_defaultLevel);
-		return m_loggers.size() - 1;
+		mLoggers.push_back(std::make_shared<spdlog::logger>(name, sinkVec.begin(), sinkVec.end()));
+		mLoggers.back()->set_pattern("%^[%T] %n: %v%$");
+		mLoggers.back()->set_level(mDefaultLevel);
+		return mLoggers.size() - 1;
 	}
 }

@@ -1,10 +1,17 @@
 #pragma once
-#ifdef _PTSDSCRIPTING
-#define SCRIPTINGAPI  __declspec(dllexport)   // export DLL information
 
+#if defined(_MSC_VER)
+	#ifdef _PTSDSCRIPTING
+		#define SCRIPTINGAPI  __declspec(dllexport)   // export DLL information
+	#else
+		#define SCRIPTINGAPI  __declspec(dllimport)   // import DLL information
+	#endif 
 #else
-#define SCRIPTINGAPI  __declspec(dllimport)   // import DLL information
-
+	#ifdef _PTSDSCRIPTING
+		#define SCRIPTINGAPI __attribute__((visibility("default")))
+	#else
+		#define SCRIPTINGAPI
+	#endif 
 #endif 
 
 namespace PTSD {
@@ -12,8 +19,10 @@ namespace PTSD {
 	private:
 
 	public:
-		static int Init();
-		~Scripting() {}
 		Scripting() {}
+
+		~Scripting() {}
+		
+		void init();
 	};
 }

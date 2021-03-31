@@ -1,10 +1,17 @@
 #pragma once
-#ifdef _PTSDSOUND
-#define SOUNDAPI  __declspec(dllexport)   // export DLL information
 
+#if defined(_MSC_VER)
+	#ifdef _PTSDSOUND
+		#define SOUNDAPI  __declspec(dllexport)   // export DLL information
+	#else
+		#define SOUNDAPI  __declspec(dllimport)   // import DLL information
+	#endif 
 #else
-#define SOUNDAPI  __declspec(dllimport)   // import DLL information
-
+	#ifdef _PTSDSOUND
+		#define SOUNDAPI __attribute__((visibility("default")))
+	#else
+		#define SOUNDAPI
+	#endif 
 #endif 
 
 namespace PTSD {
@@ -12,6 +19,6 @@ namespace PTSD {
 	{
 	public:
 		PTSDSound() {};
-		int SOUNDAPI Init();
+		int SOUNDAPI init();
 	};
 }

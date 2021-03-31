@@ -11,7 +11,7 @@
 //using namespace FMOD;
 
 namespace PTSD {
-	int PTSDSound::Init() {
+	int PTSDSound::init() {
         
         std::cout << "Soy el modulo de sonido. Mis creadores casi se olvidan de mi :/\n";
 
@@ -40,6 +40,6 @@ namespace PTSD {
         result = system->createSound("./assets/clowning-around.mp3", FMOD_CREATESTREAM, 0, &sound);
         result = system->playSound(sound, nullptr, false, &channel);
         result = channel->setChannelGroup(channelGroup);
-
+			return 0;
 	}
 }

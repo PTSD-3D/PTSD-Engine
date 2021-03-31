@@ -1,10 +1,16 @@
 #pragma once
-#ifdef _PTSDPHYS
-#define PHYSAPI  __declspec(dllexport)   // export DLL information
-
+#if defined(_MSC_VER)
+	#ifdef _PTSDPHYS
+		#define PHYSAPI  __declspec(dllexport)   // export DLL information
+	#else
+		#define PHYSAPI  __declspec(dllimport)   // import DLL information
+	#endif 
 #else
-#define PHYSAPI  __declspec(dllimport)   // import DLL information
-
+	#ifdef _PTSDPHYS
+		#define PHYSAPI __attribute__((visibility("default")))
+	#else
+		#define PHYSAPI
+	#endif 
 #endif 
 
 namespace PTSD {

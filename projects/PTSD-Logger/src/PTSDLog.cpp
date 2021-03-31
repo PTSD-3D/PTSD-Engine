@@ -1,7 +1,7 @@
 #include <iostream>
 #include "PTSDLog.h"
 #include "LogImpl.h"
-#include "spdlog\spdlog.h"
+#include "spdlog/spdlog.h"
 
 namespace PTSD {
 
@@ -81,16 +81,16 @@ namespace PTSD {
 	 * \param level filters lower than level messages
 	 * \return 0 on correct
 	 */
-	int Log::Init(LogLevel level) {
+	int Log::init(LogLevel level) {
 		setLogLevel(level);
-		LogImpl::getInstance()->Init(level);
+		LogImpl::getInstance()->init(level);
 		return 0;
 	}
 	/**
 	 * \brief Deletes the private implementation singleton
 	 * \return 0 on correct
 	 */
-	int Log::Shutdown()
+	int Log::shutdown()
 	{
 		delete LogImpl::getInstance();
 		return 0;

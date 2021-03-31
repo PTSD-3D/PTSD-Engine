@@ -1,18 +1,26 @@
 #include <iostream>
 #include "PTSDGraphics.h"
-#include <OgreLogManager.h>
-#include <OgreRoot.h>
-#include "GraphicsLogger.hpp"
+#include "GraphicsImplementation.h"
 
 namespace PTSD {
-	int Graphics::Init() {
-		Ogre::LogManager* logMgr = new Ogre::LogManager();
-		Ogre::Log* log = Ogre::LogManager::getSingleton().createLog("logs/Ogre.log", true, false, true);
-		log->addListener(new PTSDLogListener());
-		Ogre::Root* root;
-		root = new Ogre::Root();
-		Ogre::LogManager::getSingleton().getDefaultLog()->logMessage("GET OUT OF MY SWAMP",Ogre::LML_WARNING);
-		PTSD::LOG("Graphics system initialized");
+	Graphics* Graphics::mInstance = nullptr;
+	int Graphics::init() {
+		mImplementation = PTSD::GraphicsImplementation::getInstance();
+		mImplementation->init();
 		return 0;
+	}
+
+	/**
+	 * \brief Renders a frame!
+	 * \return True on success
+	 */
+	bool Graphics::renderFrame()
+	{
+		return mImplementation->renderFrame();
+	}
+
+	Camera* Graphics::getCam()
+	{
+		return mImplementation->getCamera();
 	}
 }

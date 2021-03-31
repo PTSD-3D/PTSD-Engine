@@ -6,30 +6,38 @@
 #include "PTSDScripting.h"
 #include "PTSDSound.h"
 #include "PTSDUI.h"
-
 #include "PTSDInput.h"
+#include "Camera.h"
+#include "Vec3.h"
 
 int main()
 {
-	PTSD::Log* m_LogSystem = new PTSD::Log();
-	PTSD::Input* m_InputSystem = new PTSD::Input();
-	PTSD::Graphics* m_GraphicsSystem = new PTSD::Graphics();
-	PTSD::Scripting* m_ScriptingSystem = new PTSD::Scripting();
-	PTSD::Physics* m_PhysicsSystem = PTSD::Physics::getInstance();
-	PTSD::UI* m_UISystem = new PTSD::UI();
-	PTSD::PTSDSound* m_soundSystem = new PTSD::PTSDSound();
+	PTSD::Input* inputSystem = new PTSD::Input();
+	PTSD::Log* logSystem = new PTSD::Log();
+	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
+	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
+	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
+	PTSD::UI* uiSystem = new PTSD::UI();
+	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 
-	
-	m_LogSystem->Init(PTSD::Info);
+#ifdef _DEBUG
+	logSystem->init(PTSD::Trace);
+#else
+	logSystem->init(PTSD::Warning);
+#endif
 	PTSD::LOG("Beginning Initialization");
-	m_soundSystem->Init();
-	//m_InputSystem->Init();
-	m_PhysicsSystem->Init();
-	m_GraphicsSystem->Init();
-	m_ScriptingSystem->Init();
+	soundSystem->init();
+	inputSystem->init();
+	physicsSystem->init();
+	graphicsSystem->init();
+	uiSystem->init();
+	scriptingSystem->init();
 	PTSD::LOG("All subsystems initialized");
 
-	while (true){
-		m_PhysicsSystem->Update();
+	PTSD::Camera* myCam = graphicsSystem->getCam();
+	while(true)
+	{
+		graphicsSystem->renderFrame();
+		graphicsSystem->getCam()->translate({ 0,0,0.1 });
 	}
 }
