@@ -51,7 +51,9 @@ vs2010/
 
 [Dd]ependencies/bullet/src/build_debug/*
 [Dd]ependencies/bullet/src/build_release/*
-
+GPATH
+GRTAGS
+GTAGS
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
