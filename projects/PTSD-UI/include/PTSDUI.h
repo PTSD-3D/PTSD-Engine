@@ -17,8 +17,9 @@ namespace PTSD {
 	class UIAPI UI {
 	private:
 	public:
-		static int Init();
-		~UI(){}
-		UI(){}
+		UI() {}
+		~UI() {}
+
+		static int init();
 	};
 }

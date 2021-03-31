@@ -19,8 +19,9 @@ namespace PTSD {
 	private:
 
 	public:
-		static int Init();
-		~Input() {}
 		Input() {}
+		~Input() {}
+		
+		static int init();
 	};
 }

@@ -6,7 +6,7 @@ namespace PTSD {
 
 	//Test code.
 	//Creates a physics world and prints out the position of an object.
-	int PTSDPhysics::Init() {
+	int PTSDPhysics::init() {
 
 		btDefaultCollisionConfiguration* collisionConfiguration = new
 			btDefaultCollisionConfiguration();

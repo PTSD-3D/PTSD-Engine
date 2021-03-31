@@ -12,7 +12,7 @@ namespace Ogre
 }
 namespace PTSD
 {
-	class CameraImpl
+	class CameraImplementation
 	{
 	private:
 		Ogre::SceneNode* mNode;
@@ -20,11 +20,11 @@ namespace PTSD
 		Ogre::RenderWindow* mWindow;
 		Ogre::Viewport* mViewPort;
 	public:
-		CameraImpl(Vec3_placeholder v);
-		~CameraImpl();
+		CameraImplementation(Vec3Placeholder v);
+		~CameraImplementation();
 		
-		void lookAt(Vec3_placeholder pt);
-		void translate(Vec3_placeholder v);
-		void setPosition(Vec3_placeholder pos);
+		void lookAt(Vec3Placeholder pt);
+		void translate(Vec3Placeholder v);
+		void setPosition(Vec3Placeholder pos);
 	};
 };

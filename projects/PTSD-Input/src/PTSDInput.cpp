@@ -8,7 +8,7 @@
 
 namespace PTSD {
 
-	int Input::Init() {
+	int Input::init() {
 
 		SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -22,22 +22,22 @@ namespace PTSD {
 		SDL_SysWMinfo wmInfo;
 		SDL_VERSION(&wmInfo.version);
 
-		//////////por si queremos que la ventana oculte el cursor
+		//////////For the window to hide the cursor
 		SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
 		SDL_ShowCursor(false);
 
 		SDL_Event e;
 
-		bool salir = false;
+		bool exit = false;
 
-		while (!salir) {
+		while (!exit) {
 
 			SDL_PollEvent(&e);
 			if (e.type == SDL_KEYDOWN) {
 				switch (e.key.keysym.sym) {
 				case SDLK_LEFT:
 					std::cout << "Wenas tardes, aqui tu morenito SDL" << "\n";
-					salir = true;
+					exit = true;
 					break;
 				}
 			}
