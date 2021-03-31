@@ -46,7 +46,9 @@ int main()
 		m_GraphicsSystem->renderFrame();
 		m_GraphicsSystem->getCam()->translate({ 0,0,0.1 });
 
-		exit = m_InputSystem->keyPressed(SCANCODE_A);
+		m_InputSystem->test();
+
+		exit = m_InputSystem->keyPressed(SCANCODE_Q);
 		//exit = m_InputSystem->ControllerButtonReleased(0,CONTROLLER_BUTTON_A);
 		//exit = m_InputSystem->mouseWheelClick();
 

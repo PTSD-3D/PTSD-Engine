@@ -59,12 +59,16 @@ namespace PTSD {
 		return 0;
 	}
 
+	void Input::update() {
+		InputImp::getInstance()->update();
+	}
+
 	void Input::test() {
 		InputImp* aux = InputImp::getInstance();
-		Vector2D pos = aux->getMousePos();
-		cout << pos.x << " " << pos.y << endl;
+		/*Vector2D pos = aux->getMousePos();
+		cout << pos.x << " " << pos.y << endl;*/
 
-		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_A)) cout << "a" << endl;
+		/*if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_A)) cout << "a" << endl;
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_B)) cout << "b" << endl;
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_X)) cout << "x" << endl;
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_Y)) cout << "y" << endl;
@@ -73,13 +77,33 @@ namespace PTSD {
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)) cout << "RB" << endl;
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_LEFTSHOULDER)) cout << "LB" << endl;
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_RIGHTSTICK)) cout << "right_stick" << endl;
-		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_LEFTSTICK)) cout << "left_stick" << endl;
+		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_LEFTSTICK)) cout << "left_stick" << endl;*/
 
 		/*Vector2D pos = aux->getStickDir(0, GAMEPADSTICK::RIGHTSTICK);
 		cout << pos.x << " " << pos.y << endl;*/
 
 		//cout << aux->getTrigger(0, GAMEPADTRIGGER::RIGHTTRIGGER) << endl;
 
+//---------------------------------------------------------------------------
+
+		if(keyPressed(SCANCODE_A))cout << "Tecla a pulsada" << endl;
+		//if(keyRelease(SCANCODE_A))cout << "Tecla sin pulsar" << endl;
+		 
+		if (mouseLeftClick()) cout << "Click Izquierdo" << endl;
+		if (mouseRightClick()) cout << "Click Derecho" << endl;
+		if (mouseWheelClick()) cout << "Click Rueda del raton" << endl;
+
+		if(ControllerButtonPressed(0, CONTROLLER_BUTTON_A)) cout << "Boton A pulsado" << endl;
+		if(ControllerButtonReleased(0, CONTROLLER_BUTTON_A)) cout << "Boton A soltado" << endl;
+
+		//Vector2D posY = controllerRightAxis(0);
+		//cout << "RightAxis =" << posY.x << " " << posY.y << endl;
+
+		//Vector2D posX = controllerLeftAxis(0);
+		//cout << "LeftAxis =" << posX.x << " " << posX.y << endl;
+
+		//cout << "Left Trigger =" << controllerLeftTrigger(0) << endl;
+		//cout << "Right Trigger =" << controllerRightTrigger(0) << endl;
 		
 	}
 	//Keyboard
@@ -87,6 +111,11 @@ namespace PTSD {
 	bool Input::keyPressed(Scancode key) {
 		return InputImp::getInstance()->isKeyDown(static_cast<SDL_Scancode>(key));
 	}
+
+	bool Input::keyRelease(Scancode key) {
+		return InputImp::getInstance()->isKeyUp(static_cast<SDL_Scancode>(key));
+	}
+
 	//Mouse
 
 	bool Input::mouseLeftClick() {
@@ -128,9 +157,5 @@ namespace PTSD {
 
 	float Input::controllerRightTrigger(int controllerID) {
 		return InputImp::getInstance()->getTrigger(controllerID, GAMEPADTRIGGER::RIGHTTRIGGER);
-	}
-
-	void Input::update() {
-		InputImp::getInstance()->update();
 	}
 }

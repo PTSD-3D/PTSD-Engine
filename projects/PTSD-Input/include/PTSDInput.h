@@ -34,29 +34,33 @@ namespace PTSD {
 
 		static void test();
 
+	//Keyboard
 		static bool keyPressed(Scancode key);
 
-		bool mouseLeftClick();
+		static bool keyRelease(Scancode key);
+		
+	//Mouse
+		static bool mouseLeftClick();
 
-		bool mouseRightClick();
+		static bool mouseRightClick();
 
-		bool mouseWheelClick();
+		static bool mouseWheelClick();
 
-		Vector2D getMousePos();
+		static Vector2D getMousePos();
 
-		bool keyReleased(Scancode key);
+	//Controller
 
-		bool ControllerButtonPressed(int controllerID, ControllerButton button);
+		static bool ControllerButtonPressed(int controllerID, ControllerButton button);
 
-		bool ControllerButtonReleased(int controllerID, ControllerButton button);
+		static bool ControllerButtonReleased(int controllerID, ControllerButton button);
 
-		Vector2D controllerRightAxis(int controllerID);
+		static Vector2D controllerRightAxis(int controllerID);
 
-		Vector2D controllerLeftAxis(int controllerID);
+		static Vector2D controllerLeftAxis(int controllerID);
 
-		float controllerLeftTrigger(int controllerID);
+		static float controllerLeftTrigger(int controllerID);
 
-		float controllerRightTrigger(int controllerID);
+		static float controllerRightTrigger(int controllerID);
 
 		void update();
 	};

@@ -79,25 +79,6 @@ namespace PTSD {
 		}
 	}
 
-	void InputImp::initialiseGamepads() {
-		/*if (-1 == SDL_GameControllerAddMappingsFromFile("./config/gamecontrollerdb.txt"))
-			cout << "Error al cargar la base de datos" << endl;*/
-		if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0) {
-			SDL_InitSubSystem(SDL_INIT_JOYSTICK);
-		}
-		numControllers_ = SDL_NumJoysticks();
-	}
-
-	void InputImp::clearJoysticks()
-	{
-		if (m_bJoysticksInitialised)
-		{
-			for (auto& ctrl : m_gameControllers) {
-				SDL_GameControllerClose(ctrl);
-			}
-		}
-	}
-
 	void InputImp::clearState() {
 		isKeyDownEvent_ = false;
 		isKeyUpEvent_ = false;
@@ -107,7 +88,7 @@ namespace PTSD {
 		isButtonDownEvent_ = false;
 		isButtonUpEvent_ = false;
 
-		//Ajustamos los botones y teclas recien pulsados o soltados
+		//Adjust just pressed and released buttons
 		for (int i = 0; i < 3; i++) {
 			switch (mbState_[i])
 			{
@@ -147,59 +128,16 @@ namespace PTSD {
 		}
 	}
 
-	double InputImp::getStickX(int gameJoy, GAMEPADSTICK stick)
+	
+	//Controllers
+	void InputImp::clearJoysticks()
 	{
-		int joy = gameToSystemCtrlId[gameJoy];
-		if (joy >= m_gameControllers.size())
-			return 0.0;
-		if (m_joystickValues.size() > 0)
+		if (m_bJoysticksInitialised)
 		{
-			if (stick == LEFTSTICK)
-
-			{
-				return m_joystickValues[joy].first->getX();
-			}
-			else if (stick == RIGHTSTICK)
-			{
-				return m_joystickValues[joy].second->getX();
+			for (auto& ctrl : m_gameControllers) {
+				SDL_GameControllerClose(ctrl);
 			}
 		}
-		return 0;
-	}
-
-	double InputImp::getStickY(int gameJoy, GAMEPADSTICK stick)
-	{
-		int joy = gameToSystemCtrlId[gameJoy];
-		if (joy >= m_gameControllers.size())
-			return 0.0;
-		if (m_joystickValues.size() > joy)
-		{
-			if (stick == LEFTSTICK)
-			{
-				return m_joystickValues[joy].first->getY();
-			}
-			else if (stick == RIGHTSTICK)
-			{
-				return m_joystickValues[joy].second->getY();
-			}
-		}
-		return 0;
-	}
-
-	double InputImp::getTrigger(int gameJoy, GAMEPADTRIGGER trigger) {
-		int joy = gameToSystemCtrlId[gameJoy];
-		if (m_joystickValues.size() > joy)
-		{
-			if (trigger == LEFTTRIGGER)
-			{
-				return *m_triggerValues[joy].first;
-			}
-			else if (trigger == RIGHTTRIGGER)
-			{
-				return *m_triggerValues[joy].second;
-			}
-		}
-		return 0;
 	}
 
 	void InputImp::onJoyAxisChange(SDL_Event& event) {
@@ -441,6 +379,15 @@ namespace PTSD {
 		//std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
 	}
 
+	void InputImp::initialiseGamepads() {
+		/*if (-1 == SDL_GameControllerAddMappingsFromFile("./config/gamecontrollerdb.txt"))
+			cout << "Error al cargar la base de datos" << endl;*/
+		if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0) {
+			SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+		}
+		numControllers_ = SDL_NumJoysticks();
+	}
+
 	bool InputImp::isButtonJustUp(int gameCtrl, SDL_GameControllerButton b)
 	{
 		int ctrl = gameToSystemCtrlId[gameCtrl];
@@ -497,4 +444,60 @@ namespace PTSD {
 		else
 			return Vector2D{ 0, 0 };
 	}
+
+	double InputImp::getStickX(int gameJoy, GAMEPADSTICK stick)
+	{
+		int joy = gameToSystemCtrlId[gameJoy];
+		if (joy >= m_gameControllers.size())
+			return 0.0;
+		if (m_joystickValues.size() > 0)
+		{
+			if (stick == LEFTSTICK)
+
+			{
+				return m_joystickValues[joy].first->getX();
+			}
+			else if (stick == RIGHTSTICK)
+			{
+				return m_joystickValues[joy].second->getX();
+			}
+		}
+		return 0;
+	}
+
+	double InputImp::getStickY(int gameJoy, GAMEPADSTICK stick)
+	{
+		int joy = gameToSystemCtrlId[gameJoy];
+		if (joy >= m_gameControllers.size())
+			return 0.0;
+		if (m_joystickValues.size() > joy)
+		{
+			if (stick == LEFTSTICK)
+			{
+				return m_joystickValues[joy].first->getY();
+			}
+			else if (stick == RIGHTSTICK)
+			{
+				return m_joystickValues[joy].second->getY();
+			}
+		}
+		return 0;
+	}
+
+	double InputImp::getTrigger(int gameJoy, GAMEPADTRIGGER trigger) {
+		int joy = gameToSystemCtrlId[gameJoy];
+		if (m_joystickValues.size() > joy)
+		{
+			if (trigger == LEFTTRIGGER)
+			{
+				return *m_triggerValues[joy].first;
+			}
+			else if (trigger == RIGHTTRIGGER)
+			{
+				return *m_triggerValues[joy].second;
+			}
+		}
+		return 0;
+	}
+
 }
