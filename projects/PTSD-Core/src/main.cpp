@@ -6,7 +6,6 @@
 #include "PTSDScripting.h"
 #include "PTSDSound.h"
 #include "PTSDUI.h"
-
 #include "PTSDInput.h"
 #include "Camera.h"
 #include "Vec3.h"
