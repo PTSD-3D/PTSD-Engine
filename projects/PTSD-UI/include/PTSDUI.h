@@ -18,12 +18,12 @@ namespace Ogre {
 }
 
 namespace PTSD {
-	class UIImpl;
+	class UIImplementation;
 
 	class UIAPI UI {
 	private:
 		static UI* mInstance;
-		UIImpl* mImpl = nullptr; //private implementation
+		UIImplementation* mImpl = nullptr; //private implementation
 		
 	public:
 		static UI* getInstance()
