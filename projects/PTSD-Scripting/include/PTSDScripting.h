@@ -15,12 +15,20 @@
 #endif 
 
 namespace PTSD {
+	class ScriptingImplementation;
 	class SCRIPTINGAPI Scripting {
 	private:
-
+		ScriptingImplementation* mScriptMgr;
 	public:
-		static int Init();
-		~Scripting() {}
-		Scripting() {}
+		Scripting() : mScriptMgr(nullptr) {};
+		~Scripting();
+
+		int init();
+		void run(std::string script);
+		bool update();
+		void shutdown();
+
+		void addEntity(void* entityPtr);
+		void deleteEntity(size_t entityID);
 	};
 }
