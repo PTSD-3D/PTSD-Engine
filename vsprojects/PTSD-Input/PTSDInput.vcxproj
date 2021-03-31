@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\projects\PTSD-Input\include\PTSDInput.h" />
+    <ClInclude Include="..\..\projects\PTSD-Input\include\PTSDkeys.h" />
+    <ClInclude Include="..\..\projects\PTSD-Input\include\Vec2.h" />
     <ClInclude Include="..\..\projects\PTSD-Input\src\InputImp.h" />
   </ItemGroup>
   <ItemGroup>

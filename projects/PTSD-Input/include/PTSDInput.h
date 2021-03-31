@@ -7,6 +7,9 @@
 
 #endif 
 
+#include "PTSDkeys.h"
+#include "Vec2.h"
+
 namespace PTSD {
 	class InputImp;
 
@@ -25,8 +28,30 @@ namespace PTSD {
 
 		static void test();
 
-		static bool keyPressed(/*SDL_Scancode key*/);
+		static bool keyPressed(Scancode key);
 
-		/*static*/ void update();
+		bool mouseLeftClick();
+
+		bool mouseRightClick();
+
+		bool mouseWheelClick();
+
+		Vector2D getMousePos();
+
+		bool keyReleased(Scancode key);
+
+		bool ControllerButtonPressed(int controllerID, ControllerButton button);
+
+		bool ControllerButtonReleased(int controllerID, ControllerButton button);
+
+		Vector2D controllerRightAxis(int controllerID);
+
+		Vector2D controllerLeftAxis(int controllerID);
+
+		float controllerLeftTrigger(int controllerID);
+
+		float controllerRightTrigger(int controllerID);
+
+		void update();
 	};
 }

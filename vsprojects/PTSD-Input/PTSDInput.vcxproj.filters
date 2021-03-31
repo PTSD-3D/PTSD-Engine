@@ -21,6 +21,12 @@
     <ClInclude Include="..\..\projects\PTSD-Input\src\InputImp.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Input\include\PTSDkeys.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Input\include\Vec2.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-Input\src\PTSDInput.cpp">

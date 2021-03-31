@@ -10,6 +10,8 @@
 #include "PTSDInput.h"
 #include "Camera.h"
 #include "Vec3.h"
+#include "Vec2.h"
+#include "PTSDkeys.h"
 
 int main()
 {
@@ -46,6 +48,12 @@ int main()
 		m_GraphicsSystem->renderFrame();
 		m_GraphicsSystem->getCam()->translate({ 0,0,0.1 });
 
-		exit = m_InputSystem->keyPressed();
+		exit = m_InputSystem->keyPressed(SCANCODE_A);
+		//exit = m_InputSystem->ControllerButtonReleased(0,CONTROLLER_BUTTON_A);
+		//exit = m_InputSystem->mouseWheelClick();
+
+		/*Vector2D pos = m_InputSystem->controllerLeftAxis(0);
+		std::cout << pos.x << " " << pos.y << std::endl;*/
+		//std::cout << m_InputSystem->controllerLeftTrigger(0) << std::endl;
 	}
 }

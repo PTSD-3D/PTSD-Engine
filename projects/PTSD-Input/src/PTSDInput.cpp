@@ -61,8 +61,8 @@ namespace PTSD {
 
 	void Input::test() {
 		InputImp* aux = InputImp::getInstance();
-	/*	Vector2D pos = aux->getMousePos();
-		cout << pos.x << " " << pos.y << endl;*/
+		Vector2D pos = aux->getMousePos();
+		cout << pos.x << " " << pos.y << endl;
 
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_A)) cout << "a" << endl;
 		if (aux->isButtonDown(0, SDL_CONTROLLER_BUTTON_B)) cout << "b" << endl;
@@ -82,9 +82,52 @@ namespace PTSD {
 
 		
 	}
+	//Keyboard
 
-	bool Input::keyPressed(/*SDL_Scancode key*/) {
-		return InputImp::getInstance()->isKeyDown(SDL_SCANCODE_LEFT);
+	bool Input::keyPressed(Scancode key) {
+		return InputImp::getInstance()->isKeyDown(static_cast<SDL_Scancode>(key));
+	}
+	//Mouse
+
+	bool Input::mouseLeftClick() {
+		return InputImp::getInstance()->isMouseButtonDown(MOUSEBUTTON::LEFT);
+	}
+
+	bool Input::mouseRightClick() {
+		return InputImp::getInstance()->isMouseButtonDown(MOUSEBUTTON::RIGHT);
+	}
+
+	bool Input::mouseWheelClick() {
+		return InputImp::getInstance()->isMouseButtonDown(MOUSEBUTTON::MIDDLE);
+	}
+
+	Vector2D Input::getMousePos() {
+		return InputImp::getInstance()->getMousePos();
+	}
+	//Controller
+
+	bool Input::ControllerButtonPressed(int controllerID, ControllerButton button) {
+		return InputImp::getInstance()->isButtonDown(controllerID, static_cast<SDL_GameControllerButton>(button)); 
+	}
+
+	bool Input::ControllerButtonReleased(int controllerID, ControllerButton button) {
+		return InputImp::getInstance()->isButtonJustUp(controllerID, static_cast<SDL_GameControllerButton>(button));
+	}
+
+	Vector2D Input::controllerRightAxis(int controllerID) {
+		return InputImp::getInstance()->getStickDir(controllerID, GAMEPADSTICK::RIGHTSTICK);
+	}
+
+	Vector2D Input::controllerLeftAxis(int controllerID) {
+		return InputImp::getInstance()->getStickDir(controllerID, GAMEPADSTICK::LEFTSTICK);
+	}
+
+	float Input::controllerLeftTrigger(int controllerID) {
+		return InputImp::getInstance()->getTrigger(controllerID, GAMEPADTRIGGER::LEFTTRIGGER);
+	}
+
+	float Input::controllerRightTrigger(int controllerID) {
+		return InputImp::getInstance()->getTrigger(controllerID, GAMEPADTRIGGER::RIGHTTRIGGER);
 	}
 
 	void Input::update() {
