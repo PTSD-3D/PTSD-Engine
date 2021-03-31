@@ -92,14 +92,14 @@
     <ClInclude Include="..\..\projects\PTSD-Graphics\include\Camera.h" />
     <ClInclude Include="..\..\projects\PTSD-Graphics\include\PTSDGraphics.h" />
     <ClInclude Include="..\..\projects\PTSD-Graphics\include\Vec3.h" />
-    <ClInclude Include="..\..\projects\PTSD-Graphics\src\CameraImpl.h" />
-    <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsImpl.h" />
+    <ClInclude Include="..\..\projects\PTSD-Graphics\src\CameraImplementation.h" />
+    <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsImplementation.h" />
     <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsLogger.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-Graphics\src\Camera.cpp" />
-    <ClCompile Include="..\..\projects\PTSD-Graphics\src\CameraImpl.cpp" />
-    <ClCompile Include="..\..\projects\PTSD-Graphics\src\GraphicsImpl.cpp" />
+    <ClCompile Include="..\..\projects\PTSD-Graphics\src\CameraImplementation.cpp" />
+    <ClCompile Include="..\..\projects\PTSD-Graphics\src\GraphicsImplementation.cpp" />
     <ClCompile Include="..\..\projects\PTSD-Graphics\src\PTSDGraphics.cpp" />
   </ItemGroup>
   <ItemGroup>

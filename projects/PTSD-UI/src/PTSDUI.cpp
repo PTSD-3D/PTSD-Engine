@@ -22,4 +22,3 @@ namespace PTSD {
 		return mImpl->Shutdown();
 	}
 }
-

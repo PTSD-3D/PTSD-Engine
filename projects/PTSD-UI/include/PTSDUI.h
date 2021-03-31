@@ -4,13 +4,13 @@
 		#define UIAPI  __declspec(dllexport)   // export DLL information
 	#else
 		#define UIAPI  __declspec(dllimport)   // import DLL information
-	#endif 
+	#endif
 #else
 	#ifdef _PTSDUI
 		#define UIAPI __attribute__((visibility("default")))
 	#else
-		#define UIAPI 
-	#endif 
+		#define UIAPI
+	#endif
 #endif
 
 namespace Ogre {
@@ -24,7 +24,7 @@ namespace PTSD {
 	private:
 		static UI* mInstance;
 		UIImplementation* mImpl = nullptr; //private implementation
-		
+
 	public:
 		static UI* getInstance()
 		{
