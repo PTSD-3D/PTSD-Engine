@@ -18,7 +18,7 @@ int main()
 	PTSD::Scripting* m_ScriptingSystem = new PTSD::Scripting();
 	PTSD::PTSDPhysics* m_physicsSystem = new PTSD::PTSDPhysics();
 	PTSD::UI* m_UISystem = new PTSD::UI();
-	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
+	PTSD::PTSDSound* m_soundSystem = new PTSD::PTSDSound();
 
 #ifdef _DEBUG
 	m_LogSystem->Init(PTSD::Trace);
@@ -26,8 +26,9 @@ int main()
 	m_LogSystem->Init(PTSD::Warning);
 #endif
 	PTSD::LOG("Beginning Initialization");
+	m_soundSystem->Init();
 	m_InputSystem->Init();
-	physicsSystem->Init();
+	m_physicsSystem->Init();
 	m_GraphicsSystem->Init();
 	m_ScriptingSystem->Init();
 	PTSD::LOG("All subsystems initialized");
