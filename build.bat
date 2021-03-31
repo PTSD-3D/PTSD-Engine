@@ -18,6 +18,8 @@ copy dependencies\bullet\src\bin\pybullet_vs2010_x64_debug.dll bin\ 1>NUL
 echo Copiando DLLs de SDL2...
 copy dependencies\Ogre\build\SDL2-build\Debug\SDL2d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\SDL2-build\RelWithDebInfo\SDL2.dll bin\ 1>NUL
+copy dependencies\fmod\fmod.dll bin\ 1>NUL
+copy dependencies\fmod\fmodL.dll bin\ 1>NUL
 
 echo Copiando DLLs de FMOD...
 copy dependencies\fmod\fmod.dll bin\ 1>NUL

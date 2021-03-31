@@ -6,7 +6,6 @@
 #include "PTSDScripting.h"
 #include "PTSDSound.h"
 #include "PTSDUI.h"
-
 #include "PTSDInput.h"
 #include "Camera.h"
 #include "Vec3.h"
@@ -22,7 +21,6 @@ int main()
 	PTSD::PTSDPhysics* m_physicsSystem = new PTSD::PTSDPhysics();
 	PTSD::UI* m_UISystem = new PTSD::UI();
 	PTSD::PTSDSound* m_soundSystem = new PTSD::PTSDSound();
-	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
 
 #ifdef _DEBUG
 	m_LogSystem->Init(PTSD::Trace);
@@ -32,7 +30,7 @@ int main()
 	PTSD::LOG("Beginning Initialization");
 	m_soundSystem->Init();
 	m_InputSystem->Init();
-	physicsSystem->Init();
+	m_physicsSystem->Init();
 	m_GraphicsSystem->Init();
 	m_InputSystem->Init();
 	m_ScriptingSystem->Init();
