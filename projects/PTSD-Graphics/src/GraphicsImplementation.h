@@ -15,7 +15,7 @@ namespace Ogre
 namespace PTSD
 {
 	class Camera;
-	class GraphicsImpl
+	class GraphicsImplementation
 	{
 	private:
 		Ogre::Root* mRoot;
@@ -39,18 +39,20 @@ namespace PTSD
 		void msgPump();
 
 		
-		GraphicsImpl() = default;
-		static GraphicsImpl* mInstance;
+		GraphicsImplementation() = default;
+		static GraphicsImplementation* mInstance;
 
 	public:
-		static GraphicsImpl* getInstance()
+		~GraphicsImplementation() = default;
+
+		static GraphicsImplementation* getInstance()
 		{
 			if (mInstance == nullptr)
-				mInstance = new GraphicsImpl();
+				mInstance = new GraphicsImplementation();
 			return mInstance;
 		}
-		void Init();
-		void Shutdown();
+		void init();
+		void shutdown();
 
 		bool renderFrame();
 
@@ -58,8 +60,5 @@ namespace PTSD
 		Ogre::SceneManager* getSceneMgr() const { return mSceneMgr; }
 		Camera* getCamera() const { return mCamera; }
 		Ogre::RenderWindow* getRenderWindow() const { return mRenderWindow; }
-
-		~GraphicsImpl() = default;
-
 	};
 }
