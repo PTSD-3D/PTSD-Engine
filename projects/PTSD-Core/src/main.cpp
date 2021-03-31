@@ -30,6 +30,7 @@ int main()
 	m_InputSystem->Init();
 	m_physicsSystem->Init();
 	m_GraphicsSystem->Init();
+	m_UISystem->Init();
 	m_ScriptingSystem->Init();
 	PTSD::LOG("All subsystems initialized");
 

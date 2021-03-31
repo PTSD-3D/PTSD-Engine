@@ -14,11 +14,26 @@
 #endif
 
 namespace PTSD {
+	class UIImpl;
+
 	class UIAPI UI {
 	private:
+		static UI* mInstance;
+		UIImpl* mImpl = nullptr; //private implementation
+		
 	public:
-		static int Init();
-		~UI(){}
-		UI(){}
+		static UI* getInstance()
+		{
+			if (mInstance == nullptr)
+				mInstance = new UI();
+			return mInstance;
+		}
+
+		int Init();
+		bool Render();
+		void Shutdown();
+
+		UI() = default;
+		~UI() = default;
 	};
 }

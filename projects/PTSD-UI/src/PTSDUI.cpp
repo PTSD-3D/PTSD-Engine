@@ -1,12 +1,25 @@
-#include "PTSDUI.h"
-#include <CEGUI/CEGUI.h>
 #include <iostream>
+#include "PTSDUI.h"
+#include "UIImpl.h"
 
+namespace PTSD {
 
-int PTSD::UI::Init() {
-	std::cout << "UI system initialized\n";
-	CEGUI::BasicImage image("PTSD-UI-Test\n");
-	std::cout << image.getName();
+	UI* UI::mInstance = nullptr;
 
-	return 0;
+	int UI::Init() {
+		mImpl = PTSD::UIImpl::getInstance();
+		mImpl->Init();
+		return 0;
+	}
+
+	bool UI::Render()
+	{
+		return mImpl->Render();
+	}
+
+	void UI::Shutdown()
+	{
+		return mImpl->Shutdown();
+	}
 }
+
