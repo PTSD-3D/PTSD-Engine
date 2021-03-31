@@ -7,24 +7,36 @@
 #include "PTSDSound.h"
 #include "PTSDUI.h"
 #include "PTSDInput.h"
+#include "Camera.h"
+#include "Vec3.h"
 
 int main()
 {
-	PTSD::Log* m_LogSystem = new PTSD::Log();
 	PTSD::Input* m_InputSystem = new PTSD::Input();
-	PTSD::Graphics* m_GraphicsSystem = new PTSD::Graphics();
+	PTSD::Log* m_LogSystem = new PTSD::Log();
+	PTSD::Graphics* m_GraphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Scripting* m_ScriptingSystem = new PTSD::Scripting();
 	PTSD::PTSDPhysics* m_physicsSystem = new PTSD::PTSDPhysics();
 	PTSD::UI* m_UISystem = new PTSD::UI();
 	PTSD::PTSDSound* m_soundSystem = new PTSD::PTSDSound();
-	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
 
-	m_LogSystem->Init(PTSD::Info);
+#ifdef _DEBUG
+	m_LogSystem->Init(PTSD::Trace);
+#else
+	m_LogSystem->Init(PTSD::Warning);
+#endif
 	PTSD::LOG("Beginning Initialization");
 	m_soundSystem->Init();
 	m_InputSystem->Init();
-	physicsSystem->Init();
+	m_physicsSystem->Init();
 	m_GraphicsSystem->Init();
 	m_ScriptingSystem->Init();
 	PTSD::LOG("All subsystems initialized");
+
+	PTSD::Camera* myCam = m_GraphicsSystem->getCam();
+	while(true)
+	{
+		m_GraphicsSystem->renderFrame();
+		m_GraphicsSystem->getCam()->translate({ 0,0,0.1 });
+	}
 }

@@ -13,24 +13,51 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\API">
+      <UniqueIdentifier>{89862353-45af-4b75-a8ea-92bda9e4e2d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Implementation">
+      <UniqueIdentifier>{85b901ff-0518-4df6-aaa0-6dba71655186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Implementation">
+      <UniqueIdentifier>{85d41d2d-8241-475f-8292-eda6e51b030c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API">
+      <UniqueIdentifier>{6e7a183c-beb4-46f5-ba23-2359fd028201}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\projects\PTSD-Graphics\include\PTSDGraphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\projects\PTSD-Graphics\src\Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsLogger.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Graphics\include\Vec3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Graphics\include\Camera.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Graphics\include\PTSDGraphics.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Graphics\src\CameraImpl.h">
+      <Filter>Header Files\Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Graphics\src\GraphicsImpl.h">
+      <Filter>Header Files\Implementation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Graphics\src\Graphics.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\projects\PTSD-Graphics\src\GraphicsImpl.cpp">
+      <Filter>Source Files\Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Graphics\src\CameraImpl.cpp">
+      <Filter>Source Files\Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Graphics\src\Camera.cpp">
+      <Filter>Source Files\API</Filter>
     </ClCompile>
     <ClCompile Include="..\..\projects\PTSD-Graphics\src\PTSDGraphics.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\API</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
