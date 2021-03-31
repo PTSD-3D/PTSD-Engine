@@ -6,9 +6,9 @@ namespace PTSD {
 
 	UI* UI::mInstance = nullptr;
 
-	int UI::Init() {
+	int UI::Init(Ogre::RenderWindow* mRenderWindow) {
 		mImpl = PTSD::UIImpl::getInstance();
-		mImpl->Init();
+		mImpl->Init(mRenderWindow);
 		return 0;
 	}
 

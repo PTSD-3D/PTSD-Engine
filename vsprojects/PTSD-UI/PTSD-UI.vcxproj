@@ -90,9 +90,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\projects\PTSD-UI\include\PTSDUI.h" />
+    <ClInclude Include="..\..\projects\PTSD-UI\src\UIImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-UI\src\PTSDUI.cpp" />
+    <ClCompile Include="..\..\projects\PTSD-UI\src\UIImpl.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

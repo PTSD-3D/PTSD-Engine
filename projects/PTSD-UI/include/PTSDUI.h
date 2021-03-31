@@ -13,6 +13,10 @@
 	#endif 
 #endif
 
+namespace Ogre {
+	class RenderWindow;
+}
+
 namespace PTSD {
 	class UIImpl;
 
@@ -29,7 +33,7 @@ namespace PTSD {
 			return mInstance;
 		}
 
-		int Init();
+		int Init(Ogre::RenderWindow* mRenderWindow);
 		bool Render();
 		void Shutdown();
 
