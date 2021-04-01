@@ -16,7 +16,7 @@
 
 
 namespace PTSD {
-	class GraphicsImpl;
+	class GraphicsImplementation;
 	class Camera;
 
 	/**
@@ -24,19 +24,21 @@ namespace PTSD {
 	 */
 	class GRAPHICSAPI Graphics {
 	private:
-		static Graphics* m_instance;
-		GraphicsImpl* m_impl = nullptr;//private Implementation
+		static Graphics* mInstance;
+		GraphicsImplementation* mImplementation = nullptr;//private Implementation
 	public:
+		Graphics() = default;
+
+		~Graphics() = default;
+
 		static Graphics* getInstance()
 		{
-			if (m_instance == nullptr)
-				m_instance = new Graphics();
-			return m_instance;
+			if (mInstance == nullptr)
+				mInstance = new Graphics();
+			return mInstance;
 		}
-		int Init();
+		int init();
 		bool renderFrame();
 		Camera* getCam();
-		~Graphics() = default;
-		Graphics() = default;
 	};
 }

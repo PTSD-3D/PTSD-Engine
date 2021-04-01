@@ -1,19 +1,19 @@
-#include "CameraImpl.h"
+#include "CameraImplementation.h"
 
 
 #include <OgreRenderWindow.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
-#include "GraphicsImpl.h"
+#include "GraphicsImplementation.h"
 #include <OgreViewport.h>
 #include <Ogre.h>
 
 
 namespace PTSD
 {
-	CameraImpl::CameraImpl(Vec3_placeholder v)
+	CameraImplementation::CameraImplementation(Vec3Placeholder v)
 	{
-		Ogre::SceneManager* mgr = GraphicsImpl::getInstance()->getSceneMgr();
+		Ogre::SceneManager* mgr = GraphicsImplementation::getInstance()->getSceneMgr();
 		mCamera = mgr->createCamera("mainCam");
 		mNode = mgr->getRootSceneNode()->createChildSceneNode();
 		mNode->setPosition({ v.x,v.y,v.z });
@@ -21,13 +21,13 @@ namespace PTSD
 		mCamera->setNearClipDistance(5);
 
 		//TODO Window abstraction
-		mWindow = GraphicsImpl::getInstance()->getRenderWindow();
-		mViewPort = GraphicsImpl::getInstance()->getRenderWindow()->addViewport(mCamera);
+		mWindow = GraphicsImplementation::getInstance()->getRenderWindow();
+		mViewPort = GraphicsImplementation::getInstance()->getRenderWindow()->addViewport(mCamera);
 
 		mCamera->setAspectRatio(Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
 	}
 
-	CameraImpl::~CameraImpl()
+	CameraImplementation::~CameraImplementation()
 	{
 		
 	}
@@ -36,7 +36,7 @@ namespace PTSD
 	 * \brief looks to a world point
 	 * \param pt point 
 	 */
-	void CameraImpl::lookAt(Vec3_placeholder pt)
+	void CameraImplementation::lookAt(Vec3Placeholder pt)
 	{
 		mNode->lookAt({pt.x,pt.y,pt.z},Ogre::Node::TS_WORLD);
 	}
@@ -45,7 +45,7 @@ namespace PTSD
 	 * \brief moves in world coordinates
 	 * \param v movement vector 
 	 */
-	void CameraImpl::translate(Vec3_placeholder v)
+	void CameraImplementation::translate(Vec3Placeholder v)
 	{
 		mNode->translate({ v.x,v.y,v.z }, Ogre::Node::TS_WORLD);
 	}
@@ -54,7 +54,7 @@ namespace PTSD
 	 * \brief sets the world position of the camera
 	 * \param pos position
 	 */
-	void CameraImpl::setPosition(Vec3_placeholder pos)
+	void CameraImplementation::setPosition(Vec3Placeholder pos)
 	{
 		mNode->setPosition({ pos.x,pos.y,pos.z });
 	}
