@@ -14,13 +14,13 @@
 #endif 
 
 namespace PTSD {
-	class PhysicsImpl;
+	class PhysicsImplementation;
 
 	class PHYSAPI Physics
 	{
 	private:
 		static Physics* mInstance;
-		PhysicsImpl* mImpl = nullptr; //private implementation
+		PhysicsImplementation* mImpl = nullptr; //private implementation
 
 	public:
 		static Physics* getInstance() {
@@ -29,9 +29,9 @@ namespace PTSD {
 			return mInstance;
 		}
 
-		void Init();
-		void Update();
-		void Shutdown();
+		void init();
+		void update();
+		void shutdown();
 
 		Physics() = default;
 		~Physics() = default;

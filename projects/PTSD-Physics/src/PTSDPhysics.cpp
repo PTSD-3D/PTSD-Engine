@@ -1,20 +1,20 @@
 #include "PTSDPhysics.h"
-#include "PhysicsImpl.h"
+#include "PhysicsImplementation.h"
 
 namespace PTSD {
 
 	Physics* Physics::mInstance = nullptr;
 
-	void Physics::Init() {
-		mImpl = PhysicsImpl::getInstance();
-		mImpl->Init();
+	void Physics::init() {
+		mImpl = PhysicsImplementation::getInstance();
+		mImpl->init();
 	}
 
-	void Physics::Update() {
-		mImpl->Update();
+	void Physics::update() {
+		mImpl->update();
 	}
 
-	void Physics::Shutdown() {
-		mImpl->Shutdown();
+	void Physics::shutdown() {
+		mImpl->shutdown();
 	}
 }

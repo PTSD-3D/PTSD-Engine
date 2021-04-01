@@ -13,21 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\API">
+      <UniqueIdentifier>{513477ac-9863-4f4d-b979-fb73519bd0b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Implementation">
+      <UniqueIdentifier>{3c685359-b896-4884-b68f-8fae805c465d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\API">
+      <UniqueIdentifier>{584ff54d-c73b-448e-9dc6-70df1ae2a89d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Implementation">
+      <UniqueIdentifier>{dd77eb6d-50d6-426e-9986-2a5f0b2d43ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\projects\PTSD-Physics\include\PTSDPhysics.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\Collider.h">
+      <Filter>Header Files\API</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\projects\PTSD-Physics\include\PhysicsImpl.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\Rigidbody.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\PTSDPhysics.h">
+      <Filter>Header Files\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\ColliderImplementation.h">
+      <Filter>Header Files\Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\PhysicsImplementation.h">
+      <Filter>Header Files\Implementation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Physics\include\RigidbodyImplementation.h">
+      <Filter>Header Files\Implementation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-Physics\src\PTSDPhysics.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\API</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\projects\PTSD-Physics\src\PhysicsImpl.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\projects\PTSD-Physics\src\Collider.cpp">
+      <Filter>Source Files\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Physics\src\Rigidbody.cpp">
+      <Filter>Source Files\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Physics\src\ColliderImplementation.cpp">
+      <Filter>Source Files\Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Physics\src\RigidbodyImplementation.cpp">
+      <Filter>Source Files\Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Physics\src\PhysicsImplementation.cpp">
+      <Filter>Source Files\Implementation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

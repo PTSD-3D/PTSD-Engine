@@ -1,13 +1,16 @@
 #pragma once
+#include "Vec3.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
 class btCollisionDispatcher;
 class btSequentialImpulseConstraintSolver;
 class btDiscreteDynamicsWorld;
+class btRigidBody;
+class btCollisionObject;
 
 namespace PTSD {
-	class PhysicsImpl {
+	class PhysicsImplementation {
 	private:
 		btBroadphaseInterface* mBroadphase;
 		btDefaultCollisionConfiguration* mCollisionConfiguration;
@@ -18,18 +21,21 @@ namespace PTSD {
 		void testScene();
 		void logActivity();
 
-		PhysicsImpl() = default;
-		static PhysicsImpl* mInstance;
+		PhysicsImplementation() = default;
+		static PhysicsImplementation* mInstance;
 
 	public:
-		static PhysicsImpl* getInstance() {
+		static PhysicsImplementation* getInstance() {
 			if (mInstance == nullptr)
-				mInstance = new PhysicsImpl();
+				mInstance = new PhysicsImplementation();
 			return mInstance;;
 		}
-		void Init();
-		void Update();
-		void Shutdown();
+		void init();
+		void update();
+		void shutdown();
+
+		btRigidBody* addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = {0,0,0,1});
+		btRigidBody* addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
 
 		btBroadphaseInterface* getBroadphase() const { return mBroadphase; }
 		btDefaultCollisionConfiguration* getCollisionConfiguration() const { return mCollisionConfiguration; }
@@ -37,6 +43,6 @@ namespace PTSD {
 		btSequentialImpulseConstraintSolver* getSolver() const { return mSolver; }
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
 
-		~PhysicsImpl() = default;
+		~PhysicsImplementation() = default;
 	};
 }
