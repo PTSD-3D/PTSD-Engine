@@ -41,5 +41,8 @@ int main()
 	{
 		graphicsSystem->renderFrame();
 		graphicsSystem->getCam()->translate({ 0,0,0.1 });
+		inputSystem->update();
+		inputSystem->test();
+
 	}
 }
