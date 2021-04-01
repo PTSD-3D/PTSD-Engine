@@ -217,7 +217,7 @@ namespace PTSD
 
 		}
 
-		LOG("Frame rendered", Trace);
+		//LOG("Frame rendered", Trace);
 		return true;
 	}
 
