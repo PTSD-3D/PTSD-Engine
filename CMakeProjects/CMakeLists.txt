@@ -9,6 +9,7 @@ set(PTSD_PROJECTS "${PROJECT_SOURCE_DIR}/../projects/")
 set(PTSD_MODULES "")
 set(PTSD_MODULES_INCLUDES "")
 set(PTSD_LOGGER_INCLUDE  "${PTSD_ROOT}/projects/PTSD-Logger/include")
+set(PTSD_INPUT_INCLUDE  "${PTSD_ROOT}/projects/PTSD-Input/include")
 link_directories("${PTSD_ROOT}bin/")
 
 ##############
