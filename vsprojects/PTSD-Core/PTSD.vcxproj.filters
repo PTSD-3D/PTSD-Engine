@@ -66,6 +66,12 @@
     <ClCompile Include="..\..\source\Graphics\source\PTSDGraphics.cpp">
       <Filter>Graphics\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Input\source\PTSDInput.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Logger\LogImpl.h">
@@ -91,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Graphics\include\PTSDGraphics.h">
       <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Input\include\PTSDInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Input\include\PTSDkeys.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Input\source\InputImplementation.h">
+      <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

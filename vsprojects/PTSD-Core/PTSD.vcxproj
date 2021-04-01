@@ -16,6 +16,8 @@
     <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\PTSDGraphics.cpp" />
+    <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp" />
+    <ClCompile Include="..\..\source\Input\source\PTSDInput.cpp" />
     <ClCompile Include="..\..\source\Logger\LogImpl.cpp" />
     <ClCompile Include="..\..\source\Logger\PTSDLog.cpp" />
   </ItemGroup>
@@ -26,6 +28,9 @@
     <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp" />
     <ClInclude Include="..\..\source\Graphics\include\PTSDGraphics.h" />
+    <ClInclude Include="..\..\source\Input\include\PTSDInput.h" />
+    <ClInclude Include="..\..\source\Input\include\PTSDkeys.h" />
+    <ClInclude Include="..\..\source\Input\source\InputImplementation.h" />
     <ClInclude Include="..\..\source\Logger\LogImpl.h" />
     <ClInclude Include="..\..\source\Logger\PTSDLog.h" />
   </ItemGroup>
@@ -80,7 +85,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -97,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

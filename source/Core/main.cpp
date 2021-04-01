@@ -5,7 +5,7 @@
 //#include "PTSDScripting.h"
 //#include "PTSDSound.h"
 //#include "PTSDUI.h"
-//#include "PTSDInput.h"
+#include "PTSDInput.h"
 #include "Camera.h"
 //#include "Vec3.h"
 //#include "Vec2.h"
@@ -14,7 +14,7 @@
 int main()
 {
 	PTSD::Log* logSystem = new PTSD::Log();
-	//PTSD::Input* inputSystem = new PTSD::Input();
+	PTSD::Input* inputSystem = new PTSD::Input();
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	/*PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
 	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
@@ -27,9 +27,9 @@ int main()
 	logSystem->init(PTSD::Warning);
 #endif
 	PTSD::LOG("Beginning Initialization");
-	/*soundSystem->init();
+	//soundSystem->init();
 	inputSystem->init();
-	physicsSystem->init();*/
+	//physicsSystem->init();*/
 	graphicsSystem->init();
 	/*uiSystem->init();
 	scriptingSystem->init();*/
@@ -38,10 +38,10 @@ int main()
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 	while(true)
 	{
+		inputSystem->update();
 		graphicsSystem->getCam()->translate({ 0,0,0.1 });
 		graphicsSystem->renderFrame();
-		//inputSystem->update();
-		//inputSystem->test();
+		inputSystem->test();
 
 	}
 }

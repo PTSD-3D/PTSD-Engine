@@ -1,25 +1,12 @@
 #pragma once
-#if defined(_MSC_VER)
-	#ifdef _PTSDINPUT
-		#define INPUTAPI  __declspec(dllexport)   // export DLL information
-	#else
-		#define INPUTAPI  __declspec(dllimport)   // import DLL information
-	#endif 
-#else
-	#ifdef _PTSDINPUT
-		#define INPUTAPI __attribute__((visibility("default")))
-	#else
-		#define INPUTAPI
-	#endif 
-#endif 
 
 #include "PTSDkeys.h"
-#include "Vec2.h"
+#include "PTSDVectors.h"
 
 namespace PTSD {
 	class InputImplementation;
 
-	class INPUTAPI Input {
+	class Input {
 	private:
 		InputImplementation* mImplementation = nullptr;
 	public:
