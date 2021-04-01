@@ -8,18 +8,18 @@ namespace PTSD {
 	UI* UI::mInstance = nullptr;
 
 	int UI::init() {
-		mImpl = PTSD::UIImplementation::getInstance();
-		mImpl->init(PTSD::Graphics::getInstance()->getRenderWindow());
+		mImplementation = PTSD::UIImplementation::getInstance();
+		mImplementation->init(PTSD::Graphics::getInstance()->getRenderWindow());
 		return 0;
 	}
 
 	bool UI::render()
 	{
-		return mImpl->render();
+		return mImplementation->render(PTSD::Graphics::getInstance()->getDeltaTime());
 	}
 
 	void UI::shutdown()
 	{
-		return mImpl->shutdown();
+		return mImplementation->shutdown();
 	}
 }

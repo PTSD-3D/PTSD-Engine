@@ -27,4 +27,8 @@ namespace PTSD {
 	{
 		return mImplementation->getRenderWindow();
 	}
+	double Graphics::getDeltaTime()
+	{
+		return mImplementation->getDeltaTime();
+	}
 }

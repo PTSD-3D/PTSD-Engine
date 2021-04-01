@@ -19,7 +19,7 @@ namespace PTSD {
 	class UIAPI UI {
 	private:
 		static UI* mInstance;
-		UIImplementation* mImpl = nullptr; //private implementation
+		UIImplementation* mImplementation = nullptr; //private implementation
 
 	public:
 		UI() = default;

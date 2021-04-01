@@ -18,6 +18,7 @@
 #include <Ogre.h>
 #include <OgrePlugin.h>
 #include "Camera.h"
+#include <iostream>
 
 // OGRE initialization:
 #ifdef WIN32
@@ -206,6 +207,7 @@ namespace PTSD
 
 	void GraphicsImplementation::init()
 	{
+		lastRenderTime = double(GetTickCount64())/1000;
 
 		setupLogging();
 		setupWindow();
@@ -237,7 +239,12 @@ namespace PTSD
 
 		}
 
+		//deltaTime = current time - last rendered time
+		deltaTime = (double(GetTickCount64()) / 1000) - lastRenderTime;
+		lastRenderTime = (double(GetTickCount64()) / 1000);
+
 		LOG("Frame rendered", Trace);
+
 		return true;
 	}
 

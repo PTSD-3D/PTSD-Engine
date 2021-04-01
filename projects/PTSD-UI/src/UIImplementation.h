@@ -34,7 +34,7 @@ namespace PTSD {
 		}
 
 		int init(Ogre::RenderWindow* mRenderWindow);
-		bool render();
+		bool render(double deltaTime);
 		void shutdown();
 
 		void loadScheme(std::string filename);

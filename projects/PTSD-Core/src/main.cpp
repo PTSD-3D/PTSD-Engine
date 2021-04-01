@@ -37,6 +37,7 @@ int main()
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 	while(true)
 	{
+		uiSystem->render();
 		graphicsSystem->renderFrame();
 		graphicsSystem->getCam()->translate({ 0,0,0.1 });
 	}
