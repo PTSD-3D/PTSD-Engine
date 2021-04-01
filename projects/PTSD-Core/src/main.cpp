@@ -18,7 +18,7 @@ int main()
 	PTSD::Log* logSystem = new PTSD::Log();
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
-	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
+	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
 	PTSD::UI* uiSystem = new PTSD::UI();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 
@@ -39,10 +39,10 @@ int main()
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 	while(true)
 	{
-		graphicsSystem->renderFrame();
-		graphicsSystem->getCam()->translate({ 0,0,0.1 });
 		inputSystem->update();
 		inputSystem->test();
-
+		physicsSystem->update();
+		graphicsSystem->renderFrame();
+		graphicsSystem->getCam()->translate({ 0,0,0.1 });
 	}
 }
