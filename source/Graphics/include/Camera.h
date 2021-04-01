@@ -8,7 +8,7 @@
 #endif
 
 #include <memory>
-#include "Vec3.h"
+#include "PTSDVectors.h"
 
 namespace PTSD
 {

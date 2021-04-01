@@ -37,6 +37,12 @@
     <Filter Include="Ui">
       <UniqueIdentifier>{884c6967-46e9-43f0-a6ee-3fbeb5d94aba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Headers">
+      <UniqueIdentifier>{0154c785-7487-414f-9189-a850663168b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Source">
+      <UniqueIdentifier>{1c7afe85-a6d8-4fbc-a00a-96112896dea5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Core\main.cpp">
@@ -48,6 +54,18 @@
     <ClCompile Include="..\..\source\Logger\PTSDLog.cpp">
       <Filter>Logger</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\Camera.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\PTSDGraphics.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Logger\LogImpl.h">
@@ -55,6 +73,24 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Logger\PTSDLog.h">
       <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Core\PTSDVectors.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\Camera.h">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\PTSDGraphics.h">
+      <Filter>Graphics\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

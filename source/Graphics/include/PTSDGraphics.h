@@ -1,19 +1,5 @@
 #pragma once
 
-#if defined(_MSC_VER)
-	#ifdef _PTSDGRAPHICS
-		#define GRAPHICSAPI  __declspec(dllexport)   // export DLL information
-	#else
-		#define GRAPHICSAPI  __declspec(dllimport)   // import DLL information
-	#endif 
-#else
-	#ifdef _PTSDLOG
-		#define GRAPHICSAPI __attribute__((visibility("default")))
-	#else
-		#define GRAPHICSAPI
-	#endif 
-#endif 
-
 
 namespace PTSD {
 	class GraphicsImplementation;
@@ -22,7 +8,7 @@ namespace PTSD {
 	/**
 	 * \brief Singleton Rendering Manger
 	 */
-	class GRAPHICSAPI Graphics {
+	class Graphics {
 	private:
 		static Graphics* mInstance;
 		GraphicsImplementation* mImplementation = nullptr;//private Implementation

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <Vec3.h>
+#include <PTSDVectors.h>
 
 namespace Ogre
 {
