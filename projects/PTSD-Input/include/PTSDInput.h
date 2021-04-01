@@ -17,51 +17,37 @@
 #include "Vec2.h"
 
 namespace PTSD {
-	class InputImp;
+	class InputImplementation;
 
 	class INPUTAPI Input {
 	private:
-
+		InputImplementation* mImplementation = nullptr;
 	public:
-		static int Init();
 
-		~Input() {}
 		Input() {}
-
+		~Input() {}
+		int init();
 		size_t createInput();
-
 		int Shutdown();
-
-		static void test();
+		void test();
 
 	//Keyboard
-		static bool keyPressed(Scancode key);
-
-		static bool keyRelease(Scancode key);
+		bool keyPressed(Scancode key);
+		bool keyRelease(Scancode key);
 		
 	//Mouse
-		static bool mouseLeftClick();
-
-		static bool mouseRightClick();
-
-		static bool mouseWheelClick();
-
-		static Vector2D getMousePos();
+		bool mouseLeftClick();
+		bool mouseRightClick();
+		bool mouseWheelClick();
+		Vector2D getMousePos();
 
 	//Controller
-
-		static bool ControllerButtonPressed(int controllerID, ControllerButton button);
-
-		static bool ControllerButtonReleased(int controllerID, ControllerButton button);
-
-		static Vector2D controllerRightAxis(int controllerID);
-
-		static Vector2D controllerLeftAxis(int controllerID);
-
-		static float controllerLeftTrigger(int controllerID);
-
-		static float controllerRightTrigger(int controllerID);
-
+		bool ControllerButtonPressed(int controllerID, ControllerButton button);
+		bool ControllerButtonReleased(int controllerID, ControllerButton button);
+		Vector2D controllerRightAxis(int controllerID);
+		Vector2D controllerLeftAxis(int controllerID);
+		float controllerLeftTrigger(int controllerID);
+		float controllerRightTrigger(int controllerID);
 		void update();
 	};
 }

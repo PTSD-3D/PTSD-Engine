@@ -29,10 +29,9 @@ int main()
 #endif
 	PTSD::LOG("Beginning Initialization");
 	m_soundSystem->Init();
-	m_InputSystem->Init();
+	m_InputSystem->init();
 	m_physicsSystem->Init();
 	m_GraphicsSystem->Init();
-	m_InputSystem->Init();
 	m_ScriptingSystem->Init();
 	PTSD::LOG("All subsystems initialized");
 

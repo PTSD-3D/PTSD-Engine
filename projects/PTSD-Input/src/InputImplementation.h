@@ -28,11 +28,11 @@ namespace PTSD {
 		Up = 0, JustUp, Down, JustDown
 	};
 
-	class InputImp {
+	class InputImplementation {
 	private:
 
-		static InputImp* m_instance;
-		InputImp();
+		static InputImplementation* mInstance;
+		InputImplementation();
 
 		//Generic keyboard press
 		bool isKeyUpEvent_;
@@ -48,20 +48,20 @@ namespace PTSD {
 
 		//Variables for controller input
 		int numControllers_;
-		std::vector<SDL_GameController*> m_gameControllers; //Pointers for SDL controllers
+		std::vector<SDL_GameController*> mGameControllers; //Pointers for SDL controllers
 		std::queue<int> disconnectedGameControllers_;	//Queue for disconected controllers
 
 		//State of the inputs from a controller
-		std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
-		std::vector<std::pair<double*, double*>> m_triggerValues;
-		std::vector<std::vector<ButtonState>> m_buttonStates;
+		std::vector<std::pair<Vector2D*, Vector2D*>> mJoystickValues;
+		std::vector<std::pair<double*, double*>> mTriggerValues;
+		std::vector<std::vector<ButtonState>> mButtonStates;
 		std::vector<Vector2D> lastLStickValue_;
 
 		
 		//State of the inputs from a keyboard and mouse
-		ButtonState m_mouseButtonStates[3];
-		std::vector<SDL_Scancode> m_keysJustDown; 
-		std::vector<SDL_Scancode> m_keysJustUp; 
+		ButtonState mMouseButtonStates[3];
+		std::vector<SDL_Scancode> mKeysJustDown; 
+		std::vector<SDL_Scancode> mKeysJustUp; 
 		const int kbSize = 300;
 		std::vector<ButtonState> kbState_;
 		std::queue<int> justUpKeys;
@@ -73,7 +73,7 @@ namespace PTSD {
 
 		bool debugFlag_ReconectedController = false;
 
-		bool m_bJoysticksInitialised;
+		bool mBJoysticksInitialised;
 		bool isButtonDownEvent_;
 		bool isButtonUpEvent_;
 		bool isAxisMovementEvent_;
@@ -131,29 +131,24 @@ namespace PTSD {
 
 
 	public:
-
-		static InputImp* getInstance()
+		~InputImplementation();
+		InputImplementation(InputImplementation&) = delete;
+		InputImplementation& operator=(InputImplementation&) = delete;
+		
+		static InputImplementation* getInstance()
 		{
-			if (!m_instance)
-				m_instance = new InputImp();
-			return m_instance;
+			if (!mInstance)
+				mInstance = new InputImplementation();
+			return mInstance;
 		}
 
 		size_t createInput();
 
 		void Init();
-
-		const int m_joystickDeadZone = 10000;
-		const int m_triggerDeadZone = 10000; //trigger deadzone equals threshold
-
-		InputImp(InputImp&) = delete;
-		InputImp& operator=(InputImp&) = delete;
-
-		//virtual ~InputImp();
-		~InputImp();
-
-		// update the state
 		void update();
+
+		const int mJoystickDeadZone = 10000;
+		const int mTriggerDeadZone = 10000; //trigger deadzone equals threshold
 
 		//Methods to get the information about some kind of input
 		//---------------------------------------------
@@ -191,11 +186,9 @@ namespace PTSD {
 		inline bool mouseMotionEvent() {
 			return isMouseMotionEvent_;
 		}
-
 		inline bool mouseButtonEvent() {
 			return isMouseButtonEvent_;
 		}
-
 		Vector2D getMousePos() {
 			return mousePos_;
 		}
@@ -218,7 +211,7 @@ namespace PTSD {
 		//init
 		void initialiseGamepads();
 		bool joysticksInitialised() {
-			return m_bJoysticksInitialised;
+			return mBJoysticksInitialised;
 		}
 		int getNumControllers() {
 			return numControllers_;
@@ -235,13 +228,14 @@ namespace PTSD {
 		inline bool isAxisMovementEvent() {
 			return isAxisMovementEvent_;
 		}
+
 		//justup/down for the exact press or release
 		bool isButtonJustUp(int gameCtrl, SDL_GameControllerButton b);
 		bool isButtonJustDown(int gameCtrl, SDL_GameControllerButton b);
+
 		//isup/down for holding a button
 		bool isButtonDown(int gameCtrl, SDL_GameControllerButton b);
 		bool isButtonUp(int gameCtrl, SDL_GameControllerButton b);
-
 
 		//get the direction or a value from a stick/trigger given a controller
 		Vector2D getStickDir(int ctrl, GAMEPADSTICK stick);
