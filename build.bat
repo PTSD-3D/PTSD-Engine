@@ -10,6 +10,8 @@ copy dependencies\Ogre\build\bin\relwithdebinfo\OgreMain.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\debug\RenderSystem_GL_d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\release\RenderSystem_GL.dll bin\ 1>NUL
+copy dependencies\Ogre\build\bin\debug\Codec_STBI_d.dll bin\ 1>NUL
+copy dependencies\Ogre\build\bin\release\Codec_STBI.dll bin\ 1>NUL
 
 echo Copiando DLLs de Bullet...
 copy dependencies\bullet\src\bin\pybullet_vs2010_x64_release.dll bin\ 1>NUL
