@@ -9,6 +9,8 @@
 #include "PTSDInput.h"
 #include "Camera.h"
 #include "Vec3.h"
+#include "Vec2.h"
+#include "PTSDkeys.h"
 
 int main()
 {
@@ -38,7 +40,10 @@ int main()
 	while(true)
 	{
 		graphicsSystem->getCam()->translate({ 0,0,0.1 });
+		inputSystem->update();
+		inputSystem->test();
 		graphicsSystem->renderFrame();
 		uiSystem->render();
+
 	}
 }
