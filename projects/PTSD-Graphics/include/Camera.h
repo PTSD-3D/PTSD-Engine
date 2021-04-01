@@ -1,11 +1,17 @@
 #pragma once
-#ifdef _PTSDGRAPHICS
-#define GRAPHICSAPI  __declspec(dllexport)   // export DLL information
-
+#if defined(_MSC_VER)
+	#ifdef _PTSDGRAPHICS
+		#define GRAPHICSAPI  __declspec(dllexport)   // export DLL information
+	#else
+		#define GRAPHICSAPI  __declspec(dllimport)   // import DLL information
+	#endif 
 #else
-#define GRAPHICSAPI  __declspec(dllimport)   // import DLL information
-
-#endif
+	#ifdef _PTSDLOG
+		#define GRAPHICSAPI __attribute__((visibility("default")))
+	#else
+		#define GRAPHICSAPI
+	#endif 
+#endif 
 
 #include <memory>
 #include "Vec3.h"

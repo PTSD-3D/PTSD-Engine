@@ -12,7 +12,6 @@
 #include <OgreResourceGroupManager.h>
 #include <OgreViewport.h>
 #include <OgreEntity.h>
-#include <SDL_config_windows.h>
 #include <SDL_syswm.h>
 #include <OgreFileSystemLayer.h>
 #include <Ogre.h>
@@ -21,6 +20,7 @@
 
 // OGRE initialization:
 #ifdef WIN32
+// #include <SDL_config_windows.h>
 //Necessary to tell the mouse events to go to this window
 #if (_WIN32_WINNT < 0x0501)
 #undef _WIN32_WINNT
@@ -65,8 +65,11 @@ namespace PTSD
 		// We set up an SDL window
 		if (SDL_InitSubSystem(SDL_INIT_VIDEO) != 0)
 			LOG("Unable to initialise SDL", LogLevel::Critical);
-
-		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 25, 25, 800, 600, SDL_WINDOW_RESIZABLE);
+		Uint32 flags = SDL_WINDOW_RESIZABLE;
+		#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+			flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
+		#endif
+		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 25, 25, 800, 600, flags);
 
 		SDL_SysWMinfo wmInfo;
 		SDL_GetVersion(&wmInfo.version);
@@ -80,6 +83,9 @@ namespace PTSD
 #ifdef SDL_VIDEO_DRIVER_WINDOWS
 		misc["externalWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));
 #else
+		SDL_GL_CreateContext(mSDLWindow);
+		if(!SDL_GL_GetCurrentContext())
+			LOG("Cannot create SDL_GL context", Critical);
 		misc["currentGLContext"] = Ogre::String("True");
 #endif
 
@@ -172,34 +178,8 @@ namespace PTSD
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
-#elif OGRE_PLATFORM == OGRE_PLATFORM_LINUX
-			//GLX Message Pump
-			Ogre::RenderWindowList::iterator win = _msWindows.begin();
-			Ogre::RenderWindowList::iterator end = _msWindows.end();
-
-			Display* xDisplay = 0; // same for all windows
-
-			for (; win != end; win++)
-			{
-				XID xid;
-				XEvent event;
-
-				if (!xDisplay)
-					(win)->getCustomAttribute("XDISPLAY", &xDisplay);
-
-				(win)->getCustomAttribute("WINDOW", &xid);
-
-				while (XCheckWindowEvent(xDisplay, xid, StructureNotifyMask | VisibilityChangeMask | FocusChangeMask, &event))
-				{
-					GLXProc(win, event);
-				}
-
-				// The ClientMessage event does not appear under any Event Mask
-				while (XCheckTypedWindowEvent(xDisplay, xid, ClientMessage, &event))
-				{
-					GLXProc(win, event);
-				}
-			}
+ #elif OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+				SDL_PumpEvents();
 #endif
 		
 	}

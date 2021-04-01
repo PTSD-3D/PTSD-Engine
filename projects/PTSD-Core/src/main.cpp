@@ -12,7 +12,7 @@
 
 int main()
 {
-	PTSD::Input* inputSystem = new PTSD::Input();
+	// PTSD::Input* inputSystem = new PTSD::Input();
 	PTSD::Log* logSystem = new PTSD::Log();
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
@@ -27,7 +27,7 @@ int main()
 #endif
 	PTSD::LOG("Beginning Initialization");
 	soundSystem->init();
-	inputSystem->init();
+	// inputSystem->init();
 	physicsSystem->init();
 	graphicsSystem->init();
 	uiSystem->init();
