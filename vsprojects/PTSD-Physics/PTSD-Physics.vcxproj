@@ -100,7 +100,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_PTSDPHYS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)dependencies\bullet\src\src;$(SolutionDir)dependencies\bullet\src\build3\vs2010;$(SolutionDir)dependencies\bullet\src\Extras;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
