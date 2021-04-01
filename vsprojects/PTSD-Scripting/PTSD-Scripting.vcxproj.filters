@@ -18,9 +18,15 @@
     <ClInclude Include="..\..\projects\PTSD-Scripting\include\PTSDScripting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-Scripting\src\ScriptingImplementation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-Scripting\src\PTSDScripting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-Scripting\src\ScriptingImplementation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
