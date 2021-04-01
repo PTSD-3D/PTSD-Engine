@@ -1,4 +1,3 @@
-#pragma once
 #include <OgreString.h>
 #include "GraphicsImplementation.h"
 #include "GraphicsLogger.hpp"

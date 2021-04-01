@@ -17,7 +17,7 @@ macro(add_source)
 				list(APPEND SRCS "${MY_SOURCE}${_src}")
 		endforeach()
 endmacro()
-add_source( PTSDInput )#<----- Add al sources here
+add_source( PTSDInput InputImplementation)#<----- Add al sources here
 add_library(${NAME} SHARED ${SRCS})
 target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
 target_compile_definitions(${NAME} PUBLIC _PTSDINPUT)
