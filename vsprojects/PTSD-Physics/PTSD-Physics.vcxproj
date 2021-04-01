@@ -26,6 +26,11 @@
     <ClCompile Include="..\..\projects\PTSD-Physics\src\Rigidbody.cpp" />
     <ClCompile Include="..\..\projects\PTSD-Physics\src\RigidbodyImplementation.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PTSD-Logger\PTSD-Logger.vcxproj">
+      <Project>{41797280-a7ab-4696-aa4e-8dd149a8a789}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -77,7 +82,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_PTSDPHYS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)dependencies\bullet\src\src\;$(SolutionDir)dependencies\bullet\src\build3\vs2010\;$(SolutionDir)dependencies\bullet\src\Extras\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -95,7 +100,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;_PTSDPHYS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)dependencies\bullet\src\src;$(SolutionDir)dependencies\bullet\src\build3\vs2010;$(SolutionDir)dependencies\bullet\src\Extras;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

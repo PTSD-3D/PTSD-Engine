@@ -34,9 +34,6 @@ namespace PTSD {
 		void update();
 		void shutdown();
 
-		btRigidBody* addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = {0,0,0,1});
-		btRigidBody* addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
-
 		btBroadphaseInterface* getBroadphase() const { return mBroadphase; }
 		btDefaultCollisionConfiguration* getCollisionConfiguration() const { return mCollisionConfiguration; }
 		btCollisionDispatcher* getDispatcher() const { return mDispatcher; }

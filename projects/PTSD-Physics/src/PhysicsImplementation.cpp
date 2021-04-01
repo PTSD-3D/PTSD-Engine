@@ -1,9 +1,11 @@
 #pragma once
+#include <string>
 #include "PTSDLog.h"
 #include "PhysicsImplementation.h"
 #include "btBulletCollisionCommon.h"
 #include "btBulletDynamicsCommon.h"
 #include "ColliderImplementation.h" //for demonstration purposes
+#include "RigidbodyImplementation.h" //for demonstration purposes
 
 namespace PTSD {
 
@@ -14,11 +16,14 @@ namespace PTSD {
 		mWorld->setGravity(btVector3(0, -10, 0));
 
 		ColliderImplementation* col = new ColliderImplementation();
+		RigidbodyImplementation* rig = new RigidbodyImplementation();
 
 		btCollisionObject* obj = col->addSphereCollider(5);
 
 		btCollisionObject* obj2 = col->addBoxCollider({ 5,5,5 });
-		btRigidBody* body = addBoxRigidBody({ 5,5,5 }, 1, { 0,100,0 });
+		btRigidBody* body = rig->addBoxRigidBody({ 5,5,5 }, 1, { 0,100,0 });
+
+		rig->addForce({ 10,0,0 });
 	}
 
 	//for debugging purposes, not meant to be in the final engine
@@ -37,25 +42,10 @@ namespace PTSD {
 			{
 				trans = obj->getWorldTransform();
 			}
-			printf(" world pos object %d = %f ,%f ,%f\n", j, float(trans.getOrigin().getX()), float(
-				trans.getOrigin().getY()), float(trans.getOrigin().getZ()));
+			std::string s = "World pos object " + std::to_string(j) + " = " + std::to_string(float(trans.getOrigin().getX())) + ", " +
+				std::to_string(float(trans.getOrigin().getY())) + ", " + std::to_string(float(trans.getOrigin().getZ())) + "\n";
+			LOG(s.c_str(), Trace);
 		}
-	}
-
-	btRigidBody* PhysicsImplementation::addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
-		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
-		btRigidBody* body = new btRigidBody(mass, state, shape);
-		mWorld->addRigidBody(body);
-		return body;
-	}
-
-	btRigidBody* PhysicsImplementation::addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		btCollisionShape* shape = new btSphereShape(size);
-		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
-		btRigidBody* body = new btRigidBody(mass, state, shape);
-		mWorld->addRigidBody(body);
-		return body;
 	}
 
 	void PhysicsImplementation::init() {
