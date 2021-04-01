@@ -2,8 +2,7 @@
 #include "PTSDScripting.h"
 #include "ScriptingImplementation.h"
 #include "lua.hpp"
-#include <sol/sol.hpp>
-
+#include "sol/sol.hpp"
 
 namespace PTSD {
 	int Scripting::init() {

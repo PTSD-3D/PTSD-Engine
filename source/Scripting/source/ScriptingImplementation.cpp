@@ -5,8 +5,8 @@ Include every PTSD-System to expose its public API to our Scripting state
 */
 #include "PTSDInput.h"
 #include "PTSDGraphics.h"
-#include "PTSDUI.h"
-#include "PTSDPhysics.h"
+//#include "PTSDUI.h"
+//#include "PTSDPhysics.h"
 #include "PTSDScripting.h" //debería ser el ECS
 
 namespace PTSD {

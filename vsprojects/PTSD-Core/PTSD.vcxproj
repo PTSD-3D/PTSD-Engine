@@ -20,6 +20,8 @@
     <ClCompile Include="..\..\source\Input\source\PTSDInput.cpp" />
     <ClCompile Include="..\..\source\Logger\LogImpl.cpp" />
     <ClCompile Include="..\..\source\Logger\PTSDLog.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\PTSDScripting.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Core\PTSDVectors.h" />
@@ -33,6 +35,8 @@
     <ClInclude Include="..\..\source\Input\source\InputImplementation.h" />
     <ClInclude Include="..\..\source\Logger\LogImpl.h" />
     <ClInclude Include="..\..\source\Logger\PTSDLog.h" />
+    <ClInclude Include="..\..\source\Scripting\include\PTSDScripting.h" />
+    <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -85,13 +89,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger\;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include\;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include\;$(SolutionDir)source\Scripting\include\;$(SolutionDir)dependencies\scripting\;$(SolutionDir)dependencies\scripting\lua\include\</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OgreMain_d.lib;SDL2d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua54.lib;OgreMain_d.lib;SDL2d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\scripting\lua\;$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -102,15 +107,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger\;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include\;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include\;$(SolutionDir)source\Scripting\include\;$(SolutionDir)dependencies\scripting\;$(SolutionDir)dependencies\scripting\lua\include\</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>OgreMain.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\RelWithDebInfo</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua54.lib;OgreMain.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\scripting\lua\;$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\RelWithDebInfo</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
