@@ -41,6 +41,9 @@ namespace PTSD {
 		void loadFont(std::string filename);
 
 		void createRoot();
+		void createWindowStaticImage(std::string name, std::string source, float xDim, float yDim);
+		void setMouseCursor(std::string name);
+		void setMouseCursorVisible(bool active);
 
 	};
 }
