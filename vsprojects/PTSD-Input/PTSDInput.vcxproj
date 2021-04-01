@@ -12,8 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\projects\PTSD-Input\include\PTSDInput.h" />
+    <ClInclude Include="..\..\projects\PTSD-Input\include\PTSDkeys.h" />
+    <ClInclude Include="..\..\projects\PTSD-Input\include\Vec2.h" />
+    <ClInclude Include="..\..\projects\PTSD-Input\src\InputImplementation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\projects\PTSD-Input\src\InputImplementation.cpp" />
     <ClCompile Include="..\..\projects\PTSD-Input\src\PTSDInput.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
