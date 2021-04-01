@@ -1,26 +1,25 @@
 #include <iostream>
-#include "test.h"
 #include "PTSDLog.h"
-#include "PTSDPhysics.h"
-#include "PTSDGraphics.h"
-#include "PTSDScripting.h"
-#include "PTSDSound.h"
-#include "PTSDUI.h"
-#include "PTSDInput.h"
-#include "Camera.h"
-#include "Vec3.h"
-#include "Vec2.h"
-#include "PTSDkeys.h"
+//#include "PTSDPhysics.h"
+//#include "PTSDGraphics.h"
+//#include "PTSDScripting.h"
+//#include "PTSDSound.h"
+//#include "PTSDUI.h"
+//#include "PTSDInput.h"
+//#include "Camera.h"
+//#include "Vec3.h"
+//#include "Vec2.h"
+//#include "PTSDkeys.h"
 
 int main()
 {
-	PTSD::Input* inputSystem = new PTSD::Input();
 	PTSD::Log* logSystem = new PTSD::Log();
+	/*PTSD::Input* inputSystem = new PTSD::Input();
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
 	PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
 	PTSD::UI* uiSystem = new PTSD::UI();
-	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
+	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();*/
 
 #ifdef _DEBUG
 	logSystem->init(PTSD::Trace);
@@ -28,7 +27,7 @@ int main()
 	logSystem->init(PTSD::Warning);
 #endif
 	PTSD::LOG("Beginning Initialization");
-	soundSystem->init();
+	/*soundSystem->init();
 	inputSystem->init();
 	physicsSystem->init();
 	graphicsSystem->init();
@@ -44,5 +43,5 @@ int main()
 		inputSystem->update();
 		inputSystem->test();
 
-	}
+	}*/
 }

@@ -84,14 +84,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\projects\PTSD-Logger\include\PTSDLog.h" />
-    <ClInclude Include="..\..\projects\PTSD-Logger\src\LogImpl.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Logger\src\LogImpl.cpp" />
-    <ClCompile Include="..\..\projects\PTSD-Logger\src\PTSDLog.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
