@@ -23,4 +23,8 @@ namespace PTSD {
 	{
 		return mImplementation->getCamera();
 	}
+	Ogre::RenderWindow* Graphics::getRenderWindow() const
+	{
+		return mImplementation->getRenderWindow();
+	}
 }

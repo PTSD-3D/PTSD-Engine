@@ -1,24 +1,25 @@
 #include <iostream>
 #include "PTSDUI.h"
-#include "UIImpl.h"
+#include "PTSDGraphics.h"
+#include "UIImplementation.h"
 
 namespace PTSD {
 
 	UI* UI::mInstance = nullptr;
 
-	int UI::Init(Ogre::RenderWindow* mRenderWindow) {
+	int UI::init() {
 		mImpl = PTSD::UIImplementation::getInstance();
-		mImpl->Init(mRenderWindow);
+		mImpl->init(PTSD::Graphics::getInstance()->getRenderWindow());
 		return 0;
 	}
 
-	bool UI::Render()
+	bool UI::render()
 	{
-		return mImpl->Render();
+		return mImpl->render();
 	}
 
-	void UI::Shutdown()
+	void UI::shutdown()
 	{
-		return mImpl->Shutdown();
+		return mImpl->shutdown();
 	}
 }

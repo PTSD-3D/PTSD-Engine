@@ -1,3 +1,5 @@
+#include <string>
+
 namespace CEGUI {
 	class String;
 	class System;
@@ -11,27 +13,34 @@ namespace CEGUI {
 
 namespace Ogre {
 	class RenderWindow;
+	class RenderTarget;
 }
 
 namespace PTSD {
 	class UIImplementation {
 	private:
-		CEGUI::OgreRenderer* renderer;
-
 		UIImplementation() = default;
+		CEGUI::OgreRenderer* renderer;
+		CEGUI::Window* mRoot;
+
 		static UIImplementation* mInstance;
 	public:
+		~UIImplementation() = default;
+
 		static UIImplementation* getInstance() {
 			if (mInstance == nullptr)
 				mInstance = new UIImplementation();
 			return mInstance;
 		}
 
-		int Init(Ogre::RenderWindow* mRenderWindow);
-		bool Render();
-		void Shutdown();
+		int init(Ogre::RenderWindow* mRenderWindow);
+		bool render();
+		void shutdown();
 
-		~UIImplementation() = default;
+		void loadScheme(std::string filename);
+		void loadFont(std::string filename);
+
+		void createRoot();
 
 	};
 }

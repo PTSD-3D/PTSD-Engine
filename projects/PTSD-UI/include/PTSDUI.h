@@ -13,10 +13,6 @@
 	#endif
 #endif
 
-namespace Ogre {
-	class RenderWindow;
-}
-
 namespace PTSD {
 	class UIImplementation;
 
@@ -26,6 +22,9 @@ namespace PTSD {
 		UIImplementation* mImpl = nullptr; //private implementation
 
 	public:
+		UI() = default;
+		~UI() = default;
+
 		static UI* getInstance()
 		{
 			if (mInstance == nullptr)
@@ -33,11 +32,8 @@ namespace PTSD {
 			return mInstance;
 		}
 
-		int Init(Ogre::RenderWindow* mRenderWindow);
-		bool Render();
-		void Shutdown();
-
-		UI() = default;
-		~UI() = default;
+		int init();
+		bool render();
+		void shutdown();
 	};
 }
