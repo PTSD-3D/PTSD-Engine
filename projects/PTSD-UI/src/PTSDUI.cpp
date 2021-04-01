@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-int PTSD::UI::Init() {
+int PTSD::UI::init() {
 	std::cout << "UI system initialized\n";
 	CEGUI::BasicImage image("PTSD-UI-Test\n");
 	std::cout << image.getName();

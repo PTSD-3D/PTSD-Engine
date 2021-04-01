@@ -19,8 +19,10 @@ namespace PTSD {
 	private:
 
 	public:
-		static int Init();
-		~Scripting() {}
 		Scripting() {}
+
+		~Scripting() {}
+		
+		void init();
 	};
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <OgreString.h>
-#include "GraphicsImpl.h"
+#include "GraphicsImplementation.h"
 #include "GraphicsLogger.hpp"
 #include <OgreRoot.h>
 #include <OgreConfigFile.h>
@@ -34,11 +34,11 @@
 
 namespace PTSD
 {
-	GraphicsImpl* GraphicsImpl::mInstance = nullptr;
+	GraphicsImplementation* GraphicsImplementation::mInstance = nullptr;
 	/**
 	 * \brief Redirects OGRE logging system to PTSD-Logger
 	 */
-	void GraphicsImpl::setupLogging()
+	void GraphicsImplementation::setupLogging()
 	{
 		//PTSD Logging, before init we will redirect everything to our own logger
 		Ogre::LogManager* logMgr = new Ogre::LogManager();
@@ -50,7 +50,7 @@ namespace PTSD
 	/**
 	 * \brief Creates an SDL window and hooks OGRE to it
 	 */
-	void GraphicsImpl::setupWindow()
+	void GraphicsImplementation::setupWindow()
 	{
 		mRoot = new Ogre::Root("plugins.cfg", "ogre.cfg", "Ogre.log");
 
@@ -94,7 +94,7 @@ namespace PTSD
 	/**
 	 * \brief Finds resources stated in resources.cfg
 	 */
-	void GraphicsImpl::loadResources()
+	void GraphicsImplementation::loadResources()
 	{
 		//TODO parametrization and configuration
 		// load resource paths from config file
@@ -138,7 +138,7 @@ namespace PTSD
 		Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	}
 
-	void GraphicsImpl::testScene()
+	void GraphicsImplementation::testScene()
 	{
 
 		mSceneMgr = mRoot->createSceneManager();
@@ -161,7 +161,7 @@ namespace PTSD
 	/**
 	 * \brief Pumps messages, needed for render loop
 	 */
-	void GraphicsImpl::msgPump()
+	void GraphicsImplementation::msgPump()
 	{
 		
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -204,7 +204,7 @@ namespace PTSD
 		
 	}
 
-	void GraphicsImpl::Init()
+	void GraphicsImplementation::init()
 	{
 
 		setupLogging();
@@ -219,7 +219,7 @@ namespace PTSD
 	 * \brief Renders a frame!
 	 * \return true on success
 	 */
-	bool GraphicsImpl::renderFrame()
+	bool GraphicsImplementation::renderFrame()
 	{
 		msgPump();
 
@@ -241,7 +241,7 @@ namespace PTSD
 		return true;
 	}
 
-	void GraphicsImpl::Shutdown()
+	void GraphicsImplementation::shutdown()
 	{
 		delete mRoot;
 	}
