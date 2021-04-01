@@ -14,6 +14,9 @@
 	#endif 
 #endif 
 
+namespace Ogre {
+	class RenderWindow;
+}
 
 namespace PTSD {
 	class GraphicsImplementation;
@@ -40,5 +43,8 @@ namespace PTSD {
 		int init();
 		bool renderFrame();
 		Camera* getCam();
+		Ogre::RenderWindow* getRenderWindow() const;
+		double getDeltaTime();
+
 	};
 }

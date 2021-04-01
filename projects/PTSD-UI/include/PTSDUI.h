@@ -4,22 +4,36 @@
 		#define UIAPI  __declspec(dllexport)   // export DLL information
 	#else
 		#define UIAPI  __declspec(dllimport)   // import DLL information
-	#endif 
+	#endif
 #else
 	#ifdef _PTSDUI
 		#define UIAPI __attribute__((visibility("default")))
 	#else
-		#define UIAPI 
-	#endif 
+		#define UIAPI
+	#endif
 #endif
 
 namespace PTSD {
+	class UIImplementation;
+
 	class UIAPI UI {
 	private:
-	public:
-		UI() {}
-		~UI() {}
+		static UI* mInstance;
+		UIImplementation* mImplementation = nullptr; //private implementation
 
-		static int init();
+	public:
+		UI() = default;
+		~UI() = default;
+
+		static UI* getInstance()
+		{
+			if (mInstance == nullptr)
+				mInstance = new UI();
+			return mInstance;
+		}
+
+		int init();
+		bool render();
+		void shutdown();
 	};
 }

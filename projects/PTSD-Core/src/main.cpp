@@ -42,6 +42,7 @@ int main()
 		inputSystem->update();
 		inputSystem->test();
 		physicsSystem->update();
+		uiSystem->render();
 		graphicsSystem->renderFrame();
 		graphicsSystem->getCam()->translate({ 0,0,0.1 });
 	}
