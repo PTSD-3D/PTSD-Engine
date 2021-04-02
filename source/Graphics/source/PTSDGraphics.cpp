@@ -23,4 +23,12 @@ namespace PTSD {
 	{
 		return mImplementation->getCamera();
 	}
+	Ogre::RenderWindow* Graphics::getRenderWindow() const
+	{
+		return mImplementation->getRenderWindow();
+	}
+	double Graphics::getDeltaTime()
+	{
+		return mImplementation->getDeltaTime();
+	}
 }

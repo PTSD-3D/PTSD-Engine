@@ -25,6 +25,8 @@ namespace PTSD
 		//Ogre::Camera* mOgreCam;
 		Ogre::Viewport* mViewPort;
 		Ogre::FileSystemLayer* mFileSystemLayer;
+		double deltaTime;
+		double lastRenderTime;
 
 		//TODO Camera class
 		Camera* mCamera;
@@ -60,5 +62,6 @@ namespace PTSD
 		Ogre::SceneManager* getSceneMgr() const { return mSceneMgr; }
 		Camera* getCamera() const { return mCamera; }
 		Ogre::RenderWindow* getRenderWindow() const { return mRenderWindow; }
+		double getDeltaTime() const { return deltaTime; }
 	};
 }

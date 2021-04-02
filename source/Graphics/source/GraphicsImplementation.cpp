@@ -18,6 +18,7 @@
 #include <Ogre.h>
 #include <OgrePlugin.h>
 #include "Camera.h"
+#include <iostream>
 
 // OGRE initialization:
 #ifdef WIN32
@@ -90,7 +91,7 @@ namespace PTSD
 		mRenderWindow->setVisible(true);
 	}
 
-	
+
 	/**
 	 * \brief Finds resources stated in resources.cfg
 	 */
@@ -157,13 +158,13 @@ namespace PTSD
 		lightNode->attachObject(light);
 	}
 
-	
+
 	/**
 	 * \brief Pumps messages, needed for render loop
 	 */
 	void GraphicsImplementation::msgPump()
 	{
-		
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 			// Windows Message Loop (NULL means check all HWNDs belonging to this context)
 			MSG  msg;
@@ -201,18 +202,19 @@ namespace PTSD
 				}
 			}
 #endif
-		
+
 	}
 
 	void GraphicsImplementation::init()
 	{
+		lastRenderTime = double(GetTickCount64())/1000;
 
 		setupLogging();
 		setupWindow();
 		loadResources();
 		testScene();
 
-		LOG("Graphics system initialized");	
+		LOG("Graphics system initialized");
 	}
 
 	/**
@@ -237,7 +239,12 @@ namespace PTSD
 
 		}
 
-		//LOG("Frame rendered", Trace);
+		//deltaTime = current time - last rendered time
+		deltaTime = (double(GetTickCount64()) / 1000) - lastRenderTime;
+		lastRenderTime = (double(GetTickCount64()) / 1000);
+
+		LOG("Frame rendered", Trace);
+
 		return true;
 	}
 

@@ -18,9 +18,15 @@
     <ClInclude Include="..\..\projects\PTSD-UI\include\PTSDUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\projects\PTSD-UI\src\UIImplementation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\projects\PTSD-UI\src\PTSDUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\projects\PTSD-UI\src\UIImplementation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
