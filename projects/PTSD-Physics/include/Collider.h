@@ -1,11 +1,18 @@
 #pragma once
-#ifdef _PTSDPHYSICS
-#define PHYSICSAPI  __declspec(dllexport)   // export DLL information
 
+#if defined(_MSC_VER)
+	#ifdef _PTSDPHYS
+		#define PHYSICSAPI  __declspec(dllexport)   // export DLL information
+	#else
+		#define PHYSICSAPI  __declspec(dllimport)   // import DLL information
+	#endif 
 #else
-#define PHYSICSAPI  __declspec(dllimport)   // import DLL information
-
-#endif
+	#ifdef _PTSDPHYS
+		#define PHYSICSAPI __attribute__((visibility("default")))
+	#else
+		#define PHYSICSAPI
+	#endif 
+#endif 
 
 #include <memory>
 #include "Vec3.h"

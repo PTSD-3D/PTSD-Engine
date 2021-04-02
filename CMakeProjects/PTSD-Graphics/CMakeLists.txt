@@ -7,6 +7,7 @@ set (CMAKE_CXX_STANDARD 17)
 set ("NAME" "PTSD-Graphics")
 set ("MY_SOURCE" "${PTSD_PROJECTS}${NAME}/src/")
 set ("MY_INCLUDE" "${PTSD_PROJECTS}${NAME}/include/")
+set (PTSD_GRAPHICS_INCLUDE ${MY_INCLUDE} PARENT_SCOPE)
 
 ##################################
 #Add as library with source macro#

@@ -54,13 +54,13 @@ namespace Ogre
 class Root;
 class RenderSystem;
 class RenderTarget;
-#if (CEGUI_OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
-class TexturePtr;
-#else
+// #if (CEGUI_OGRE_VERSION < ((1 << 16) | (9 << 8) | 0))
+// class TexturePtr;
+// #else
 template<typename T> class SharedPtr;
 class Texture;
 typedef SharedPtr<Texture> TexturePtr;
-#endif
+// #endif
 class Matrix4;
 }
 
