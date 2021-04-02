@@ -36,11 +36,9 @@ int main()
 	while(true)
 	{
 		inputSystem->update();
-		graphicsSystem->getCam()->translate({ 0,0,0.1 });
-		graphicsSystem->renderFrame();
-		inputSystem->test();
 		//physicsSystem->update();
-		graphicsSystem->renderFrame();
 		graphicsSystem->getCam()->translate({ 0,0,0.1 });
+		graphicsSystem->renderFrame();
+		//inputSystem->test();
 	}
 }
