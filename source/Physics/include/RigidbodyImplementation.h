@@ -1,5 +1,5 @@
 #pragma once
-#include "Vec3.h"
+#include "PTSDVectors.h"
 
 class btDiscreteDynamicsWorld;
 class btRigidBody;

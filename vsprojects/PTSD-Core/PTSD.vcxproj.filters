@@ -84,6 +84,24 @@
     <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp">
       <Filter>Ui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\PTSDPhysics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\Collider.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\ColliderImplementation.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\PhysicsImplementation.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp">
       <Filter>Ui</Filter>
     </ClCompile>
@@ -133,6 +151,24 @@
     </ClInclude>
     <ClInclude Include="..\..\source\UI\include\PTSDUI.h">
       <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\PhysicsImplementation.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\PTSDPhysics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\RigidbodyImplementation.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\Collider.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\ColliderImplementation.h">
+      <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\UI\include\UIImplementation.h">
       <Filter>Ui</Filter>

@@ -1,21 +1,14 @@
 #pragma once
-#ifdef _PTSDPHYSICS
-#define PHYSICSAPI  __declspec(dllexport)   // export DLL information
-
-#else
-#define PHYSICSAPI  __declspec(dllimport)   // import DLL information
-
-#endif
 
 #include <memory>
-#include "Vec3.h"
+#include "PTSDVectors.h"
 
 class btRigidBody;
 
 namespace PTSD
 {
 	class RigidbodyImplementation;
-	class PHYSICSAPI Rigidbody {
+	class Rigidbody {
 	private:
 		std::unique_ptr<RigidbodyImplementation> mImplementation;//private implementation w Bullet
 		btRigidBody* mObj;

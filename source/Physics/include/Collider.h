@@ -1,21 +1,14 @@
 #pragma once
-#ifdef _PTSDPHYSICS
-#define PHYSICSAPI  __declspec(dllexport)   // export DLL information
-
-#else
-#define PHYSICSAPI  __declspec(dllimport)   // import DLL information
-
-#endif
 
 #include <memory>
-#include "Vec3.h"
+#include "PTSDVectors.h"
 
 class btCollisionObject;
 
 namespace PTSD
 {
 	class ColliderImplementation;
-	class PHYSICSAPI Collider {
+	class Collider {
 	private:
 		std::unique_ptr<ColliderImplementation> mImplementation;//private implementation w Bullet
 		btCollisionObject* mObj;
