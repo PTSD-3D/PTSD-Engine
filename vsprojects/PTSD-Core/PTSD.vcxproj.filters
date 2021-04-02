@@ -78,6 +78,9 @@
     <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp">
       <Filter>Scripting</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Logger\LogImpl.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h">
       <Filter>Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Sound\include\PTSDSound.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
