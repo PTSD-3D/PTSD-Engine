@@ -1,7 +1,7 @@
 1- Instalar Python.
    Si no lo tienes instalado, instalalo directamente en c:, no lo muevas a ningun subdirectorio.
 
-2- Modificar build_visual_studio_vr_pybullet_double.bat en el directorio scr en bullet.
+2- Modificar build_visual_studio_vr_pybullet_double_dynamic.bat en el directorio scr en bullet.
    Tienes que indicarle la posición de Python al .bat en las líneas 9 y 12.
    Si has instalado Python directamente en C: , puedes ignorar este paso. No tienes que haberlo metido en ningun subdirectorio, tiene que estar C:/Python39, tal cual.
    Si tenéis python en, por ejemplo:  C:/myDirectorio1/miDirectorio2, tenéis que modificar las líneas de esta manera:
