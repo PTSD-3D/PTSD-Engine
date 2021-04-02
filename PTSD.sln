@@ -4,13 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Core", "vsprojects\PTSD-Core\PTSD.vcxproj", "{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BF836B04-6F79-4B76-BB79-C598B92D2DDA} = {BF836B04-6F79-4B76-BB79-C598B92D2DDA}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-Physics", "vsprojects\PTSD-Physics\PTSD-Physics.vcxproj", "{04CF3F44-77C9-4B6B-B4E8-8A02268FBF45}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PTSD-UI", "vsprojects\PTSD-UI\PTSD-UI.vcxproj", "{BF836B04-6F79-4B76-BB79-C598B92D2DDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,14 +15,6 @@ Global
 		{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}.Debug|x64.Build.0 = Debug|x64
 		{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}.Release|x64.ActiveCfg = Release|x64
 		{CCE6C881-2767-4D8C-BA13-49A6C68C1E13}.Release|x64.Build.0 = Release|x64
-		{04CF3F44-77C9-4B6B-B4E8-8A02268FBF45}.Debug|x64.ActiveCfg = Debug|x64
-		{04CF3F44-77C9-4B6B-B4E8-8A02268FBF45}.Debug|x64.Build.0 = Debug|x64
-		{04CF3F44-77C9-4B6B-B4E8-8A02268FBF45}.Release|x64.ActiveCfg = Release|x64
-		{04CF3F44-77C9-4B6B-B4E8-8A02268FBF45}.Release|x64.Build.0 = Release|x64
-		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x64.ActiveCfg = Debug|x64
-		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Debug|x64.Build.0 = Debug|x64
-		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Release|x64.ActiveCfg = Release|x64
-		{BF836B04-6F79-4B76-BB79-C598B92D2DDA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
