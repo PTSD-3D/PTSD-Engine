@@ -5,6 +5,7 @@
 #include "PTSDScripting.h"
 #include "PTSDSound.h"
 #include "PTSDInput.h"
+#include "PTSDUI.h"
 #include "Camera.h"
 
 int main()
@@ -16,7 +17,6 @@ int main()
 	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
 	PTSD::UI* uiSystem = new PTSD::UI();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
-	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
 
 #ifdef _DEBUG
 	logSystem->init(PTSD::Trace);
