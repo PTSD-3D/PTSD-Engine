@@ -1,30 +1,201 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Core">
+      <UniqueIdentifier>{616f1da0-c7b5-4df6-bba7-3b81fad1ef9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{5a40e338-15ea-4aa7-a517-cd8e434db6d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Input">
+      <UniqueIdentifier>{ddcf49c1-b38e-47df-8c48-9b8f6c1a79d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{9b06cc50-e9f8-4a7d-897b-6773a09452c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{4f57be81-b1d7-4ce8-aba2-31de9acd813b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{883807a3-255f-4dc1-9d2a-048c831bc2e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{942fe84a-fe5c-403b-bccb-6d90e466b426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ui">
+      <UniqueIdentifier>{884c6967-46e9-43f0-a6ee-3fbeb5d94aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Headers">
+      <UniqueIdentifier>{0154c785-7487-414f-9189-a850663168b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Source">
+      <UniqueIdentifier>{1c7afe85-a6d8-4fbc-a00a-96112896dea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Headers">
+      <UniqueIdentifier>{35ac3029-8b05-49c3-b1ea-71a9cd0f0a7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Source">
+      <UniqueIdentifier>{ce00cf01-c292-4e42-bc6c-266412ba5667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger\Headers">
+      <UniqueIdentifier>{87db54f6-84e0-4c41-b406-6b0e2ef6db8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger\Source">
+      <UniqueIdentifier>{4b491212-aca7-4224-9d27-39c59841e216}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Headers">
+      <UniqueIdentifier>{4f72eed5-b4cd-4e0b-b2db-49905fb85356}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics\Source">
+      <UniqueIdentifier>{38861a94-a6e7-4d86-9a49-fde8cd62adea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting\Headers">
+      <UniqueIdentifier>{c5648a95-8cf4-4664-84d8-23dfccff2389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting\Source">
+      <UniqueIdentifier>{51cdcca9-a3fc-48dd-badc-2f59890d06e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Headers">
+      <UniqueIdentifier>{6d882913-01c7-4518-afd9-6184c7f8190a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Source">
+      <UniqueIdentifier>{834c5239-01b0-4fbc-b645-02a52449154f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ui\Headers">
+      <UniqueIdentifier>{008b968b-a0a7-4adb-adb6-7bd163b3d826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ui\Source">
+      <UniqueIdentifier>{12e1e552-fb11-48ff-9403-58480e333d9d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\projects\PTSD-Core\include\test.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClCompile Include="..\..\source\Core\main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\Camera.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Graphics\source\PTSDGraphics.cpp">
+      <Filter>Graphics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp">
+      <Filter>Input\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Input\source\PTSDInput.cpp">
+      <Filter>Input\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\Collider.cpp">
+      <Filter>Physics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\ColliderImplementation.cpp">
+      <Filter>Physics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\PhysicsImplementation.cpp">
+      <Filter>Physics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\PTSDPhysics.cpp">
+      <Filter>Physics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp">
+      <Filter>Physics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp">
+      <Filter>Physics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp">
+      <Filter>Scripting\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scripting\source\PTSDScripting.cpp">
+      <Filter>Scripting\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp">
+      <Filter>Sound\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp">
+      <Filter>Ui\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp">
+      <Filter>Ui\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Logger\source\LogImpl.cpp">
+      <Filter>Logger\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Logger\source\PTSDLog.cpp">
+      <Filter>Logger\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\Graphics\include\Camera.h">
+      <Filter>Graphics\Headers</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Core\src\test.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\projects\PTSD-Core\src\main.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
+    <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Graphics\include\PTSDGraphics.h">
+      <Filter>Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Input\source\InputImplementation.h">
+      <Filter>Input\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Input\include\PTSDInput.h">
+      <Filter>Input\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Input\include\PTSDkeys.h">
+      <Filter>Input\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\Collider.h">
+      <Filter>Physics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\ColliderImplementation.h">
+      <Filter>Physics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\PhysicsImplementation.h">
+      <Filter>Physics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\PTSDPhysics.h">
+      <Filter>Physics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h">
+      <Filter>Physics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\RigidbodyImplementation.h">
+      <Filter>Physics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Scripting\include\PTSDScripting.h">
+      <Filter>Scripting\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h">
+      <Filter>Scripting\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Sound\include\PTSDSound.h">
+      <Filter>Sound\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UI\include\PTSDUI.h">
+      <Filter>Ui\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UI\include\UIImplementation.h">
+      <Filter>Ui\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Logger\include\LogImpl.h">
+      <Filter>Logger\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Logger\include\PTSDLog.h">
+      <Filter>Logger\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Core\include\PTSDVectors.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

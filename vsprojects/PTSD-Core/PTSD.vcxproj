@@ -11,34 +11,50 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\projects\PTSD-Core\include\test.h" />
+    <ClCompile Include="..\..\source\Core\main.cpp" />
+    <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
+    <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp" />
+    <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
+    <ClCompile Include="..\..\source\Graphics\source\PTSDGraphics.cpp" />
+    <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp" />
+    <ClCompile Include="..\..\source\Input\source\PTSDInput.cpp" />
+    <ClCompile Include="..\..\source\Logger\source\LogImpl.cpp" />
+    <ClCompile Include="..\..\source\Logger\source\PTSDLog.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\Collider.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\ColliderImplementation.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\PhysicsImplementation.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\PTSDPhysics.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\PTSDScripting.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp" />
+    <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp" />
+    <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp" />
+    <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\projects\PTSD-Core\src\main.cpp" />
-    <ClCompile Include="..\..\projects\PTSD-Core\src\test.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PTSD-Input\PTSDInput.vcxproj">
-      <Project>{6f50baf9-27cc-4eb7-993a-abc4ac9d9fa9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\PTSD-Graphics\PTSD-Graphics.vcxproj">
-      <Project>{0e45c6bc-8109-4a51-ab04-569d842c668e}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\PTSD-Logger\PTSD-Logger.vcxproj">
-      <Project>{41797280-a7ab-4696-aa4e-8dd149a8a789}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\PTSD-Physics\PTSD-Physics.vcxproj">
-      <Project>{04cf3f44-77c9-4b6b-b4e8-8a02268fbf45}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\PTSD-Scripting\PTSD-Scripting.vcxproj">
-      <Project>{999a09d0-b127-4481-926d-e215c121c364}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\PTSD-Sound\PTSD-Sound.vcxproj">
-      <Project>{3de5d76f-910f-4b58-bbc3-55151822a4ee}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\PTSD-UI\PTSD-UI.vcxproj">
-      <Project>{bf836b04-6f79-4b76-bb79-c598b92d2dda}</Project>
-    </ProjectReference>
+    <ClInclude Include="..\..\source\Core\include\PTSDVectors.h" />
+    <ClInclude Include="..\..\source\Graphics\include\Camera.h" />
+    <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h" />
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h" />
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp" />
+    <ClInclude Include="..\..\source\Graphics\include\PTSDGraphics.h" />
+    <ClInclude Include="..\..\source\Input\include\PTSDInput.h" />
+    <ClInclude Include="..\..\source\Input\include\PTSDkeys.h" />
+    <ClInclude Include="..\..\source\Input\source\InputImplementation.h" />
+    <ClInclude Include="..\..\source\Logger\include\LogImpl.h" />
+    <ClInclude Include="..\..\source\Logger\include\PTSDLog.h" />
+    <ClInclude Include="..\..\source\Physics\include\Collider.h" />
+    <ClInclude Include="..\..\source\Physics\include\ColliderImplementation.h" />
+    <ClInclude Include="..\..\source\Physics\include\PhysicsImplementation.h" />
+    <ClInclude Include="..\..\source\Physics\include\PTSDPhysics.h" />
+    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h" />
+    <ClInclude Include="..\..\source\Physics\include\RigidbodyImplementation.h" />
+    <ClInclude Include="..\..\source\Scripting\include\PTSDScripting.h" />
+    <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h" />
+    <ClInclude Include="..\..\source\Sound\include\PTSDSound.h" />
+    <ClInclude Include="..\..\source\UI\include\PTSDUI.h" />
+    <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -89,16 +105,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)projects\PTSD-Scripting\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Input\include\;$(SolutionDir)projects\PTSD-Sound\include\;$(SolutionDir)projects\PTSD-Physics\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\include\;$(SolutionDir)source\Logger\include\;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include\;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include\;$(SolutionDir)source\Scripting\include\;$(SolutionDir)dependencies\scripting\;$(SolutionDir)dependencies\scripting\lua\include\;$(SolutionDir)source\Sound\include\;$(SolutionDir)dependencies\fmod\src\;$(SolutionDir)source\UI\include\;$(SolutionDir)dependencies\CEGUI\src\cegui\include\;$(SolutionDir)dependencies\CEGUI\build\cegui\include\;$(SolutionDir)dependencies\CEGUI\src\dependencies\include;$(SolutionDir)source\Physics\include\;$(SolutionDir)dependencies\bullet\src\src\;$(SolutionDir)dependencies\bullet\src\build3\vs2010\;$(SolutionDir)dependencies\bullet\src\Extras\</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>LinearMath_vs2010_x64_debug.lib;BulletCollision_vs2010_x64_debug.lib;BulletDynamics_vs2010_x64_debug.lib;Bullet3Geometry_vs2010_x64_debug.lib;lua54.lib;fmod_vc.lib;fmodL_vc.lib;OgreMain_d.lib;SDL2d.lib;CEGUISILLYImageCodec_d.lib;CEGUIOgreRenderer-0_d.lib;CEGUIExpatParser_d.lib;CEGUIBase-0_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bullet\src\bin;$(SolutionDir)dependencies\CEGUI\build\lib\;$(SolutionDir)dependencies\fmod\;$(SolutionDir)dependencies\scripting\lua\;$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -107,18 +124,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)projects\PTSD-Graphics\include\;$(SolutionDir)projects\PTSD-Scripting\include\;$(SolutionDir)projects\PTSD-Logger\include\;$(SolutionDir)projects\PTSD-Input\include\;$(SolutionDir)projects\PTSD-Sound\include\;$(SolutionDir)projects\PTSD-Physics\include\;$(SolutionDir)projects\PTSD-UI\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\include\;$(SolutionDir)source\Logger\include\;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include\;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include\;$(SolutionDir)source\Scripting\include\;$(SolutionDir)dependencies\scripting\;$(SolutionDir)dependencies\scripting\lua\include\;$(SolutionDir)source\Sound\include\;$(SolutionDir)dependencies\fmod\src\;$(SolutionDir)source\UI\include\;$(SolutionDir)dependencies\CEGUI\src\cegui\include\;$(SolutionDir)dependencies\CEGUI\build\cegui\include\;$(SolutionDir)dependencies\CEGUI\src\dependencies\include;$(SolutionDir)source\Physics\include\;$(SolutionDir)dependencies\bullet\src\src\;$(SolutionDir)dependencies\bullet\src\build3\vs2010\;$(SolutionDir)dependencies\bullet\src\Extras\</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>BulletDynamics_vs2010_x64_release.lib;BulletCollision_vs2010_x64_release.lib;LinearMath_vs2010_x64_release.lib;Bullet3Geometry_vs2010_x64_release.lib;lua54.lib;fmod_vc.lib;fmodL_vc.lib;OgreMain.lib;SDL2.lib;CEGUISILLYImageCodec.lib;CEGUIOgreRenderer-0.lib;CEGUIExpatParser.lib;CEGUIBase-0.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bullet\src\bin;$(SolutionDir)dependencies\CEGUI\build\lib\;$(SolutionDir)dependencies\fmod\;$(SolutionDir)dependencies\scripting\lua\;$(SolutionDir)dependencies\Ogre\build\lib\$(Configuration);$(SolutionDir)dependencies\Ogre\build\SDL2-build\RelWithDebInfo</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
