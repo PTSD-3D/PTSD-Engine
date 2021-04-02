@@ -13,10 +13,10 @@ int main()
 	PTSD::Log* logSystem = new PTSD::Log();
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Input* inputSystem = new PTSD::Input();
-	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
-	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
 	PTSD::UI* uiSystem = new PTSD::UI();
+	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
+	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
 
 #ifdef _DEBUG
 	logSystem->init(PTSD::Trace);
@@ -26,8 +26,8 @@ int main()
 	PTSD::LOG("Beginning Initialization");
 	graphicsSystem->init();
 	inputSystem->init();
-	physicsSystem->init();
 	uiSystem->init();
+	physicsSystem->init();
 	soundSystem->init();
 	scriptingSystem->init();
 	PTSD::LOG("All subsystems initialized");
