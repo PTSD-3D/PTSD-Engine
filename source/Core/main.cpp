@@ -4,7 +4,7 @@
 #include "PTSDGraphics.h"
 #include "PTSDScripting.h"
 #include "PTSDSound.h"
-//#include "PTSDUI.h"
+#include "PTSDUI.h"
 #include "PTSDInput.h"
 #include "Camera.h"
 
@@ -14,8 +14,8 @@ int main()
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Input* inputSystem = new PTSD::Input();
 	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
-	/*PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
-	PTSD::UI* uiSystem = new PTSD::UI();*/
+	//PTSD::PTSDPhysics* physicsSystem = new PTSD::PTSDPhysics();
+	PTSD::UI* uiSystem = new PTSD::UI();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 
 #ifdef _DEBUG
@@ -26,8 +26,8 @@ int main()
 	PTSD::LOG("Beginning Initialization");
 	graphicsSystem->init();
 	inputSystem->init();
-	//physicsSystem->init();*/
-	//uiSystem->init();
+	//physicsSystem->init();
+	uiSystem->init();
 	soundSystem->init();
 	scriptingSystem->init();
 	PTSD::LOG("All subsystems initialized");
