@@ -33,11 +33,28 @@ int main()
 	PTSD::LOG("All subsystems initialized");
 
 	PTSD::Camera* myCam = graphicsSystem->getCam();
-	while(true)
-	{
-		inputSystem->update();
-		physicsSystem->update();
-		graphicsSystem->getCam()->translate({ 0,0,0.1 });
+
+	//GAME LOOP
+	bool running = true;
+	double deltaTime = 0.033;
+	double accumulator = 0;
+	double currentTime = 0;
+
+	while (running) {
+		double newTime; //= getTime();
+		double frameTime = newTime - currentTime;
+		currentTime = newTime;
+
+		accumulator += frameTime;
+
+		while (accumulator >= deltaTime) {
+			inputSystem->update();
+			physicsSystem->update();
+			graphicsSystem->getCam()->translate({ 0,0,0.1 });
+			scriptingSystem->update();
+			//soundSystem->update();
+			accumulator -= deltaTime;
+		}
 		graphicsSystem->renderFrame();
 		uiSystem->render();
 	}
