@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp" />
     <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp" />
     <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp" />
+    <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Core\PTSDVectors.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h" />
     <ClInclude Include="..\..\source\Sound\include\PTSDSound.h" />
     <ClInclude Include="..\..\source\UI\include\PTSDUI.h" />
+    <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -91,7 +93,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger\;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include\;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include\;$(SolutionDir)source\Scripting\include\;$(SolutionDir)dependencies\scripting\;$(SolutionDir)dependencies\scripting\lua\include\;$(SolutionDir)source\Sound\include\;$(SolutionDir)dependencies\fmod\src\;$(SolutionDir)source\UI\include\;$(SolutionDir)dependencies\CEGUI\src\cegui\include\;$(SolutionDir)dependencies\CEGUI\build\cegui\include\;$(SolutionDir)dependencies\CEGUI\src\dependencies\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -110,7 +112,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)projects\$(ProjectName)\src\;$(SolutionDir)projects\$(ProjectName)\include\;$(SolutionDir)source\Core\;$(SolutionDir)source\Logger\;$(SolutionDir)dependencies\spdlog\src\include\;$(SolutionDir)source\Graphics\include\;$(SolutionDir)dependencies\Ogre\build\include\;$(SolutionDir)dependencies\Ogre\src\OgreMain\include\;$(SolutionDir)dependencies\Ogre\build\SDL2-2.0.10\include\;$(SolutionDir)source\Input\include\;$(SolutionDir)source\Scripting\include\;$(SolutionDir)dependencies\scripting\;$(SolutionDir)dependencies\scripting\lua\include\;$(SolutionDir)source\Sound\include\;$(SolutionDir)dependencies\fmod\src\;$(SolutionDir)source\UI\include\;$(SolutionDir)dependencies\CEGUI\src\cegui\include\;$(SolutionDir)dependencies\CEGUI\build\cegui\include\;$(SolutionDir)dependencies\CEGUI\src\dependencies\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>

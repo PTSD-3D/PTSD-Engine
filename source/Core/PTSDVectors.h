@@ -18,15 +18,15 @@ struct Vector2D {
 	inline void setY(float y_) {
 		y = y_;
 	}
-	inline double magnitude() const {
-		return sqrt(pow(x, 2) + pow(y, 2));
+	inline float magnitude() const {
+		return sqrt(x*x + y*y);
 	}
 	Vector2D normalize() {
 
 		Vector2D r;
 		r.x = x;
 		r.y = y;
-		double mag = magnitude();
+		float mag = magnitude();
 		if (mag > 0.0) {
 			r.x = r.x / mag;
 			r.y = r.y / mag;

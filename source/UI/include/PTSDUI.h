@@ -1,16 +1,26 @@
 #pragma once
 
-#define _SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING
-//#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
-
-
 namespace PTSD {
+	class UIImplementation;
+
 	class UI {
 	private:
-	public:
-		UI() {}
-		~UI() {}
+		static UI* mInstance;
+		UIImplementation* mImplementation = nullptr; //private implementation
 
-		static int init();
+	public:
+		UI() = default;
+		~UI() = default;
+
+		static UI* getInstance()
+		{
+			if (mInstance == nullptr)
+				mInstance = new UI();
+			return mInstance;
+		}
+
+		int init();
+		bool render();
+		void shutdown();
 	};
 }

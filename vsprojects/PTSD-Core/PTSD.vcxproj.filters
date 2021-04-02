@@ -84,6 +84,9 @@
     <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp">
       <Filter>Ui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Logger\LogImpl.h">
@@ -129,6 +132,9 @@
       <Filter>Sound</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\UI\include\PTSDUI.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\UI\include\UIImplementation.h">
       <Filter>Ui</Filter>
     </ClInclude>
   </ItemGroup>
