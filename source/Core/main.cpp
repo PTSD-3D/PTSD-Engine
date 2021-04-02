@@ -1,7 +1,7 @@
 #include <iostream>
 #include "PTSDLog.h"
 //#include "PTSDPhysics.h"
-//#include "PTSDUI.h"
+#include "PTSDUI.h"
 #include "PTSDGraphics.h"
 #include "PTSDScripting.h"
 #include "PTSDSound.h"
@@ -13,8 +13,8 @@ int main()
 	PTSD::Log* logSystem = new PTSD::Log();
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Input* inputSystem = new PTSD::Input();
+	PTSD::UI* uiSystem = new PTSD::UI();
 	//PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
-	//PTSD::UI* uiSystem = new PTSD::UI();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
 
@@ -26,8 +26,8 @@ int main()
 	PTSD::LOG("Beginning Initialization");
 	graphicsSystem->init();
 	inputSystem->init();
+	uiSystem->init();
 	//physicsSystem->init();
-	//uiSystem->init();
 	soundSystem->init();
 	scriptingSystem->init();
 	PTSD::LOG("All subsystems initialized");
@@ -39,7 +39,7 @@ int main()
 		//physicsSystem->update();
 		graphicsSystem->getCam()->translate({ 0,0,0.1 });
 		graphicsSystem->renderFrame();
-		//uiSystem->render();
+		uiSystem->render();
 	}
 
 	return 0;
