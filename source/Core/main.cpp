@@ -28,7 +28,7 @@ int main()
 	inputSystem->init();
 	uiSystem->init();
 	physicsSystem->init();
-	soundSystem->init();
+	soundSystem->Init();
 	scriptingSystem->init();
 	PTSD::LOG("All subsystems initialized");
 

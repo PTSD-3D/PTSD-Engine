@@ -29,6 +29,8 @@
     <ClCompile Include="..\..\source\Scripting\source\PTSDScripting.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp" />
     <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp" />
+    <ClCompile Include="..\..\source\Sound\source\Sound.cpp" />
+    <ClCompile Include="..\..\source\Sound\source\SoundAttorney.cpp" />
     <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp" />
     <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
@@ -53,6 +55,8 @@
     <ClInclude Include="..\..\source\Scripting\include\PTSDScripting.h" />
     <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h" />
     <ClInclude Include="..\..\source\Sound\include\PTSDSound.h" />
+    <ClInclude Include="..\..\source\Sound\include\Sound.h" />
+    <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
     <ClInclude Include="..\..\source\UI\include\PTSDUI.h" />
     <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
   </ItemGroup>

@@ -129,6 +129,12 @@
     <ClCompile Include="..\..\source\Logger\source\PTSDLog.cpp">
       <Filter>Logger\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Sound\source\Sound.cpp">
+      <Filter>Sound\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Sound\source\SoundAttorney.cpp">
+      <Filter>Sound\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
@@ -196,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Core\include\PTSDVectors.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Sound\include\Sound.h">
+      <Filter>Sound\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h">
+      <Filter>Sound\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
