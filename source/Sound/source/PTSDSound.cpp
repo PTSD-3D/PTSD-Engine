@@ -113,7 +113,7 @@ namespace PTSD {
     void PTSDSound::pauseSound(PTSD::Sound* sound) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + " couldn't be paused. It most likely has already ended. @PTSDSound.cpp, PauseSound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }
@@ -125,7 +125,7 @@ namespace PTSD {
     void PTSDSound::resumeSound(PTSD::Sound* sound) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + " couldn't be resumed. It most likely has already ended. @PTSDSound.cpp, ResumeSound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }
@@ -137,7 +137,7 @@ namespace PTSD {
     void PTSDSound::muteSound(PTSD::Sound* sound) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + " couldn't be muted. It most likely has already ended. @PTSDSound.cpp, MuteSound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }
@@ -149,7 +149,7 @@ namespace PTSD {
     void PTSDSound::unmuteSound(PTSD::Sound* sound) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + " couldn't be unmuted. It most likely has already ended. @PTSDSound.cpp, UnmuteSound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }
@@ -161,7 +161,7 @@ namespace PTSD {
     void PTSDSound::setSoundVolume(PTSD::Sound* sound, float vol) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + " couldn't be paused. It most likely has already ended. @PTSDSound.cpp, SetSoundVolume()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }
@@ -174,7 +174,7 @@ namespace PTSD {
     void PTSDSound::endSound(PTSD::Sound* sound) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + " couldn't be stopped. It most likely has already ended. @PTSDSound.cpp, EndSound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }
@@ -186,7 +186,7 @@ namespace PTSD {
     void PTSDSound::setLoopingSound(PTSD::Sound* sound, bool loop) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + " 's looping state couldn't be modified. It most likely has already ended. @PTSDSound.cpp, EndSound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }
@@ -200,7 +200,7 @@ namespace PTSD {
     bool PTSDSound::isSoundPaused(PTSD::Sound* sound) {
         FMOD::Sound* currSound;
         result = genChannels[sound->getChannelPlayed()]->getCurrentSound(&currSound);
-        if (result != FMOD_OK || Attorney::getFmodSound(sound) != currSound) {
+        if (result != FMOD_OK || SoundAttorney::getFmodSound(sound) != currSound) {
             std::string errMsg = sound->getPath() + "'s paused state couldn't be checked. It most likely has already ended. @PTSDSound.cpp, EndSound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Warning);
         }

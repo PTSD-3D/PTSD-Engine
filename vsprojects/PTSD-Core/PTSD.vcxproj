@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\Core\main.cpp" />
+    <ClCompile Include="..\..\source\Core\src\main.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Core\include\PTSDVectors.h" />
+    <ClInclude Include="..\..\source\Core\include\test.h" />
     <ClInclude Include="..\..\source\Graphics\include\Camera.h" />
     <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h" />

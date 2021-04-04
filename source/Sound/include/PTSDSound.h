@@ -35,7 +35,7 @@ namespace PTSD {
 		std::vector<FMOD::Channel*> genChannels;
 		FMOD::Channel* musicChannel = nullptr;
 		FMOD_RESULT result;
-		int nChannels = 128; //This should be configured by the developer.
+		int nChannels = 128; //ATM this is arbitrary. It could be configured by the developer.
 		int currentChannel = -1;
 
 	public:
@@ -50,6 +50,7 @@ namespace PTSD {
 		void shutdown();
 
 		//ChannelGroupManagement
+		//From each channelGroup, you can manage the volume of each sound Type (ambient, dialog...)
 		void pauseChannelGroup(int soundType);
 		void resumeChannelGroup(int soundType);
 		void muteChannelGroup(int soundType);
@@ -59,6 +60,7 @@ namespace PTSD {
 		bool isChannelGroupPaused(int soundType);
 
 		//Sound Management
+		//With these functions you can modify specific sounds.
 		void playSound(PTSD::Sound* sound);
 		void playSound(std::string path, int soundType, float vol = 1, bool loop = false);
 		void pauseSound(PTSD::Sound* sound);
@@ -71,6 +73,7 @@ namespace PTSD {
 		bool isSoundPaused(PTSD::Sound* sound);
 
 		//Music Management
+		//Only 1 song can be played at a time. This could be improved upon in the future.
 		void playMusic(std::string path, bool loop);
 		void changeMusic(std::string path, bool loop);
 		void pauseMusic();

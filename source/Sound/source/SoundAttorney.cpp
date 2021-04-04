@@ -2,7 +2,7 @@
 #include "Sound.h"
 
 namespace PTSD {
-    FMOD::Sound* Attorney::getFmodSound(Sound* sound) {
+    FMOD::Sound* SoundAttorney::getFmodSound(Sound* sound) {
         return sound->getFmodSound();
     }
 }
