@@ -9,7 +9,7 @@
 #include "Camera.h"
 #include "PTSDUI.h"
 #include "test.h"
-#include <Windows.h> //Please delete me or Ricardo will kill me.
+#include <SDL_timer.h>
 
 int main()
 {
@@ -36,14 +36,31 @@ int main()
 	scriptingSystem->init();
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
-	while(true)
-	{
-		inputSystem->update();
-		physicsSystem->update();
-		graphicsSystem->getCam()->translate({ 0,0,0.1 });
-		graphicsSystem->renderFrame();
+
+	//GAME LOOP (all times in miliseconds)
+	bool running = true;
+	Uint32 deltaTime = 33; //33 miliseconds per frame, ~30fps
+	Uint32 accumulator = 0;
+	Uint32 currentTime = SDL_GetTicks();
+	Uint32 newTime;
+	while (running) {
+		newTime = SDL_GetTicks();
+		Uint32 frameTime = newTime - currentTime;
+		currentTime = newTime;
+
+		accumulator += frameTime; //If we're lagging behind the game will be updated as many times as needed to catch up
+
+		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
+			inputSystem->update();
+			physicsSystem->update();
+			graphicsSystem->getCam()->translate({ 0,0,0.1 });
+			//scriptingSystem->update(); Prob� a ponerlo pero al hacer update revienta (?)
+			//soundSystem->update(); DESCOMENTAR CUANDO EST� ACABADO
+			//PTSD::LOG("update cycle complete", PTSD::Warning);
+			accumulator -= deltaTime;
+		}
+		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();
 	}
-
 	return 0;
 }

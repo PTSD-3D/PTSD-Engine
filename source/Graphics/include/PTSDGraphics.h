@@ -32,6 +32,5 @@ namespace PTSD {
 		Camera* getCam();
 		Ogre::RenderWindow* getRenderWindow() const;
 		double getDeltaTime();
-
 	};
 }
