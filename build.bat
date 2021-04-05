@@ -47,6 +47,6 @@ copy dependencies\CEGUI\src\dependencies\bin\libexpat_d.dll bin\ 1>NUL
 
 echo Copiando DLLs scripting...
 
-copy dependencies\lua\lua54.dll bin\ 1>NUL
+copy dependencies\scripting\lua\lua54.dll bin\ 1>NUL
 
 PAUSE
