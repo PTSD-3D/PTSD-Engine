@@ -54,7 +54,7 @@ int main()
 			graphicsSystem->getCam()->translate({ 0,0,0.1 });
 			//scriptingSystem->update(); Probé a ponerlo pero al hacer update revienta (?)
 			//soundSystem->update(); DESCOMENTAR CUANDO ESTÉ ACABADO
-			PTSD::LOG("update cycle complete", PTSD::Warning);
+			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 		}
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
