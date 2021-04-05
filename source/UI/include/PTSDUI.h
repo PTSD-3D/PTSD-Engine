@@ -6,7 +6,8 @@ namespace CEGUI {
 
 namespace PTSD {
 	class UIImplementation;
-
+	class Input;
+	class Graphics;
 	/**
 	 * \brief Singleton UI Manager
 	 */
@@ -14,6 +15,8 @@ namespace PTSD {
 	private:
 		static UI* mInstance;
 		UIImplementation* mImplementation = nullptr; //private implementation
+		PTSD::Input* inputInstance = nullptr;;
+		PTSD::Graphics* graphicsInstance = nullptr;;
 
 	public:
 		UI() = default;

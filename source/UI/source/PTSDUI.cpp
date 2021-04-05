@@ -10,9 +10,11 @@ namespace PTSD {
 
 	int UI::init() {
 		mImplementation = PTSD::UIImplementation::getInstance();
-		mImplementation->init(PTSD::Graphics::getInstance()->getRenderWindow());
+		inputInstance = PTSD::Input::getInstance();
+		graphicsInstance = PTSD::Graphics::getInstance();
+		mImplementation->init(graphicsInstance->getRenderWindow());
 		registerForEvents();
-		mImplementation->setMouseInitialPosition(PTSD::Input::getInstance()->getMousePos());
+		mImplementation->setMouseInitialPosition(inputInstance->getMousePos());
 		return 0;
 	}
 
@@ -22,7 +24,7 @@ namespace PTSD {
 	bool UI::render()
 	{
 		inputUpdate();
-		return mImplementation->render(PTSD::Graphics::getInstance()->getDeltaTime());
+		return mImplementation->render(graphicsInstance->getDeltaTime());
 	}
 
 	/**
@@ -30,9 +32,9 @@ namespace PTSD {
 	 */
 	void UI::inputUpdate()
 	{
-		if (PTSD::Input::getInstance()->mouseMotion()) mImplementation->injectMousePosition(
-			PTSD::Input::getInstance()->getMousePos());
-		if (PTSD::Input::getInstance()->mouseLeftClick()) mImplementation->injectMouseLeftClick();
+		if (inputInstance->mouseMotion()) mImplementation->injectMousePosition(
+			inputInstance->getMousePos());
+		if (inputInstance->mouseLeftClick()) mImplementation->injectMouseLeftClick();
 	}
 
 	/**
