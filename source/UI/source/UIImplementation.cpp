@@ -6,6 +6,8 @@
 
 #include <OgreRenderWindow.h>
 
+#include <iostream>
+
 namespace PTSD {
 
 	UIImplementation* UIImplementation::mInstance = nullptr;
@@ -14,33 +16,37 @@ namespace PTSD {
 	{
 		renderer = &CEGUI::OgreRenderer::bootstrapSystem(*mRenderWindow);
 
-		loadScheme("TaharezLook.scheme");
-		loadFont("DejaVuSans-12.font");
+		windowMngr = &CEGUI::WindowManager::getSingleton();
 
-		CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-12");
-		
-		setMouseCursor("TaharezLook/MouseArrow");
+		system = &CEGUI::System::getSingleton();
 
 		createRoot();
 
-		createWindowStaticImage("PrettyWindow", "TaharezLook/UpArrow",50,50);
+		loadResources();
+
+		system->getDefaultGUIContext().setDefaultFont("DejaVuSans-12");
+
+		CEGUI::DefaultLogger::getSingletonPtr()->setLogFilename("logs/CEGUI.log");
+		std::cout << "SIZE" << renderer->getDisplaySize().d_height << '\n';
+
+		test();
 
 		return 0;
 	}
 
 	bool UIImplementation::render(double deltaTime)
 	{
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectTimePulse(deltaTime);
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseMove(0.1, 0);
-		CEGUI::System::getSingleton().renderAllGUIContexts();
+		system->getDefaultGUIContext().injectTimePulse(deltaTime);
+		system->getDefaultGUIContext().injectMouseMove(0.1, 0);
+		system->renderAllGUIContexts();
 
 		return false;
 	}
 
 	void UIImplementation::shutdown()
 	{
-		CEGUI::WindowManager::getSingleton().destroyAllWindows();
-		delete mRoot;
+		windowMngr->destroyAllWindows();
+		mRoot = nullptr;
 	}
 
 	void UIImplementation::loadScheme(std::string filename)
@@ -53,31 +59,45 @@ namespace PTSD {
 		CEGUI::FontManager::getSingleton().createFromFile(filename);
 	}
 
-	void UIImplementation::createRoot()
+	void UIImplementation::loadResources()
 	{
-		mRoot = CEGUI::WindowManager::getSingleton().createWindow("DefaultWindow", "MasterRoot");
-		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(mRoot);
+		loadScheme("TaharezLook.scheme");
+		loadFont("DejaVuSans-12.font");
 	}
 
-	void UIImplementation::createWindowStaticImage(std::string name, std::string source, float xDim, float yDim)
+	void UIImplementation::createRoot()
 	{
-		CEGUI::Window* myImageWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/StaticImage", name);
-		myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5, 0), CEGUI::UDim(0.5, 0)));
-		myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0, xDim), CEGUI::UDim(0, yDim)));
+		mRoot = windowMngr->createWindow("DefaultWindow", "MasterRoot");
+		system->getDefaultGUIContext().setRootWindow(mRoot);
+	}
+
+	void UIImplementation::createWindowStaticImage(std::string name, std::string source, Vector2D position, Vector2D size)
+	{
+		CEGUI::Window* myImageWindow = windowMngr->createWindow("TaharezLook/StaticImage", name);
+		myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
+		myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
 		myImageWindow->setProperty("Image", source);
 		mRoot->addChild(myImageWindow);
 	}
 
 	void UIImplementation::setMouseCursor(std::string name)
 	{
-		CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage(name);
+		system->getDefaultGUIContext().getMouseCursor().setDefaultImage(name);
 		setMouseCursorVisible(true);
 	}
 
 	void UIImplementation::setMouseCursorVisible(bool active)
 	{
-		if(active) CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
-		else CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
+		if(active) system->getDefaultGUIContext().getMouseCursor().show();
+		else system->getDefaultGUIContext().getMouseCursor().hide();
+	}
+	void UIImplementation::test()
+	{
+		
+
+		setMouseCursor("TaharezLook/MouseArrow");
+
+		createWindowStaticImage("PrettyWindow", "TaharezLook/UpArrow", Vector2D(renderer->getDisplaySize().d_width/2 , renderer->getDisplaySize().d_height/2), Vector2D(50, 50));
 	}
 }
 

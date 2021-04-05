@@ -1,5 +1,7 @@
 #include <string>
 
+#include "PTSDVectors.h"
+
 namespace CEGUI {
 	class String;
 	class System;
@@ -22,6 +24,8 @@ namespace PTSD {
 		UIImplementation() = default;
 		CEGUI::OgreRenderer* renderer;
 		CEGUI::Window* mRoot;
+		CEGUI::WindowManager* windowMngr;
+		CEGUI::System* system;
 
 		static UIImplementation* mInstance;
 	public:
@@ -39,11 +43,15 @@ namespace PTSD {
 
 		void loadScheme(std::string filename);
 		void loadFont(std::string filename);
+		void loadResources();
 
 		void createRoot();
-		void createWindowStaticImage(std::string name, std::string source, float xDim, float yDim);
+		void createWindowStaticImage(std::string name, std::string source, Vector2D position, Vector2D size);
 		void setMouseCursor(std::string name);
 		void setMouseCursorVisible(bool active);
 
+		void injectMousePosition(Vector2D mousePosition);
+
+		void test();
 	};
 }

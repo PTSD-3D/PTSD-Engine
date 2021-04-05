@@ -124,6 +124,10 @@ namespace PTSD {
 		return mImplementation->isMouseButtonDown(MOUSEBUTTON::MIDDLE);
 	}
 
+	bool Input::mouseMotion() {
+		return mImplementation->mouseMotionEvent();
+	}
+
 	Vector2D Input::getMousePos() {
 		return mImplementation->getMousePos();
 	}

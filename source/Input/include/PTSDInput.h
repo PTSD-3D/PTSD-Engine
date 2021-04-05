@@ -26,6 +26,7 @@ namespace PTSD {
 		bool mouseLeftClick();
 		bool mouseRightClick();
 		bool mouseWheelClick();
+		bool mouseMotion();
 		Vector2D getMousePos();
 
 	//Controller

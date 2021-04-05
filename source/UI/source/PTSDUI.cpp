@@ -1,6 +1,7 @@
 #include <iostream>
 #include "PTSDUI.h"
 #include "PTSDGraphics.h"
+#include "PTSDInput.h"
 #include "UIImplementation.h"
 
 namespace PTSD {
