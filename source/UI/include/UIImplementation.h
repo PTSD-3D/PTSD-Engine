@@ -1,4 +1,5 @@
 #include <string>
+#include <functional>
 
 #include "PTSDVectors.h"
 
@@ -21,7 +22,6 @@ namespace Ogre {
 namespace PTSD {
 	class UIImplementation {
 	private:
-		UIImplementation() = default;
 		CEGUI::OgreRenderer* renderer;
 		CEGUI::Window* mRoot;
 		CEGUI::WindowManager* windowMngr;
@@ -30,6 +30,7 @@ namespace PTSD {
 
 		static UIImplementation* mInstance;
 	public:
+		UIImplementation() = default;
 		~UIImplementation() = default;
 
 		static UIImplementation* getInstance() {
@@ -44,14 +45,22 @@ namespace PTSD {
 
 		void loadScheme(std::string filename);
 		void loadFont(std::string filename);
+		void loadLayout(std::string filename);
 		void loadResources();
 
 		void createRoot();
-		void createWindowStaticImage(std::string name, std::string source, Vector2D position, Vector2D size);
+		void createText(std::string name, std::string text, Vector2D position, Vector2D size);
+		void createStaticImage(std::string name, std::string source, Vector2D position, Vector2D size);
+		void createButton(std::string name, std::string text, Vector2D position, Vector2D size);
 		void setMouseCursor(std::string name);
 		void setMouseCursorVisible(bool active);
-
 		void setMouseInitialPosition(Vector2D mousePosition);
+		void setEvent(std::string name, std::function<bool(const CEGUI::EventArgs&)> function);
+		void setText(std::string name, std::string text);
+		void setStaticImage(std::string name, std::string image);
+
+		CEGUI::PushButton* getPushButton(std::string name);
+
 		void injectMousePosition(Vector2D mousePosition);
 		void injectMouseLeftClick();
 

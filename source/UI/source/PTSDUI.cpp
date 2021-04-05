@@ -11,16 +11,46 @@ namespace PTSD {
 	int UI::init() {
 		mImplementation = PTSD::UIImplementation::getInstance();
 		mImplementation->init(PTSD::Graphics::getInstance()->getRenderWindow());
+		registerForEvents();
 		mImplementation->setMouseInitialPosition(PTSD::Input::getInstance()->getMousePos());
 		return 0;
 	}
 
+	/**
+	 * \brief Renders a frame!
+	 */
 	bool UI::render()
 	{
-		if (PTSD::Input::getInstance()->mouseMotion()) mImplementation->injectMousePosition(
-		PTSD::Input::getInstance()->getMousePos());
-		if (PTSD::Input::getInstance()->mouseLeftClick()) mImplementation->injectMouseLeftClick();
+		inputUpdate();
 		return mImplementation->render(PTSD::Graphics::getInstance()->getDeltaTime());
+	}
+
+	/**
+	 * \brief Process the input from PTSD::Input instance
+	 */
+	void UI::inputUpdate()
+	{
+		if (PTSD::Input::getInstance()->mouseMotion()) mImplementation->injectMousePosition(
+			PTSD::Input::getInstance()->getMousePos());
+		if (PTSD::Input::getInstance()->mouseLeftClick()) mImplementation->injectMouseLeftClick();
+	}
+
+	/**
+	 * \brief Register for the events */
+	void UI::registerForEvents()
+	{
+		auto function = std::bind(&PTSD::UI::testCallback, this, std::placeholders::_1);
+		mImplementation->setEvent("PushButton", function);
+	}
+
+	/**
+	 * \brief Test Callback function which changes text and image
+	 */
+	bool UI::testCallback(const CEGUI::EventArgs& e)
+	{
+		mImplementation->setStaticImage("PrettyImage","TaharezLook/MiniHorzScrollLeftHover");
+		mImplementation->setText("PrettyText","ButtonTest pressed!");
+		return true;
 	}
 
 	void UI::shutdown()

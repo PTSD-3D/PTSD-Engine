@@ -1,8 +1,15 @@
 #pragma once
 
+namespace CEGUI {
+	class EventArgs;
+}
+
 namespace PTSD {
 	class UIImplementation;
 
+	/**
+	 * \brief Singleton UI Manager
+	 */
 	class UI {
 	private:
 		static UI* mInstance;
@@ -21,6 +28,9 @@ namespace PTSD {
 
 		int init();
 		bool render();
+		void inputUpdate();
+		void registerForEvents();
+		bool testCallback(const CEGUI::EventArgs& e);
 		void shutdown();
 	};
 }
