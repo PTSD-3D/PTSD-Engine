@@ -50,6 +50,7 @@ namespace PTSD {
 	{
 		mImplementation->setStaticImage("PrettyImage","TaharezLook/MiniHorzScrollLeftHover");
 		mImplementation->setText("PrettyText","ButtonTest pressed!");
+		mImplementation->setLayoutVisible("DemoWindow", false);
 		return true;
 	}
 

@@ -76,7 +76,7 @@ namespace PTSD {
 	{
 		loadScheme("TaharezLook.scheme");
 		loadFont("DejaVuSans-12.font");
-		//loadLayout("TaharezLookOverview.layout");
+		loadLayout("TreeDemoTaharez.layout");
 	}
 
 	/**
@@ -148,6 +148,12 @@ namespace PTSD {
 	{
 		CEGUI::Window* myWindow = mRoot->getChild(name);
 		myWindow->setProperty("Image", image);
+	}
+
+	void UIImplementation::setLayoutVisible(std::string name, bool visible)
+	{
+		CEGUI::Window* myWindow = mRoot->getChild(name);
+		myWindow->setVisible(visible);
 	}
 
 	CEGUI::PushButton* UIImplementation::getPushButton(std::string name)

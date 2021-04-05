@@ -58,6 +58,7 @@ namespace PTSD {
 		void setEvent(std::string name, std::function<bool(const CEGUI::EventArgs&)> function);
 		void setText(std::string name, std::string text);
 		void setStaticImage(std::string name, std::string image);
+		void setLayoutVisible(std::string name, bool visible);
 
 		CEGUI::PushButton* getPushButton(std::string name);
 
