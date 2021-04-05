@@ -8,11 +8,20 @@ namespace PTSD {
 
 	class Input {
 	private:
+		static Input* mInstance;
 		InputImplementation* mImplementation = nullptr;
 	public:
 
 		Input() {}
 		~Input() {}
+
+		static Input* getInstance()
+		{
+			if (mInstance == nullptr)
+				mInstance = new Input();
+			return mInstance;
+		}
+
 		int init();
 		size_t createInput();
 		int Shutdown();

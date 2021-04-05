@@ -8,7 +8,7 @@
 #include <iostream>
 
 namespace PTSD {
-
+	Input* Input::mInstance = nullptr;
 	int Input::init() {
 
 		SDL_Init(SDL_INIT_EVERYTHING);
@@ -29,7 +29,7 @@ namespace PTSD {
 		bool exit = false;
 
 		////Input singleton
-		mImplementation = InputImplementation::getInstance();
+		mImplementation = PTSD::InputImplementation::getInstance();
 		mImplementation->createInput();
 		mImplementation->initialiseGamepads();
 
