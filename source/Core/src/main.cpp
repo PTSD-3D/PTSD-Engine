@@ -10,6 +10,9 @@
 #include "PTSDUI.h"
 #include "test.h"
 #include <SDL_timer.h>
+#include "Entity.h"
+#include "Component.h"
+#include "EntityManager.h"
 
 int main()
 {
@@ -37,6 +40,11 @@ int main()
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
+	//Entity testing
+	PTSD::EntityManager entityManager;
+	PTSD::Entity* sinbad = entityManager.createEntity();
+	sinbad->addComponent<PTSD::DebugComponent>();
+
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
 	Uint32 deltaTime = 33; //33 miliseconds per frame, ~30fps
@@ -54,6 +62,7 @@ int main()
 			inputSystem->update();
 			physicsSystem->update();
 			graphicsSystem->getCam()->translate({ 0,0,0.1 });
+			entityManager.update();
 			//scriptingSystem->update(); Prob� a ponerlo pero al hacer update revienta (?)
 			soundSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);

@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\Core\src\EntityManager.cpp" />
     <ClCompile Include="..\..\source\Core\src\main.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp" />
@@ -35,6 +36,11 @@
     <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\Core\include\Component.h" />
+    <ClInclude Include="..\..\source\Core\include\ECS.h" />
+    <ClInclude Include="..\..\source\Core\include\Entity.h" />
+    <ClInclude Include="..\..\source\Core\include\EntityManager.h" />
+    <ClInclude Include="..\..\source\Core\include\ObjectPool.h" />
     <ClInclude Include="..\..\source\Core\include\PTSDVectors.h" />
     <ClInclude Include="..\..\source\Core\include\test.h" />
     <ClInclude Include="..\..\source\Graphics\include\Camera.h" />
