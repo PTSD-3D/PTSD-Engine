@@ -55,7 +55,7 @@ int main()
 			physicsSystem->update();
 			graphicsSystem->getCam()->translate({ 0,0,0.1 });
 			//scriptingSystem->update(); Prob� a ponerlo pero al hacer update revienta (?)
-			//soundSystem->update(); DESCOMENTAR CUANDO EST� ACABADO
+			soundSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 		}
