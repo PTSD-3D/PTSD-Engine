@@ -37,7 +37,6 @@ namespace PTSD {
 	bool UIImplementation::render(double deltaTime)
 	{
 		system->getDefaultGUIContext().injectTimePulse(deltaTime);
-		system->getDefaultGUIContext().injectMouseMove(0.1, 0);
 		system->renderAllGUIContexts();
 
 		return false;
@@ -91,9 +90,25 @@ namespace PTSD {
 		if(active) system->getDefaultGUIContext().getMouseCursor().show();
 		else system->getDefaultGUIContext().getMouseCursor().hide();
 	}
+
+	void UIImplementation::setMouseInitialPosition(Vector2D mousePosition)
+	{
+		system->getDefaultGUIContext().getMouseCursor().setPosition(CEGUI::Vector2f(mousePosition.getX(), mousePosition.getY()));
+	}
+
+	void UIImplementation::injectMousePosition(Vector2D mousePosition)
+	{
+		system->getDefaultGUIContext().injectMouseMove(mousePosition.getX() - lastMousePosition.getX(), mousePosition.getY() - lastMousePosition.getY());
+		lastMousePosition = mousePosition;
+	}
+
+	void UIImplementation::injectMouseLeftClick()
+	{
+		system->getDefaultGUIContext().injectMouseButtonClick(CEGUI::LeftButton);
+	}
+
 	void UIImplementation::test()
 	{
-		
 
 		setMouseCursor("TaharezLook/MouseArrow");
 

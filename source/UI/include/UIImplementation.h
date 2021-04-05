@@ -26,6 +26,7 @@ namespace PTSD {
 		CEGUI::Window* mRoot;
 		CEGUI::WindowManager* windowMngr;
 		CEGUI::System* system;
+		Vector2D lastMousePosition;
 
 		static UIImplementation* mInstance;
 	public:
@@ -50,7 +51,9 @@ namespace PTSD {
 		void setMouseCursor(std::string name);
 		void setMouseCursorVisible(bool active);
 
+		void setMouseInitialPosition(Vector2D mousePosition);
 		void injectMousePosition(Vector2D mousePosition);
+		void injectMouseLeftClick();
 
 		void test();
 	};

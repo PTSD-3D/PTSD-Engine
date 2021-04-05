@@ -11,11 +11,15 @@ namespace PTSD {
 	int UI::init() {
 		mImplementation = PTSD::UIImplementation::getInstance();
 		mImplementation->init(PTSD::Graphics::getInstance()->getRenderWindow());
+		mImplementation->setMouseInitialPosition(PTSD::Input::getInstance()->getMousePos());
 		return 0;
 	}
 
 	bool UI::render()
 	{
+		if (PTSD::Input::getInstance()->mouseMotion()) mImplementation->injectMousePosition(
+		PTSD::Input::getInstance()->getMousePos());
+		if (PTSD::Input::getInstance()->mouseLeftClick()) mImplementation->injectMouseLeftClick();
 		return mImplementation->render(PTSD::Graphics::getInstance()->getDeltaTime());
 	}
 
