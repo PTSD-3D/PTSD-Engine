@@ -40,6 +40,7 @@ namespace PTSD {
 		}
 
 		int init(Ogre::RenderWindow* mRenderWindow);
+		void initLogger();
 		bool render(double deltaTime);
 		void shutdown();
 

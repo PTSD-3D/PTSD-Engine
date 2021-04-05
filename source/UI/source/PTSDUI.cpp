@@ -39,6 +39,7 @@ namespace PTSD {
 	 * \brief Register for the events */
 	void UI::registerForEvents()
 	{
+		/*bind(function, reference for the execution of the function, placeholder for parameters)*/
 		auto function = std::bind(&PTSD::UI::testCallback, this, std::placeholders::_1);
 		mImplementation->setEvent("PushButton", function);
 	}

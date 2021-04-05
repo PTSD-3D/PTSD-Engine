@@ -20,6 +20,8 @@ namespace PTSD {
 	 */
 	int UIImplementation::init(Ogre::RenderWindow* mRenderWindow)
 	{
+		initLogger();
+
 		renderer = &CEGUI::OgreRenderer::bootstrapSystem(*mRenderWindow);
 
 		windowMngr = &CEGUI::WindowManager::getSingleton();
@@ -30,13 +32,20 @@ namespace PTSD {
 
 		loadResources();
 
-		system->getDefaultGUIContext().setDefaultFont("DejaVuSans-12");
-
-		CEGUI::DefaultLogger::getSingletonPtr()->setLogFilename("logs/CEGUI.log");
-
 		test();
 
 		return 0;
+	}
+
+	/**
+	 * \brief Instantiate logger first
+	 */
+	void UIImplementation::initLogger()
+	{
+		if (!CEGUI::Logger::getSingletonPtr())
+			new CEGUI::DefaultLogger();
+
+		CEGUI::Logger::getSingleton().setLogFilename("logs/CEGUI.log");
 	}
 
 	/**
