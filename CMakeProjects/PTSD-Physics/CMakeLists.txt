@@ -18,9 +18,9 @@ macro(add_source)
 				list(APPEND SRCS "${MY_SOURCE}${_src}")
 		endforeach()
 endmacro()
-add_source(PTSDPhysics) #<----- Add al sources here
+add_source(PTSDPhysics Collider ColliderImplementation PTSDPhysics Rigidbody RigidbodyImplementation PhysicsImplementation) #<----- Add al sources here
 add_library(${NAME} SHARED ${SRCS})
-target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}")
+target_include_directories(${NAME} PUBLIC "${MY_INCLUDE}" PUBLIC "${PTSD_LOGGER_INCLUDE}")
 target_compile_definitions(${NAME} PUBLIC _PTSDPHYS)
 
 
@@ -46,6 +46,9 @@ target_link_libraries( ${NAME}
 															BulletCollision${PYBULLET_LIB_SUF}
 															Bullet3Geometry${PYBULLET_LIB_SUF}
 															BulletDynamics${PYBULLET_LIB_SUF})
+
+
+target_include_directories(${NAME} 	PUBLIC 	${PTSD_GRAPHICS_INCLUDE})
 
 
 #######################################################

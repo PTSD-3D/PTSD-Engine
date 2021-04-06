@@ -14,7 +14,7 @@ namespace FMOD { //This is so we trick the .h into not exploding into pieces.
 	class Sound;
 }
 
-enum FMOD_RESULT;
+// enum FMOD_RESULT;
 
 namespace PTSD {
 	enum SoundChannels {
@@ -34,7 +34,7 @@ namespace PTSD {
 		std::vector<FMOD::ChannelGroup*> genChannelGroups;
 		std::vector<FMOD::Channel*> genChannels;
 		FMOD::Channel* musicChannel = nullptr;
-		FMOD_RESULT result;
+		int result;
 		int nChannels = 128; //ATM this is arbitrary. It could be configured by the developer.
 		int currentChannel = -1;
 
