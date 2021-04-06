@@ -2,6 +2,7 @@
 #include "PTSDScripting.h"
 #include "ScriptingImplementation.h"
 #include "lua.hpp"
+#include "PTSDLog.h"
 #include "sol/sol.hpp"
 
 namespace PTSD {
@@ -29,6 +30,8 @@ namespace PTSD {
 
 	void Scripting::run(std::string script)
 	{
+		std::string mssg = script + " loading... @PTSDScripting, Run()";
+		PTSD::LOG(mssg.c_str(), PTSD::Info);
 		mScriptMgr->run(script);
 	}
 

@@ -13,6 +13,7 @@ namespace PTSD
 		bool bindUIComponents();
 		bool bindSoundComponents();
 		bool bindInputComponents();
+		bool bindGenericComponents();
 	public:
 		ScriptingImplementation();
 		virtual ~ScriptingImplementation() = default;

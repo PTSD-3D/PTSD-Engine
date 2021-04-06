@@ -10,6 +10,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 //#include "PTSDPhysics.h"
 #include "PTSDScripting.h" //debería ser el ECS
 #include "PTSDVectors.h"
+#include "PTSDLog.h"
 
 namespace PTSD {
 	ScriptingImplementation::ScriptingImplementation() {
@@ -32,7 +33,8 @@ namespace PTSD {
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
 			bindSoundComponents() &&
-			bindInputComponents()) {
+			bindInputComponents() &&
+			bindGenericComponents()) {
 			//state.do_file("./assets/PTSDComponents.lua");
 			//state.do_file("./assets/UserComponent.lua");
 			// state["Start"]();
@@ -69,32 +71,54 @@ namespace PTSD {
 	bool ScriptingImplementation::bindGraphicsComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA Graphics Components... @ScriptingImplementation, BindGraphicsComponents()");
+
 		state.set_function("translate", &PTSD::Camera::translate , PTSD::Graphics::getInstance()->getCam());
-		state.new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+
 		return true;
 	}
 	bool ScriptingImplementation::bindPhysicsComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA Physics Components... @ScriptingImplementation, BindPhysicsComponents()");
 		return true;
 	}
 	bool ScriptingImplementation::bindSoundComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA Sound Components... @ScriptingImplementation, BindSoundComponents()");
 		return true;
 	}
 	bool ScriptingImplementation::bindUIComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA UI Components... @ScriptingImplementation, BindUIComponents()");
 		return true;
 	}
-
-	
 	bool ScriptingImplementation::bindInputComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA Input Components... @ScriptingImplementation, BindInputComponents()");
+
 		state.set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
-		//state.new_enum()
+
+		//This should be expanded or reconsidered in the future.
+		state.new_enum<Scancode>("PTSDKeys", {
+			{"W", Scancode::SCANCODE_W},
+			{"A", Scancode::SCANCODE_A},
+			{"S", Scancode::SCANCODE_S},
+			{"D", Scancode::SCANCODE_D}
+		});
+
+		return true;
+	}
+	bool ScriptingImplementation::bindGenericComponents()
+	{
+		//Init everything
+		PTSD::LOG("Binding Generic Components... @ScriptingImplementation, BindGenericComponents()");
+
+		state.new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+
 		return true;
 	}
 }
