@@ -8,6 +8,7 @@ Component.all = {}
 function Component.create(name, fields, defaults)
     local component = reqNamespace.class(name)
 
+	component.name = name
     if fields then
         defaults = defaults or {}
         component.initialize = function(self, ...)

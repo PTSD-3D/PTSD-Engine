@@ -23,7 +23,7 @@ function EntityManager:addEntity(entity)
 	self.entities[entity.id] = entity
 
 	for _, component in pairs(entity.components) do
-		local componentName = component.name
+		local componentName = component.class.name
 
 
 		--Add entity to each of the entityLists for each component, to be able to get it later
@@ -47,7 +47,7 @@ function EntityManager:removeEntity(entity)
 	if self.entities[entity.id] then
 		--Remove the Entity from all Systems and the engine
 		for _, component in pairs(entity.components) do
-			local componentName = component.name
+			local componentName = component.class.name
 			if self.singleRequirements[componentName] then
 				for _, system in pairs(self.singleRequirements[componentName]) do
 					system:removeEntity(entity)
@@ -57,7 +57,7 @@ function EntityManager:removeEntity(entity)
 
 		--Remove Entity from the entity lists
 		for _, component in pairs(entity.components) do
-			self.entityLists[component.name][entity.id] = nil
+			self.entityLists[component.class.name][entity.id] = nil
 		end
 
 		-- Set entity to dead for systems that have a reference saved to the entity
@@ -69,7 +69,7 @@ function EntityManager:removeEntity(entity)
 end
 
 function EntityManager:addSystem(system)
-	local systemName = system.name
+	local systemName = system.class.name
 
 	if self.systems[systemName] and self.systems[systemName] ~= system then
 		print("Error: System already added")
@@ -88,7 +88,7 @@ function EntityManager:addSystem(system)
 end
 
 function EntityManager:registerSystem(system)
-	local systemName = system.name
+	local systemName = system.class.name
 	self.systems[name] = system
 
 	--system:requires() returns a table of strings

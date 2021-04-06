@@ -9,7 +9,7 @@ local function populateNamespace(ns)
     --ns.ComponentRemoved = require(folderOfThisFile .. "src.events.ComponentRemoved")
 
     -- Requiring the engine
-    --ns.Entity = require(folderOfThisFile .. "src.Entity")
+    ns.Entity = reqEntity
     ns.EntityManager = reqEntityManager
     --ns.System = require(folderOfThisFile .. "src.System")
     --ns.EventManager = require(folderOfThisFile .. "src.EventManager")
