@@ -27,3 +27,16 @@ PTSD::Entity* PTSD::EntityManager::createEntity()
 	entities_.push_back({nextID_++});
 	return &entities_.back();
 }
+
+void PTSD::EntityManager::deleteEntity(UUID entity)
+{
+	auto it = entities_.begin();
+	while (it != entities_.end())
+		++it;
+	if(it==entities_.end())
+	{
+		PTSD::LOG("UNABLE TO FOUND ENTITY", Error);
+		throw "Entity not found";
+	}
+	entities_.erase(it);
+}

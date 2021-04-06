@@ -19,8 +19,9 @@ namespace PTSD {
 		EntityManager* entityManager_ = nullptr;
 		std::vector<std::unique_ptr<Component>> components_;
 		std::array<Component*, CmpId::MAXCOMPONENTS> componentPtrs_ = {};
-		std::bitset<MAXTAGS_> tags_;
+		//TODO add reference to lua entity
 	public:
+		//Component methods
 		template<typename T, typename ... TArgs>
 		T* addComponent(TArgs&& ...mArgs) {
 			T* c(new T(std::forward<TArgs>(mArgs)...));
@@ -35,10 +36,11 @@ namespace PTSD {
 		T* getComponent(CmpId id) {
 			return static_cast<T*>(componentPtrs_[id]);
 		}
-
 		bool hasComponent(CmpId id) const {
 			return componentPtrs_[id] != nullptr;
 		}
+
+		//Runtime loop methods
 		void init()
 		{
 			for (auto& cmp : components_)
@@ -49,13 +51,6 @@ namespace PTSD {
 			for (auto& cmp : components_)
 				cmp->update();
 		}
-		//void render(); handled by ogre
-		void setActive(bool active = true) { active_ = active; }
-		bool isActive() { return active_; }
-		bool checkTag(Tag t) { return tags_[t]; }
-		UUID getID() { return id_; }
-		void addTag(Tag t, bool to = true) { tags_[t] = to; }
-
 		void onCollisionEnter(Collision* col)
 		{
 			for (auto& cmp : components_)
@@ -71,7 +66,13 @@ namespace PTSD {
 			for (auto& cmp : components_)
 				cmp->onCollisionExit(col);
 		}
+
+		//Getters and Setters
+		void setActive(bool active = true) { active_ = active; }
+		bool isActive() { return active_; }
+		UUID getID() { return id_; }
 		Entity(UUID id, bool active = true) :
 			id_(id), active_(active) {}
+		EntityManager* getManger() const { return entityManager_; }
 	};
 }

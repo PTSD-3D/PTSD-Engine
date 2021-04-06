@@ -42,8 +42,11 @@ namespace PTSD {
 
 	bool ScriptingImplementation::update()
 	{
+		entityManager_.update();
 		state["Update"]();
-		return state["Exit"];
+		//TODO exit state
+		return true;
+		//return state["Exit"];
 	}
 
 	void ScriptingImplementation::shutdown()
@@ -52,14 +55,19 @@ namespace PTSD {
 
 	}
 
-	void ScriptingImplementation::addEntity(void* entityPtr)
+	Entity* ScriptingImplementation::createEntity()
 	{
+		PTSD::Entity* ent = entityManager_.createEntity();
 		//Creates an entity in Lua and relates it to this pointer
 		//Entity["Start"]();
+
+		return ent;
 	}
 
-	void ScriptingImplementation::deleteEntity(size_t entityID)
+	void ScriptingImplementation::deleteEntity(UUID entityID)
 	{
+		entityManager_.deleteEntity(entityID);
+		//Deletes entity in Lua
 		//Entity["Delete"]();
 	}
 

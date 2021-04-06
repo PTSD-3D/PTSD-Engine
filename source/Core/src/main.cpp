@@ -37,13 +37,12 @@ int main()
 	soundSystem->Init();
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
 	scriptingSystem->init();
+	PTSD::Entity* sinbad = scriptingSystem->createEntity();
+	sinbad->addComponent<PTSD::DebugComponent>();
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
 	//Entity testing
-	PTSD::EntityManager entityManager;
-	PTSD::Entity* sinbad = entityManager.createEntity();
-	sinbad->addComponent<PTSD::DebugComponent>();
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
@@ -62,8 +61,7 @@ int main()
 			inputSystem->update();
 			physicsSystem->update();
 			graphicsSystem->getCam()->translate({ 0,0,0.1 });
-			entityManager.update();
-			//scriptingSystem->update(); Prob� a ponerlo pero al hacer update revienta (?)
+			scriptingSystem->update();
 			soundSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;

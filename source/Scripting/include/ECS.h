@@ -1,6 +1,7 @@
 #pragma once
 namespace PTSD
 {
+	using UUID = unsigned long;
 	using CmpIdType = unsigned long;
 
 	enum CmpId: CmpIdType

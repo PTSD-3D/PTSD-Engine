@@ -1,5 +1,4 @@
 #pragma once
-#include "ObjectPool.h"
 #include "Entity.h"
 
 namespace PTSD
@@ -9,7 +8,6 @@ namespace PTSD
 	class EntityManager
 	{
 	private:
-		//TODO Entity pooling
 		std::vector<Entity> entities_;
 		UUID nextID_ = 0;
 	public:
@@ -19,6 +17,7 @@ namespace PTSD
 		void init();
 		void update();
 		Entity* createEntity();
+		void deleteEntity(UUID entity);
 		
 	};
 
