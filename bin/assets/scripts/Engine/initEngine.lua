@@ -11,7 +11,7 @@ local function populateNamespace(ns)
     -- Requiring the engine
     ns.Entity = reqEntity
     ns.EntityManager = reqEntityManager
-    --ns.System = require(folderOfThisFile .. "src.System")
+    ns.System = reqSystem
     --ns.EventManager = require(folderOfThisFile .. "src.EventManager")
     ns.Component = reqComponent
 end

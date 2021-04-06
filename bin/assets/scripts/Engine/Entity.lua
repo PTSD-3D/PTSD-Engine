@@ -1,13 +1,7 @@
 local namespace = reqNamespace
+namespace.class = reqMiddleclass
 
-local Entity = {}
-
-function Entity:new(o)
-	o = o or {}
-	setmetatable(o,self)
-	self.__index = self
-	return o
-end
+local Entity = namespace.class("Entity")
 
 function Entity:initialize(name)
 	self.components = {}
@@ -22,14 +16,11 @@ function Entity:add(component)
 	local name = component.class.name
 	print(name)
 	if not self.components[name] then
-		print("a1")
 		self.components[name] = component
 		if self.eventManager then
 			self.eventManager:fireEvent(namespace.ComponeentAdded(self,name))
 		end
-		print("b1")
 	end
-	print("c1")
 end
 
 function Entity:set(component)
@@ -59,9 +50,6 @@ function Entity:remove(name)
 end
 
 function Entity:get(name)
-	if self.components[name] then
-		print("found")
-	end
 	return self.components[name]
 end
 

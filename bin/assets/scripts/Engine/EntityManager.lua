@@ -1,13 +1,15 @@
 --Main Entity Manager class
 
-local EntityManager =  {}
---local EntityManager =  reqNamespace.class("EntityManager")
+local EntityManager =  reqNamespace.class("EntityManager")
 
-function EntityManager:init()
+function EntityManager:initialize()
 	self.entities = {}
 
+	--List of systems organized by their requirements
 	self.singleRequirements = {}
 	self.allRequirements = {}
+
+	--lists of entities organized by their components
 	self.entityLists = {}
 
 	--TODO eventManager
@@ -18,7 +20,7 @@ end
 
 function EntityManager:addEntity(entity)
 	-- Assign entity's id
-	local nId = self.entities[#self.entities].id + 1
+	local nId = #self.entities + 1
 	entity.id = nId
 	self.entities[entity.id] = entity
 
@@ -78,18 +80,22 @@ function EntityManager:addSystem(system)
 
 	--Add system to registry if not already present
 	if not (self.systems[systemName]) then
+		print("registering ".. systemName)
 		self:registerSystem(system)
 	end
 
-	--Check entities already existing?
-
+	-- Checks if some of the already existing entities match the required components.
+    for _, entity in pairs(self.entities) do
+        self:checkRequirements(entity, system)
+    end
 
 	return system
 end
 
 function EntityManager:registerSystem(system)
 	local systemName = system.class.name
-	self.systems[name] = system
+	self.systems[systemName] = system
+	table.insert(self.systems,system)
 
 	--system:requires() returns a table of strings
 	for index, req in pairs(system:requires()) do
@@ -136,7 +142,7 @@ function EntityManager:update(...)
 	end
 end
 
--- Component added and removed events
+-- TODO Component added and removed events
 
 -- Returns list with specific component.
 function EntityManager:getEntitiesWithComponent(component)

@@ -17,6 +17,7 @@ namespace PTSD {
 		state.require_file("reqMiddleclass", "./assets/scripts/engine/middleclass.lua");
 		state.require_file("reqComponent", "./assets/scripts/engine/Component.lua");
 		state.require_file("reqEntity", "./assets/scripts/engine/Entity.lua");
+		state.require_file("reqSystem", "./assets/scripts/engine/System.lua");
 		state.require_file("reqEntityManager", "./assets/scripts/engine/EntityManager.lua");
 		state.require_file("reqEngine", "./assets/scripts/engine/initEngine.lua");
 
@@ -26,15 +27,42 @@ local eng = reqEngine
 reqEngine.initialize({globals = true});
 
 local Position = eng.Component.create("position", {"x", "y"}, {x = 0, y = 0})
+local Velocity = eng.Component.create("velocity",{"vx","vy"})
 
-print(Position(150,25).x)
-
-local player = eng.Entity:new()
+local player = eng.Entity()
 player:initialize()
 
 player:add(Position(30, 25))
-local test = player:get("position")
-print(test.x)
+player:add(Velocity(100,100))
+
+print(player:get("position").x)
+
+local MoveSystem = class("MoveSystem",System)
+
+function MoveSystem:requires()
+	return {"position","velocity"}
+end
+
+function MoveSystem:update(dt)
+	for _, entity in pairs(self.targets) do
+		local position = entity:get("position")
+		local velocity = entity:get("velocity")
+		position.x = position.x + velocity.vx*dt
+		position.y = position.y + velocity.vy*dt
+	end
+end
+
+manager = eng.EntityManager()
+
+manager:addEntity(player)
+
+manager:addSystem(MoveSystem())
+
+print(player:get("position").x)
+
+manager:update(1)
+
+print(player:get("position").x)
 )");
 	}
 
