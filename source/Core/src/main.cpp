@@ -37,6 +37,8 @@ int main()
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
+	scriptingSystem->run("CameraScript");
+
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
 	Uint32 deltaTime = 33; //33 miliseconds per frame, ~30fps
@@ -52,6 +54,9 @@ int main()
 
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
+
+			scriptingSystem->update();
+
 			physicsSystem->update();
 			graphicsSystem->getCam()->translate({ 0,0,0.1 });
 			//scriptingSystem->update(); Prob� a ponerlo pero al hacer update revienta (?)
