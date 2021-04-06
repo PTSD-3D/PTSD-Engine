@@ -37,7 +37,7 @@ int main()
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
-	scriptingSystem->run("CameraScript");
+	scriptingSystem->run("CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
@@ -58,11 +58,13 @@ int main()
 			scriptingSystem->update();
 
 			physicsSystem->update();
-			graphicsSystem->getCam()->translate({ 0,0,0.1 });
+			//graphicsSystem->getCam()->translate({ 0,0,0.1 });
 			//scriptingSystem->update(); Prob� a ponerlo pero al hacer update revienta (?)
 			soundSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
+
+			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();

@@ -5,6 +5,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 */
 #include "PTSDInput.h"
 #include "PTSDGraphics.h"
+#include "Camera.h"
 //#include "PTSDUI.h"
 //#include "PTSDPhysics.h"
 #include "PTSDScripting.h" //debería ser el ECS
@@ -29,7 +30,8 @@ namespace PTSD {
 		if (bindGraphicsComponents() &&
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
-			bindSoundComponents()) {
+			bindSoundComponents() &&
+			bindInputComponents()) {
 			//state.do_file("./assets/PTSDComponents.lua");
 			//state.do_file("./assets/UserComponent.lua");
 			// state["Start"]();
@@ -66,6 +68,7 @@ namespace PTSD {
 	bool ScriptingImplementation::bindGraphicsComponents()
 	{
 		//Init everything
+		state.set_function("translate", &PTSD::Camera::translate , PTSD::Graphics::getInstance()->getCam());
 		return true;
 	}
 	bool ScriptingImplementation::bindPhysicsComponents()
@@ -81,6 +84,15 @@ namespace PTSD {
 	bool ScriptingImplementation::bindUIComponents()
 	{
 		//Init everything
+		return true;
+	}
+
+	
+	bool ScriptingImplementation::bindInputComponents()
+	{
+		//Init everything
+		state.set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
+		//state.new_enum()
 		return true;
 	}
 }
