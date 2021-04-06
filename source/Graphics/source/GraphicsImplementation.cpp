@@ -186,8 +186,7 @@ namespace PTSD
 
 	void GraphicsImplementation::init()
 	{
-		lastRenderTime = double(SDL_GetTicks())/1000;
-
+		lastRenderTime = SDL_GetTicks();
 		setupLogging();
 		setupWindow();
 		loadResources();
@@ -219,8 +218,8 @@ namespace PTSD
 		}
 
 		//deltaTime = current time - last rendered time
-		deltaTime = (double(SDL_GetTicks()) / 1000) - lastRenderTime;
-		lastRenderTime = (double(SDL_GetTicks()) / 1000);
+		deltaTime = double(SDL_GetTicks() - lastRenderTime) / 1000;
+		lastRenderTime = SDL_GetTicks();
 
 		LOG("Frame rendered", Trace);
 
