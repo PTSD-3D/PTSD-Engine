@@ -4,22 +4,27 @@
     --print(fact(a))
 
     function Update (n)
+      local dir = vec3:new(0, 0, 0)
       if keyPressed(4) then
         print("a")
         --Llama a mover
-        translate({-1,0,0})
+        dir = vec3:new(-1, 0, 0)
+        translate(dir)
       end
       if keyPressed(26) then
         print("w")
-        translate({0,0,-1})
+        dir = vec3:new(0, 0, -1)
+        translate(dir)
       end
       if keyPressed(22) then
         print("s")
-        translate({0,0,-1})
+        dir = vec3:new(0, 0, 1)
+        translate(dir)
       end
       if keyPressed(7) then
         print("d")
-        translate({1,0,0})
+        dir = vec3:new(1, 0, 0)
+        translate(dir)
       end
       return true
     end

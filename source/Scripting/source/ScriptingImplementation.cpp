@@ -9,6 +9,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 //#include "PTSDUI.h"
 //#include "PTSDPhysics.h"
 #include "PTSDScripting.h" //debería ser el ECS
+#include "PTSDVectors.h"
 
 namespace PTSD {
 	ScriptingImplementation::ScriptingImplementation() {
@@ -69,6 +70,7 @@ namespace PTSD {
 	{
 		//Init everything
 		state.set_function("translate", &PTSD::Camera::translate , PTSD::Graphics::getInstance()->getCam());
+		state.new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
 		return true;
 	}
 	bool ScriptingImplementation::bindPhysicsComponents()
