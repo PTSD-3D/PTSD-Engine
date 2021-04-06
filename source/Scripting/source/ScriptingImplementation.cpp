@@ -11,7 +11,28 @@ Include every PTSD-System to expose its public API to our Scripting state
 
 namespace PTSD {
 	ScriptingImplementation::ScriptingImplementation() {
-		state.open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os);
+		state.open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table);
+
+		//Exemplifies how require works
+		/*state.require_file("test2","./assets/scripts/engine/test2.lua");
+		state.script_file("./assets/scripts/engine/test.lua");
+		state.script_file("./assets/scripts/engine/test.lua");*/
+
+		state.require_file("reqNamespace", "./assets/scripts/engine/namespace.lua");
+		state.require_file("reqMiddleclass", "./assets/scripts/engine/middleclass.lua");
+		state.require_file("reqComponent", "./assets/scripts/engine/Component.lua");
+		state.require_file("reqEntityManager", "./assets/scripts/engine/EntityManager.lua");
+		state.require_file("reqEngine", "./assets/scripts/engine/initEngine.lua");
+
+		state.script(R"(
+local eng = reqEngine
+
+reqEngine.initialize({globals = true});
+
+local Position = Component.create("position", {"x", "y"}, {x = 0, y = 0})
+
+print(Position(150,25).x)
+)");
 	}
 
 	void ScriptingImplementation::run(std::string scriptFile)

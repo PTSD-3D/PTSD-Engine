@@ -1,6 +1,7 @@
 --Main Entity Manager class
 
 local EntityManager =  {}
+--local EntityManager =  reqNamespace.class("EntityManager")
 
 function EntityManager:init()
 	self.entities = {}
@@ -42,7 +43,7 @@ function EntityManager:addEntity(entity)
 end
 
 
-function Engine:removeEntity(entity)
+function EntityManager:removeEntity(entity)
 	if self.entities[entity.id] then
 		--Remove the Entity from all Systems and the engine
 		for _, component in pairs(entity.components) do
@@ -67,7 +68,7 @@ function Engine:removeEntity(entity)
 	end
 end
 
-function Engine:addSystem(system)
+function EntityManager:addSystem(system)
 	local systemName = system.name
 
 	if self.systems[systemName] and self.systems[systemName] ~= system then
@@ -86,7 +87,7 @@ function Engine:addSystem(system)
 	return system
 end
 
-function Engine:registerSystem(system)
+function EntityManager:registerSystem(system)
 	local systemName = system.name
 	self.systems[name] = system
 
@@ -103,7 +104,7 @@ function Engine:registerSystem(system)
 	end
 end
 
-function Engine:stopSystem(name)
+function EntityManager:stopSystem(name)
 	if self.systems[name] then
 		self.systems[name].active = false
 	else
@@ -111,7 +112,7 @@ function Engine:stopSystem(name)
 	end
 end
 
-function Engine:startSystem(name)
+function EntityManager:startSystem(name)
 	if self.systems[name] then
 		self.systems[name].active = true
 	else
@@ -119,7 +120,7 @@ function Engine:startSystem(name)
 	end
 end
 
-function Engine:toggleSystem(name)
+function EntityManager:toggleSystem(name)
 	if self.systems[name] then
 		self.systems[name].active = not self.systems[name].active
 	else
@@ -127,7 +128,7 @@ function Engine:toggleSystem(name)
 	end
 end
 
-function Egine:update(...)
+function EntityManager:update(...)
 	for _, system in ipairs(self.systems) do
 		if system.active then
 			system:update(...)
@@ -138,7 +139,7 @@ end
 -- Component added and removed events
 
 -- Returns list with specific component.
-function Engine:getEntitiesWithComponent(component)
+function EntityManager:getEntitiesWithComponent(component)
 	if self.entityLists[component] then
 		return self.entityLists[component]
 	else
@@ -146,7 +147,7 @@ function Engine:getEntitiesWithComponent(component)
 	end
 end
 
-function Engine:checkRequirements(entity, system) 
+function EntityManager:checkRequirements(entity, system) 
 	local meetsRequirements = true
 	
 	for _, requirement in pairs(system:requires()) do
