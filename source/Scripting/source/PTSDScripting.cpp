@@ -2,6 +2,7 @@
 #include "PTSDScripting.h"
 #include "ScriptingImplementation.h"
 #include "lua.hpp"
+#include "PTSDLog.h"
 #include "sol/sol.hpp"
 
 namespace PTSD {

@@ -221,7 +221,7 @@ namespace PTSD
 		deltaTime = double(SDL_GetTicks() - lastRenderTime) / 1000;
 		lastRenderTime = SDL_GetTicks();
 
-		LOG("Frame rendered", Trace);
+		//LOG("Frame rendered", Trace);
 
 		return true;
 	}

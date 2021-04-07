@@ -42,7 +42,8 @@ int main()
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
-	//Entity testing
+	//Initial LUA scripts
+	scriptingSystem->run("CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
@@ -61,10 +62,12 @@ int main()
 			inputSystem->update();
 			physicsSystem->update();
 			graphicsSystem->getCam()->translate({ 0,0,0.1 });
-			scriptingSystem->update();
 			soundSystem->update();
+			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
+
+			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();
