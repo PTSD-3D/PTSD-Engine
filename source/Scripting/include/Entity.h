@@ -73,6 +73,6 @@ namespace PTSD {
 		UUID getID() { return id_; }
 		Entity(UUID id, bool active = true) :
 			id_(id), active_(active) {}
-		EntityManager* getManger() const { return entityManager_; }
+		EntityManager* getManager() const { return entityManager_; }
 	};
 }
