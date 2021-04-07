@@ -1,7 +1,9 @@
 #pragma once
+#include "ECS.h"
 
 namespace PTSD {
 	class ScriptingImplementation;
+	class Entity;
 	class Scripting {
 	private:
 		ScriptingImplementation* mScriptMgr;
@@ -14,7 +16,7 @@ namespace PTSD {
 		bool update();
 		void shutdown();
 
-		void addEntity(void* entityPtr);
-		void deleteEntity(size_t entityID);
+		Entity* createEntity();
+		void deleteEntity(UUID entityID);
 	};
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include <sol/sol.hpp>
 #include "lua.hpp"
+#include "ECS.h"
+#include "EntityManager.h"
 
 
 namespace PTSD
@@ -8,6 +10,7 @@ namespace PTSD
 	class ScriptingImplementation {
 	private:
 		sol::state state;
+		EntityManager entityManager_;
 		bool bindGraphicsComponents();
 		bool bindPhysicsComponents();
 		bool bindUIComponents();
@@ -22,7 +25,7 @@ namespace PTSD
 		bool update();
 		void shutdown();
 
-		void addEntity(void* entityPtr);
-		void deleteEntity(size_t entityID);
+		Entity* createEntity();
+		void deleteEntity(UUID entityID);
 	};
 }
