@@ -30,8 +30,6 @@ namespace PTSD {
 
 	void Scripting::run(std::string script)
 	{
-		std::string mssg = script + " loading... @PTSDScripting, Run()";
-		PTSD::LOG(mssg.c_str(), PTSD::Info);
 		mScriptMgr->run(script);
 	}
 

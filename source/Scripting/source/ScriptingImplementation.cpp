@@ -19,6 +19,9 @@ namespace PTSD {
 
 	void ScriptingImplementation::run(std::string scriptFile)
 	{
+		std::string mssg = scriptFile + " loading... @PTSDScripting, Run()";
+		PTSD::LOG(mssg.c_str(), PTSD::Info);
+
 		state.do_file("./assets/scripts/" + scriptFile);
 	}
 
