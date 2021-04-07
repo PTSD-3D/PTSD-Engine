@@ -10,6 +10,9 @@
 #include "PTSDUI.h"
 #include "test.h"
 #include <SDL_timer.h>
+#include "Entity.h"
+#include "Component.h"
+#include "EntityManager.h"
 
 int main()
 {
@@ -34,9 +37,12 @@ int main()
 	soundSystem->Init();
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
 	scriptingSystem->init();
+	PTSD::Entity* sinbad = scriptingSystem->createEntity();
+	sinbad->addComponent<PTSD::DebugComponent>();
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
+	//Initial LUA scripts
 	scriptingSystem->run("CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
@@ -54,13 +60,10 @@ int main()
 
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
-
-			scriptingSystem->update();
-
 			physicsSystem->update();
-			//graphicsSystem->getCam()->translate({ 0,0,0.1 });
-			//scriptingSystem->update(); Prob� a ponerlo pero al hacer update revienta (?)
+			graphicsSystem->getCam()->translate({ 0,0,0.1 });
 			soundSystem->update();
+			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 
