@@ -135,7 +135,7 @@ function EntityManager:toggleSystem(name)
 end
 
 function EntityManager:update(...)
-	for _, system in ipairs(self.systems) do
+	for _, system in pairs(self.systems) do
 		if system.active then
 			system:update(...)
 		end
