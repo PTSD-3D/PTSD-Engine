@@ -55,7 +55,8 @@ namespace PTSD {
 
 	bool ScriptingImplementation::update()
 	{
-		state.script("manager:update(1)");
+		//state.script("manager:update(1)");
+		state["manager"]["update"](state["manager"],1); //This and line above are both valid
 		entityManager_.update();
 		state["Update"]();
 		//TODO exit state

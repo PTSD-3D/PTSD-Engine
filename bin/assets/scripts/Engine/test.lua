@@ -37,6 +37,6 @@ manager:addSystem(MoveSystem())
 
 print(player:get("position").x)
 
-manager:update(1)
+--manager:update(1)
 
 --print(player:get("position").x)
