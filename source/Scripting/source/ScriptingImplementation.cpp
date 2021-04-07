@@ -5,9 +5,12 @@ Include every PTSD-System to expose its public API to our Scripting state
 */
 #include "PTSDInput.h"
 #include "PTSDGraphics.h"
+#include "Camera.h"
 //#include "PTSDUI.h"
 //#include "PTSDPhysics.h"
-#include "PTSDScripting.h" //debería ser el ECS
+#include "PTSDScripting.h"
+#include "PTSDVectors.h"
+#include "PTSDLog.h"
 
 namespace PTSD {
 	ScriptingImplementation::ScriptingImplementation() {
@@ -26,6 +29,9 @@ namespace PTSD {
 
 	void ScriptingImplementation::run(std::string scriptFile)
 	{
+		std::string mssg = scriptFile + " loading... @PTSDScripting, Run()";
+		PTSD::LOG(mssg.c_str(), PTSD::Info);
+
 		state.do_file("./assets/scripts/" + scriptFile);
 	}
 
@@ -33,13 +39,15 @@ namespace PTSD {
 	
 	/**
 	 * \brief Inicializa todos los componentes y funciones(API) de todos los sistemas. Devuelve true si todo ha ido bien.
-	 * \return false si alguna inicialización de componentes o  funciones falla.
+	 * \return false si alguna inicializaciï¿½n de componentes o  funciones falla.
 	 */
 	bool ScriptingImplementation::init() {
 		if (bindGraphicsComponents() &&
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
-			bindSoundComponents()) {
+			bindSoundComponents() &&
+			bindInputComponents() &&
+			bindGenericComponents()) {
 		}
 
 		return true;
@@ -48,7 +56,11 @@ namespace PTSD {
 	bool ScriptingImplementation::update()
 	{
 		state.script("manager:update(1)");
+		entityManager_.update();
+		state["Update"]();
+		//TODO exit state
 		return true;
+		//return state["Exit"];
 	}
 
 	void ScriptingImplementation::shutdown()
@@ -57,35 +69,73 @@ namespace PTSD {
 
 	}
 
-	void ScriptingImplementation::addEntity(void* entityPtr)
+	Entity* ScriptingImplementation::createEntity()
 	{
+		PTSD::Entity* ent = entityManager_.createEntity();
 		//Creates an entity in Lua and relates it to this pointer
 		//Entity["Start"]();
+
+		return ent;
 	}
 
-	void ScriptingImplementation::deleteEntity(size_t entityID)
+	void ScriptingImplementation::deleteEntity(UUID entityID)
 	{
+		entityManager_.deleteEntity(entityID);
+		//Deletes entity in Lua
 		//Entity["Delete"]();
 	}
 
 	bool ScriptingImplementation::bindGraphicsComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA Graphics Components... @ScriptingImplementation, BindGraphicsComponents()");
+
+		state.set_function("translate", &PTSD::Camera::translate , PTSD::Graphics::getInstance()->getCam());
+
 		return true;
 	}
 	bool ScriptingImplementation::bindPhysicsComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA Physics Components... @ScriptingImplementation, BindPhysicsComponents()");
 		return true;
 	}
 	bool ScriptingImplementation::bindSoundComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA Sound Components... @ScriptingImplementation, BindSoundComponents()");
 		return true;
 	}
 	bool ScriptingImplementation::bindUIComponents()
 	{
 		//Init everything
+		PTSD::LOG("Binding LUA UI Components... @ScriptingImplementation, BindUIComponents()");
+		return true;
+	}
+	bool ScriptingImplementation::bindInputComponents()
+	{
+		//Init everything
+		PTSD::LOG("Binding LUA Input Components... @ScriptingImplementation, BindInputComponents()");
+
+		state.set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
+
+		//This should be expanded or reconsidered in the future.
+		state.new_enum<Scancode>("PTSDKeys", {
+			{"W", Scancode::SCANCODE_W},
+			{"A", Scancode::SCANCODE_A},
+			{"S", Scancode::SCANCODE_S},
+			{"D", Scancode::SCANCODE_D}
+		});
+
+		return true;
+	}
+	bool ScriptingImplementation::bindGenericComponents()
+	{
+		//Init everything
+		PTSD::LOG("Binding Generic Components... @ScriptingImplementation, BindGenericComponents()");
+
+		state.new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+
 		return true;
 	}
 }

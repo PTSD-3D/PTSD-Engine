@@ -25,8 +25,9 @@ namespace PTSD
 		//Ogre::Camera* mOgreCam;
 		Ogre::Viewport* mViewPort;
 		Ogre::FileSystemLayer* mFileSystemLayer;
+		/*Time difference between the previous frame and the current frame in seconds*/
 		double deltaTime;
-		double lastRenderTime;
+		Uint32 lastRenderTime;
 
 		//TODO Camera class
 		Camera* mCamera;

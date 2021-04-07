@@ -2,6 +2,7 @@
 #include "PTSDScripting.h"
 #include "ScriptingImplementation.h"
 #include "lua.hpp"
+#include "PTSDLog.h"
 #include "sol/sol.hpp"
 
 namespace PTSD {
@@ -42,12 +43,13 @@ namespace PTSD {
 		mScriptMgr->shutdown();
 	}
 
-	void Scripting::addEntity(void* entityPtr)
+	Entity* Scripting::createEntity()
 	{
-		mScriptMgr->addEntity(entityPtr);
+		return mScriptMgr->createEntity();
 	}
 
-	void Scripting::deleteEntity(size_t entityID)
+
+	void Scripting::deleteEntity(UUID entityID)
 	{
 		mScriptMgr->deleteEntity(entityID);
 	}
