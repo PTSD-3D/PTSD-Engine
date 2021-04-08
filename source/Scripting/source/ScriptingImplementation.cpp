@@ -8,13 +8,23 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "Camera.h"
 //#include "PTSDUI.h"
 //#include "PTSDPhysics.h"
-#include "PTSDScripting.h" //debería ser el ECS
+#include "PTSDScripting.h"
 #include "PTSDVectors.h"
 #include "PTSDLog.h"
 
 namespace PTSD {
 	ScriptingImplementation::ScriptingImplementation() {
-		state.open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os);
+		state.open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table);
+
+		state.require_file("reqNamespace", "./assets/scripts/engine/namespace.lua");
+		state.require_file("reqMiddleclass", "./assets/scripts/engine/middleclass.lua");
+		state.require_file("reqComponent", "./assets/scripts/engine/Component.lua");
+		state.require_file("reqEntity", "./assets/scripts/engine/Entity.lua");
+		state.require_file("reqSystem", "./assets/scripts/engine/System.lua");
+		state.require_file("reqEntityManager", "./assets/scripts/engine/EntityManager.lua");
+		state.require_file("reqEngine", "./assets/scripts/engine/initEngine.lua");
+
+		state.script_file("./assets/scripts/engine/test.lua"); //Test file of engine initialization, any other code goes below...
 	}
 
 	void ScriptingImplementation::run(std::string scriptFile)
@@ -29,7 +39,7 @@ namespace PTSD {
 	
 	/**
 	 * \brief Inicializa todos los componentes y funciones(API) de todos los sistemas. Devuelve true si todo ha ido bien.
-	 * \return false si alguna inicialización de componentes o  funciones falla.
+	 * \return false si alguna inicializaciï¿½n de componentes o  funciones falla.
 	 */
 	bool ScriptingImplementation::init() {
 		if (bindGraphicsComponents() &&
@@ -38,11 +48,6 @@ namespace PTSD {
 			bindSoundComponents() &&
 			bindInputComponents() &&
 			bindGenericComponents()) {
-			//state.do_file("./assets/PTSDComponents.lua");
-			//state.do_file("./assets/UserComponent.lua");
-			// state["Start"]();
-			// while(!state["Exit"])
-			// 	state["Update"]();
 		}
 
 		return true;
@@ -50,6 +55,8 @@ namespace PTSD {
 
 	bool ScriptingImplementation::update()
 	{
+		//state.script("manager:update(1)");
+		state["manager"]["update"](state["manager"],1); //This and line above are both valid
 		entityManager_.update();
 		state["Update"]();
 		//TODO exit state
