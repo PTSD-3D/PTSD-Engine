@@ -144,6 +144,12 @@
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformImplementation.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
@@ -232,6 +238,12 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ECS.h">
       <Filter>Scripting\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformImplementation.h">
+      <Filter>Core\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
