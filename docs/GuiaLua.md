@@ -1,4 +1,17 @@
-# Guía básica existencial PT:SD Lua ECS
+# Guía básica existencial PT:SD Lua
+## Bindeo de funciones
+Una funcion de c++ se pueda bindear de varias maneras
+```lua
+state["nombreDeFuncionEnLua"]= nombreDeFuncionEnCpp;
+state.set("nombreDeFuncionEnLua",nombreDeFuncionEnCpp);
+state.set_function("nombreDeFuncionEnLua",nombreDeFuncionEnCpp);
+```
+Si queremos que llame a una funcion de una instancia de un objeto especifico se settea de la siguiente manera
+```lua
+state.set_function("nombreDeFuncionEnLua",&ClaseCpp::nombreDeFuncionEnCpp,InstanciaDeClaseCpp);
+```
+---
+## ECS
 
 EntityManager se encarga de recibir el input y el deltaTime y pasárselo a las entidades.
 

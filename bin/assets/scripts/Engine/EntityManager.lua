@@ -42,6 +42,8 @@ function EntityManager:addEntity(entity)
 			end
 		end
 	end
+
+	--Register entity in cpp
 end
 
 
