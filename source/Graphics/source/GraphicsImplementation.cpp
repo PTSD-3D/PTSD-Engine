@@ -149,11 +149,12 @@ namespace PTSD
 
 		mSceneMgr = mRoot->createSceneManager();
 
-		mCamera = new Camera({ 0,0,80 });
+		mCamera = new Camera({ 0,0,8 });	//new Camera({ 0,0,80 });
 
-		Ogre::Entity* ogreEntt = mSceneMgr->createEntity("ogrehead.mesh");
+		Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Kirby.mesh");		//ogrehead.mesh
 		Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 		ogreNode->attachObject(ogreEntt);
+		ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
 
 		mSceneMgr->setAmbientLight(Ogre::ColourValue(.5, .5, .5));
 
