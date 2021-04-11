@@ -226,6 +226,16 @@ namespace PTSD
 		return true;
 	}
 
+	float GraphicsImplementation::getWindowWidth() const
+	{
+		return mRenderWindow->getWidth();
+	}
+
+	float GraphicsImplementation::getWindowHeight() const
+	{
+		return mRenderWindow->getHeight();
+	}
+
 	void GraphicsImplementation::shutdown()
 	{
 		delete mRoot;

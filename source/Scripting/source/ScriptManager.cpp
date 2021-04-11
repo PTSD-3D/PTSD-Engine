@@ -107,6 +107,8 @@ namespace PTSD {
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
 		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::Graphics::getInstance()->getCam());
+		(*state).set_function("getWindowWidth", &PTSD::Graphics::getWindowWidth, PTSD::Graphics::getInstance());
+		(*state).set_function("getWindowHeight", &PTSD::Graphics::getWindowHeight, PTSD::Graphics::getInstance());
 
 		return true;
 	}

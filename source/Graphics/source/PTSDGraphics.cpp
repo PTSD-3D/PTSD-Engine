@@ -27,6 +27,14 @@ namespace PTSD {
 	{
 		return mImplementation->getRenderWindow();
 	}
+	float Graphics::getWindowWidth() const
+	{
+		return mImplementation->getWindowWidth();
+	}
+	float Graphics::getWindowHeight() const
+	{
+		return mImplementation->getWindowHeight();
+	}
 	double Graphics::getDeltaTime()
 	{
 		return mImplementation->getDeltaTime();

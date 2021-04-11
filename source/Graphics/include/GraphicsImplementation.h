@@ -63,6 +63,8 @@ namespace PTSD
 		Ogre::SceneManager* getSceneMgr() const { return mSceneMgr; }
 		Camera* getCamera() const { return mCamera; }
 		Ogre::RenderWindow* getRenderWindow() const { return mRenderWindow; }
+		float getWindowWidth() const;
+		float getWindowHeight() const;
 		double getDeltaTime() const { return deltaTime; }
 	};
 }
