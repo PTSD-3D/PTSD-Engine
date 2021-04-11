@@ -1,16 +1,20 @@
 #pragma once
-#include <sol/sol.hpp>
-#include "lua.hpp"
-#include "ECS.h"
-#include "EntityManager.h"
+#include <string>
 
+namespace sol {
+	class state;
+}
 
 namespace PTSD
 {
-	class ScriptingImplementation {
+	using UUID = unsigned long;
+	class EntityManager;
+	class Entity;
+	class ScriptManager {
 	private:
-		sol::state state;
-		EntityManager entityManager_;
+		sol::state* state;
+		EntityManager* entityManager;
+
 		bool bindGraphicsComponents();
 		bool bindPhysicsComponents();
 		bool bindUIComponents();
@@ -18,14 +22,14 @@ namespace PTSD
 		bool bindInputComponents();
 		bool bindGenericComponents();
 	public:
-		ScriptingImplementation();
-		virtual ~ScriptingImplementation() = default;
-
-		void run(std::string scriptFile);
+		ScriptManager();
+		virtual ~ScriptManager();
 
 		bool init();
 		bool update();
 		void shutdown();
+
+		void run(const std::string& scriptFile);
 
 		Entity* createEntity();
 		void deleteEntity(UUID entityID);

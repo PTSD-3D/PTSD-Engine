@@ -73,6 +73,12 @@
     <Filter Include="Core\Source">
       <UniqueIdentifier>{5868f7a0-2ac8-4aa6-ba4b-12afc2e7b7c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripting\Scripts">
+      <UniqueIdentifier>{5678d39b-7abf-446d-ab81-6e3cd0016e94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting\Scripts\Engine">
+      <UniqueIdentifier>{c9bb1d3c-5b4c-4ce8-a8ba-7a9239354e22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp">
@@ -111,10 +117,7 @@
     <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp">
-      <Filter>Scripting\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Scripting\source\PTSDScripting.cpp">
+    <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp">
@@ -188,10 +191,7 @@
     <ClInclude Include="..\..\source\Physics\include\RigidbodyImplementation.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Scripting\include\PTSDScripting.h">
-      <Filter>Scripting\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h">
+    <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h">
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Sound\include\PTSDSound.h">
@@ -233,5 +233,31 @@
     <ClInclude Include="..\..\source\Scripting\include\ECS.h">
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\assets\scripts\Engine\Component.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\Entity.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\EntityManager.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\initEngine.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\middleclass.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\namespace.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\System.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\test.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
   </ItemGroup>
 </Project>
