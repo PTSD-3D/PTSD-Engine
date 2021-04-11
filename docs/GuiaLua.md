@@ -53,6 +53,29 @@ state.script_file("./assets/scripts/engine/x.lua");
 así ya estara disponible en el estado general de lua para ser llamado
 
 --- 
+## Creación de escenas en lua
+
+Para crear una escena se ha de crear un archivo lua de la escena y se creará una tabla con las entidades con sus componentes:
+* Los componentes de Lua identificados por el nombre y añadiendos sus atributos 
+* Los componentes según han sido especificados en C++ de la manera que indica cada uno de sus sistemas
+
+```lua
+local Scene = {}
+
+Scene = {
+	Entity1={
+		Components = {
+			{name="componentName1",arguments={101,102}},
+			{name="componentName2",arguments={1,1}}
+		},
+		Mesh = {"ogrehead.mesh"}
+	}
+}
+
+return Scene
+```
+
+---
 ## Credit where credit is due
 
 Basado mucho en [lovetoys](https://github.com/lovetoys/lovetoys), libreria ECS de Lua.

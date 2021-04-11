@@ -1,17 +1,21 @@
 local ns = reqNamespace;
 
 --Loads a scene after the whole engine has been initialized
-function ns.loadScene(sceneTable)
+function ns.loadScene(manager, sceneTable)
 	for _, entData in pairs(sceneTable) do
 		local entityObject = ns.Entity()
 		entityObject:initialize()
+
+		--Loads all components
 		if entData.Components ~= {} then
-			--TODO load lua components
+			for _, compDetails in pairs(entData.Components) do
+				entityObject:add(ns.Component.all[compDetails["name"]](table.unpack(compDetails["arguments"])))
+			end
 		end
 
 		--[[Entity is added to manager after adding components to prevent
 		firing componentAdded event various times--]]
-		ns.EntityManager:addEntity(entityObject)
+		manager:addEntity(entityObject)
 
 		if entData.Mesh ~= {} then
 			--Add cpp mesh data to cpp entity

@@ -54,6 +54,8 @@ namespace PTSD {
 		(*state).require_file("reqSystem", "./assets/scripts/engine/System.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/engine/initEngine.lua");
+		(*state).require_file("sampleScene", "./assets/scripts/client/sampleScene.lua");
+		(*state).script_file("./assets/scripts/engine/EntityLoader.lua");
 
 		//Binding of external functions
 		if (bindGraphicsComponents() &&
