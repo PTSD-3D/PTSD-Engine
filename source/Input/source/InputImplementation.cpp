@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 
+#include "PTSDGraphics.h"
+
 namespace PTSD {
 	using namespace std;
 	InputImplementation* InputImplementation::mInstance = nullptr;
@@ -377,6 +379,11 @@ namespace PTSD {
 		mBJoysticksInitialised = true;
 
 		//std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
+	}
+
+	void InputImplementation::setMousePosition(Vector2D pos)
+	{
+		SDL_WarpMouseInWindow(PTSD::Graphics::getInstance()->getSDLWindow(), pos.getX(), pos.getY());
 	}
 
 	void InputImplementation::initialiseGamepads() {

@@ -1,5 +1,6 @@
 #pragma once
 
+class SDL_Window;
 
 namespace Ogre {
 	class RenderWindow;
@@ -31,6 +32,7 @@ namespace PTSD {
 		bool renderFrame();
 		Camera* getCam();
 		Ogre::RenderWindow* getRenderWindow() const;
+		SDL_Window* getSDLWindow() const;
 		float getWindowWidth() const;
 		float getWindowHeight() const;
 		double getDeltaTime();

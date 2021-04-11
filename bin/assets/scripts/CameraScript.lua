@@ -28,8 +28,8 @@
         translate(dir)
       end
 
-      print(centrePosX);
-      print(centrePosY);
+      print(mousePosX);
+      print(mousePosY);
 
       return true
     end

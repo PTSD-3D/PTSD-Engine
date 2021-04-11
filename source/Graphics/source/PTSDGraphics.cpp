@@ -23,18 +23,27 @@ namespace PTSD {
 	{
 		return mImplementation->getCamera();
 	}
+
 	Ogre::RenderWindow* Graphics::getRenderWindow() const
 	{
 		return mImplementation->getRenderWindow();
 	}
+
+	SDL_Window* Graphics::getSDLWindow() const
+	{
+		return mImplementation->getSDLWindow();
+	}
+
 	float Graphics::getWindowWidth() const
 	{
 		return mImplementation->getWindowWidth();
 	}
+
 	float Graphics::getWindowHeight() const
 	{
 		return mImplementation->getWindowHeight();
 	}
+
 	double Graphics::getDeltaTime()
 	{
 		return mImplementation->getDeltaTime();

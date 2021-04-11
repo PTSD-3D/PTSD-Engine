@@ -199,6 +199,13 @@ namespace PTSD {
 			return mousePos_.getY();
 		}
 
+		void setMouseLock(bool b) {
+			if (b) SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
+			else SDL_SetRelativeMouseMode(SDL_bool::SDL_FALSE);
+		}
+
+		void setMousePosition(Vector2D pos);
+
 		inline bool isMouseButtonUp(MOUSEBUTTON mb) {
 			return mbState_[mb] == Up || mbState_[mb] == JustUp;
 		}
