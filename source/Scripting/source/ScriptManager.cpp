@@ -86,9 +86,9 @@ namespace PTSD {
 		//Clean entity internal representation (?)
 	}
 
-	Entity* ScriptManager::createEntity(UUID entityID)
+	std::shared_ptr<Entity> ScriptManager::createEntity(UUID entityID)
 	{
-		PTSD::Entity* ent = entityManager->createEntity(entityID);
+		auto ent = entityManager->createEntity(entityID);
 		//Creates an entity in Lua and relates it to this pointer
 		//Entity["Start"]();
 
