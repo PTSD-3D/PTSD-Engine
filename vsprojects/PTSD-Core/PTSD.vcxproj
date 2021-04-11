@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Core\src\main.cpp" />
+    <ClCompile Include="..\..\source\Core\src\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
@@ -34,12 +35,11 @@
     <ClCompile Include="..\..\source\Sound\source\SoundAttorney.cpp" />
     <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp" />
     <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="TransformImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Core\include\PTSDVectors.h" />
     <ClInclude Include="..\..\source\Core\include\test.h" />
+    <ClInclude Include="..\..\source\Core\include\TransformComponent.h" />
     <ClInclude Include="..\..\source\Graphics\include\Camera.h" />
     <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h" />
@@ -67,8 +67,6 @@
     <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
     <ClInclude Include="..\..\source\UI\include\PTSDUI.h" />
     <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="TransformImplementation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

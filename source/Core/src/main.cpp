@@ -13,6 +13,7 @@
 #include "Entity.h"
 #include "Component.h"
 #include "EntityManager.h"
+#include "TransformComponent.h"
 
 int main()
 {
@@ -39,6 +40,8 @@ int main()
 	scriptingSystem->init();
 	PTSD::Entity* sinbad = scriptingSystem->createEntity();
 	sinbad->addComponent<PTSD::DebugComponent>();
+	sinbad->addComponent<PTSD::TransformComponent>();
+	sinbad->getComponent<PTSD::TransformComponent>(PTSD::Transform)->translate(Vec3Placeholder(30, 0, 0));
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
