@@ -1,8 +1,7 @@
-#include "InputImplementation.h"
 #include <fstream>
 #include <iostream>
-
 #include "PTSDGraphics.h"
+#include "InputImplementation.h"
 
 namespace PTSD {
 	using namespace std;
@@ -381,7 +380,7 @@ namespace PTSD {
 		//std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
 	}
 
-	void InputImplementation::setMousePosition(Vector2D pos)
+	void InputImplementation::setMousePosition(Vector2D pos) const
 	{
 		SDL_WarpMouseInWindow(PTSD::Graphics::getInstance()->getSDLWindow(), pos.getX(), pos.getY());
 	}

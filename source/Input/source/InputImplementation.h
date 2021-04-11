@@ -4,7 +4,6 @@
 #include <array>
 #include <vector>
 #include <memory>
-//#include "checkML.h"
 #include <iterator>
 #include <queue>
 #include <map>
@@ -204,7 +203,7 @@ namespace PTSD {
 			else SDL_SetRelativeMouseMode(SDL_bool::SDL_FALSE);
 		}
 
-		void setMousePosition(Vector2D pos);
+		void setMousePosition(Vector2D pos) const;
 
 		inline bool isMouseButtonUp(MOUSEBUTTON mb) {
 			return mbState_[mb] == Up || mbState_[mb] == JustUp;
