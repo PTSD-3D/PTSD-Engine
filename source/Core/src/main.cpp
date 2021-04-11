@@ -15,6 +15,10 @@
 #include "EntityManager.h"
 #include "TransformComponent.h"
 
+//This is for transform debugging
+#include "GraphicsImplementation.h"
+#include <OgreEntity.h>
+
 int main()
 {
 	PTSD::Log* logSystem = new PTSD::Log();
@@ -40,8 +44,12 @@ int main()
 	scriptingSystem->init();
 	PTSD::Entity* sinbad = scriptingSystem->createEntity();
 	sinbad->addComponent<PTSD::DebugComponent>();
-	sinbad->addComponent<PTSD::TransformComponent>();
-	sinbad->getComponent<PTSD::TransformComponent>(PTSD::Transform)->translate(Vec3Placeholder(30, 0, 0));
+
+	//This is for trasform debugging
+	PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
+	Ogre::Entity* ogreEntt = PTSD::GraphicsImplementation::getInstance()->getSceneMgr()->createEntity("ogrehead.mesh");
+	transform->getNode()->attachObject(ogreEntt);
+
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
@@ -69,6 +77,10 @@ int main()
 			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
+
+			//This is for transform debugging
+			transform->translate(Vec3Placeholder(0.3, 0, 0));
+			PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Warning);
 
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
