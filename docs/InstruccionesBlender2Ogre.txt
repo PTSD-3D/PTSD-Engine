@@ -38,6 +38,8 @@ el .scene , la salida de consola al cambiar xml a mesh y el archivo .material de
 
 -Modelas y haces la cositas chachis
 
+*Antes de exportar tienes que tener seleccionada la malla que quieres exportar ;)*
+
 -Exportas a una carpeta vacia y coges los archivos que necesites
 
 -Te llevas los archivos a assets
@@ -46,5 +48,6 @@ el .scene , la salida de consola al cambiar xml a mesh y el archivo .material de
 
 -GG EZ
 
-Link del repo
+--Link del repo para mas info--
+
 https://github.com/OGRECave/blender2ogre

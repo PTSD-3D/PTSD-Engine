@@ -19,7 +19,7 @@ int main()
 	PTSD::Log* logSystem = new PTSD::Log();
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Input* inputSystem = PTSD::Input::getInstance();
-	//PTSD::UI* uiSystem = new PTSD::UI();
+	PTSD::UI* uiSystem = new PTSD::UI();
 	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
@@ -32,7 +32,7 @@ int main()
 	PTSD::LOG("Beginning Initialization");
 	graphicsSystem->init();
 	inputSystem->init();
-	//uiSystem->init();
+	uiSystem->init();
 	physicsSystem->init();
 	soundSystem->Init();
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
@@ -70,7 +70,7 @@ int main()
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
-		//uiSystem->render();
+		uiSystem->render();
 	}
 	return 0;
 }
