@@ -131,6 +131,14 @@ namespace PTSD {
 	Vector2D Input::getMousePos() {
 		return mImplementation->getMousePos();
 	}
+
+	float Input::getMousePosX() {
+		return mImplementation->getMousePosX();
+	}
+
+	float Input::getMousePosY() {
+		return mImplementation->getMousePosY();
+	}
 	//Controller
 
 	bool Input::ControllerButtonPressed(int controllerID, ControllerButton button) {

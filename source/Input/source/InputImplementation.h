@@ -192,6 +192,12 @@ namespace PTSD {
 		Vector2D getMousePos() {
 			return mousePos_;
 		}
+		float getMousePosX() {
+			return mousePos_.getX();
+		}
+		float getMousePosY() {
+			return mousePos_.getY();
+		}
 
 		inline bool isMouseButtonUp(MOUSEBUTTON mb) {
 			return mbState_[mb] == Up || mbState_[mb] == JustUp;

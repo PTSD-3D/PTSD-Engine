@@ -3,6 +3,9 @@
       --If you're creating a variable just for this .lua please 
       --define it as a local variable.
       local dir = vec3:new(0, 0, 0)
+      local posX = getMousePosX()
+      local posY = getMousePosY()
+      
       if keyPressed(PTSDKeys.A) then
         dir = vec3:new(-1, 0, 0)
         translate(dir)
@@ -19,6 +22,10 @@
         dir = vec3:new(1, 0, 0)
         translate(dir)
       end
+
+      print(posX);
+      print(posY);
+
       return true
     end
 
