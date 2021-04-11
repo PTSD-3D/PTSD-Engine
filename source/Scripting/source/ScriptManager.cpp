@@ -55,16 +55,17 @@ namespace PTSD {
 		(*state).require_file("reqEntityManager", "./assets/scripts/engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/engine/initEngine.lua");
 
-		(*state).script_file("./assets/scripts/engine/test.lua"); //Test file of engine initialization, any other code goes below...
-
 		//Binding of external functions
 		if (bindGraphicsComponents() &&
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
 			bindSoundComponents() &&
 			bindInputComponents() &&
+			bindScriptingComponents() &&
 			bindGenericComponents()) {
 		}
+
+		(*state).script_file("./assets/scripts/engine/test.lua"); //Test file of engine initialization, any other code goes below...
 
 		return true;
 	}
@@ -85,9 +86,9 @@ namespace PTSD {
 		//Clean entity internal representation (?)
 	}
 
-	Entity* ScriptManager::createEntity()
+	Entity* ScriptManager::createEntity(UUID entityID)
 	{
-		PTSD::Entity* ent = entityManager->createEntity();
+		PTSD::Entity* ent = entityManager->createEntity(entityID);
 		//Creates an entity in Lua and relates it to this pointer
 		//Entity["Start"]();
 
@@ -142,6 +143,11 @@ namespace PTSD {
 			{"S", Scancode::SCANCODE_S},
 			{"D", Scancode::SCANCODE_D}
 			});
+
+		return true;
+	}
+	bool ScriptManager::bindScriptingComponents() {
+		(*state).set_function("PTSDCreateEntity", &PTSD::ScriptManager::createEntity, this);
 
 		return true;
 	}

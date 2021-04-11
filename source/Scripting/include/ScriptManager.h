@@ -20,6 +20,7 @@ namespace PTSD
 		bool bindUIComponents();
 		bool bindSoundComponents();
 		bool bindInputComponents();
+		bool bindScriptingComponents();
 		bool bindGenericComponents();
 	public:
 		ScriptManager();
@@ -31,7 +32,7 @@ namespace PTSD
 
 		void run(const std::string& scriptFile);
 
-		Entity* createEntity();
+		Entity* createEntity(UUID entityID);
 		void deleteEntity(UUID entityID);
 	};
 }

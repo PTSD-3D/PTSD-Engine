@@ -9,15 +9,14 @@ namespace PTSD
 	{
 	private:
 		std::vector<Entity> entities_;
-		UUID nextID_ = 0;
 	public:
 		EntityManager();
 		~EntityManager();
 
 		void init();
 		void update();
-		Entity* createEntity();
-		void deleteEntity(UUID entity);
+		Entity* createEntity(UUID entityID);
+		void deleteEntity(UUID entityID);
 		
 	};
 

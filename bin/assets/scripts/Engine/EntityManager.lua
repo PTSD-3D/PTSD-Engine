@@ -44,6 +44,7 @@ function EntityManager:addEntity(entity)
 	end
 
 	--Register entity in cpp
+	PTSDCreateEntity(nId)
 end
 
 

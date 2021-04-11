@@ -22,13 +22,13 @@ void PTSD::EntityManager::update()
 		ent.update();
 }
 
-PTSD::Entity* PTSD::EntityManager::createEntity()
+PTSD::Entity* PTSD::EntityManager::createEntity(UUID entityID)
 {
-	entities_.push_back({nextID_++});
+	entities_.push_back({entityID});
 	return &entities_.back();
 }
 
-void PTSD::EntityManager::deleteEntity(UUID entity)
+void PTSD::EntityManager::deleteEntity(UUID entityID)
 {
 	auto it = entities_.begin();
 	while (it != entities_.end())
