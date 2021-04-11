@@ -1,0 +1,50 @@
+Descargar plug-in
+https://github.com/OGRECave/blender2ogre/releases/tag/v0.8.0
+
+Descargar blender:
+https://www.blender.org/download/
+
+**Prerrequisitos**
+1- Tener Blender (a ser posible de la 2.8 en adelante).
+2- Tener Python (se usa a la hora de exportar) y debe de ser como la que usa tu version de blender.
+	si te vas a la consola puedes ver cual es. En mi caso con blender 2.92 es python 3.7 .
+3- Debes tener Ogre compilado (necesitaremos un archivo mas adelante).
+
+Esta version es compatible con blender 2.8 en adelante asique no hace falta usar un blender arcaico.
+
+* Como meter el plug-in:
+
+-Buscar donde tienes instalado blender (steam si lo pillaste ahi)
+
+-Ir a la carpeta scripts/addons y alli tenemos que dejar la carpeta io_ogre que esta en 
+la capeta del plug-in que hemos descargado.
+
+-*Advertencia* en windows hay que poner en el archivo de config.py que hay en io_ogre
+la direccion de OGRETOOLS_XML_CONVERTER a la direccion donde lo tengas tu
+en el proyecto del PTSD (Busca en la barra de busqueda -> OgreXmlConverter.exe) y
+recuerda que en la direccion las barras diagonales son dobles.
+
+-Ahora abre Blender y en la pentaña Edit->Preferences->Addons tienes que buscar
+en la parte de Import-Export el OGRE Exporter (El unico que pone algo sobre ogre).
+
+-Para exportar ahora lo que hay que hacer es ir a la seccion de File-Export y buscar la 
+opcion de Ogre3D la cual genera el .mesh y tambien .scene .
+
+-Esto dará como resultado un .mesh en xml (El que se usa para generar el bueno), un .mesh de tipo MESH (el bueno),
+el .scene , la salida de consola al cambiar xml a mesh y el archivo .material de materiales de los objetos que exportemos.
+
+
+* Workflow de trabajo:
+
+-Modelas y haces la cositas chachis
+
+-Exportas a una carpeta vacia y coges los archivos que necesites
+
+-Te llevas los archivos a assets
+
+-Los metes en el juego
+
+-GG EZ
+
+Link del repo
+https://github.com/OGRECave/blender2ogre
