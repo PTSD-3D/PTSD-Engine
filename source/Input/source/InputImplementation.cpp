@@ -380,11 +380,6 @@ namespace PTSD {
 		//std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
 	}
 
-	void InputImplementation::setMousePosition(Vector2D pos) const
-	{
-		SDL_WarpMouseInWindow(PTSD::Graphics::getInstance()->getSDLWindow(), pos.getX(), pos.getY());
-	}
-
 	void InputImplementation::initialiseGamepads() {
 		/*if (-1 == SDL_GameControllerAddMappingsFromFile("./config/gamecontrollerdb.txt"))
 			cout << "Error al cargar la base de datos" << endl;*/

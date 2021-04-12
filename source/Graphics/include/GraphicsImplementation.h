@@ -37,6 +37,7 @@ namespace PTSD
 
 		void setupLogging();
 		void setupWindow();
+		void setupMouse();
 		void loadResources();
 		void testScene();
 		void msgPump();

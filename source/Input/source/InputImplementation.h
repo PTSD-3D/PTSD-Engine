@@ -42,6 +42,7 @@ namespace PTSD {
 		bool isMouseMotionEvent_;
 		bool isMouseButtonEvent_;
 		Vector2D mousePos_;
+		Vector2D mouseRelativePos_;
 		std::array<ButtonState, 3> mbState_;
 		//---------------------------------------------
 
@@ -111,8 +112,12 @@ namespace PTSD {
 		//mouse
 		inline void onMouseMotion(SDL_Event& event) {
 			isMouseMotionEvent_ = true;
+
 			mousePos_.x = event.motion.x;
 			mousePos_.y = event.motion.y;
+
+			mouseRelativePos_.x = event.motion.xrel;
+			mouseRelativePos_.y = event.motion.yrel;
 		}
 		inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
 			isMouseButtonEvent_ = true;
@@ -191,13 +196,9 @@ namespace PTSD {
 		Vector2D getMousePosition() {
 			return mousePos_;
 		}
-
-		void setMouseLock(bool b) {
-			if (b) SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
-			else SDL_SetRelativeMouseMode(SDL_bool::SDL_FALSE);
+		Vector2D getMouseRelativePosition() {
+			return mouseRelativePos_;
 		}
-
-		void setMousePosition(Vector2D pos) const;
 
 		inline bool isMouseButtonUp(MOUSEBUTTON mb) {
 			return mbState_[mb] == Up || mbState_[mb] == JustUp;

@@ -128,19 +128,14 @@ namespace PTSD {
 		return mImplementation->mouseMotionEvent();
 	}
 
-	void Input::setMousePosition(Vector2D pos)
-	{
-		mImplementation->setMousePosition(pos);
-	}
-
 	Vector2D Input::getMousePosition() {
 		return mImplementation->getMousePosition();
 	}
 
-	void Input::setMouseLock(bool b)
-	{
-		mImplementation->setMouseLock(b);
+	Vector2D Input::getMouseRelativePosition() {
+		return mImplementation->getMouseRelativePosition();
 	}
+
 	//Controller
 
 	bool Input::ControllerButtonPressed(int controllerID, ControllerButton button) {

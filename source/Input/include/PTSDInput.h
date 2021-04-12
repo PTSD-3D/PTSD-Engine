@@ -36,10 +36,8 @@ namespace PTSD {
 		bool mouseRightClick();
 		bool mouseWheelClick();
 		bool mouseMotion();
-		void setMousePosition(Vector2D pos);
 		Vector2D getMousePosition();
-
-		void setMouseLock(bool b);
+		Vector2D getMouseRelativePosition();
 
 	//Controller
 		bool ControllerButtonPressed(int controllerID, ControllerButton button);

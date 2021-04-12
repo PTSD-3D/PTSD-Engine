@@ -136,7 +136,7 @@ namespace PTSD {
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
 		(*state).set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
-		(*state).set_function("getMousePosition", &PTSD::Input::getMousePosition, PTSD::Input::getInstance());
+		(*state).set_function("getMouseRelativePosition", &PTSD::Input::getMouseRelativePosition, PTSD::Input::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		(*state).new_enum<Scancode>("PTSDKeys", {

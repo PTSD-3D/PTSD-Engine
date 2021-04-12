@@ -96,6 +96,11 @@ namespace PTSD
 		mRenderWindow->setVisible(true);
 	}
 
+	void GraphicsImplementation::setupMouse()
+	{
+		SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
+	}
+
 
 	/**
 	 * \brief Finds resources stated in resources.cfg
@@ -189,6 +194,7 @@ namespace PTSD
 		lastRenderTime = SDL_GetTicks();
 		setupLogging();
 		setupWindow();
+		setupMouse();
 		loadResources();
 		testScene();
 

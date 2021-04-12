@@ -3,8 +3,8 @@
       --If you're creating a variable just for this .lua please 
       --define it as a local variable.
       local dir = vec3:new(0, 0, 0)
-      local mousePosition = getMousePosition()
-      local centralPosition = vec2:new(getWindowWidth()/2, getWindowHeight()/2)
+      --If we are using relative mouse position, this method returns the delta position of the mouse
+      local mouseDirection = getMouseRelativePosition()
 
       if keyPressed(PTSDKeys.A) then
         dir = vec3:new(-1, 0, 0)
@@ -23,8 +23,8 @@
         translate(dir)
       end
 
-      print(centralPosition.x);
-      print(centralPosition.y);
+      print(mouseDirection.x)
+      print(mouseDirection.y)
 
       return true
     end
