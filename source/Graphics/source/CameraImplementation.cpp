@@ -47,7 +47,7 @@ namespace PTSD
 	 */
 	void CameraImplementation::translate(Vec3Placeholder v)
 	{
-		mNode->translate({ v.x,v.y,v.z }, Ogre::Node::TS_WORLD);
+		mNode->translate({ v.x,v.y,v.z }, Ogre::Node::TS_LOCAL);
 	}
 
 	/**
@@ -60,7 +60,11 @@ namespace PTSD
 	}
 
 	void CameraImplementation::rotateMouse(Vector2D dir) {
-		mNode->pitch(Ogre::Degree(dir.getX()));
-		mNode->yaw(Ogre::Degree(dir.getY()));
+		//Codigo by Federico Peinado para nada copiado
+		Ogre::Matrix3 mx;
+		mx.FromEulerAnglesYXZ(-Ogre::Degree(dir.x), -Ogre::Degree(dir.y), Ogre::Degree(0));
+		Ogre::Quaternion result = mx;
+		
+		mNode->rotate(result);
 	}
 }

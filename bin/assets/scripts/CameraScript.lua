@@ -27,9 +27,8 @@
       print(mouseDirection.x)
       print(mouseDirection.y)
 
-      if (math.abs(mouseDirection.x) >= deadZone.x or math.abs(mouseDirection.y) >= deadZone.y) then
-      
-      end
+      rotateCamera(mouseDirection)
+
       centerMouse()
       return true
     end

@@ -31,6 +31,6 @@ void PTSD::Camera::setPosition(Vec3Placeholder v)
 
 void PTSD::Camera::mouseRotate(Vector2D dir)
 {
-	
+	mImplementation->rotateMouse(dir);
 }
 

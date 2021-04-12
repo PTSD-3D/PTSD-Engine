@@ -37,7 +37,7 @@ int main()
 	soundSystem->Init();
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
 	scriptingSystem->init();
-	PTSD::Entity* sinbad = scriptingSystem->createEntity();
+	//PTSD::Entity* sinbad = scriptingSystem->createEntity();
 	//sinbad->addComponent<PTSD::DebugComponent>();
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
