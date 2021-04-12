@@ -45,10 +45,13 @@ int main()
 	PTSD::Entity* sinbad = scriptingSystem->createEntity();
 	sinbad->addComponent<PTSD::DebugComponent>();
 
-	//This is for trasform debugging
+	//This is for transform debugging
 	PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
 	Ogre::Entity* ogreEntt = PTSD::GraphicsImplementation::getInstance()->getSceneMgr()->createEntity("ogrehead.mesh");
 	transform->getNode()->attachObject(ogreEntt);
+	transform->setPosition(10, 0, 0);
+	transform->setRotation(0, 90, 0);
+	transform->setScale(0.5, 0.5, 0.5);
 
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
@@ -72,15 +75,18 @@ int main()
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
 			physicsSystem->update();
-			graphicsSystem->getCam()->translate({ 0,0,0.1 });
+			graphicsSystem->getCam()->translate({ 0,0,0.5 });
 			soundSystem->update();
 			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 
 			//This is for transform debugging
-			transform->translate(Vec3Placeholder(0.3, 0, 0));
-			PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Warning);
+			transform->translate(Vec3Placeholder(0.1, 0, 0));
+			transform->rotate(Vec3Placeholder(0, 3, 0));
+			//PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Info);
+			//PTSD::LOG(std::to_string(transform->getRotation().y).c_str(), PTSD::Info);
+			//This is for transform debugging
 
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}

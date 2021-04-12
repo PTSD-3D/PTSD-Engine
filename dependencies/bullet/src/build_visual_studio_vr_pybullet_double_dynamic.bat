@@ -6,10 +6,10 @@ IF NOT EXIST bin\openvr64pi.dll  copy examples\ThirdPartyLibs\openvr\bin\win64\o
 
 
 #find a python version (hopefully just 1) and use this
-dir c:\python* /b /ad > tmp1234.txt
+dir c:\Python\python* /b /ad > tmp1234.txt
 
 set /p myvar1= < tmp1234.txt
-set myvar=c:/%myvar1%
+set myvar=c:/Python/%myvar1%
 del tmp1234.txt
 
 rem you can also override and hardcode the Python path like this (just remove the # hashmark in next line)

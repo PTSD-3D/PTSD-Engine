@@ -1,56 +1,113 @@
 #include "TransformComponent.h"
 
 namespace PTSD {
+	//Methods to convert from and to quaternions and vec3
+	Vec3Placeholder TransformComponent::OgreQuatEuler(const Ogre::Quaternion& quaternion) const
+	{
+		Ogre::Matrix3 mx2;
+		quaternion.ToRotationMatrix(mx2);
+		Ogre::Radian x, y, z;
+		mx2.ToEulerAnglesYXZ(y, x, z);
+		Vec3Placeholder vect(x.valueAngleUnits(),y.valueAngleUnits(), z.valueAngleUnits());
+
+		return vect;
+	}
+	Ogre::Quaternion TransformComponent::EulerToOgreQuat(const Vec3Placeholder& degreesVector) const
+	{
+		Ogre::Matrix3 mx;
+		mx.FromEulerAnglesYXZ(Ogre::Degree(degreesVector.y), Ogre::Degree(degreesVector.x), Ogre::Degree(degreesVector.z));
+		Ogre::Quaternion result(mx);
+		return result;
+	}
+	//
+
 	TransformComponent::TransformComponent() : Component(CmpId::Transform) {
 		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 	}
 
-	void TransformComponent::translate(Vec3Placeholder translation) {
-		mNode->translate(translation.x, translation.y, translation.z);
+	void TransformComponent::translate(Vec3Placeholder translation) { //moves the transform with a vec3
+		mNode->translate(translation.x, translation.y, translation.z, Ogre::Node::TS_WORLD);
 	}
-	void TransformComponent::rotate(Ogre::Quaternion rotation) {
-		mNode->rotate(rotation);
+	void TransformComponent::translate(float x, float y, float z) { //moves the transform with 3 floats
+		mNode->translate(x, y, z, Ogre::Node::TS_WORLD);
 	}
-	void TransformComponent::scale(Vec3Placeholder scale) {
+	void TransformComponent::rotate(Vec3Placeholder rotation) { //changes orientation of the transform using a vec3
+		Ogre::Quaternion q = EulerToOgreQuat(rotation);			// It has a little problem with rounding +-(0.00001)
+		mNode->rotate(q, Ogre::Node::TS_LOCAL);
+	}
+	void TransformComponent::rotate(float x, float y, float z) { //changes orientation of the transform using 3 floats
+		Vec3Placeholder rotation = (x, y, z);					 // It has a little problem with rounding +-(0.00001)
+		Ogre::Quaternion q = EulerToOgreQuat(rotation);			
+		mNode->rotate(q, Ogre::Node::TS_LOCAL);
+	}
+	//void TransformComponent::rotateQuat(Vec4Placeholder rotation) {
+	//	mNode->rotate(rotation);
+	//}
+	void TransformComponent::scale(Vec3Placeholder scale) { //adds or substracts from the actual scale with a vec3
 		mNode->scale(scale.x, scale.y, scale.z);
 	}
+	void TransformComponent::scale(float x, float y, float z) { //adds or substracts from the actual scale with 3 floats
+		mNode->scale(x, y, z);
+	}
 
-
-	void TransformComponent::setPosition(Vec3Placeholder position) {
+	//Setters 
+	void TransformComponent::setPosition(Vec3Placeholder position) { //Sets the position of the transform with vec3
 		mNode->setPosition(position.x, position.y, position.z);
 	}
-	void TransformComponent::setRotation(Ogre::Quaternion rotation) {
-		mNode->setOrientation(rotation);
+	void TransformComponent::setPosition(float x, float y, float z) //Sets the position of the transform with 3 floats
+	{
+		mNode->setPosition(x, y, z);
+	}
+	void TransformComponent::setRotation(Vec3Placeholder rotation) { //Sets the rotation of the transform
+		Ogre::Quaternion q = EulerToOgreQuat(rotation);
+		mNode->setOrientation(q);
 	};
-	void TransformComponent::setScale(Vec3Placeholder scale) {
+
+	void TransformComponent::setRotation(float x, float y, float z) //Sets the rotation of the transform with 3 floats
+	{
+		Ogre::Quaternion q = EulerToOgreQuat(Vec3Placeholder(x,y,z));
+		mNode->setOrientation(q);
+	}
+	void TransformComponent::setScale(Vec3Placeholder scale) { //Sets the scale of the transform
 		mNode->setScale(scale.x, scale.y, scale.z);
 	};
-	void TransformComponent::setParent(TransformComponent* parent) {
-		parent->getNode()->addChild(mNode);
-		mParent = parent;
-		parent->getChildren().push_back(this);
-	};
 
+	void TransformComponent::setScale(float x, float y, float z) //Sets the scale of the transform with 3 floats
+	{
+		mNode->setScale(x, y, z);
+	}
 
-	Vec3Placeholder TransformComponent::getPosition() const {
+	//void TransformComponent::setParent(TransformComponent* parent) { //Sets another node as the parent of the transform's node
+	//	//GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(mNode->getName());
+	//	mNode->getParent()->removeChild(mNode);
+	//	parent->getNode()->addChild(mNode);						     
+	//	mParent = parent;
+	//	parent->getChildren().push_back(this);
+	//}
+
+	//Getters
+	Vec3Placeholder TransformComponent::getPosition() const { //Gets the position of the transform
 		Ogre::Vector3 v = mNode->getPosition();
 		return Vec3Placeholder(v.x, v.y, v.z);
 	}
-	//Vec3Placeholder Transform::getRotation() const {
-	//	Vec3Placeholder v = Vec3Placeholder(mNode->getOrientation());
-	//	return Vec3Placeholder(v.x,v.y,v.z);
-	//}
-	Vec3Placeholder TransformComponent::getScale() const {
+	Vec3Placeholder TransformComponent::getRotation() const { //Gets the rotation of the transform
+		Vec3Placeholder v = OgreQuatEuler(mNode->getOrientation());
+		return v;
+	}
+	Vec3Placeholder TransformComponent::getScale() const { //Gets the scale of the transform
 		Ogre::Vector3 v = mNode->getScale();
 		return Vec3Placeholder(v.x, v.y, v.z);
 	}
-	TransformComponent* TransformComponent::getParent() const {
-		return mParent;
-	}
-	std::vector<TransformComponent*> TransformComponent::getChildren() const {
-		return mChildren;
-	}
-	Ogre::SceneNode* TransformComponent::getNode() const {
+	//TransformComponent* TransformComponent::getParent() const { //Gets the transform of its parent
+	//	return mParent;
+	//}
+	//std::vector<TransformComponent*> TransformComponent::getChildren() const { //Gets a vector of the transform's children
+	//	return mChildren;
+	//}
+	Ogre::SceneNode* TransformComponent::getNode() const { //Gets the node associated to the transform
 		return mNode;
 	}
+
+	//
+
 }
