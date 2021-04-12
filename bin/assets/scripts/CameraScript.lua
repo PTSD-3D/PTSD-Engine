@@ -3,7 +3,7 @@
       --If you're creating a variable just for this .lua please 
       --define it as a local variable.
       local dir = vec3:new(0, 0, 0)
-      local deadZone = vec2:new(1.5, 1.5)
+      local sensitivity = 1 --Should be able to modify it from another class
       --If we are using relative mouse position, this method returns the delta position of the mouse
       local mouseDirection = getMouseRelativePosition()
 
@@ -27,7 +27,7 @@
       print(mouseDirection.x)
       print(mouseDirection.y)
 
-      rotateCamera(mouseDirection)
+      rotateCamera(mouseDirection * sensitivity)
 
       centerMouse()
       return true

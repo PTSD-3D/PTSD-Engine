@@ -145,7 +145,8 @@ namespace PTSD {
 			{"W", Scancode::SCANCODE_W},
 			{"A", Scancode::SCANCODE_A},
 			{"S", Scancode::SCANCODE_S},
-			{"D", Scancode::SCANCODE_D}
+			{"D", Scancode::SCANCODE_D},
+			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
 
 		return true;
@@ -156,7 +157,8 @@ namespace PTSD {
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
 		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
-		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y);
+		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
+			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 
 		return true;
 	}

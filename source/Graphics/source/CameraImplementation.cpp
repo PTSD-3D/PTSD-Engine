@@ -1,6 +1,5 @@
 #include "CameraImplementation.h"
 
-
 #include <OgreRenderWindow.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
@@ -17,7 +16,11 @@ namespace PTSD
 		mCamera = mgr->createCamera("mainCam");
 		mNode = mgr->getRootSceneNode()->createChildSceneNode();
 		mNode->setPosition({ v.x,v.y,v.z });
-		mNode->attachObject(mCamera);
+		cameraYawNode = mNode->createChildSceneNode();
+		cameraPitchNode = cameraYawNode->createChildSceneNode();
+		cameraRollNode = cameraPitchNode->createChildSceneNode();
+		cameraRollNode->attachObject(mCamera);
+
 		mCamera->setNearClipDistance(5);
 
 		//TODO Window abstraction
@@ -47,7 +50,8 @@ namespace PTSD
 	 */
 	void CameraImplementation::translate(Vec3Placeholder v)
 	{
-		mNode->translate({ v.x,v.y,v.z }, Ogre::Node::TS_LOCAL);
+		Ogre::Vector3 ogreVec = Ogre::Vector3(v.x, v.y, v.z);
+		mNode->translate(cameraYawNode->getOrientation() * cameraPitchNode->getOrientation() * ogreVec, Ogre::SceneNode::TS_LOCAL);
 	}
 
 	/**
@@ -60,11 +64,28 @@ namespace PTSD
 	}
 
 	void CameraImplementation::rotateMouse(Vector2D dir) {
-		//Codigo by Federico Peinado para nada copiado
-		Ogre::Matrix3 mx;
-		mx.FromEulerAnglesYXZ(-Ogre::Degree(dir.x), -Ogre::Degree(dir.y), Ogre::Degree(0));
-		Ogre::Quaternion result = mx;
-		
-		mNode->rotate(result);
+
+		cameraPitchNode->pitch(Ogre::Degree(-dir.getY()));
+		cameraYawNode->yaw(Ogre::Degree(-dir.getX()));
+
+		// We don't want the camera to do a full 360º rotation on the x-axis. It needs to be locked at 180º
+		float pitchAngle = (2 * Ogre::Degree(Ogre::Math::ACos(this->cameraPitchNode->getOrientation().w)).valueDegrees());
+
+		// Just to determine the sign of the angle we pick up above, the
+		// value itself does not interest us.
+		float pitchAngleSign = this->cameraPitchNode->getOrientation().x;
+
+		// Limit the pitch between -90 degress and +90 degrees, Quake3-style.
+		if (pitchAngle > 90.0f)
+		{
+			if (pitchAngleSign > 0)
+				// Set orientation to 90 degrees on X-axis.
+				this->cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
+					Ogre::Math::Sqrt(0.5f), 0, 0));
+			else if (pitchAngleSign < 0)
+				// Sets orientation to -90 degrees on X-axis.
+				this->cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
+					-Ogre::Math::Sqrt(0.5f), 0, 0));
+		}
 	}
 }

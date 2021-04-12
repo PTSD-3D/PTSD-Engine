@@ -1,7 +1,9 @@
 #pragma once
-
-
 #include <PTSDVectors.h>
+
+//The design I followed to implement the Camera rotation (3 nodes, one for each rotation axis)
+//I found in http://wiki.ogre3d.org/Creating+a+simple+first-person+camera+system
+//If we ever need to make some adjustments to the camera, this is probablly a good place to start.
 
 namespace Ogre
 {
@@ -16,6 +18,9 @@ namespace PTSD
 	{
 	private:
 		Ogre::SceneNode* mNode;
+		Ogre::SceneNode* cameraYawNode;
+		Ogre::SceneNode* cameraPitchNode;
+		Ogre::SceneNode* cameraRollNode;
 		Ogre::Camera* mCamera;
 		Ogre::RenderWindow* mWindow;
 		Ogre::Viewport* mViewPort;
