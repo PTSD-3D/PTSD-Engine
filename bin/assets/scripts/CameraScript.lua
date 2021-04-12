@@ -3,13 +3,8 @@
       --If you're creating a variable just for this .lua please 
       --define it as a local variable.
       local dir = vec3:new(0, 0, 0)
-      local mousePosX = getMousePosX()
-      local mousePosY = getMousePosY()
-      local windowWidth = getWindowWidth()
-      local windowHeight = getWindowHeight()
-
-      local centrePosX = windowWidth/2;
-      local centrePosY = windowHeight/2;
+      local mousePosition = getMousePosition()
+      local centralPosition = vec2:new(getWindowWidth()/2, getWindowHeight()/2)
 
       if keyPressed(PTSDKeys.A) then
         dir = vec3:new(-1, 0, 0)
@@ -28,8 +23,8 @@
         translate(dir)
       end
 
-      print(mousePosX);
-      print(mousePosY);
+      print(centralPosition.x);
+      print(centralPosition.y);
 
       return true
     end

@@ -133,17 +133,10 @@ namespace PTSD {
 		mImplementation->setMousePosition(pos);
 	}
 
-	Vector2D Input::getMousePos() {
-		return mImplementation->getMousePos();
+	Vector2D Input::getMousePosition() {
+		return mImplementation->getMousePosition();
 	}
 
-	float Input::getMousePosX() {
-		return mImplementation->getMousePosX();
-	}
-
-	float Input::getMousePosY() {
-		return mImplementation->getMousePosY();
-	}
 	void Input::setMouseLock(bool b)
 	{
 		mImplementation->setMouseLock(b);

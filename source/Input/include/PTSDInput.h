@@ -37,9 +37,7 @@ namespace PTSD {
 		bool mouseWheelClick();
 		bool mouseMotion();
 		void setMousePosition(Vector2D pos);
-		Vector2D getMousePos();
-		float getMousePosX();
-		float getMousePosY();
+		Vector2D getMousePosition();
 
 		void setMouseLock(bool b);
 

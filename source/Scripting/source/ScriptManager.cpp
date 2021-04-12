@@ -136,8 +136,7 @@ namespace PTSD {
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
 		(*state).set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
-		(*state).set_function("getMousePosX", &PTSD::Input::getMousePosX, PTSD::Input::getInstance());
-		(*state).set_function("getMousePosY", &PTSD::Input::getMousePosY, PTSD::Input::getInstance());
+		(*state).set_function("getMousePosition", &PTSD::Input::getMousePosition, PTSD::Input::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		(*state).new_enum<Scancode>("PTSDKeys", {
@@ -154,8 +153,8 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
-		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(float, float)>());
+		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(float, float)>(), "x", &Vector2D::x, "y", &Vector2D::y);
 
 		return true;
 	}

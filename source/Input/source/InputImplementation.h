@@ -188,14 +188,8 @@ namespace PTSD {
 		inline bool mouseButtonEvent() {
 			return isMouseButtonEvent_;
 		}
-		Vector2D getMousePos() {
+		Vector2D getMousePosition() {
 			return mousePos_;
-		}
-		float getMousePosX() {
-			return mousePos_.getX();
-		}
-		float getMousePosY() {
-			return mousePos_.getY();
 		}
 
 		void setMouseLock(bool b) {
