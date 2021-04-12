@@ -109,6 +109,7 @@ namespace PTSD {
 		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::Graphics::getInstance()->getCam());
 		(*state).set_function("getWindowWidth", &PTSD::Graphics::getWindowWidth, PTSD::Graphics::getInstance());
 		(*state).set_function("getWindowHeight", &PTSD::Graphics::getWindowHeight, PTSD::Graphics::getInstance());
+		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::Graphics::getInstance()->getCam());
 
 		return true;
 	}
@@ -137,6 +138,7 @@ namespace PTSD {
 
 		(*state).set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
 		(*state).set_function("getMouseRelativePosition", &PTSD::Input::getMouseRelativePosition, PTSD::Input::getInstance());
+		(*state).set_function("centerMouse", &PTSD::Input::centerMouse, PTSD::Input::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		(*state).new_enum<Scancode>("PTSDKeys", {
@@ -153,8 +155,8 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
-		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(float, float)>(), "x", &Vector2D::x, "y", &Vector2D::y);
+		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y);
 
 		return true;
 	}

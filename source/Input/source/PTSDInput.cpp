@@ -15,7 +15,7 @@ namespace PTSD {
 
 		if (!SDL_WasInit(SDL_INIT_VIDEO))
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
-
+		
 		//Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
 		//SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
 		//SDL_SysWMinfo wmInfo;
@@ -111,6 +111,11 @@ namespace PTSD {
 	}
 
 	//Mouse
+
+	void Input::centerMouse()
+	{
+		mImplementation->centerMouse();
+	}
 
 	bool Input::mouseLeftClick() {
 		return mImplementation->isMouseButtonDown(MOUSEBUTTON::LEFT);

@@ -1,4 +1,5 @@
 #pragma once
+#include "PTSDGraphics.h"
 #include "PTSDInput.h"
 #include <SDL.h>
 #include <array>
@@ -187,16 +188,22 @@ namespace PTSD {
 		//---------------------------------------------
 
 		// mouse
+		inline void centerMouse() {
+			SDL_WarpMouseInWindow(PTSD::Graphics::getInstance()->getSDLWindow(), PTSD::Graphics::getInstance()->getWindowWidth() / 2, PTSD::Graphics::getInstance()->getWindowHeight() / 2);
+			mouseRelativePos_ = Vector2D(0, 0);
+			mousePos_ = Vector2D(0, 0);
+		}
+
 		inline bool mouseMotionEvent() {
 			return isMouseMotionEvent_;
 		}
 		inline bool mouseButtonEvent() {
 			return isMouseButtonEvent_;
 		}
-		Vector2D getMousePosition() {
+		inline Vector2D getMousePosition() {
 			return mousePos_;
 		}
-		Vector2D getMouseRelativePosition() {
+		inline Vector2D getMouseRelativePosition() {
 			return mouseRelativePos_;
 		}
 

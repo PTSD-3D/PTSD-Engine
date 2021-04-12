@@ -32,12 +32,14 @@ namespace PTSD {
 		bool keyRelease(Scancode key);
 		
 	//Mouse
+		void centerMouse();
 		bool mouseLeftClick();
 		bool mouseRightClick();
 		bool mouseWheelClick();
 		bool mouseMotion();
 		Vector2D getMousePosition();
 		Vector2D getMouseRelativePosition();
+		
 
 	//Controller
 		bool ControllerButtonPressed(int controllerID, ControllerButton button);

@@ -35,7 +35,7 @@ namespace PTSD
 		}
 		virtual void update() override
 		{
-			LOG("Debug component updated",Trace);
+			//LOG("Debug component updated",Trace);
 		}
 	};
 }

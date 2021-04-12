@@ -25,7 +25,7 @@ function MoveSystem:update(dt)
 		local velocity = entity:get("velocity")
 		position.x = position.x + velocity.vx*dt
 		position.y = position.y + velocity.vy*dt
-		print(position.x)
+		--print(position.x)
 	end
 end
 
@@ -35,7 +35,7 @@ manager:addEntity(player)
 
 manager:addSystem(MoveSystem())
 
-print(player:get("position").x)
+--print(player:get("position").x)
 
 --manager:update(1)
 

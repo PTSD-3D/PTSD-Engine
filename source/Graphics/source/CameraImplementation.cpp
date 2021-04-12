@@ -58,4 +58,9 @@ namespace PTSD
 	{
 		mNode->setPosition({ pos.x,pos.y,pos.z });
 	}
+
+	void CameraImplementation::rotateMouse(Vector2D dir) {
+		mNode->pitch(Ogre::Degree(dir.getX()));
+		mNode->yaw(Ogre::Degree(dir.getY()));
+	}
 }

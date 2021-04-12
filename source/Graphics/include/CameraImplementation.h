@@ -26,5 +26,6 @@ namespace PTSD
 		void lookAt(Vec3Placeholder pt);
 		void translate(Vec3Placeholder v);
 		void setPosition(Vec3Placeholder pos);
+		void rotateMouse(Vector2D dir);
 	};
 };
