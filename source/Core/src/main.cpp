@@ -15,9 +15,7 @@
 #include "EntityManager.h"
 #include "TransformComponent.h"
 
-//This is for transform debugging
-#include "GraphicsImplementation.h"
-#include <OgreEntity.h>
+
 
 int main()
 {
@@ -45,13 +43,7 @@ int main()
 	PTSD::Entity* sinbad = scriptingSystem->createEntity();
 	sinbad->addComponent<PTSD::DebugComponent>();
 
-	//This is for transform debugging
-	PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
-	Ogre::Entity* ogreEntt = PTSD::GraphicsImplementation::getInstance()->getSceneMgr()->createEntity("ogrehead.mesh");
-	transform->getNode()->attachObject(ogreEntt);
-	transform->setPosition(10, 0, 0);
-	transform->setRotation(0, 90, 0);
-	transform->setScale(0.5, 0.5, 0.5);
+	PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
 
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
@@ -81,12 +73,7 @@ int main()
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 
-			//This is for transform debugging
-			transform->translate(Vec3Placeholder(0.1, 0, 0));
-			transform->rotate(Vec3Placeholder(0, 3, 0));
-			//PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Info);
-			//PTSD::LOG(std::to_string(transform->getRotation().y).c_str(), PTSD::Info);
-			//This is for transform debugging
+			PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}

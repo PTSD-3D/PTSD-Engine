@@ -40,9 +40,6 @@ namespace PTSD {
 		Ogre::Quaternion q = EulerToOgreQuat(rotation);			
 		mNode->rotate(q, Ogre::Node::TS_LOCAL);
 	}
-	//void TransformComponent::rotateQuat(Vec4Placeholder rotation) {
-	//	mNode->rotate(rotation);
-	//}
 	void TransformComponent::scale(Vec3Placeholder scale) { //adds or substracts from the actual scale with a vec3
 		mNode->scale(scale.x, scale.y, scale.z);
 	}
@@ -77,14 +74,6 @@ namespace PTSD {
 		mNode->setScale(x, y, z);
 	}
 
-	//void TransformComponent::setParent(TransformComponent* parent) { //Sets another node as the parent of the transform's node
-	//	//GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(mNode->getName());
-	//	mNode->getParent()->removeChild(mNode);
-	//	parent->getNode()->addChild(mNode);						     
-	//	mParent = parent;
-	//	parent->getChildren().push_back(this);
-	//}
-
 	//Getters
 	Vec3Placeholder TransformComponent::getPosition() const { //Gets the position of the transform
 		Ogre::Vector3 v = mNode->getPosition();
@@ -98,12 +87,6 @@ namespace PTSD {
 		Ogre::Vector3 v = mNode->getScale();
 		return Vec3Placeholder(v.x, v.y, v.z);
 	}
-	//TransformComponent* TransformComponent::getParent() const { //Gets the transform of its parent
-	//	return mParent;
-	//}
-	//std::vector<TransformComponent*> TransformComponent::getChildren() const { //Gets a vector of the transform's children
-	//	return mChildren;
-	//}
 	Ogre::SceneNode* TransformComponent::getNode() const { //Gets the node associated to the transform
 		return mNode;
 	}

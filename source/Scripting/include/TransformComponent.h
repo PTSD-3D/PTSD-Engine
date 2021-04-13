@@ -14,8 +14,6 @@ namespace PTSD {
 	class TransformComponent : public Component {
 	private:
 		Ogre::SceneNode* mNode;
-		TransformComponent* mParent = nullptr;
-		std::vector<TransformComponent*> mChildren;
 
 		//Methods to convert from and to quaternions and vec3
 		Vec3Placeholder OgreQuatEuler(const Ogre::Quaternion& quaternion) const;
@@ -27,7 +25,6 @@ namespace PTSD {
 
 		void translate(Vec3Placeholder translation);
 		void translate(float x, float y, float z);
-		//void rotateQuat(Vec4Placeholder rotation);
 		void rotate(Vec3Placeholder rotation); // It has a little problem with rounding +-(0.00001)
 		void rotate(float x, float y, float z); // It has a little problem with rounding +-(0.00001)
 		void scale(Vec3Placeholder scale);
@@ -39,15 +36,10 @@ namespace PTSD {
 		void setRotation(float x, float y, float z);
 		void setScale(Vec3Placeholder scale);
 		void setScale(float x, float y, float z);
-		//void setParent(TransformComponent* parent);
 
 		Vec3Placeholder getPosition() const;
 		Vec3Placeholder getRotation() const;
 		Vec3Placeholder getScale() const;
-		//Parenting was causing a lot problems with the rotation, so we decidede to leave it for now
-		//We will check it out if its needed
-		//TransformComponent* getParent() const;
-		//std::vector<TransformComponent*> getChildren() const;
 		Ogre::SceneNode* getNode() const;
 	};
 }
