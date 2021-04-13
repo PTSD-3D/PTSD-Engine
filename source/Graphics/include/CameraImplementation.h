@@ -18,6 +18,14 @@ namespace PTSD
 	{
 	private:
 		Ogre::SceneNode* mNode;
+
+		//The node hierarchy is as follows: 
+		// mNode -> cameraYawNode -> cameraPitchNode -> cameraRollNode -> mCamera
+
+		//We use 3 separate nodes because if we apply a complex rotation directly to mNode it can cause
+		//unwanted rotations in an axis we wouldn't like to rotate. (Rotate x and y and somehow it rotates z)
+		//Therefore, it's recommended to keep them separate and use cameraYawNode only for Yaw operations, cameraPitchNode for Pitch and so on...
+
 		Ogre::SceneNode* cameraYawNode;
 		Ogre::SceneNode* cameraPitchNode;
 		Ogre::SceneNode* cameraRollNode;
