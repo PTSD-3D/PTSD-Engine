@@ -11,6 +11,7 @@ namespace PTSD
 		Rigidbody,
 		Collider,
 		Debug,
+		Mesh,
 
 		MAXCOMPONENTS
 	};
