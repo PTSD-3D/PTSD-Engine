@@ -195,6 +195,6 @@ namespace PTSD {
 
 		createStaticImage("PrettyImage", "TaharezLook/UpArrow", Vector2D(renderer->getDisplaySize().d_width/2 , renderer->getDisplaySize().d_height/2), Vector2D(50, 50));
 		createText("PrettyText", "Plane text", Vector2D(renderer->getDisplaySize().d_width/1.5 , renderer->getDisplaySize().d_height/2), Vector2D(150, 50));
-		createButton("PushButton", "TestButton", Vector2D(renderer->getDisplaySize().d_width / 3, renderer->getDisplaySize().d_height / 2), Vector2D(100, 50));
+		createButton("PushButton", "Hide UI and Mouse", Vector2D(renderer->getDisplaySize().d_width / 3, renderer->getDisplaySize().d_height / 2), Vector2D(200, 50));
 	}
 }
