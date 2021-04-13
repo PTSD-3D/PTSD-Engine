@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <string>
 
 namespace sol {
@@ -20,6 +21,7 @@ namespace PTSD
 		bool bindUIComponents();
 		bool bindSoundComponents();
 		bool bindInputComponents();
+		bool bindScriptingComponents();
 		bool bindGenericComponents();
 	public:
 		ScriptManager();
@@ -31,7 +33,7 @@ namespace PTSD
 
 		void run(const std::string& scriptFile);
 
-		Entity* createEntity();
+		std::shared_ptr<Entity> createEntity(UUID entityID);
 		void deleteEntity(UUID entityID);
 	};
 }

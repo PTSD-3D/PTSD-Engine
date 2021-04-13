@@ -37,13 +37,13 @@ int main()
 	soundSystem->Init();
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
 	scriptingSystem->init();
-	PTSD::Entity* sinbad = scriptingSystem->createEntity();
+	auto sinbad = scriptingSystem->createEntity(0);
 	sinbad->addComponent<PTSD::DebugComponent>();
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
 	//Initial LUA scripts
-	scriptingSystem->run("CameraScript.lua");
+	scriptingSystem->run("client/CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;

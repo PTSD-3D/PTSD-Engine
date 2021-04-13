@@ -45,17 +45,17 @@ namespace PTSD {
 	 */
 	bool ScriptManager::init() {
 		//Lua state initialization
-		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table);
+		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table, sol::lib::debug);
 
-		(*state).require_file("reqNamespace", "./assets/scripts/engine/namespace.lua");
-		(*state).require_file("reqMiddleclass", "./assets/scripts/engine/middleclass.lua");
-		(*state).require_file("reqComponent", "./assets/scripts/engine/Component.lua");
-		(*state).require_file("reqEntity", "./assets/scripts/engine/Entity.lua");
-		(*state).require_file("reqSystem", "./assets/scripts/engine/System.lua");
-		(*state).require_file("reqEntityManager", "./assets/scripts/engine/EntityManager.lua");
-		(*state).require_file("reqEngine", "./assets/scripts/engine/initEngine.lua");
-
-		(*state).script_file("./assets/scripts/engine/test.lua"); //Test file of engine initialization, any other code goes below...
+		(*state).require_file("reqNamespace", "./assets/scripts/Engine/namespace.lua");
+		(*state).require_file("reqMiddleclass", "./assets/scripts/Engine/middleclass.lua");
+		(*state).require_file("reqComponent", "./assets/scripts/Engine/Component.lua");
+		(*state).require_file("reqEntity", "./assets/scripts/Engine/Entity.lua");
+		(*state).require_file("reqSystem", "./assets/scripts/Engine/System.lua");
+		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
+		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
+		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
+		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
 		if (bindGraphicsComponents() &&
@@ -63,8 +63,11 @@ namespace PTSD {
 			bindUIComponents() &&
 			bindSoundComponents() &&
 			bindInputComponents() &&
+			bindScriptingComponents() &&
 			bindGenericComponents()) {
 		}
+
+		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
 
 		return true;
 	}
@@ -85,9 +88,9 @@ namespace PTSD {
 		//Clean entity internal representation (?)
 	}
 
-	Entity* ScriptManager::createEntity()
+	std::shared_ptr<Entity> ScriptManager::createEntity(UUID entityID)
 	{
-		PTSD::Entity* ent = entityManager->createEntity();
+		auto ent = entityManager->createEntity(entityID);
 		//Creates an entity in Lua and relates it to this pointer
 		//Entity["Start"]();
 
@@ -142,6 +145,11 @@ namespace PTSD {
 			{"S", Scancode::SCANCODE_S},
 			{"D", Scancode::SCANCODE_D}
 			});
+
+		return true;
+	}
+	bool ScriptManager::bindScriptingComponents() {
+		(*state).set_function("PTSDCreateEntity", &PTSD::ScriptManager::createEntity, this);
 
 		return true;
 	}
