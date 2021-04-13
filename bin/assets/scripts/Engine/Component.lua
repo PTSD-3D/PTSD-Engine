@@ -37,7 +37,7 @@ function Component.load(names)
     for _, name in pairs(names) do
         components[#components+1] = Component.all[name]
     end
-    return unpack(components)
+    return table.unpack(components)
 end
 
 return Component

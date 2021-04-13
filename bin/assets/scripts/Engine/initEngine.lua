@@ -34,7 +34,7 @@ function engine.initialize(opts)
         end
         engine.initialized = true
     else
-        print('Lovetoys is already initialized.')
+        print('Engine is already initialized.')
     end
 end
 

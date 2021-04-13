@@ -1,5 +1,7 @@
 #pragma once
 #include "Entity.h"
+#include <unordered_map>
+#include <memory>
 
 namespace PTSD
 {
@@ -8,16 +10,15 @@ namespace PTSD
 	class EntityManager
 	{
 	private:
-		std::vector<Entity> entities_;
-		UUID nextID_ = 0;
+		std::unordered_map<UUID,std::shared_ptr<Entity>> entities_;
 	public:
 		EntityManager();
 		~EntityManager();
 
 		void init();
 		void update();
-		Entity* createEntity();
-		void deleteEntity(UUID entity);
+		std::shared_ptr<Entity> createEntity(UUID entityID);
+		void deleteEntity(UUID entityID);
 		
 	};
 
