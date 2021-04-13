@@ -18,7 +18,7 @@ function Entity:add(component)
 	if not self.components[name] then
 		self.components[name] = component
 		if self.eventManager then
-			self.eventManager:fireEvent(namespace.ComponeentAdded(self,name))
+			self.eventManager:fireEvent(namespace.ComponentAdded(self,name))
 		end
 	end
 end

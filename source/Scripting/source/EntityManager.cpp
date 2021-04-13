@@ -13,30 +13,26 @@ PTSD::EntityManager::~EntityManager()
 void PTSD::EntityManager::init()
 {
 	for (auto& ent : entities_)
-		ent.init();
+		ent.second->init();
 }
 
 void PTSD::EntityManager::update()
 {
 	for (auto& ent : entities_)
-		ent.update();
+		ent.second->update();
 }
 
-PTSD::Entity* PTSD::EntityManager::createEntity()
+std::shared_ptr<PTSD::Entity> PTSD::EntityManager::createEntity(UUID entityID)
 {
-	entities_.push_back({nextID_++});
-	return &entities_.back();
+	auto ent = entities_.insert({ entityID,std::make_shared<Entity>(entityID) });
+	return ent.first->second;
 }
 
-void PTSD::EntityManager::deleteEntity(UUID entity)
+void PTSD::EntityManager::deleteEntity(UUID entityID)
 {
-	auto it = entities_.begin();
-	while (it != entities_.end())
-		++it;
-	if(it==entities_.end())
+	auto it = entities_.find(entityID);
+	if(it!=entities_.end())
 	{
-		PTSD::LOG("UNABLE TO FOUND ENTITY", Error);
-		throw "Entity not found";
+		entities_.erase(it);
 	}
-	entities_.erase(it);
 }
