@@ -24,9 +24,6 @@
         translate(dir)
       end
 
-      print(mouseDirection.x)
-      print(mouseDirection.y)
-
       rotateCamera(mouseDirection * sensitivity)
 
       return true
