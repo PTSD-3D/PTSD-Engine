@@ -188,10 +188,12 @@ namespace PTSD {
 		//---------------------------------------------
 
 		// mouse
-		inline void centerMouse() {
-			SDL_WarpMouseInWindow(PTSD::Graphics::getInstance()->getSDLWindow(), PTSD::Graphics::getInstance()->getWindowWidth() / 2, PTSD::Graphics::getInstance()->getWindowHeight() / 2);
-			mouseRelativePos_ = Vector2D(0, 0);
-			mousePos_ = Vector2D(0, 0);
+
+		//This vector is updated when SDL detects mouse motion. Therefore, it's not updated when the mouse is stopped (will never be 0,0).
+		//We need to manually reset it at the end of every frame.
+		inline void cleanMouseDelta() {
+			mouseRelativePos_.x = 0;
+			mouseRelativePos_.y = 0;
 		}
 
 		inline bool mouseMotionEvent() {

@@ -29,7 +29,6 @@
 
       rotateCamera(mouseDirection * sensitivity)
 
-      centerMouse()
       return true
     end
 

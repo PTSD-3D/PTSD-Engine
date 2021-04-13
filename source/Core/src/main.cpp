@@ -63,6 +63,8 @@ int main()
 			graphicsSystem->getCam()->translate({ 0,0,0.1 });
 			soundSystem->update();
 			scriptingSystem->update();
+
+			inputSystem->clean();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 

@@ -23,6 +23,7 @@ namespace PTSD {
 		}
 
 		int init();
+		void clean();
 		size_t createInput();
 		int Shutdown();
 		void test();
@@ -32,7 +33,7 @@ namespace PTSD {
 		bool keyRelease(Scancode key);
 		
 	//Mouse
-		void centerMouse();
+		void cleanMouseDelta();
 		bool mouseLeftClick();
 		bool mouseRightClick();
 		bool mouseWheelClick();

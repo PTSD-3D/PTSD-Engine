@@ -42,6 +42,11 @@ namespace PTSD {
 		return 0;
 	}
 
+	void Input::clean()
+	{
+		cleanMouseDelta();
+	}
+
 	size_t Input::createInput()
 	{
 		return mImplementation->createInput();
@@ -112,9 +117,9 @@ namespace PTSD {
 
 	//Mouse
 
-	void Input::centerMouse()
+	void Input::cleanMouseDelta()
 	{
-		mImplementation->centerMouse();
+		mImplementation->cleanMouseDelta();
 	}
 
 	bool Input::mouseLeftClick() {

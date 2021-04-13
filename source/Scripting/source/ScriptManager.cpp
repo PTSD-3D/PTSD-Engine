@@ -138,7 +138,7 @@ namespace PTSD {
 
 		(*state).set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
 		(*state).set_function("getMouseRelativePosition", &PTSD::Input::getMouseRelativePosition, PTSD::Input::getInstance());
-		(*state).set_function("centerMouse", &PTSD::Input::centerMouse, PTSD::Input::getInstance());
+		(*state).set_function("resetMouse", &PTSD::Input::cleanMouseDelta, PTSD::Input::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		(*state).new_enum<Scancode>("PTSDKeys", {
