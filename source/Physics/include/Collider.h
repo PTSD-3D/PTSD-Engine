@@ -12,9 +12,10 @@ namespace PTSD
 	private:
 		btCollisionObject* mObj;
 	public:
-		Vec3Placeholder getTransformOrigin();
-		btCollisionObject* getObj() { return mObj; }
-		Collider(btCollisionObject* mObj);
+		Collider(float size);
+		Collider(Vec3Placeholder size);
 		~Collider() = default;
+
+		Vec3Placeholder getTransformOrigin();		
 	};
 }

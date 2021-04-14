@@ -42,11 +42,11 @@ namespace PTSD {
 	void PhysicsManager::testScene() {
 		mWorld->setGravity(btVector3(0, -10, 0));
 
-		btCollisionObject* obj = addSphereCollider(5)->getObj();
+		Rigidbody* rig = new Rigidbody({ 5,5,5 }, 1, { 0,100,0 });
 
-		btCollisionObject* obj2 = addBoxCollider({ 5,5,5 })->getObj();
-		btRigidBody* body = addBoxRigidBody({ 5,5,5 }, 1, { 0,100,0 })->getObj();
-		Rigidbody* rig = new Rigidbody(body);
+		Collider* col = new Collider(5);
+
+		Collider* col2 = new Collider({ 5,5,5 });
 
 		rig->addForce({ 10,0,0 });
 	}
@@ -73,39 +73,35 @@ namespace PTSD {
 		}
 	}
 
-	Rigidbody* PhysicsManager::addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+	btRigidBody* PhysicsManager::addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
 		btCollisionShape* shape = new btSphereShape(size);
 		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
 		btRigidBody* mObj = new btRigidBody(mass, state, shape);
 		mWorld->addRigidBody(mObj);
-		Rigidbody* rig = new Rigidbody(mObj);
-		return rig;
+		return mObj;
 	}
 
-	Rigidbody* PhysicsManager::addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+	btRigidBody* PhysicsManager::addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
 		btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
 		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
 		btRigidBody* mObj = new btRigidBody(mass, state, shape);
 		mWorld->addRigidBody(mObj);
-		Rigidbody* rig = new Rigidbody(mObj);
-		return rig;
+		return mObj;
 	}
 
-	Collider* PhysicsManager::addSphereCollider(float size) {
+	btCollisionObject* PhysicsManager::addSphereCollider(float size) {
 		btCollisionObject* mObj = new btCollisionObject();
 		btCollisionShape* shape = new btSphereShape(size);
 		mObj->setCollisionShape(shape);
 		mWorld->addCollisionObject(mObj);
-		Collider* col = new Collider(mObj);
-		return col;
+		return mObj;
 	}
 
-	Collider* PhysicsManager::addBoxCollider(Vec3Placeholder size) {
+	btCollisionObject* PhysicsManager::addBoxCollider(Vec3Placeholder size) {
 		btCollisionObject* mObj = new btCollisionObject();
 		btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
 		mObj->setCollisionShape(shape);
 		mWorld->addCollisionObject(mObj);
-		Collider* col = new Collider(mObj);
-		return col;
+		return mObj;
 	}
 }
