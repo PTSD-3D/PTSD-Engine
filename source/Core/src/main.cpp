@@ -4,7 +4,6 @@
 #include "PTSDGraphics.h"
 #include "ScriptManager.h"
 #include "PTSDSound.h"
-#include "Sound.h"
 #include "PTSDInput.h"
 #include "Camera.h"
 #include "PTSDUI.h"
@@ -12,7 +11,9 @@
 #include <SDL_timer.h>
 #include "Entity.h"
 #include "Component.h"
-#include "EntityManager.h"
+#include "TransformComponent.h"
+
+
 
 int main()
 {
@@ -39,6 +40,9 @@ int main()
 	scriptingSystem->init();
 	auto sinbad = scriptingSystem->createEntity(0);
 	sinbad->addComponent<PTSD::DebugComponent>();
+
+	PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
+
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
@@ -61,11 +65,13 @@ int main()
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
 			physicsSystem->update();
-			graphicsSystem->getCam()->translate({ 0,0,0.1 });
+			graphicsSystem->getCam()->translate({ 0,0,0.5 });
 			soundSystem->update();
 			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
+
+			PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
