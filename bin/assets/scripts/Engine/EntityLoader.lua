@@ -20,8 +20,8 @@ function ns.loadScene(manager, sceneTable)
 			if entData.Transform then
 				local location = entData.Transform.position
 				local p = vec3:new(location.x, location.y, location.z)
-				aaa
-				local rotation = entData.Transform.rotationnn
+
+				local rotation = entData.Transform.rotation
 				local r = vec3:new(rotation.x, rotation.y, rotation.z)
 
 				local scale = entData.Transform.scale
