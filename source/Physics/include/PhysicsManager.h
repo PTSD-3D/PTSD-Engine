@@ -11,13 +11,13 @@ class btRigidBody;
 class btCollisionObject;
 
 namespace PTSD {
-	class PhysicsImplementation;
+	class Rigidbody;
+	class Collider;
 
 	class PhysicsManager
 	{
 	private:
 		static PhysicsManager* mInstance;
-		PhysicsImplementation* mImpl = nullptr; //private implementation
 
 		btBroadphaseInterface* mBroadphase;
 		btDefaultCollisionConfiguration* mCollisionConfiguration;
@@ -42,6 +42,12 @@ namespace PTSD {
 		btCollisionDispatcher* getDispatcher() const { return mDispatcher; }
 		btSequentialImpulseConstraintSolver* getSolver() const { return mSolver; }
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
+
+		Rigidbody* addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
+		Rigidbody* addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
+
+		Collider* addSphereCollider(float size);
+		Collider* addBoxCollider(Vec3Placeholder size);
 
 		PhysicsManager() { mInstance = this; }
 		~PhysicsManager() = default;
