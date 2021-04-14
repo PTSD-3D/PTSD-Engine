@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -27,8 +27,7 @@
     <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
-    <ClCompile Include="..\..\source\Scripting\source\PTSDScripting.cpp" />
-    <ClCompile Include="..\..\source\Scripting\source\ScriptingImplementation.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp" />
     <ClCompile Include="..\..\source\Sound\source\Sound.cpp" />
@@ -59,14 +58,23 @@
     <ClInclude Include="..\..\source\Scripting\include\ECS.h" />
     <ClInclude Include="..\..\source\Scripting\include\Entity.h" />
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h" />
-    <ClInclude Include="..\..\source\Scripting\include\PTSDScripting.h" />
-    <ClInclude Include="..\..\source\Scripting\include\ScriptingImplementation.h" />
+    <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h" />
     <ClInclude Include="..\..\source\Sound\include\PTSDSound.h" />
     <ClInclude Include="..\..\source\Sound\include\Sound.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
     <ClInclude Include="..\..\source\UI\include\PTSDUI.h" />
     <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\assets\scripts\Engine\Component.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\Entity.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\EntityManager.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\initEngine.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\middleclass.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\namespace.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\System.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\test.lua" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

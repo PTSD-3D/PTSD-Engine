@@ -4,6 +4,7 @@
 
 * Para los nombres se utilizará camelCase.
     * Las clases empiezan con mayúscula.
+    * Los métodos estáticos empiezan con mayúscula
 
 * Evitar abreviar los nombres, es más importante que sea entendible que que sea corto.
     * Se admiten acortamientos comunmente conocidos y utilizados como Manager -> Mgr/Mngr

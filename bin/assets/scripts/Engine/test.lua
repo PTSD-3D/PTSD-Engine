@@ -2,16 +2,9 @@ local eng = reqEngine
 
 reqEngine.initialize({globals = true});
 
-local Position = eng.Component.create("position", {"x", "y"}, {x = 0, y = 0})
-local Velocity = eng.Component.create("velocity",{"vx","vy"})
+eng.Component.create("position", {"x", "y"}, {x = 0, y = 0})
+eng.Component.create("velocity",{"vx","vy"})
 
-local player = eng.Entity()
-player:initialize()
-
-player:add(Position(30, 25))
-player:add(Velocity(100,100))
-
-print(player:get("position").x)
 
 local MoveSystem = class("MoveSystem",System)
 
@@ -31,12 +24,8 @@ end
 
 manager = eng.EntityManager()
 
-manager:addEntity(player)
+reqNamespace.loadScene(manager, sampleScene)
+
+--manager:addEntity(player)
 
 manager:addSystem(MoveSystem())
-
-print(player:get("position").x)
-
---manager:update(1)
-
---print(player:get("position").x)

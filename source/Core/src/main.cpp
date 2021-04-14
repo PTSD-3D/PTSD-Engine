@@ -2,7 +2,7 @@
 #include "PTSDLog.h"
 #include "PTSDPhysics.h"
 #include "PTSDGraphics.h"
-#include "PTSDScripting.h"
+#include "ScriptManager.h"
 #include "PTSDSound.h"
 #include "Sound.h"
 #include "PTSDInput.h"
@@ -25,7 +25,7 @@ int main()
 	PTSD::UI* uiSystem = new PTSD::UI();
 	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
-	PTSD::Scripting* scriptingSystem = new PTSD::Scripting();
+	PTSD::ScriptManager* scriptingSystem = new PTSD::ScriptManager();
 
 #ifdef _DEBUG
 	logSystem->init(PTSD::Trace);
@@ -40,7 +40,7 @@ int main()
 	soundSystem->Init();
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
 	scriptingSystem->init();
-	PTSD::Entity* sinbad = scriptingSystem->createEntity();
+	auto sinbad = scriptingSystem->createEntity(0);
 	sinbad->addComponent<PTSD::DebugComponent>();
 
 	PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
@@ -49,11 +49,11 @@ int main()
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
 	//Initial LUA scripts
-	scriptingSystem->run("CameraScript.lua");
+	scriptingSystem->run("client/CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
-	Uint32 deltaTime = 33; //33 miliseconds per frame, ~30fps
+	const Uint32 deltaTime = 33; //33 miliseconds per frame, ~30fps
 	Uint32 accumulator = 0;
 	Uint32 currentTime = SDL_GetTicks();
 	Uint32 newTime;
