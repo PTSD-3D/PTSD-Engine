@@ -33,16 +33,17 @@ namespace PTSD
 	}
 
 	static PTSD::TransformComponent* test_Transform_Setup(std::shared_ptr<PTSD::Entity> sinbad) {
-		PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
-		sinbad->addComponent<PTSD::MeshComponent>("ogrehead.mesh")->setMaterial("KirbyMat");
-		transform->setPosition(10, 0, 0);
-		transform->setRotation(0, 90, 0);
-		transform->setScale(0.5, 0.5, 0.5);
-		return transform;
+		// PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
+		// sinbad->addComponent<PTSD::MeshComponent>("ogrehead.mesh");
+		// transform->setPosition(10, 0, 0);
+		// transform->setRotation(0, 90, 0);
+		// transform->setScale(0.5, 0.5, 0.5);
+		// return transform;
+		return nullptr;
 	}
 	static void test_Transform_Update(PTSD::TransformComponent* transform) {
-		transform->translate(Vec3Placeholder(0.1, 0, 0));
-		transform->rotate(Vec3Placeholder(0, 3, 0));
+		// transform->translate(Vec3Placeholder(0.1, 0, 0));
+		// transform->rotate(Vec3Placeholder(0, 3, 0));
 		//PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Info);
 		//PTSD::LOG(std::to_string(transform->getRotation().y).c_str(), PTSD::Info);
 	}

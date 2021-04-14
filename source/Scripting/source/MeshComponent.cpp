@@ -19,21 +19,22 @@ namespace PTSD{
 
 	void MeshComponent::init()
 	{
-				//assume entity_ as protected
 		assert(entity_->hasComponent(Transform));
-		Ogre::SceneNode* node = entity_->getComponent<TransformComponent>(Transform)->getNode();
-		Ogre::Entity* ob = (Ogre::Entity*)(node->getAttachedObjects().size() >= 1) ? 
-		(Ogre::Entity*)node->getAttachedObjects().at(0):nullptr;
+		if(!sceneNode)
+			sceneNode = entity_->getComponent<TransformComponent>(Transform)->getNode()->createChildSceneNode();
+		Ogre::Entity* ob = (sceneNode->getAttachedObjects().size() >= 1) ? 
+		(Ogre::Entity*)sceneNode->getAttachedObjects().at(0):nullptr;
 		if(!ob)//Asumiendo que no vamos a tener varios objetos por malla.. 
 			{
-				node->attachObject(GraphicsImplementation::getInstance()->getSceneMgr()->createEntity(mMesh_));
-				ob=(Ogre::Entity*)node->getAttachedObject(0);
+				sceneNode->attachObject(GraphicsImplementation::getInstance()->getSceneMgr()->createEntity(mMesh_));
+				ob=(Ogre::Entity*)sceneNode->getAttachedObject(0);
 			}
 		else
 			{
 				entity_->getComponent<TransformComponent>(Transform)->getNode()->detachObject((unsigned short int)0);
 				GraphicsImplementation::getInstance()->getSceneMgr()->createEntity(mMesh_);
 			}
+			PTSD::LOG(mMaterial_.c_str());
 			ob->setMaterialName(mMaterial_);
 	}
 	void MeshComponent::setMaterial(const std::string& material)
@@ -48,14 +49,13 @@ namespace PTSD{
 		if(mesh != mMesh_)
 		{
 			mMesh_ = mesh;
-			entity_->getComponent<TransformComponent>(Transform)->getNode()->detachObject((unsigned short int)0);
+			sceneNode->detachObject((unsigned short int)0);
 			GraphicsImplementation::getInstance()->getSceneMgr()->createEntity(mMesh_);
 			getEntity()->setMaterialName(mMaterial_);
 		}
 	};
 	Ogre::Entity* MeshComponent::getEntity(){
-		Ogre::SceneNode* node= entity_->getComponent<TransformComponent>(Transform)->getNode();
-		Ogre::Entity* entt = (Ogre::Entity*)(node)->getAttachedObjects().at(0);
+		Ogre::Entity* entt = (Ogre::Entity*)(sceneNode)->getAttachedObjects().at(0);
 		assert(entt != nullptr);
 		return entt;
 		return nullptr;

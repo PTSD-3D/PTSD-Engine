@@ -1,4 +1,5 @@
 #include "ScriptManager.h"
+#define SOL_ALL_SAFETIES_ON 1
 #include <sol/sol.hpp>
 #include "lua.hpp"
 #include "ECS.h"
@@ -14,6 +15,8 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "PTSDPhysics.h"
 #include "PTSDVectors.h"
 #include "PTSDLog.h"
+#include "MeshComponent.h"
+#include "TransformComponent.h"
 
 namespace PTSD {
 	/**
@@ -58,13 +61,13 @@ namespace PTSD {
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
-		if (bindGraphicsComponents() &&
+		if (bindGenericComponents()&&
+			bindGraphicsComponents() &&
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
 			bindSoundComponents() &&
 			bindInputComponents() &&
-			bindScriptingComponents() &&
-			bindGenericComponents()) {
+			bindScriptingComponents() ) {
 		}
 
 		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
@@ -103,14 +106,21 @@ namespace PTSD {
 		//Deletes entity in Lua
 		//Entity["Delete"]();
 	}
-
+	std::shared_ptr<Entity> ScriptManager::getEntity(UUID entityID)
+	{
+		return entityManager->getEntity(entityID);
+	}
 	bool ScriptManager::bindGraphicsComponents()
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
 		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::Graphics::getInstance()->getCam());
-
+		EntityManager* em = entityManager;
+		(*state)["setMeshComponent"]=[em](UUID id, const std::string& mesh, const std::string& mat){
+			em->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
+		};
+		// (*state).set_function("setMeshComponent", func);
 		return true;
 	}
 	bool ScriptManager::bindPhysicsComponents()
@@ -159,7 +169,12 @@ namespace PTSD {
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
 		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
-
+		(*state).set_function("setTransform", [&](UUID id, Vec3Placeholder p, Vec3Placeholder r,Vec3Placeholder s){
+			TransformComponent* tr = entityManager->getEntity(id).get()->addComponent<TransformComponent>();
+			tr->setPosition(p);
+			tr->setRotation(r);
+			tr->setScale(s);
+		});
 		return true;
 	}
 }

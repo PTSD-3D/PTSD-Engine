@@ -34,6 +34,7 @@ namespace PTSD
 		void run(const std::string& scriptFile);
 
 		std::shared_ptr<Entity> createEntity(UUID entityID);
+		std::shared_ptr<Entity> getEntity(UUID entityID);
 		void deleteEntity(UUID entityID);
 	};
 }

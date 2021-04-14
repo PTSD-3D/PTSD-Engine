@@ -13,6 +13,9 @@
 #include "Component.h"
 #include "TransformComponent.h"
 
+#ifndef NDEBUG
+	#define _DEBUG 1
+#endif // !-DNDEBUG
 
 
 int main()
@@ -38,10 +41,10 @@ int main()
 	soundSystem->Init();
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
 	scriptingSystem->init();
-	auto sinbad = scriptingSystem->createEntity(0);
-	sinbad->addComponent<PTSD::DebugComponent>();
+	// auto sinbad = scriptingSystem->createEntity(0);
+	// sinbad->addComponent<PTSD::DebugComponent>();
 
-	PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
+	// PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
 
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
@@ -65,13 +68,13 @@ int main()
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
 			physicsSystem->update();
-			graphicsSystem->getCam()->translate({ 0,0,0.5 });
+			//graphicsSystem->getCam()->translate({ 0,0,0.5 });
 			soundSystem->update();
 			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 
-			PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
+			// PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}

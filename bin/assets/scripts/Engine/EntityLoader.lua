@@ -17,9 +17,20 @@ function ns.loadScene(manager, sceneTable)
 		firing componentAdded event various times--]]
 		manager:addEntity(entityObject)
 
-		if entData.Mesh ~= {} then
-			--Add cpp mesh data to cpp entity
-			--xd(entData.Mesh[1])
+			if entData.Transform then
+				local location = entData.Transform.position
+				local p = vec3:new(location.x, location.y, location.z)
+				aaa
+				local rotation = entData.Transform.rotationnn
+				local r = vec3:new(rotation.x, rotation.y, rotation.z)
+
+				local scale = entData.Transform.scale
+				local s = vec3:new(scale.x, scale.y, scale.z)
+				print(entityObject.id)
+				setTransform(entityObject.id,p,r,s)
+			end
+			if entData.Mesh then
+				setMeshComponent(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
 		end
 	 end
 end
