@@ -1,6 +1,6 @@
 #include <iostream>
 #include "PTSDLog.h"
-#include "PTSDPhysics.h"
+#include "PhysicsManager.h"
 #include "PTSDGraphics.h"
 #include "ScriptManager.h"
 #include "PTSDSound.h"
@@ -20,7 +20,7 @@ int main()
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Input* inputSystem = PTSD::Input::getInstance();
 	PTSD::UI* uiSystem = new PTSD::UI();
-	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
+	PTSD::PhysicsManager* physicsSystem = new PTSD::PhysicsManager();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 	PTSD::ScriptManager* scriptingSystem = new PTSD::ScriptManager();
 

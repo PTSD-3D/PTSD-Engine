@@ -108,7 +108,7 @@
     <ClCompile Include="..\..\source\Physics\source\PhysicsImplementation.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\PTSDPhysics.cpp">
+    <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp">
@@ -182,7 +182,7 @@
     <ClInclude Include="..\..\source\Physics\include\PhysicsImplementation.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\PTSDPhysics.h">
+    <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Physics\include\Rigidbody.h">

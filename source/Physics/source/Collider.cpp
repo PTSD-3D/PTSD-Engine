@@ -1,23 +1,33 @@
 #include "Collider.h"
-#include "ColliderImplementation.h"
+#include "PhysicsManager.h"
+#include "btBulletCollisionCommon.h"
+#include "btBulletDynamicsCommon.h"
 
 PTSD::Collider::Collider() {
-	mImplementation = std::make_unique<ColliderImplementation>();
+	mWorld = PhysicsManager::getInstance()->getWorld();
+	mObj = nullptr;
 }
 
 PTSD::Collider* PTSD::Collider::addSphereCollider(float size) {
 	Collider* col = new Collider();
-	mObj = mImplementation->addSphereCollider(size);
+	col->mObj = new btCollisionObject();
+	btCollisionShape* shape = new btSphereShape(size);
+	col->mObj->setCollisionShape(shape);
+	mWorld->addCollisionObject(col->mObj);
 	return col;
 }
 
 PTSD::Collider* PTSD::Collider::addBoxCollider(Vec3Placeholder size) {
 	Collider* col = new Collider();
-	mObj = mImplementation->addBoxCollider(size);
+	col->mObj = new btCollisionObject();
+	btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
+	col->mObj->setCollisionShape(shape);
+	mWorld->addCollisionObject(col->mObj);
 	return col;
 }
 
 Vec3Placeholder PTSD::Collider::getTransformOrigin() {
-	return mImplementation->getTransformOrigin();
+	btVector3 t = mObj->getWorldTransform().getOrigin();
+	return { (float)t.x(), (float)t.y(), (float)t.z() };
 }
 

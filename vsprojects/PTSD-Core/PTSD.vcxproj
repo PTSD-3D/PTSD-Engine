@@ -23,7 +23,7 @@
     <ClCompile Include="..\..\source\Physics\source\Collider.cpp" />
     <ClCompile Include="..\..\source\Physics\source\ColliderImplementation.cpp" />
     <ClCompile Include="..\..\source\Physics\source\PhysicsImplementation.cpp" />
-    <ClCompile Include="..\..\source\Physics\source\PTSDPhysics.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp" />
     <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
@@ -50,7 +50,7 @@
     <ClInclude Include="..\..\source\Physics\include\Collider.h" />
     <ClInclude Include="..\..\source\Physics\include\ColliderImplementation.h" />
     <ClInclude Include="..\..\source\Physics\include\PhysicsImplementation.h" />
-    <ClInclude Include="..\..\source\Physics\include\PTSDPhysics.h" />
+    <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h" />
     <ClInclude Include="..\..\source\Physics\include\Rigidbody.h" />
     <ClInclude Include="..\..\source\Physics\include\RigidbodyImplementation.h" />
     <ClInclude Include="..\..\source\Scripting\include\Component.h" />
