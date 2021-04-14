@@ -1,9 +1,7 @@
-	#include "Component.h"
+#include "Component.h"
+#include "string.h"
 
-namespace Ogre{
-	class OgreNode;
-}
-
+namespace Ogre{class Entity;}
 namespace PTSD{
 	class MeshComponent: public Component
 	{
@@ -17,8 +15,8 @@ namespace PTSD{
 		const std::string getMaterial(){return mMaterial_;};
 	
 	private:
+		Ogre::Entity* getEntity(); //helper function
 		std::string mMaterial_;
 		std::string mMesh_;
-		Ogre::OgreNode* mNode_;
 	};
 }
