@@ -1,5 +1,4 @@
 #include "Collider.h"
-#include "PhysicsManager.h"
 #include "btBulletCollisionCommon.h"
 #include "btBulletDynamicsCommon.h"
 

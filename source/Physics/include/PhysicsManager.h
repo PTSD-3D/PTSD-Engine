@@ -11,6 +11,7 @@ class btRigidBody;
 class btCollisionObject;
 
 namespace PTSD {
+
 	class Rigidbody;
 	class Collider;
 
@@ -43,7 +44,7 @@ namespace PTSD {
 		btSequentialImpulseConstraintSolver* getSolver() const { return mSolver; }
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
 
-		Rigidbody* addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
+		Rigidbody *addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
 		Rigidbody* addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
 
 		Collider* addSphereCollider(float size);
