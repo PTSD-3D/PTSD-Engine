@@ -105,9 +105,6 @@
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp">
-      <Filter>Physics\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
@@ -136,6 +133,9 @@
       <Filter>Core\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp">
+      <Filter>Scripting\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scripting\source\Rigidbody.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -168,9 +168,6 @@
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h">
-      <Filter>Physics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h">
@@ -213,6 +210,9 @@
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ECS.h">
+      <Filter>Scripting\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Scripting\include\Rigidbody.h">
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
   </ItemGroup>

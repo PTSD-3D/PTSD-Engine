@@ -21,5 +21,9 @@ function ns.loadScene(manager, sceneTable)
 			--Add cpp mesh data to cpp entity
 			--xd(entData.Mesh[1])
 		end
+
+		if entData.Rigidbody ~= {} then
+			--Añadir el componente RigidBody jajasi
+		end
 	 end
 end

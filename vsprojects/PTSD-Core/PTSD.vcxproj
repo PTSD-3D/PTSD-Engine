@@ -22,8 +22,8 @@
     <ClCompile Include="..\..\source\Logger\source\PTSDLog.cpp" />
     <ClCompile Include="..\..\source\Physics\source\Collider.cpp" />
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp" />
-    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp" />
     <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp" />
     <ClCompile Include="..\..\source\Sound\source\Sound.cpp" />
@@ -46,11 +46,11 @@
     <ClInclude Include="..\..\source\Logger\include\PTSDLog.h" />
     <ClInclude Include="..\..\source\Physics\include\Collider.h" />
     <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h" />
-    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h" />
     <ClInclude Include="..\..\source\Scripting\include\Component.h" />
     <ClInclude Include="..\..\source\Scripting\include\ECS.h" />
     <ClInclude Include="..\..\source\Scripting\include\Entity.h" />
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h" />
+    <ClInclude Include="..\..\source\Scripting\include\Rigidbody.h" />
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h" />
     <ClInclude Include="..\..\source\Sound\include\PTSDSound.h" />
     <ClInclude Include="..\..\source\Sound\include\Sound.h" />

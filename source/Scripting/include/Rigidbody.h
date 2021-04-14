@@ -1,13 +1,13 @@
 #pragma once
-
 #include <memory>
 #include "PTSDVectors.h"
+#include "Component.h"
 
 class btRigidBody;
 
 namespace PTSD
 {
-	class Rigidbody {
+	class Rigidbody: public Component {
 	private:
 		btRigidBody* mObj;
 	public:

@@ -5,11 +5,11 @@
 
 namespace PTSD
 {
-	Rigidbody::Rigidbody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+	Rigidbody::Rigidbody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat): Component(CmpId::RigidbodyC) {
 		mObj = PhysicsManager::getInstance()->addSphereRigidBody(size, mass, pos, quat);
 	}
 
-	Rigidbody::Rigidbody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+	Rigidbody::Rigidbody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat): Component(CmpId::RigidbodyC) {
 		mObj = PhysicsManager::getInstance()->addBoxRigidBody(size, mass, pos, quat);
 	}
 
