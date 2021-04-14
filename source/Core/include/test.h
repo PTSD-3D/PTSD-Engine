@@ -6,7 +6,7 @@
 #include "Entity.h"
 #include <OgreEntity.h>
 //#include <Windows.h> //Please keep me commented if you are finished testing or Ricardo will kill you.
-
+#include "MeshComponent.h"
 namespace PTSD
 {
 	//This needs to be kept commented because Sleep() is a function from Windows, so it wouldn't work on Linux
@@ -34,8 +34,7 @@ namespace PTSD
 
 	static PTSD::TransformComponent* test_Transform_Setup(std::shared_ptr<PTSD::Entity> sinbad) {
 		PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
-		Ogre::Entity* ogreEntt = PTSD::GraphicsImplementation::getInstance()->getSceneMgr()->createEntity("ogrehead.mesh");
-		transform->getNode()->attachObject(ogreEntt);
+		sinbad->addComponent<PTSD::MeshComponent>("ogrehead.mesh")->setMaterial("KirbyMat");
 		transform->setPosition(10, 0, 0);
 		transform->setRotation(0, 90, 0);
 		transform->setScale(0.5, 0.5, 0.5);
