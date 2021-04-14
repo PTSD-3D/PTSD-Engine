@@ -4,7 +4,6 @@
 #include "PTSDGraphics.h"
 #include "ScriptManager.h"
 #include "PTSDSound.h"
-#include "Sound.h"
 #include "PTSDInput.h"
 #include "Camera.h"
 #include "PTSDUI.h"
@@ -12,7 +11,6 @@
 #include <SDL_timer.h>
 #include "Entity.h"
 #include "Component.h"
-#include "EntityManager.h"
 #include "TransformComponent.h"
 
 
