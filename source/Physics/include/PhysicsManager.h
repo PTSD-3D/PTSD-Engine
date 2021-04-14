@@ -31,7 +31,7 @@ namespace PTSD {
 		}
 
 		void init();
-		void update();
+		void update(const float& deltaTime);
 		void shutdown();
 
 		btBroadphaseInterface* getBroadphase() const { return mBroadphase; }

@@ -24,9 +24,9 @@ namespace PTSD {
 		testScene();
 	}
 
-	void PhysicsManager::update() {
+	void PhysicsManager::update(const float& deltaTime) {
 		//generic deltaTime
-		mWorld->stepSimulation((1.0 / 60, 10));
+		mWorld->stepSimulation((deltaTime));
 		logActivity();
 	}
 
