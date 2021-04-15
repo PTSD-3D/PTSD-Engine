@@ -30,4 +30,5 @@ namespace PTSD {
 
 
 	void LOG(const char* msg, LogLevel lv = LogLevel::Info, size_t logId = 0);
+	void LOGInfoMsg(const char* msg);
 }

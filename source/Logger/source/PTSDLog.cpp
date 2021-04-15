@@ -76,6 +76,11 @@ namespace PTSD {
 		}
 	}
 
+	void LOGInfoMsg(const char* msg)
+	{
+		PTSD::LOG(msg, LogLevel::Info, 0);
+	}
+
 	/**
 	 * \brief Initializes logging subsystem
 	 * \param level filters lower than level messages

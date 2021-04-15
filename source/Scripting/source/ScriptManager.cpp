@@ -58,7 +58,8 @@ namespace PTSD {
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
-		if (bindGraphicsComponents() &&
+		if (bindLoggerComponents() &&
+			bindGraphicsComponents() &&
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
 			bindSoundComponents() &&
@@ -102,6 +103,16 @@ namespace PTSD {
 		entityManager->deleteEntity(entityID);
 		//Deletes entity in Lua
 		//Entity["Delete"]();
+	}
+
+	bool ScriptManager::bindLoggerComponents()
+	{
+		//Init everything
+		PTSD::LOG("Binding LUA Logger Components... @ScriptManager, BindLoggerComponents()");
+
+		(*state).set_function("LOG", sol::overload(&PTSD::LOG, &PTSD::LOGInfoMsg));
+
+		return true;
 	}
 
 	bool ScriptManager::bindGraphicsComponents()

@@ -16,6 +16,7 @@ namespace PTSD
 		sol::state* state;
 		EntityManager* entityManager;
 
+		bool bindLoggerComponents();
 		bool bindGraphicsComponents();
 		bool bindPhysicsComponents();
 		bool bindUIComponents();
