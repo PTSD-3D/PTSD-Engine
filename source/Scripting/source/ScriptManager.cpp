@@ -110,6 +110,14 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Logger Components... @ScriptManager, BindLoggerComponents()");
 
+		(*state).new_enum("LogLevel",
+			"Trace", LogLevel::Trace,
+			"Info", LogLevel::Info,
+			"Warning", LogLevel::Warning,
+			"Error", LogLevel::Error,
+			"Critical", LogLevel::Critical,
+			"NONE", LogLevel::NONE);
+
 		(*state).set_function("LOG", sol::overload(&PTSD::LOG, &PTSD::LOGInfoMsg));
 
 		return true;
