@@ -62,7 +62,7 @@ namespace PTSD {
 		//Sound Management
 		//With these functions you can modify specific sounds.
 		void playSound(PTSD::Sound* sound);
-		void playSound(std::string path, int soundType, float vol = 1, bool loop = false);
+		void playSound(const std::string& path, int soundType, float vol = 1, bool loop = false);
 		void pauseSound(PTSD::Sound* sound);
 		void resumeSound(PTSD::Sound* sound);
 		void muteSound(PTSD::Sound* sound);
@@ -74,8 +74,8 @@ namespace PTSD {
 
 		//Music Management
 		//Only 1 song can be played at a time. This could be improved upon in the future.
-		void playMusic(std::string path, bool loop);
-		void changeMusic(std::string path, bool loop);
+		void playMusic(const std::string& path, bool loop);
+		void changeMusic(const std::string& path, bool loop);
 		void pauseMusic();
 		void resumeMusic();
 		void muteMusic();
