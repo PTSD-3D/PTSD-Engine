@@ -65,17 +65,17 @@ namespace PTSD {
 		mRoot = nullptr;
 	}
 
-	void UIImplementation::loadScheme(std::string filename)
+	void UIImplementation::loadScheme(const std::string& filename)
 	{
 		CEGUI::SchemeManager::getSingleton().createFromFile(filename);
 	}
 
-	void UIImplementation::loadFont(std::string filename)
+	void UIImplementation::loadFont(const std::string& filename)
 	{
 		CEGUI::FontManager::getSingleton().createFromFile(filename);
 	}
 
-	void UIImplementation::loadLayout(std::string filename)
+	void UIImplementation::loadLayout(const std::string& filename)
 	{
 		CEGUI::Window* layout = windowMngr->loadLayoutFromFile(filename);
 		mRoot->addChild(layout);
@@ -97,7 +97,7 @@ namespace PTSD {
 		system->getDefaultGUIContext().setRootWindow(mRoot);
 	}
 
-	void UIImplementation::createText(std::string name, std::string text, Vector2D position, Vector2D size)
+	void UIImplementation::createText(const std::string& name, const std::string& text, Vector2D position, Vector2D size)
 	{
 		CEGUI::Window* myTextWindow = windowMngr->createWindow("TaharezLook/StaticText", name);
 		myTextWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
@@ -106,7 +106,7 @@ namespace PTSD {
 		mRoot->addChild(myTextWindow);
 	}
 
-	void UIImplementation::createStaticImage(std::string name, std::string source, Vector2D position, Vector2D size)
+	void UIImplementation::createStaticImage(const std::string& name, const std::string& source, Vector2D position, Vector2D size)
 	{
 		CEGUI::Window* myImageWindow = windowMngr->createWindow("TaharezLook/StaticImage", name);
 		myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
@@ -115,7 +115,7 @@ namespace PTSD {
 		mRoot->addChild(myImageWindow);
 	}
 
-	void UIImplementation::createButton(std::string name, std::string text, Vector2D position, Vector2D size)
+	void UIImplementation::createButton(const std::string& name, const std::string& text, Vector2D position, Vector2D size)
 	{
 		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(windowMngr->createWindow("TaharezLook/Button", name));
 		myButtonWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
@@ -124,7 +124,7 @@ namespace PTSD {
 		mRoot->addChild(myButtonWindow);
 	}
 
-	void UIImplementation::setMouseCursor(std::string name)
+	void UIImplementation::setMouseCursor(const std::string& name)
 	{
 		system->getDefaultGUIContext().getMouseCursor().setDefaultImage(name);
 		setMouseCursorVisible(true);
@@ -141,31 +141,31 @@ namespace PTSD {
 		system->getDefaultGUIContext().getMouseCursor().setPosition(CEGUI::Vector2f(mousePosition.getX(), mousePosition.getY()));
 	}
 
-	void UIImplementation::setEvent(std::string name, std::function<bool(const CEGUI::EventArgs&)> function)
+	void UIImplementation::setEvent(const std::string& name, std::function<bool(const CEGUI::EventArgs&)> function)
 	{
 		CEGUI::PushButton* myButton = getPushButton(name);
 		myButton->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(function));
 	}
 
-	void UIImplementation::setText(std::string name, std::string text)
+	void UIImplementation::setText(const std::string& name, const std::string& text)
 	{
 		CEGUI::Window* myWindow = mRoot->getChild(name);
 		myWindow->setText(text);
 	}
 
-	void UIImplementation::setStaticImage(std::string name, std::string image)
+	void UIImplementation::setStaticImage(const std::string& name, const std::string& image)
 	{
 		CEGUI::Window* myWindow = mRoot->getChild(name);
 		myWindow->setProperty("Image", image);
 	}
 
-	void UIImplementation::setLayoutVisible(std::string name, bool visible)
+	void UIImplementation::setLayoutVisible(const std::string& name, bool visible)
 	{
 		CEGUI::Window* myWindow = mRoot->getChild(name);
 		myWindow->setVisible(visible);
 	}
 
-	CEGUI::PushButton* UIImplementation::getPushButton(std::string name)
+	CEGUI::PushButton* UIImplementation::getPushButton(const std::string& name)
 	{
 		return static_cast<CEGUI::PushButton*>(mRoot->getChild(name));
 	}
