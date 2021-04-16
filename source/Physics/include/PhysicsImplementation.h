@@ -28,7 +28,7 @@ namespace PTSD {
 		static PhysicsImplementation* getInstance() {
 			if (mInstance == nullptr)
 				mInstance = new PhysicsImplementation();
-			return mInstance;;
+			return mInstance;
 		}
 		void init();
 		void update();

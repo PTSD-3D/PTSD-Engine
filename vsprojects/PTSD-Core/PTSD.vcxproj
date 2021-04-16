@@ -15,24 +15,25 @@
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
-    <ClCompile Include="..\..\source\Graphics\source\PTSDGraphics.cpp" />
+    <ClCompile Include="..\..\source\Graphics\source\GraphicsManager.cpp" />
     <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp" />
-    <ClCompile Include="..\..\source\Input\source\PTSDInput.cpp" />
+    <ClCompile Include="..\..\source\Input\source\InputManager.cpp" />
     <ClCompile Include="..\..\source\Logger\source\LogImpl.cpp" />
-    <ClCompile Include="..\..\source\Logger\source\PTSDLog.cpp" />
+    <ClCompile Include="..\..\source\Logger\source\PTSDAssert.cpp" />
+    <ClCompile Include="..\..\source\Logger\source\LogManager.cpp" />
     <ClCompile Include="..\..\source\Physics\source\Collider.cpp" />
     <ClCompile Include="..\..\source\Physics\source\ColliderImplementation.cpp" />
     <ClCompile Include="..\..\source\Physics\source\PhysicsImplementation.cpp" />
-    <ClCompile Include="..\..\source\Physics\source\PTSDPhysics.cpp" />
+    <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp" />
     <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp" />
-    <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp" />
+    <ClCompile Include="..\..\source\Sound\source\SoundManager.cpp" />
     <ClCompile Include="..\..\source\Sound\source\Sound.cpp" />
     <ClCompile Include="..\..\source\Sound\source\SoundAttorney.cpp" />
-    <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp" />
+    <ClCompile Include="..\..\source\UI\source\UIManager.cpp" />
     <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -42,16 +43,17 @@
     <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp" />
-    <ClInclude Include="..\..\source\Graphics\include\PTSDGraphics.h" />
-    <ClInclude Include="..\..\source\Input\include\PTSDInput.h" />
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsManager.h" />
+    <ClInclude Include="..\..\source\Input\include\InputManager.h" />
     <ClInclude Include="..\..\source\Input\include\PTSDkeys.h" />
     <ClInclude Include="..\..\source\Input\source\InputImplementation.h" />
+    <ClInclude Include="..\..\source\Logger\include\PTSDAssert.h" />
     <ClInclude Include="..\..\source\Logger\include\LogImpl.h" />
-    <ClInclude Include="..\..\source\Logger\include\PTSDLog.h" />
+    <ClInclude Include="..\..\source\Logger\include\LogManager.h" />
     <ClInclude Include="..\..\source\Physics\include\Collider.h" />
     <ClInclude Include="..\..\source\Physics\include\ColliderImplementation.h" />
     <ClInclude Include="..\..\source\Physics\include\PhysicsImplementation.h" />
-    <ClInclude Include="..\..\source\Physics\include\PTSDPhysics.h" />
+    <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h" />
     <ClInclude Include="..\..\source\Physics\include\Rigidbody.h" />
     <ClInclude Include="..\..\source\Physics\include\RigidbodyImplementation.h" />
     <ClInclude Include="..\..\source\Scripting\include\Component.h" />
@@ -60,10 +62,10 @@
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h" />
-    <ClInclude Include="..\..\source\Sound\include\PTSDSound.h" />
+    <ClInclude Include="..\..\source\Sound\include\SoundManager.h" />
     <ClInclude Include="..\..\source\Sound\include\Sound.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
-    <ClInclude Include="..\..\source\UI\include\PTSDUI.h" />
+    <ClInclude Include="..\..\source\UI\include\UIManager.h" />
     <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
   </ItemGroup>
   <ItemGroup>

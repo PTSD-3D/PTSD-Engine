@@ -1,27 +1,29 @@
 #include <iostream>
-#include "PTSDUI.h"
-#include "PTSDGraphics.h"
-#include "PTSDInput.h"
+#include "UIManager.h"
+#include "GraphicsManager.h"
+#include "InputManager.h"
 #include "UIImplementation.h"
 
 namespace PTSD {
 
-	UI* UI::mInstance = nullptr;
+	UIManager* UIManager::mInstance = nullptr;
 
-	int UI::init() {
-		mImplementation = PTSD::UIImplementation::getInstance();
-		inputInstance = PTSD::Input::getInstance();
-		graphicsInstance = PTSD::Graphics::getInstance();
-		mImplementation->init(graphicsInstance->getRenderWindow());
-		registerForEvents();
-		mImplementation->setMouseInitialPosition(inputInstance->getMousePos());
+	int UIManager::init() {
+		PTSD_ASSERT(mInstance == nullptr, "UIManager already initialized");
+		mInstance = new UIManager();
+		mInstance->mImplementation = PTSD::UIImplementation::getInstance();
+		mInstance->inputInstance = PTSD::InputManager::getInstance();
+		mInstance->graphicsInstance = PTSD::GraphicsManager::getInstance();
+		mInstance->mImplementation->init(mInstance->graphicsInstance->getRenderWindow());
+		mInstance->registerForEvents();
+		mInstance->mImplementation->setMouseInitialPosition(mInstance->inputInstance->getMousePos());
 		return 0;
 	}
 
 	/**
 	 * \brief Renders a frame!
 	 */
-	bool UI::render()
+	bool UIManager::render()
 	{
 		inputUpdate();
 		return mImplementation->render(graphicsInstance->getDeltaTime());
@@ -30,7 +32,7 @@ namespace PTSD {
 	/**
 	 * \brief Process the input from PTSD::Input instance
 	 */
-	void UI::inputUpdate()
+	void UIManager::inputUpdate()
 	{
 		if (inputInstance->mouseMotion()) mImplementation->injectMousePosition(
 			inputInstance->getMousePos());
@@ -39,17 +41,17 @@ namespace PTSD {
 
 	/**
 	 * \brief Register for the events */
-	void UI::registerForEvents()
+	void UIManager::registerForEvents()
 	{
 		/*bind(function, reference for the execution of the function, placeholder for parameters)*/
-		auto function = std::bind(&PTSD::UI::testCallback, this, std::placeholders::_1);
+		auto function = std::bind(&PTSD::UIManager::testCallback, this, std::placeholders::_1);
 		mImplementation->setEvent("PushButton", function);
 	}
 
 	/**
 	 * \brief Test Callback function which changes text and image
 	 */
-	bool UI::testCallback(const CEGUI::EventArgs& e)
+	bool UIManager::testCallback(const CEGUI::EventArgs& e)
 	{
 		mImplementation->setStaticImage("PrettyImage","TaharezLook/MiniHorzScrollLeftHover");
 		mImplementation->setText("PrettyText","ButtonTest pressed!");
@@ -57,7 +59,7 @@ namespace PTSD {
 		return true;
 	}
 
-	void UI::shutdown()
+	void UIManager::shutdown()
 	{
 		return mImplementation->shutdown();
 	}

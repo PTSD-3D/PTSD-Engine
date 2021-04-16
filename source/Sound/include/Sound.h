@@ -4,19 +4,19 @@ namespace FMOD {
 	class Sound;
 }
 
-//In order to play a sound, you need to create this class, and then pass its pointer to the PTSDSound singleton (PlaySound())
+//In order to play a sound, you need to create this class, and then pass its pointer to the SoundManager singleton (PlaySound())
 
 namespace PTSD {
 	class Sound {
 	private:
 		std::string path;
 		int channelPlayed = -1; //-1 is not being played at any channel
-		int soundType; //Ambient, PlayerEffects, Dialog. See the enum at PTSDSound
+		int soundType; //Ambient, PlayerEffects, Dialog. See the enum at SoundManager
 		float volume = 1; //1 is max volume
 		bool loop = false;
 
 		FMOD::Sound* fmodSound; 
-		FMOD::Sound* getFmodSound(); //Can be accesed by PTSDSound. See class SoundAttorney
+		FMOD::Sound* getFmodSound(); //Can be accesed by SoundManager. See class SoundAttorney
 
 	public:
 		Sound(std::string path, int soundType);

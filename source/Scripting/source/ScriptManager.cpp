@@ -7,13 +7,13 @@
 /*
 Include every PTSD-System to expose its public API to our Scripting state
 */
-#include "PTSDInput.h"
-#include "PTSDGraphics.h"
+#include "InputManager.h"
+#include "GraphicsManager.h"
 #include "Camera.h"
-#include "PTSDUI.h"
-#include "PTSDPhysics.h"
+#include "UIManager.h"
+#include "PhysicsManager.h"
 #include "PTSDVectors.h"
-#include "PTSDLog.h"
+#include "LogManager.h"
 
 namespace PTSD {
 	/**
@@ -109,7 +109,7 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
-		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::Graphics::getInstance()->getCam());
+		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
 
 		return true;
 	}
@@ -136,7 +136,7 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
-		(*state).set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
+		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		(*state).new_enum<Scancode>("PTSDKeys", {

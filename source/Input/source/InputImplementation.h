@@ -1,5 +1,5 @@
 #pragma once
-#include "PTSDInput.h"
+#include "InputManager.h"
 #include <SDL.h>
 #include <array>
 #include <vector>

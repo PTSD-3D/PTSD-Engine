@@ -1,28 +1,28 @@
 #pragma once
 
+#include "PTSDAssert.h"
 #include "PTSDkeys.h"
 #include "PTSDVectors.h"
 
 namespace PTSD {
 	class InputImplementation;
 
-	class Input {
+	class InputManager {
 	private:
-		static Input* mInstance;
+		static InputManager* mInstance;
 		InputImplementation* mImplementation = nullptr;
 	public:
 
-		Input() {}
-		~Input() {}
+		InputManager() {}
+		~InputManager() {}
 
-		static Input* getInstance()
+		static InputManager* getInstance()
 		{
-			if (mInstance == nullptr)
-				mInstance = new Input();
+			PTSD_ASSERT(mInstance != nullptr, "InputManager accessed before init");
 			return mInstance;
 		}
 
-		int init();
+		static int init();
 		size_t createInput();
 		int Shutdown();
 		void test();
