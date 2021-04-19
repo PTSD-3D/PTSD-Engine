@@ -1,6 +1,6 @@
 #include <iostream>
 #include "PTSDLog.h"
-#include "PTSDPhysics.h"
+#include "PhysicsManager.h"
 #include "PTSDGraphics.h"
 #include "ScriptManager.h"
 #include "PTSDSound.h"
@@ -21,7 +21,7 @@ int main()
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Input* inputSystem = PTSD::Input::getInstance();
 	PTSD::UI* uiSystem = new PTSD::UI();
-	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
+	PTSD::PhysicsManager* physicsSystem = new PTSD::PhysicsManager();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 	PTSD::ScriptManager* scriptingSystem = new PTSD::ScriptManager();
 
@@ -64,8 +64,10 @@ int main()
 
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
-			physicsSystem->update();
-			graphicsSystem->getCam()->translate({ 0,0,0.5 });
+
+			physicsSystem->update(deltaTime);
+			graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
+      
 			soundSystem->update();
 			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);

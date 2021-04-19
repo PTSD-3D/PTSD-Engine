@@ -102,19 +102,10 @@
     <ClCompile Include="..\..\source\Physics\source\Collider.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\ColliderImplementation.cpp">
-      <Filter>Physics\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\PhysicsImplementation.cpp">
-      <Filter>Physics\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\PTSDPhysics.cpp">
+    <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp">
-      <Filter>Physics\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\RigidbodyImplementation.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp">
@@ -179,19 +170,10 @@
     <ClInclude Include="..\..\source\Physics\include\Collider.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\ColliderImplementation.h">
-      <Filter>Physics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\PhysicsImplementation.h">
-      <Filter>Physics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\PTSDPhysics.h">
+    <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Physics\include\Rigidbody.h">
-      <Filter>Physics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\RigidbodyImplementation.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h">
