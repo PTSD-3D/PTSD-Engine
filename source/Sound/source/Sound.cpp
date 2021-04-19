@@ -2,7 +2,7 @@
 #include "Sound.h"
 
 namespace PTSD {
-    Sound::Sound(std::string p, int type)
+    Sound::Sound(const std::string& p, int type)
     {
         path = p;
         soundType = type;
@@ -23,7 +23,7 @@ namespace PTSD {
         channelPlayed = c;
     }
 
-    std::string Sound::getPath()
+    const std::string& Sound::getPath()
     {
         return path;
     }

@@ -138,6 +138,9 @@
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp">
+      <Filter>Scripting\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
@@ -213,6 +216,9 @@
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ECS.h">
+      <Filter>Scripting\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h">
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
   </ItemGroup>

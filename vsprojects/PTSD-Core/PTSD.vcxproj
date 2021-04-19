@@ -25,6 +25,7 @@
     <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp" />
     <ClCompile Include="..\..\source\Sound\source\Sound.cpp" />
     <ClCompile Include="..\..\source\Sound\source\SoundAttorney.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="..\..\source\Scripting\include\Entity.h" />
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h" />
+    <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h" />
     <ClInclude Include="..\..\source\Sound\include\PTSDSound.h" />
     <ClInclude Include="..\..\source\Sound\include\Sound.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
