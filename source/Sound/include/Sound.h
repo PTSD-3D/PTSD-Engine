@@ -19,7 +19,7 @@ namespace PTSD {
 		FMOD::Sound* getFmodSound(); //Can be accesed by SoundManager. See class SoundAttorney
 
 	public:
-		Sound(std::string path, int soundType);
+		Sound(const std::string& path, int soundType);
 
 		//Setters
 		void setVolume(float v);
@@ -27,7 +27,7 @@ namespace PTSD {
 		void setChannelPlayed(int c);
 
 		//Getters
-		std::string getPath();
+		const std::string& getPath();
 		int getChannelPlayed();
 		int getSoundType();
 		int getVolume();

@@ -1,7 +1,7 @@
 #pragma once
 #include <OgreLogManager.h>
 #include <OgreLog.h>
-#include "PTSDLog.h"
+#include "LogManager.h"
 
 
 	class PTSDLogListener : public Ogre::LogListener

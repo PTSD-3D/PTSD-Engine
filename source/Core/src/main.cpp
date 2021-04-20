@@ -68,8 +68,10 @@ int main()
 
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
-			physicsSystem->update();
-			graphicsSystem->getCam()->translate({ 0,0,0.5 });
+
+			physicsSystem->update(deltaTime);
+			graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
+      
 			soundSystem->update();
 			scriptingSystem->update();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);

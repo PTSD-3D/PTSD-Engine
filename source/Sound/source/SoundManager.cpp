@@ -67,7 +67,7 @@ namespace PTSD {
         }
     }
 
-    void SoundManager::playSound(std::string path, int soundType, float vol, bool loop) {
+    void SoundManager::playSound(const std::string& path, int soundType, float vol, bool loop) {
         currentChannel++;
         if (currentChannel > nChannels) currentChannel = 0;
 
@@ -268,7 +268,7 @@ namespace PTSD {
         return paused;
     }
 
-    void SoundManager::playMusic(std::string path, bool loop)
+    void SoundManager::playMusic(const std::string& path, bool loop)
     {
         bool needsToBeAdded = false;
         if (musicChannel == nullptr) needsToBeAdded = true;
@@ -300,7 +300,7 @@ namespace PTSD {
 
     }
 
-    void SoundManager::changeMusic(std::string path, bool loop)
+    void SoundManager::changeMusic(const std::string& path, bool loop)
     {
         FMOD::Sound* sound = nullptr;
         musicChannel->getCurrentSound(&sound);
