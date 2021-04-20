@@ -1,27 +1,27 @@
 #include "Rigidbody.h"
-#include "RigidbodyImplementation.h"
+#include "PhysicsManager.h"
+#include "btBulletCollisionCommon.h"
+#include "btBulletDynamicsCommon.h"
 
 namespace PTSD
 {
-
-
-	Rigidbody::Rigidbody() {
-		mImplementation = std::make_unique<RigidbodyImplementation>();
+	Rigidbody::Rigidbody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+		mObj = PhysicsManager::getInstance()->addSphereRigidBody(size, mass, pos, quat);
 	}
 
-	Rigidbody* PTSD::Rigidbody::addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		Rigidbody* rig = new Rigidbody();
-		mObj = mImplementation->addSphereRigidBody(size, mass, pos, quat);
-		return rig;
+	Rigidbody::Rigidbody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+		mObj = PhysicsManager::getInstance()->addBoxRigidBody(size, mass, pos, quat);
 	}
 
-	Rigidbody* PTSD::Rigidbody::addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		Rigidbody* rig = new Rigidbody();
-		mObj = mImplementation->addBoxRigidBody(size, mass, pos, quat);
-		return rig;
+	void Rigidbody::setLinearVelocity(Vec3Placeholder vel) {
+		mObj->setLinearVelocity(btVector3(vel.x, vel.y, vel.z));
+	}
+
+	void Rigidbody::setAngularVelocity(Vec3Placeholder vel) {
+		mObj->setAngularVelocity(btVector3(vel.x, vel.y, vel.z));
 	}
 
 	void Rigidbody::addForce(Vec3Placeholder force, Vec3Placeholder ref) {
-		mImplementation->addForce(force, ref);
+		mObj->applyForce(btVector3(force.x, force.y, force.z), btVector3(ref.x, ref.y, ref.z));
 	}
 }

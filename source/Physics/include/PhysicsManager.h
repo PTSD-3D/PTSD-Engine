@@ -1,5 +1,6 @@
 #pragma once
 #include "PTSDVectors.h"
+#include "PTSDAssert.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
@@ -10,8 +11,11 @@ class btRigidBody;
 class btCollisionObject;
 
 namespace PTSD {
-	class PhysicsImplementation {
+	class PhysicsManager
+	{
 	private:
+		static PhysicsManager* mInstance;
+
 		btBroadphaseInterface* mBroadphase;
 		btDefaultCollisionConfiguration* mCollisionConfiguration;
 		btCollisionDispatcher* mDispatcher;
@@ -20,18 +24,14 @@ namespace PTSD {
 
 		void testScene();
 		void logActivity();
-
-		PhysicsImplementation() = default;
-		static PhysicsImplementation* mInstance;
-
 	public:
-		static PhysicsImplementation* getInstance() {
-			if (mInstance == nullptr)
-				mInstance = new PhysicsImplementation();
-			return mInstance;;
+		static PhysicsManager* getInstance() {
+			PTSD_ASSERT(mInstance != nullptr,"PhysicsManager not initialized");
+			return mInstance;
 		}
-		void init();
-		void update();
+
+		static void init();
+		void update(const float& deltaTime);
 		void shutdown();
 
 		btBroadphaseInterface* getBroadphase() const { return mBroadphase; }
@@ -40,6 +40,13 @@ namespace PTSD {
 		btSequentialImpulseConstraintSolver* getSolver() const { return mSolver; }
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
 
-		~PhysicsImplementation() = default;
+		btRigidBody *addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
+		btRigidBody* addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
+
+		btCollisionObject* addSphereCollider(float size);
+		btCollisionObject* addBoxCollider(Vec3Placeholder size);
+
+		PhysicsManager() { mInstance = this; }
+		~PhysicsManager() = default;
 	};
 }

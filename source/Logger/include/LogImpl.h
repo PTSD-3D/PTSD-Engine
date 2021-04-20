@@ -2,7 +2,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <memory.h>
-#include "PTSDLog.h"
+#include "LogManager.h"
 
 namespace PTSD
 {

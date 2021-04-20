@@ -18,6 +18,8 @@
 #include "Camera.h"
 #include <iostream>
 
+#include "LogManager.h"
+
 // OGRE initialization:
 #ifdef WIN32
 // #include <SDL_config_windows.h>
@@ -94,6 +96,11 @@ namespace PTSD
 
 		mRenderWindow->setActive(true);
 		mRenderWindow->setVisible(true);
+	}
+
+	void GraphicsImplementation::setupMouse()
+	{
+		SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
 	}
 
 
@@ -192,6 +199,7 @@ namespace PTSD
 		lastRenderTime = SDL_GetTicks();
 		setupLogging();
 		setupWindow();
+		setupMouse();
 		loadResources();
 		testScene();
 
@@ -227,6 +235,16 @@ namespace PTSD
 		//LOG("Frame rendered", Trace);
 
 		return true;
+	}
+
+	float GraphicsImplementation::getWindowWidth() const
+	{
+		return mRenderWindow->getWidth();
+	}
+
+	float GraphicsImplementation::getWindowHeight() const
+	{
+		return mRenderWindow->getHeight();
 	}
 
 	void GraphicsImplementation::shutdown()
