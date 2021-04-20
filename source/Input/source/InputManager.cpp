@@ -58,6 +58,16 @@ namespace PTSD {
 		mImplementation->update();
 	}
 
+	void InputManager::clean()
+	{
+		cleanMouseDelta();
+	}
+
+	void InputManager::cleanMouseDelta()
+	{
+		mImplementation->cleanMouseDelta();
+	}
+
 	void InputManager::test() {
 
 		if (keyPressed(SCANCODE_A))cout << "Tecla a pulsada" << endl;
@@ -129,11 +139,15 @@ namespace PTSD {
 		return mImplementation->mouseMotionEvent();
 	}
 
-	Vector2D InputManager::getMousePos() {
-		return mImplementation->getMousePos();
+	Vector2D InputManager::getMousePosition() const {
+		return mImplementation->getMousePosition();
+	}
+	
+	Vector2D InputManager::getMouseRelativePosition() const
+	{
+		return mImplementation->getMouseRelativePosition();
 	}
 	//Controller
-
 	bool InputManager::ControllerButtonPressed(int controllerID, ControllerButton button) {
 		return mImplementation->isButtonDown(controllerID, static_cast<SDL_GameControllerButton>(button));
 	}

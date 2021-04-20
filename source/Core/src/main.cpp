@@ -65,7 +65,6 @@ int main()
 		currentTime = newTime;
 
 		accumulator += frameTime; //If we're lagging behind the game will be updated as many times as needed to catch up
-
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
 
@@ -74,6 +73,8 @@ int main()
       
 			soundSystem->update();
 			scriptingSystem->update();
+
+			inputSystem->clean();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 

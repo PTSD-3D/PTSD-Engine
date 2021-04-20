@@ -36,7 +36,8 @@ namespace PTSD {
 		bool mouseRightClick();
 		bool mouseWheelClick();
 		bool mouseMotion();
-		Vector2D getMousePos();
+		Vector2D getMousePosition() const;
+		Vector2D getMouseRelativePosition() const;
 
 	//Controller
 		bool ControllerButtonPressed(int controllerID, ControllerButton button);
@@ -46,5 +47,7 @@ namespace PTSD {
 		float controllerLeftTrigger(int controllerID);
 		float controllerRightTrigger(int controllerID);
 		void update();
+		void clean();
+		void cleanMouseDelta();
 	};
 }

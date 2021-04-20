@@ -98,6 +98,11 @@ namespace PTSD
 		mRenderWindow->setVisible(true);
 	}
 
+	void GraphicsImplementation::setupMouse()
+	{
+		SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
+	}
+
 
 	/**
 	 * \brief Finds resources stated in resources.cfg
@@ -194,6 +199,7 @@ namespace PTSD
 		lastRenderTime = SDL_GetTicks();
 		setupLogging();
 		setupWindow();
+		setupMouse();
 		loadResources();
 		testScene();
 
@@ -229,6 +235,16 @@ namespace PTSD
 		//LOG("Frame rendered", Trace);
 
 		return true;
+	}
+
+	float GraphicsImplementation::getWindowWidth() const
+	{
+		return mRenderWindow->getWidth();
+	}
+
+	float GraphicsImplementation::getWindowHeight() const
+	{
+		return mRenderWindow->getHeight();
 	}
 
 	void GraphicsImplementation::shutdown()

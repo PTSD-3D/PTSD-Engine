@@ -16,7 +16,7 @@ namespace PTSD {
 		mInstance->graphicsInstance = PTSD::GraphicsManager::getInstance();
 		mInstance->mImplementation->init(mInstance->graphicsInstance->getRenderWindow());
 		mInstance->registerForEvents();
-		mInstance->mImplementation->setMouseInitialPosition(mInstance->inputInstance->getMousePos());
+		mInstance->mImplementation->setMouseInitialPosition(mInstance->inputInstance->getMousePosition());
 		return 0;
 	}
 
@@ -35,7 +35,7 @@ namespace PTSD {
 	void UIManager::inputUpdate()
 	{
 		if (inputInstance->mouseMotion()) mImplementation->injectMousePosition(
-			inputInstance->getMousePos());
+			inputInstance->getMousePosition());
 		if (inputInstance->mouseLeftClick()) mImplementation->injectMouseLeftClick();
 	}
 

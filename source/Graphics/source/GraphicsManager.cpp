@@ -29,6 +29,22 @@ namespace PTSD {
 	{
 		return mImplementation->getRenderWindow();
 	}
+
+	float GraphicsManager::getWindowWidth() const
+	{
+		return  mImplementation->getWindowWidth();
+	}
+
+	float GraphicsManager::getWindowHeight() const
+	{
+		return getWindowHeight();
+	}
+
+	class SDL_Window* GraphicsManager::getSDLWindow() const
+	{
+		return mImplementation->getSDLWindow();
+	}
+
 	double GraphicsManager::getDeltaTime()
 	{
 		return mImplementation->getDeltaTime();
