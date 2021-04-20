@@ -66,3 +66,13 @@ struct Vec4Placeholder {
 	Vec4Placeholder(float x = 0, float y = 0, float z = 0, float w = 0) :
 		x(x), y(y), z(z), w(w) {};
 };
+
+struct QuatPlaceholder {
+	float x, y, z, w;
+	QuatPlaceholder(float x = 0, float y = 0, float z = 0, float w = 0) :
+		x(x), y(y), z(z), w(w) {};
+
+	QuatPlaceholder(const QuatPlaceholder& rhs)
+		: w(rhs.w), x(rhs.x), y(rhs.y), z(rhs.z)
+	{};
+};

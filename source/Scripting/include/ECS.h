@@ -8,8 +8,8 @@ namespace PTSD
 	{
 		Transform = 0,
 		Scriptable, //Basically MonoBehaviour
-		Rigidbody,
-		Collider,
+		RigidbodyC,
+		ColliderC,
 		Debug,
 
 		MAXCOMPONENTS

@@ -1,7 +1,10 @@
 #pragma once
 
 #include "PTSDSound.h"
-#include <iostream>
+#include <memory>
+#include "TransformComponent.h"
+#include "Entity.h"
+#include <OgreEntity.h>
 //#include <Windows.h> //Please keep me commented if you are finished testing or Ricardo will kill you.
 
 namespace PTSD
@@ -28,4 +31,21 @@ namespace PTSD
 		//}
 		//std::cout << "Sound testing complete!!!\n";
 	}
+
+	static PTSD::TransformComponent* test_Transform_Setup(std::shared_ptr<PTSD::Entity> sinbad) {
+		PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
+		Ogre::Entity* ogreEntt = PTSD::GraphicsImplementation::getInstance()->getSceneMgr()->createEntity("ogrehead.mesh");
+		transform->getNode()->attachObject(ogreEntt);
+		transform->setPosition(10, 0, 0);
+		transform->setRotation(0, 90, 0);
+		transform->setScale(0.5, 0.5, 0.5);
+		return transform;
+	}
+	static void test_Transform_Update(PTSD::TransformComponent* transform) {
+		transform->translate(Vec3Placeholder(0.1, 0, 0));
+		transform->rotate(Vec3Placeholder(0, 3, 0));
+		//PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Info);
+		//PTSD::LOG(std::to_string(transform->getRotation().y).c_str(), PTSD::Info);
+	}
+
 }

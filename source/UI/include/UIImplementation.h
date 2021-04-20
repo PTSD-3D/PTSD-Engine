@@ -45,25 +45,25 @@ namespace PTSD {
 		bool render(double deltaTime);
 		void shutdown();
 
-		void loadScheme(std::string filename);
-		void loadFont(std::string filename);
-		void loadLayout(std::string filename);
+		void loadScheme(const std::string& filename);
+		void loadFont(const std::string& filename);
+		void loadLayout(const std::string& filename);
 		void loadResources();
 
 		void createRoot();
-		void createText(std::string name, std::string text, Vector2D position, Vector2D size);
-		void createStaticImage(std::string name, std::string source, Vector2D position, Vector2D size);
-		void createButton(std::string name, std::string text, Vector2D position, Vector2D size);
-		void setMouseCursor(std::string name);
+		void createText(const std::string& name, const std::string& text, Vector2D position, Vector2D size);
+		void createStaticImage(const std::string& name, const std::string& source, Vector2D position, Vector2D size);
+		void createButton(const std::string& name, const std::string& text, Vector2D position, Vector2D size);
+		void setMouseCursor(const std::string& name);
 		void setMouseCursorVisible(bool active);
 		void setMouseInitialPosition(Vector2D mousePosition);
-		void setEvent(std::string name, std::function<bool(const CEGUI::EventArgs&)> function);
-		void setText(std::string name, std::string text);
-		void setStaticImage(std::string name, std::string image);
-		void setLayoutVisible(std::string name, bool visible);
+		void setEvent(const std::string& name, std::function<bool(const CEGUI::EventArgs&)> function);
+		void setText(const std::string& name, const std::string& text);
+		void setStaticImage(const std::string& name, const std::string& image);
+		void setLayoutVisible(const std::string& name, bool visible);
 
 		CEGUI::Window* getWindow(const std::string name);
-		CEGUI::PushButton* getPushButton(std::string name);
+		CEGUI::PushButton* getPushButton(const std::string& name);
 
 		void injectMousePosition(Vector2D mousePosition);
 		void injectMouseLeftClick();

@@ -11,7 +11,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "PTSDGraphics.h"
 #include "Camera.h"
 #include "PTSDUI.h"
-#include "PTSDPhysics.h"
+#include "PhysicsManager.h"
 #include "PTSDVectors.h"
 #include "PTSDLog.h"
 

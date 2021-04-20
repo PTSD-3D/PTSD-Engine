@@ -1,10 +1,9 @@
 #include <iostream>
 #include "PTSDLog.h"
-#include "PTSDPhysics.h"
+#include "PhysicsManager.h"
 #include "PTSDGraphics.h"
 #include "ScriptManager.h"
 #include "PTSDSound.h"
-#include "Sound.h"
 #include "PTSDInput.h"
 #include "Camera.h"
 #include "PTSDUI.h"
@@ -12,7 +11,9 @@
 #include <SDL_timer.h>
 #include "Entity.h"
 #include "Component.h"
-#include "EntityManager.h"
+#include "TransformComponent.h"
+
+
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
 	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
 	PTSD::Input* inputSystem = PTSD::Input::getInstance();
 	PTSD::UI* uiSystem = new PTSD::UI();
-	PTSD::Physics* physicsSystem = PTSD::Physics::getInstance();
+	PTSD::PhysicsManager* physicsSystem = new PTSD::PhysicsManager();
 	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
 	PTSD::ScriptManager* scriptingSystem = new PTSD::ScriptManager();
 
@@ -39,6 +40,9 @@ int main()
 	scriptingSystem->init();
 	auto sinbad = scriptingSystem->createEntity(0);
 	sinbad->addComponent<PTSD::DebugComponent>();
+
+	PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
+
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
@@ -59,14 +63,18 @@ int main()
 		accumulator += frameTime; //If we're lagging behind the game will be updated as many times as needed to catch up
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
-			physicsSystem->update();
-			graphicsSystem->getCam()->translate({ 0,0,0.1 });
+
+			physicsSystem->update(deltaTime);
+			graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
+      
 			soundSystem->update();
 			scriptingSystem->update();
 
 			inputSystem->clean();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
+
+			PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
