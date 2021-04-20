@@ -115,12 +115,22 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
-		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::Graphics::getInstance()->getCam());
-		EntityManager* em = entityManager;
-		(*state)["setMeshComponent"]=[em](UUID id, const std::string& mesh, const std::string& mat){
-			em->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
-		};
-		// (*state).set_function("setMeshComponent", func);
+		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::Graphics::getInstance()->getCam());
+
+		(*state).set_function("setMeshComponent", [&](UUID id, const std::string& mesh, const std::string& mat){
+			entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
+		});
+
+		(*state).set_function("translate", [&](UUID id, Vec3Placeholder tr){
+			entityManager->getEntity(id).get()->getComponent<PTSD::TransformComponent>(Transform)->translate(tr);
+		});
+		(	*state).set_function("rotate", [&](UUID id, Vec3Placeholder rt){
+			entityManager->getEntity(id).get()->getComponent<PTSD::TransformComponent>(Transform)->rotate(rt);
+		});
+		(*state).set_function("scale", [&](UUID id, Vec3Placeholder sc){
+			entityManager->getEntity(id).get()->getComponent<PTSD::TransformComponent>(Transform)->scale(sc);
+		});
+		
 		return true;
 	}
 	bool ScriptManager::bindPhysicsComponents()

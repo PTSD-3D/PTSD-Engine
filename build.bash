@@ -89,7 +89,7 @@ BinDir="${PWD}/bin/";
 DependenciesDir="${PWD}/dependencies";
 OgreDir="${PWD}/dependencies/Ogre/";
 SpdlogDir="${PWD}/dependencies/spdlog/";
-LuaDir="${PWD}/dependencies/lua/lua-5.4.2/";
+LuaDir="${PWD}/dependencies/scripting/lua/lua-5.4.2/";
 BulletDir="${PWD}/dependencies/bullet/";
 CEGUI="${PWD}/dependencies/CEGUI/";
 
@@ -230,15 +230,18 @@ function buildBulletRelease(){
 	fi;
 
 	cd ${BulletDir}src;
-	printGreen "Executing bullet build_release.sh" && ./build_release.sh &>/dev/null;
-	cd ${BulletDir}src/build_release/;
-	cmake --install . &  spinner
-	cd ${BulletDir}RelWithDebInfo/lib;
-	cp	*LinearMath* ${BinDir}
-	cp	*BulletCollision* ${BinDir}
-	cp	*Bullet3Geometry* ${BinDir}
-	cp	*BulletDynamics* ${BinDir}
-	rm -rf ${BulletDir}src/build_release/;
+	printGreen "Executing bullet build_release.sh" && ./build_cmake_pybullet_double.sh &>/dev/null & spinner;
+	cd ./build3;
+	chmod +x ./premake4_linux64 
+	./premake4_linux64 --double gmake
+	cd ./gmake;
+	make;	
+	cd ${BulletDir}src/build_cmake/src;
+	cp	./*/*LinearMath.so* ${BinDir}
+	cp	./*/*BulletCollision.so* ${BinDir}
+	cp	./*/*Bullet3Geometry.so* ${BinDir}
+	cp	./*/*BulletDynamics.so* ${BinDir}
+	# rm -rf ${BulletDir}src/build_release/;
 }
 
 function buildBulletDebug(){
@@ -347,6 +350,7 @@ setupDirectories ${SpdlogDir};
 setupDirectories ${LuaDir};
 setupDirectories ${CEGUI};
 setupDirectories ${BulletDir};
+echo "no llego"
 
 buildAll;
 

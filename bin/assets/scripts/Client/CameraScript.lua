@@ -5,19 +5,19 @@
       local dir = vec3:new(0, 0, 0)
       if keyPressed(PTSDKeys.A) then
         dir = vec3:new(-1, 0, 0)
-        translate(dir)
+        translateCamera(dir)
       end
       if keyPressed(PTSDKeys.W) then
         dir = vec3:new(0, 0, -1)
-        translate(dir)
+        translateCamera(dir)
       end
       if keyPressed(PTSDKeys.S) then
         dir = vec3:new(0, 0, 1)
-        translate(dir)
+        translateCamera(dir)
       end
       if keyPressed(PTSDKeys.D) then
         dir = vec3:new(1, 0, 0)
-        translate(dir)
+        translateCamera(dir)
       end
       return true
     end
