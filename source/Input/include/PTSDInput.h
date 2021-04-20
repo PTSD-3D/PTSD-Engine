@@ -23,6 +23,7 @@ namespace PTSD {
 		}
 
 		int init();
+		void clean();
 		size_t createInput();
 		int Shutdown();
 		void test();
@@ -32,11 +33,14 @@ namespace PTSD {
 		bool keyRelease(Scancode key);
 		
 	//Mouse
+		void cleanMouseDelta();
 		bool mouseLeftClick();
 		bool mouseRightClick();
 		bool mouseWheelClick();
 		bool mouseMotion();
-		Vector2D getMousePos();
+		Vector2D getMousePosition();
+		Vector2D getMouseRelativePosition();
+		
 
 	//Controller
 		bool ControllerButtonPressed(int controllerID, ControllerButton button);

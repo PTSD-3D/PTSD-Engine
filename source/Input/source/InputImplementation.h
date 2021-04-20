@@ -1,10 +1,10 @@
 #pragma once
+#include "PTSDGraphics.h"
 #include "PTSDInput.h"
 #include <SDL.h>
 #include <array>
 #include <vector>
 #include <memory>
-//#include "checkML.h"
 #include <iterator>
 #include <queue>
 #include <map>
@@ -43,6 +43,7 @@ namespace PTSD {
 		bool isMouseMotionEvent_;
 		bool isMouseButtonEvent_;
 		Vector2D mousePos_;
+		Vector2D mouseRelativePos_;
 		std::array<ButtonState, 3> mbState_;
 		//---------------------------------------------
 
@@ -112,8 +113,12 @@ namespace PTSD {
 		//mouse
 		inline void onMouseMotion(SDL_Event& event) {
 			isMouseMotionEvent_ = true;
+
 			mousePos_.x = event.motion.x;
 			mousePos_.y = event.motion.y;
+
+			mouseRelativePos_.x = event.motion.xrel;
+			mouseRelativePos_.y = event.motion.yrel;
 		}
 		inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
 			isMouseButtonEvent_ = true;
@@ -183,14 +188,25 @@ namespace PTSD {
 		//---------------------------------------------
 
 		// mouse
+
+		//This vector is updated when SDL detects mouse motion. Therefore, it's not updated when the mouse is stopped (will never be 0,0).
+		//We need to manually reset it at the end of every frame.
+		inline void cleanMouseDelta() {
+			mouseRelativePos_.x = 0;
+			mouseRelativePos_.y = 0;
+		}
+
 		inline bool mouseMotionEvent() {
 			return isMouseMotionEvent_;
 		}
 		inline bool mouseButtonEvent() {
 			return isMouseButtonEvent_;
 		}
-		Vector2D getMousePos() {
+		inline Vector2D getMousePosition() {
 			return mousePos_;
+		}
+		inline Vector2D getMouseRelativePosition() {
+			return mouseRelativePos_;
 		}
 
 		inline bool isMouseButtonUp(MOUSEBUTTON mb) {

@@ -14,7 +14,7 @@ namespace PTSD {
 		graphicsInstance = PTSD::Graphics::getInstance();
 		mImplementation->init(graphicsInstance->getRenderWindow());
 		registerForEvents();
-		mImplementation->setMouseInitialPosition(inputInstance->getMousePos());
+		mImplementation->setMouseInitialPosition(inputInstance->getMousePosition());
 		return 0;
 	}
 
@@ -33,7 +33,7 @@ namespace PTSD {
 	void UI::inputUpdate()
 	{
 		if (inputInstance->mouseMotion()) mImplementation->injectMousePosition(
-			inputInstance->getMousePos());
+			inputInstance->getMousePosition());
 		if (inputInstance->mouseLeftClick()) mImplementation->injectMouseLeftClick();
 	}
 
@@ -51,9 +51,14 @@ namespace PTSD {
 	 */
 	bool UI::testCallback(const CEGUI::EventArgs& e)
 	{
-		mImplementation->setStaticImage("PrettyImage","TaharezLook/MiniHorzScrollLeftHover");
-		mImplementation->setText("PrettyText","ButtonTest pressed!");
+		mImplementation->setLayoutVisible("PrettyImage", false);
+		mImplementation->setLayoutVisible("PrettyText", false);
+		mImplementation->setLayoutVisible("PushButton", false);
+		//Some commented examples on how to change an existing image/text
+		//mImplementation->setStaticImage("PrettyImage","TaharezLook/MiniHorzScrollLeftHover");
+		//mImplementation->setText("PrettyText","ButtonTest pressed!");
 		mImplementation->setLayoutVisible("DemoWindow", false);
+		mImplementation->setMouseCursorVisible(false);
 		return true;
 	}
 

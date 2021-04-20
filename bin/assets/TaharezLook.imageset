@@ -170,6 +170,7 @@
     <Image height="14" name="MultiLineEditboxSelectionBrush" width="14" xPos="9" yPos="71" />
     <Image height="17" name="MouseTarget" width="17" xOffset="-8" xPos="182" yOffset="-8" yPos="127" />
     <Image height="25" name="MouseArrow" width="31" xPos="138" yPos="127" />
+    <Image height="1" name="MouseArrowHidden" width="1" xPos="0" yPos="0" />
     <Image height="18" name="MouseMoveCursor" width="18" xOffset="-8" xPos="201" yOffset="-8" yPos="127" />
     <Image height="18" name="MouseNoSoCursor" width="8" xOffset="-3" xPos="221" yOffset="-8" yPos="127" />
     <Image height="8" name="MouseEsWeCursor" width="18" xOffset="-8" xPos="182" yOffset="-3" yPos="150" />

@@ -1,6 +1,7 @@
-#include "InputImplementation.h"
 #include <fstream>
 #include <iostream>
+#include "PTSDGraphics.h"
+#include "InputImplementation.h"
 
 namespace PTSD {
 	using namespace std;

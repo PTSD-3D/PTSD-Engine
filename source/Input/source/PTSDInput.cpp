@@ -15,7 +15,7 @@ namespace PTSD {
 
 		if (!SDL_WasInit(SDL_INIT_VIDEO))
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
-
+		
 		//Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
 		//SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
 		//SDL_SysWMinfo wmInfo;
@@ -40,6 +40,11 @@ namespace PTSD {
 		//}
 
 		return 0;
+	}
+
+	void Input::clean()
+	{
+		cleanMouseDelta();
 	}
 
 	size_t Input::createInput()
@@ -112,6 +117,11 @@ namespace PTSD {
 
 	//Mouse
 
+	void Input::cleanMouseDelta()
+	{
+		mImplementation->cleanMouseDelta();
+	}
+
 	bool Input::mouseLeftClick() {
 		return mImplementation->isMouseButtonDown(MOUSEBUTTON::LEFT);
 	}
@@ -128,9 +138,14 @@ namespace PTSD {
 		return mImplementation->mouseMotionEvent();
 	}
 
-	Vector2D Input::getMousePos() {
-		return mImplementation->getMousePos();
+	Vector2D Input::getMousePosition() {
+		return mImplementation->getMousePosition();
 	}
+
+	Vector2D Input::getMouseRelativePosition() {
+		return mImplementation->getMouseRelativePosition();
+	}
+
 	//Controller
 
 	bool Input::ControllerButtonPressed(int controllerID, ControllerButton button) {

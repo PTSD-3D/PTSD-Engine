@@ -110,6 +110,9 @@ namespace PTSD {
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
 		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::Graphics::getInstance()->getCam());
+		(*state).set_function("getWindowWidth", &PTSD::Graphics::getWindowWidth, PTSD::Graphics::getInstance());
+		(*state).set_function("getWindowHeight", &PTSD::Graphics::getWindowHeight, PTSD::Graphics::getInstance());
+		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::Graphics::getInstance()->getCam());
 
 		return true;
 	}
@@ -137,13 +140,16 @@ namespace PTSD {
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
 		(*state).set_function("keyPressed", &PTSD::Input::keyPressed, PTSD::Input::getInstance());
+		(*state).set_function("getMouseRelativePosition", &PTSD::Input::getMouseRelativePosition, PTSD::Input::getInstance());
+		(*state).set_function("resetMouse", &PTSD::Input::cleanMouseDelta, PTSD::Input::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		(*state).new_enum<Scancode>("PTSDKeys", {
 			{"W", Scancode::SCANCODE_W},
 			{"A", Scancode::SCANCODE_A},
 			{"S", Scancode::SCANCODE_S},
-			{"D", Scancode::SCANCODE_D}
+			{"D", Scancode::SCANCODE_D},
+			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
 
 		return true;
@@ -158,7 +164,9 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
+			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 
 		return true;
 	}
