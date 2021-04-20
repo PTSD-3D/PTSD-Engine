@@ -1,6 +1,6 @@
 #pragma once
 #include "PTSDVectors.h"
-#include <assert.h>
+#include "PTSDAssert.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
@@ -26,11 +26,11 @@ namespace PTSD {
 		void logActivity();
 	public:
 		static PhysicsManager* getInstance() {
-			assert(mInstance != nullptr);
+			PTSD_ASSERT(mInstance != nullptr,"PhysicsManager not initialized");
 			return mInstance;
 		}
 
-		void init();
+		static void init();
 		void update(const float& deltaTime);
 		void shutdown();
 

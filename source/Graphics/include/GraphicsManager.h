@@ -1,4 +1,5 @@
 #pragma once
+#include "PTSDAssert.h"
 
 class SDL_Window;
 
@@ -13,22 +14,21 @@ namespace PTSD {
 	/**
 	 * \brief Singleton Rendering Manger
 	 */
-	class Graphics {
+	class GraphicsManager {
 	private:
-		static Graphics* mInstance;
+		static GraphicsManager* mInstance;
 		GraphicsImplementation* mImplementation = nullptr;//private Implementation
 	public:
-		Graphics() = default;
+		GraphicsManager() = default;
 
-		~Graphics() = default;
+		~GraphicsManager() = default;
 
-		static Graphics* getInstance()
+		static GraphicsManager* getInstance()
 		{
-			if (mInstance == nullptr)
-				mInstance = new Graphics();
+			PTSD_ASSERT(mInstance != nullptr, "Renderer singleton accessed before init");
 			return mInstance;
 		}
-		int init();
+		static int init();
 		bool renderFrame();
 		Camera* getCam();
 		Ogre::RenderWindow* getRenderWindow() const;

@@ -1,4 +1,4 @@
-#include "PTSDInput.h"
+#include "InputManager.h"
 #include "InputImplementation.h"
 
 #include <SDL.h>
@@ -8,14 +8,15 @@
 #include <iostream>
 
 namespace PTSD {
-	Input* Input::mInstance = nullptr;
-	int Input::init() {
-
+	InputManager* InputManager::mInstance = nullptr;
+	int InputManager::init() {
+		PTSD_ASSERT(mInstance == nullptr, "InputManager already initialized");
+		mInstance = new InputManager();
 		SDL_Init(SDL_INIT_EVERYTHING);
 
 		if (!SDL_WasInit(SDL_INIT_VIDEO))
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
-		
+
 		//Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
 		//SDL_Window* sdlWindow = SDL_CreateWindow("HOLI", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 500, 300, flags);
 		//SDL_SysWMinfo wmInfo;
@@ -29,9 +30,9 @@ namespace PTSD {
 		bool exit = false;
 
 		////Input singleton
-		mImplementation = PTSD::InputImplementation::getInstance();
-		mImplementation->createInput();
-		mImplementation->initialiseGamepads();
+		mInstance->mImplementation = PTSD::InputImplementation::getInstance();
+		mInstance->mImplementation->createInput();
+		mInstance->mImplementation->initialiseGamepads();
 
 		//while (!exit) {
 		//	test(aux);
@@ -42,27 +43,32 @@ namespace PTSD {
 		return 0;
 	}
 
-	void Input::clean()
-	{
-		cleanMouseDelta();
-	}
-
-	size_t Input::createInput()
+	size_t InputManager::createInput()
 	{
 		return mImplementation->createInput();
 	}
 
-	int Input::Shutdown()
+	int InputManager::Shutdown()
 	{
 		delete mImplementation;
 		return 0;
 	}
 
-	void Input::update() {
+	void InputManager::update() {
 		mImplementation->update();
 	}
 
-	void Input::test() {
+	void InputManager::clean()
+	{
+		cleanMouseDelta();
+	}
+
+	void InputManager::cleanMouseDelta()
+	{
+		mImplementation->cleanMouseDelta();
+	}
+
+	void InputManager::test() {
 
 		if (keyPressed(SCANCODE_A))cout << "Tecla a pulsada" << endl;
 		//if(keyRelease(SCANCODE_A))cout << "Tecla sin pulsar" << endl;
@@ -107,68 +113,62 @@ namespace PTSD {
 	}
 	//Keyboard
 
-	bool Input::keyPressed(Scancode key) {
+	bool InputManager::keyPressed(Scancode key) {
 		return mImplementation->isKeyDown(static_cast<SDL_Scancode>(key));
 	}
 
-	bool Input::keyRelease(Scancode key) {
+	bool InputManager::keyRelease(Scancode key) {
 		return mImplementation->isKeyUp(static_cast<SDL_Scancode>(key));
 	}
 
 	//Mouse
 
-	void Input::cleanMouseDelta()
-	{
-		mImplementation->cleanMouseDelta();
-	}
-
-	bool Input::mouseLeftClick() {
+	bool InputManager::mouseLeftClick() {
 		return mImplementation->isMouseButtonDown(MOUSEBUTTON::LEFT);
 	}
 
-	bool Input::mouseRightClick() {
+	bool InputManager::mouseRightClick() {
 		return mImplementation->isMouseButtonDown(MOUSEBUTTON::RIGHT);
 	}
 
-	bool Input::mouseWheelClick() {
+	bool InputManager::mouseWheelClick() {
 		return mImplementation->isMouseButtonDown(MOUSEBUTTON::MIDDLE);
 	}
 
-	bool Input::mouseMotion() {
+	bool InputManager::mouseMotion() {
 		return mImplementation->mouseMotionEvent();
 	}
 
-	Vector2D Input::getMousePosition() {
+	Vector2D InputManager::getMousePosition() const {
 		return mImplementation->getMousePosition();
 	}
-
-	Vector2D Input::getMouseRelativePosition() {
+	
+	Vector2D InputManager::getMouseRelativePosition() const
+	{
 		return mImplementation->getMouseRelativePosition();
 	}
-
 	//Controller
-
-	bool Input::ControllerButtonPressed(int controllerID, ControllerButton button) {
+	bool InputManager::ControllerButtonPressed(int controllerID, ControllerButton button) {
 		return mImplementation->isButtonDown(controllerID, static_cast<SDL_GameControllerButton>(button));
 	}
 
-	bool Input::ControllerButtonReleased(int controllerID, ControllerButton button) {
+	bool InputManager::ControllerButtonReleased(int controllerID, ControllerButton button) {
 		return mImplementation->isButtonJustUp(controllerID, static_cast<SDL_GameControllerButton>(button));
 	}
 
-	Vector2D Input::controllerRightAxis(int controllerID) {
+	Vector2D InputManager::controllerRightAxis(int controllerID) {
 		return mImplementation->getStickDir(controllerID, GAMEPADSTICK::RIGHTSTICK);
 	}
 
-	Vector2D Input::controllerLeftAxis(int controllerID) {
+	Vector2D InputManager::controllerLeftAxis(int controllerID) {
 		return mImplementation->getStickDir(controllerID, GAMEPADSTICK::LEFTSTICK);
 	}
 
-	float Input::controllerLeftTrigger(int controllerID) {
+	float InputManager::controllerLeftTrigger(int controllerID) {
 		return mImplementation->getTrigger(controllerID, GAMEPADTRIGGER::LEFTTRIGGER);
 	}
 
-	float Input::controllerRightTrigger(int controllerID) {
+	float InputManager::controllerRightTrigger(int controllerID) {
 		return mImplementation->getTrigger(controllerID, GAMEPADTRIGGER::RIGHTTRIGGER);
 	}
 }

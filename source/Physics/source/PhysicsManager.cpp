@@ -1,6 +1,6 @@
 #include "PhysicsManager.h"
 #include <string>
-#include "PTSDLog.h"
+#include "LogManager.h"
 #include "btBulletCollisionCommon.h"
 #include "btBulletDynamicsCommon.h"
 #include "Collider.h" //for demonstration purposes
@@ -11,17 +11,20 @@ namespace PTSD {
 	PhysicsManager* PhysicsManager::mInstance = nullptr;
 
 	void PhysicsManager::init() {
-		mCollisionConfiguration = new btDefaultCollisionConfiguration();
+		PTSD_ASSERT(mInstance == nullptr, "PhysicsManager already initialized");
+		mInstance = new PhysicsManager();
+		
+		mInstance->mCollisionConfiguration = new btDefaultCollisionConfiguration();
 
-		mDispatcher = new btCollisionDispatcher(mCollisionConfiguration);
+		mInstance->mDispatcher = new btCollisionDispatcher(mInstance->mCollisionConfiguration);
 
-		mBroadphase = new btDbvtBroadphase();
+		mInstance->mBroadphase = new btDbvtBroadphase();
 
-		mSolver = new btSequentialImpulseConstraintSolver;
+		mInstance->mSolver = new btSequentialImpulseConstraintSolver;
 
-		mWorld = new btDiscreteDynamicsWorld(mDispatcher, mBroadphase, mSolver, mCollisionConfiguration);
+		mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
 
-		testScene();
+		mInstance->testScene();
 	}
 
 	void PhysicsManager::update(const float& deltaTime) {

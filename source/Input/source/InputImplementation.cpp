@@ -1,6 +1,6 @@
 #include <fstream>
 #include <iostream>
-#include "PTSDGraphics.h"
+#include "GraphicsManager.h"
 #include "InputImplementation.h"
 
 namespace PTSD {

@@ -1,6 +1,6 @@
 #pragma once
 #include "ECS.h"
-#include "PTSDLog.h"
+#include "LogManager.h"
 
 namespace PTSD
 {
@@ -31,7 +31,7 @@ namespace PTSD
 		DebugComponent():Component(CmpId::Debug){}
 		virtual void init() override
 		{
-			LOG("Debug component initialized");
+			//LOG("Debug component initialized");
 		}
 		virtual void update() override
 		{

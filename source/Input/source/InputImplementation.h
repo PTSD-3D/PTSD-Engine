@@ -1,6 +1,5 @@
 #pragma once
-#include "PTSDGraphics.h"
-#include "PTSDInput.h"
+#include "InputManager.h"
 #include <SDL.h>
 #include <array>
 #include <vector>

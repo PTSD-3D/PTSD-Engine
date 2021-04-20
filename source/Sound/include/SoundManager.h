@@ -2,6 +2,8 @@
 #include <vector>
 #include <string>
 
+#include "PTSDAssert.h"
+
 namespace PTSD {
 	class Sound;
 }
@@ -24,10 +26,10 @@ namespace PTSD {
 		ChannGroupCount,
 	};
 
-	class PTSDSound
+	class SoundManager
 	{
 	private:
-		static PTSDSound* mInstance;
+		static SoundManager* mInstance;
 		FMOD::System* sys = nullptr;
 		//FMOD::ChannelGroup* genChannelGroup = nullptr;
 		FMOD::ChannelGroup* musicChannelGroup = nullptr;
@@ -39,12 +41,12 @@ namespace PTSD {
 		int currentChannel = -1;
 
 	public:
-		PTSDSound() = default;
-		~PTSDSound() = default;
-		int Init();
+		SoundManager() = default;
+		~SoundManager() = default;
+		static int init();
 		void update();
-		static PTSDSound* getInstance() {
-			if (mInstance == nullptr) mInstance = new PTSDSound();
+		static SoundManager* getInstance() {
+			PTSD_ASSERT(mInstance != nullptr, "SoundManager accessed before init");
 			return mInstance;
 		}
 		void shutdown();

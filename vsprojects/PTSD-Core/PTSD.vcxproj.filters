@@ -90,13 +90,13 @@
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp">
       <Filter>Graphics\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Graphics\source\PTSDGraphics.cpp">
+    <ClCompile Include="..\..\source\Graphics\source\GraphicsManager.cpp">
       <Filter>Graphics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp">
       <Filter>Input\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Input\source\PTSDInput.cpp">
+    <ClCompile Include="..\..\source\Input\source\InputManager.cpp">
       <Filter>Input\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Physics\source\Collider.cpp">
@@ -111,19 +111,19 @@
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Sound\source\PTSDSound.cpp">
+    <ClCompile Include="..\..\source\Sound\source\SoundManager.cpp">
       <Filter>Sound\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp">
       <Filter>Ui\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\UI\source\PTSDUI.cpp">
+    <ClCompile Include="..\..\source\UI\source\UIManager.cpp">
       <Filter>Ui\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Logger\source\LogImpl.cpp">
       <Filter>Logger\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Logger\source\PTSDLog.cpp">
+    <ClCompile Include="..\..\source\Logger\source\LogManager.cpp">
       <Filter>Logger\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Sound\source\Sound.cpp">
@@ -141,6 +141,9 @@
     <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Logger\source\PTSDAssert.cpp">
+      <Filter>Logger\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
@@ -155,13 +158,13 @@
     <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp">
       <Filter>Graphics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Graphics\include\PTSDGraphics.h">
+    <ClInclude Include="..\..\source\Graphics\include\GraphicsManager.h">
       <Filter>Graphics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Input\source\InputImplementation.h">
       <Filter>Input\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Input\include\PTSDInput.h">
+    <ClInclude Include="..\..\source\Input\include\InputManager.h">
       <Filter>Input\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Input\include\PTSDkeys.h">
@@ -179,10 +182,10 @@
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h">
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Sound\include\PTSDSound.h">
+    <ClInclude Include="..\..\source\Sound\include\SoundManager.h">
       <Filter>Sound\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\UI\include\PTSDUI.h">
+    <ClInclude Include="..\..\source\UI\include\UIManager.h">
       <Filter>Ui\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\UI\include\UIImplementation.h">
@@ -191,7 +194,7 @@
     <ClInclude Include="..\..\source\Logger\include\LogImpl.h">
       <Filter>Logger\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Logger\include\PTSDLog.h">
+    <ClInclude Include="..\..\source\Logger\include\LogManager.h">
       <Filter>Logger\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Sound\include\Sound.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h">
       <Filter>Scripting\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Logger\include\PTSDAssert.h">
+      <Filter>Logger\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

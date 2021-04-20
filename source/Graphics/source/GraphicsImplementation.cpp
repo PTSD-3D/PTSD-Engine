@@ -18,6 +18,8 @@
 #include "Camera.h"
 #include <iostream>
 
+#include "LogManager.h"
+
 // OGRE initialization:
 #ifdef WIN32
 // #include <SDL_config_windows.h>
