@@ -43,6 +43,15 @@ struct Vector2D {
 	Vector2D(const Vector2D& v) :
 		x(v.getX()), y(v.getY()) {
 	}
+	Vector2D operator - (const Vector2D& v) const {
+		return(Vector2D(x - v.x, y - v.y));
+	}
+	Vector2D operator + (const Vector2D& v) const{
+		return(Vector2D(x + v.x, y + v.y));
+	}
+	Vector2D operator * (const float &f) const{
+		return(Vector2D(x * f, y * f));
+	}
 };
 
 struct Vec3Placeholder
@@ -56,4 +65,14 @@ struct Vec4Placeholder {
 	float x, y, z, w;
 	Vec4Placeholder(float x = 0, float y = 0, float z = 0, float w = 0) :
 		x(x), y(y), z(z), w(w) {};
+};
+
+struct QuatPlaceholder {
+	float x, y, z, w;
+	QuatPlaceholder(float x = 0, float y = 0, float z = 0, float w = 0) :
+		x(x), y(y), z(z), w(w) {};
+
+	QuatPlaceholder(const QuatPlaceholder& rhs)
+		: w(rhs.w), x(rhs.x), y(rhs.y), z(rhs.z)
+	{};
 };

@@ -1,28 +1,28 @@
 #pragma once
 
+#include "PTSDAssert.h"
 #include "PTSDkeys.h"
 #include "PTSDVectors.h"
 
 namespace PTSD {
 	class InputImplementation;
 
-	class Input {
+	class InputManager {
 	private:
-		static Input* mInstance;
+		static InputManager* mInstance;
 		InputImplementation* mImplementation = nullptr;
 	public:
 
-		Input() {}
-		~Input() {}
+		InputManager() {}
+		~InputManager() {}
 
-		static Input* getInstance()
+		static InputManager* getInstance()
 		{
-			if (mInstance == nullptr)
-				mInstance = new Input();
+			PTSD_ASSERT(mInstance != nullptr, "InputManager accessed before init");
 			return mInstance;
 		}
 
-		int init();
+		static int init();
 		size_t createInput();
 		int Shutdown();
 		void test();
@@ -36,7 +36,8 @@ namespace PTSD {
 		bool mouseRightClick();
 		bool mouseWheelClick();
 		bool mouseMotion();
-		Vector2D getMousePos();
+		Vector2D getMousePosition() const;
+		Vector2D getMouseRelativePosition() const;
 
 	//Controller
 		bool ControllerButtonPressed(int controllerID, ControllerButton button);
@@ -46,5 +47,7 @@ namespace PTSD {
 		float controllerLeftTrigger(int controllerID);
 		float controllerRightTrigger(int controllerID);
 		void update();
+		void clean();
+		void cleanMouseDelta();
 	};
 }

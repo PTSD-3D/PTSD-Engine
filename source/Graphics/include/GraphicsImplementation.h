@@ -37,6 +37,7 @@ namespace PTSD
 
 		void setupLogging();
 		void setupWindow();
+		void setupMouse();
 		void loadResources();
 		void testScene();
 		void msgPump();
@@ -63,6 +64,9 @@ namespace PTSD
 		Ogre::SceneManager* getSceneMgr() const { return mSceneMgr; }
 		Camera* getCamera() const { return mCamera; }
 		Ogre::RenderWindow* getRenderWindow() const { return mRenderWindow; }
+		SDL_Window* getSDLWindow() const { return mSDLWindow; }
+		float getWindowWidth() const;
+		float getWindowHeight() const;
 		double getDeltaTime() const { return deltaTime; }
 	};
 }

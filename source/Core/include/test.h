@@ -1,14 +1,17 @@
 #pragma once
 
-#include "PTSDSound.h"
-#include <iostream>
+#include "SoundManager.h"
+#include <memory>
+#include "TransformComponent.h"
+#include "Entity.h"
+#include <OgreEntity.h>
 //#include <Windows.h> //Please keep me commented if you are finished testing or Ricardo will kill you.
 
 namespace PTSD
 {
 	//This needs to be kept commented because Sleep() is a function from Windows, so it wouldn't work on Linux
 
-	static void test_Sound(PTSDSound* m_soundSystem) {
+	static void test_Sound(SoundManager* m_soundSystem) {
 		//std::cout << "This is a sample test for the sound module. @test.cpp, test_Sound()\n If you don't want to test this again, please comment the call to this function in the main() function\n";
 		//m_soundSystem->playMusic("./assets/PTSD-Anthem.mp3", true);
 		//Sleep(500);
@@ -28,4 +31,21 @@ namespace PTSD
 		//}
 		//std::cout << "Sound testing complete!!!\n";
 	}
+
+	static PTSD::TransformComponent* test_Transform_Setup(std::shared_ptr<PTSD::Entity> sinbad) {
+		PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
+		Ogre::Entity* ogreEntt = PTSD::GraphicsImplementation::getInstance()->getSceneMgr()->createEntity("ogrehead.mesh");
+		transform->getNode()->attachObject(ogreEntt);
+		transform->setPosition(10, 0, 0);
+		transform->setRotation(0, 90, 0);
+		transform->setScale(0.5, 0.5, 0.5);
+		return transform;
+	}
+	static void test_Transform_Update(PTSD::TransformComponent* transform) {
+		transform->translate(Vec3Placeholder(0.1, 0, 0));
+		transform->rotate(Vec3Placeholder(0, 3, 0));
+		//PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Info);
+		//PTSD::LOG(std::to_string(transform->getRotation().y).c_str(), PTSD::Info);
+	}
+
 }

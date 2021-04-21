@@ -1,28 +1,23 @@
 #include <iostream>
-#include "PTSDLog.h"
+#include "LogManager.h"
 #include "PhysicsManager.h"
-#include "PTSDGraphics.h"
+#include "GraphicsManager.h"
 #include "ScriptManager.h"
-#include "PTSDSound.h"
-#include "Sound.h"
-#include "PTSDInput.h"
+#include "SoundManager.h"
+#include "InputManager.h"
 #include "Camera.h"
-#include "PTSDUI.h"
+#include "UIManager.h"
 #include "test.h"
 #include <SDL_timer.h>
 #include "Entity.h"
 #include "Component.h"
-#include "EntityManager.h"
+#include "TransformComponent.h"
+
+
 
 int main()
 {
 	PTSD::Log* logSystem = new PTSD::Log();
-	PTSD::Graphics* graphicsSystem = PTSD::Graphics::getInstance();
-	PTSD::Input* inputSystem = PTSD::Input::getInstance();
-	PTSD::UI* uiSystem = new PTSD::UI();
-	PTSD::PhysicsManager* physicsSystem = new PTSD::PhysicsManager();
-	PTSD::PTSDSound* soundSystem = new PTSD::PTSDSound();
-	PTSD::ScriptManager* scriptingSystem = new PTSD::ScriptManager();
 
 #ifdef _DEBUG
 	logSystem->init(PTSD::Trace);
@@ -30,15 +25,27 @@ int main()
 	logSystem->init(PTSD::Warning);
 #endif
 	PTSD::LOG("Beginning Initialization");
-	graphicsSystem->init();
-	inputSystem->init();
-	uiSystem->init();
-	physicsSystem->init();
-	soundSystem->Init();
+	PTSD::GraphicsManager::init();
+	PTSD::InputManager::init();
+	PTSD::UIManager::init();
+	PTSD::PhysicsManager::init();
+	PTSD::SoundManager::init();
+	PTSD::ScriptManager* scriptingSystem = new PTSD::ScriptManager();
+	
+	//Cache singletons
+	PTSD::GraphicsManager* graphicsSystem = PTSD::GraphicsManager::getInstance();
+	PTSD::InputManager* inputSystem = PTSD::InputManager::getInstance();
+	PTSD::PhysicsManager* physicsSystem = PTSD::PhysicsManager::getInstance();
+	PTSD::UIManager* uiSystem = PTSD::UIManager::getInstance();
+	PTSD::SoundManager* soundSystem = PTSD::SoundManager::getInstance();
+	
 	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
 	scriptingSystem->init();
 	auto sinbad = scriptingSystem->createEntity(0);
 	sinbad->addComponent<PTSD::DebugComponent>();
+
+	PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
+
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
@@ -57,15 +64,20 @@ int main()
 		currentTime = newTime;
 
 		accumulator += frameTime; //If we're lagging behind the game will be updated as many times as needed to catch up
-
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
 			inputSystem->update();
+
 			physicsSystem->update(deltaTime);
 			graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
+      
 			soundSystem->update();
 			scriptingSystem->update();
+
+			inputSystem->clean();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
+
+			PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
 			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
