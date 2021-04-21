@@ -158,12 +158,12 @@ namespace PTSD
 
 		mCamera = new Camera({ 0,0,8 });	//new Camera({ 0,0,80 });
 
-		Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Kirby.mesh");		//ogrehead.mesh
+		Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Prueba.mesh");		//ogrehead.mesh
 		Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 		ogreNode->attachObject(ogreEntt);
-		ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
+		//ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
 
-		ogreEntt->setMaterialName("KirbyMat");	//This is for the test of Blender2Ogre
+		//ogreEntt->setMaterialName("KirbyMat");	//This is for the test of Blender2Ogre
 
 		mSceneMgr->setAmbientLight(Ogre::ColourValue(.8, .8, .8));	//Was (0.5, 0.5, 0.5)
 
