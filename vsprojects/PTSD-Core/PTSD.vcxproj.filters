@@ -144,6 +144,9 @@
     <ClCompile Include="..\..\source\Logger\source\PTSDAssert.cpp">
       <Filter>Logger\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Core\src\BtOgre.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Logger\include\PTSDAssert.h">
       <Filter>Logger\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Core\include\BtOgre.h">
+      <Filter>Core\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
