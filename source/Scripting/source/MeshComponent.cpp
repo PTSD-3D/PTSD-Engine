@@ -1,5 +1,5 @@
 #include "MeshComponent.h"
-#include "PTSDGraphics.h"
+#include "GraphicsManager.h"
 #include <OgreEntity.h>
 #include <OgreSceneNode.h>
 #include "Entity.h"

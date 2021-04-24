@@ -13,6 +13,6 @@ namespace PTSD {
 	class SoundAttorney {
 	private:
 		static FMOD::Sound* getFmodSound(Sound* sound);
-		friend class PTSDSound;
+		friend class SoundManager;
 	};
 }

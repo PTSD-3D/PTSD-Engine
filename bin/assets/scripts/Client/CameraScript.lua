@@ -3,6 +3,10 @@
       --If you're creating a variable just for this .lua please 
       --define it as a local variable.
       local dir = vec3:new(0, 0, 0)
+      local sensitivity = 1 --Should be able to modify it from another class
+      --If we are using relative mouse position, this method returns the delta position of the mouse
+      local mouseDirection = getMouseRelativePosition()
+
       if keyPressed(PTSDKeys.A) then
         dir = vec3:new(-1, 0, 0)
         translateCamera(dir)
@@ -19,6 +23,9 @@
         dir = vec3:new(1, 0, 0)
         translateCamera(dir)
       end
+
+      rotateCamera(mouseDirection * sensitivity)
+
       return true
     end
 

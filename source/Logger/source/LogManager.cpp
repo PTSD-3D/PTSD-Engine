@@ -1,5 +1,5 @@
 #include <iostream>
-#include "PTSDLog.h"
+#include "LogManager.h"
 #include "LogImpl.h"
 #include "spdlog/spdlog.h"
 
@@ -74,6 +74,11 @@ namespace PTSD {
 		default:
 			break;
 		}
+	}
+
+	void LOGInfoMsg(const char* msg)
+	{
+		PTSD::LOG(msg, LogLevel::Info, 0);
 	}
 
 	/**
