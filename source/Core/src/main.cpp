@@ -45,6 +45,7 @@ int main()
 	sinbad->addComponent<PTSD::DebugComponent>();
 
 	PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
+	PTSD::test_Rigidbody_Setup(sinbad);
 
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();

@@ -9,11 +9,11 @@ namespace PTSD
 	class Component
 	{
 	private:
-		Entity* entity_ = nullptr;
 		CmpId id_;
 	protected:
 		Component(CmpId id) :
 			id_(id) {}
+		Entity* entity_ = nullptr;
 	public:
 		void setEntity(Entity* entity) { entity_ = entity; }
 		CmpId getId() { return id_; }
