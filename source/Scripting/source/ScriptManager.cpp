@@ -22,8 +22,7 @@ namespace PTSD {
 	/**
 	 * \brief Creates the objects for lua state and entityManager
 	 */
-	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager())
-	{}
+	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager()){}
 
 	/*
 	 * \brief Frees up allocated memory
@@ -135,18 +134,14 @@ namespace PTSD {
 
 		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
 
-		(*state).set_function("setMeshComponent", [&](UUID id, const std::string& mesh, const std::string& mat){
-			entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
-		});
+		auto luaMeshComponent = (*state).new_usertype<PTSD::MeshComponent>("MeshComponent", sol::no_constructor);
+		luaMeshComponent["setMesh"] = &PTSD::MeshComponent::setMesh;
+		luaMeshComponent["setMaterial"] = &PTSD::MeshComponent::setMaterial;
+		luaMeshComponent["getMesh"] = &PTSD::MeshComponent::getMesh;
+		luaMeshComponent["getMaterial"] = &PTSD::MeshComponent::getMaterial;
 
-		(*state).set_function("translate", [&](UUID id, Vec3Placeholder tr){
-			entityManager->getEntity(id).get()->getComponent<PTSD::TransformComponent>(Transform)->translate(tr);
-		});
-		(	*state).set_function("rotate", [&](UUID id, Vec3Placeholder rt){
-			entityManager->getEntity(id).get()->getComponent<PTSD::TransformComponent>(Transform)->rotate(rt);
-		});
-		(*state).set_function("scale", [&](UUID id, Vec3Placeholder sc){
-			entityManager->getEntity(id).get()->getComponent<PTSD::TransformComponent>(Transform)->scale(sc);
+		(*state).set_function("setMeshComponent", [&](UUID id, const std::string& mesh, const std::string& mat){
+			return entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
 		});
 		
 		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
@@ -205,11 +200,12 @@ namespace PTSD {
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
 		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+		
+		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
+		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::translate);
+
 		(*state).set_function("setTransform", [&](UUID id, Vec3Placeholder p, Vec3Placeholder r,Vec3Placeholder s){
-			TransformComponent* tr = entityManager->getEntity(id).get()->addComponent<TransformComponent>();
-			tr->setPosition(p);
-			tr->setRotation(r);
-			tr->setScale(s);
+			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
 		});
 
 		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);

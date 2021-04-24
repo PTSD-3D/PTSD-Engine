@@ -42,6 +42,7 @@ namespace PTSD{
 		if(material != mMaterial_)
 		{
 			getEntity()->setMaterialName(material);
+			mMaterial_ = material;
 		}
 	};
 	void MeshComponent::setMesh(const std::string& mesh)

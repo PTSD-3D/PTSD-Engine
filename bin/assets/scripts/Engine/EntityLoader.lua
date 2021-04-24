@@ -1,19 +1,5 @@
 local ns = reqNamespace;
 
---Sets a Transform table to the entityObject to call functions without having to pass the id everytime
-local function setLuaTransform(entityObject)
-	function _translate(vec3)
-		translate(entityObject.id, vec3)
-	end
-	function _rotate(vec3)
-		rotate(entityObject.id, vec3)
-	end
-	function _scale(vec3)
-		scale(entityObject.id, vec3)
-	end
-	entityObject.Transform = {translate = _translate, rotate = _rotate, scale = _scale}
-end
-
 --Loads a scene after the whole engine has been initialized
 function ns.loadScene(manager, sceneTable)
 	for _, entData in pairs(sceneTable) do
@@ -40,12 +26,10 @@ function ns.loadScene(manager, sceneTable)
 
 				local scale = entData.Transform.scale
 				local s = vec3:new(scale.x, scale.y, scale.z)
-				print(entityObject.id)
-				setTransform(entityObject.id,p,r,s)
-				setLuaTransform(entityObject)
+				entityObject.Transform = setTransform(entityObject.id,p,r,s)
 			end
 			if entData.Mesh then
-				setMeshComponent(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
+				entityObject.MeshComponent = setMeshComponent(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
 		end
 	 end
 end

@@ -21,6 +21,7 @@ namespace PTSD {
 
 	public:
 		TransformComponent();
+		TransformComponent(Vec3Placeholder p, Vec3Placeholder r, Vec3Placeholder s);
 		~TransformComponent() = default;
 
 		void translate(Vec3Placeholder translation);

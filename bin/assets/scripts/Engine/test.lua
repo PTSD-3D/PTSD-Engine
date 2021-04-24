@@ -20,19 +20,28 @@ function MoveSystem:update(dt)
 		local tr = entity.Transform;
 		if keyPressed(PTSDKeys.A) then
 			dir = vec3:new(-vx, 0, 0)
-			tr.translate(dir)
+			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.W) then
 			dir = vec3:new(0, 0, -vz)
-			tr.translate(dir)
+			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.S) then
 			dir = vec3:new(0, 0, vz)
-			tr.translate(dir)
+			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.D) then
 			dir = vec3:new(vx, 0, 0)
-			tr.translate(dir)
+			tr:translate(dir)
+		end
+		if keyPressed(PTSDKeys.Shift) then
+			local material = entity.MeshComponent:getMaterial()
+			if material == "KirbyMat" then
+				material = "Red"
+			else
+				material="KirbyMat"
+			end
+			entity.MeshComponent:setMaterial(material);
 		end
 	end
 end
