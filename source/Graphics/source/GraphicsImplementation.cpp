@@ -163,9 +163,13 @@ namespace PTSD
 		ogreNode->attachObject(ogreEntt);
 		//ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
 
-		//ogreEntt->setMaterialName("KirbyMat");	//This is for the test of Blender2Ogre
+		//ogreEntt->setMaterialName("color9");	//This is for the test of Blender2Ogre
+		ogreEntt->setMaterialName("color4");	//This is for the test of Blender2Ogre
+		//ogreEntt->setMaterialName("color11");	//This is for the test of Blender2Ogre
+		//ogreEntt->setMaterialName("color14");	//This is for the test of Blender2Ogre
+		//ogreEntt->setMaterialName("color8");	//This is for the test of Blender2Ogre
 
-		mSceneMgr->setAmbientLight(Ogre::ColourValue(.8, .8, .8));	//Was (0.5, 0.5, 0.5)
+		mSceneMgr->setAmbientLight(Ogre::ColourValue(.1, .1, .1));	//Was (0.5, 0.5, 0.5)
 
 		Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 		Ogre::Light* light = mSceneMgr->createLight("MainLight");
