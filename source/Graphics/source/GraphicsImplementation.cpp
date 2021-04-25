@@ -114,7 +114,7 @@ namespace PTSD
 		mFileSystemLayer = new Ogre::FileSystemLayer("./assets/");
 		Ogre::ConfigFile cf;
 
-		std::string resourcesPath = mFileSystemLayer->getConfigFilePath("../resources.cfg");
+		std::string resourcesPath = mFileSystemLayer->getConfigFilePath("./resources.cfg");
 		if (Ogre::FileSystemLayer::fileExists(resourcesPath))
 		{
 			cf.load(resourcesPath);
@@ -140,6 +140,7 @@ namespace PTSD
 				type = i->first;
 				arch = Ogre::FileSystemLayer::resolveBundlePath(i->second);
 				Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch, type, sec);
+				LOG(("Added location"+sec).c_str());
 			}
 		}
 
