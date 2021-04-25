@@ -25,6 +25,7 @@
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp" />
     <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\MeshComponent.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\Sound\source\SoundManager.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="..\..\source\Scripting\include\ECS.h" />
     <ClInclude Include="..\..\source\Scripting\include\Entity.h" />
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h" />
+    <ClInclude Include="..\..\source\Scripting\include\MeshComponent.h" />
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundManager.h" />
