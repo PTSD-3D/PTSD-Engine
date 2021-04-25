@@ -35,7 +35,7 @@ function MoveSystem:update(dt)
 			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.Shift) then
-			local material = entity.MeshComponent:getMaterial()
+			local material = entity.Mesh:getMaterial()
 			if material == "KirbyMat" then
 				material = "Red"
 			else
