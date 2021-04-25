@@ -17,8 +17,9 @@ cd ..\..\
 echo Copiando DLLs de Ogre...
 
 copy dependencies\Ogre\build\bin\debug\OgreMain_d.dll bin\ 1>NUL
-copy dependencies\Ogre\build\bin\relwithdebinfo\OgreMain.dll bin\ 1>NUL
-copy dependencies\Ogre\build\bin\relwithdebinfo\zlib.dll bin\ 1>NUL
+copy dependencies\Ogre\build\bin\release\OgreMain.dll bin\ 1>NUL
+copy dependencies\Ogre\build\bin\debug\OgreMain_d.dll bin\ 1>NUL
+copy dependencies\Ogre\build\bin\release\zlib.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\debug\RenderSystem_GL_d.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\release\RenderSystem_GL.dll bin\ 1>NUL
 copy dependencies\Ogre\build\bin\release\Codec_STBI.dll bin\ 1>NUL
