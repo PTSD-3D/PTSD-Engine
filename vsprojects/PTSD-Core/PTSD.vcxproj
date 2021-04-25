@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\Core\src\main.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
-    <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsManager.cpp" />
     <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp" />
@@ -38,7 +37,6 @@
     <ClInclude Include="..\..\source\Core\include\PTSDVectors.h" />
     <ClInclude Include="..\..\source\Core\include\test.h" />
     <ClInclude Include="..\..\source\Graphics\include\Camera.h" />
-    <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsManager.h" />
