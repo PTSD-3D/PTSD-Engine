@@ -140,7 +140,7 @@ namespace PTSD {
 		luaMeshComponent["getMesh"] = &PTSD::MeshComponent::getMesh;
 		luaMeshComponent["getMaterial"] = &PTSD::MeshComponent::getMaterial;
 
-		(*state).set_function("setMeshComponent", [&](UUID id, const std::string& mesh, const std::string& mat){
+		(*state).set_function("setMesh", [&](UUID id, const std::string& mesh, const std::string& mat){
 			return entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
 		});
 		

@@ -29,7 +29,7 @@ function ns.loadScene(manager, sceneTable)
 				entityObject.Transform = setTransform(entityObject.id,p,r,s)
 			end
 			if entData.Mesh then
-				entityObject.MeshComponent = setMeshComponent(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
+				entityObject.Mesh = setMesh(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
 		end
 	 end
 end

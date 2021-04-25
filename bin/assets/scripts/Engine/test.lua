@@ -41,7 +41,7 @@ function MoveSystem:update(dt)
 			else
 				material="KirbyMat"
 			end
-			entity.MeshComponent:setMaterial(material);
+			entity.Mesh:setMaterial(material);
 		end
 	end
 end
