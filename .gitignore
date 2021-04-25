@@ -51,6 +51,11 @@ vs2010/
 
 [Dd]ependencies/bullet/src/build_debug/*
 [Dd]ependencies/bullet/src/build_release/*
+
+!*.bat
+!dependencies/bullet/src/build_visual_studio_vr_pybullet_double_dynamic_PTSD.bat
+
+
 GPATH
 GRTAGS
 GTAGS
