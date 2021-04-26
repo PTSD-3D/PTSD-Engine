@@ -208,9 +208,11 @@ function buildCEGUIRelease(){
 		return;
 	fi;
 	cd "${CEGUI}build";
-	printGreen "Configuring CMake" && cmake -DCEGUI_HAS_FREETYPE:BOOL="1" -DCMAKE_BUILD_TYPE="Release" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/" &>/dev/null;
-	printGreen "Building CEGUI en Release \n---------------------------\n" && cmake  --build "." &  spinner 
-	printGreen "Installing Ogre en ${CEGUI}Release/";
+	printGreen "Configuring CMake" && cmake  -DCEGUI_FOUND_OGRE_VERSION_MAJOR=1 -DCEGUI_FOUND_OGRE_VERSION_MINOR=12 -DCEGUI_FOUND_OGRE_VERSION_PATCH=14 -DCMAKE_CXX_STANDARD=11 -DCEGUI_HAS_FREETYPE:BOOL="1" -DCMAKE_BUILD_TYPE="Release" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/" &>/dev/null;
+	sed -i '/define CEGUI_OGRE_VERSION_MAJOR 0/c\#define CEGUI_OGRE_VERSION_MAJOR 1' ${CEGUI}build/cegui/include/CEGUI/Config.h
+	sed -i '/define CEGUI_OGRE_VERSION_MINOR 0/c\#define CEGUI_OGRE_VERSION_MINOR 12' ${CEGUI}build/cegui/include/CEGUI/Config.h
+	sed -i '/define CEGUI_OGRE_VERSION_PATCH 0/c\#define CEGUI_OGRE_VERSION_PATCH 14' ${CEGUI}build/cegui/include/CEGUI/Config.h
+	cmake  --build "." &  spinner 
 		
 	cp -r Dependencies ../RelWithDebInfo/Dependencies
 	cp -r cegui/include ../RelWithDebInfo/include
@@ -350,7 +352,6 @@ setupDirectories ${SpdlogDir};
 setupDirectories ${LuaDir};
 setupDirectories ${CEGUI};
 setupDirectories ${BulletDir};
-echo "no llego"
 
 buildAll;
 

@@ -48,6 +48,8 @@ vs2010/
 [Dd]ependencies/*/[Rr]elWithDebInfo*
 [Dd]ependencies/*/*/[Dd]ebug*
 [Dd]ependencies/*/*/[Rr]elWithDebInfo*
+[Dd]ependencies/*/*/*/[Rr]elWithDebInfo*
+[Dd]ependencies/*/*/*/[Dd]ebug*
 
 [Dd]ependencies/bullet/src/build_debug/*
 [Dd]ependencies/bullet/src/build_release/*

@@ -63,8 +63,6 @@ target_link_libraries(PTSD_Core
 																											PRIVATE ${PTSD_ROOT}bin/libCEGUISDL2ImageCodec.so
 																											PRIVATE ${PTSD_ROOT}bin/libLinearMath.so
 																											PRIVATE ${PTSD_ROOT}bin/libOgreMain.so
-																											PRIVATE ${PTSD_ROOT}bin/libzzip.a
-																											PRIVATE /usr/lib/x86_64-linux-gnu/libz.so
 																											)
 
 ##############
