@@ -30,7 +30,6 @@ file(GLOB_RECURSE SRC CONFIGURE_DEPENDS
      "../source/*/*.h"
      "../source/*/*.cpp"
 )
-message(${SRC})
 
 include_directories(PTSD_Core PUBLIC ${PTSD_MODULES_INCLUDES})
 add_executable(PTSD_Core ${SRC})
@@ -41,8 +40,7 @@ target_include_directories(PTSD_Core
 																																PRIVATE  ${PTSD_ROOT}dependencies/Ogre/src/OgreMain/include/
 																																PRIVATE  ${PTSD_ROOT}dependencies/Ogre/build/include/
 																																PRIVATE  ${PTSD_ROOT}dependencies/spdlog/src/include/
-																																PRIVATE  ${PTSD_ROOT}dependencies/bullet/RelWithDebInfo/include/
-																																PRIVATE  ${PTSD_ROOT}dependencies/bullet/RelWithDebInfo/include/bullet/
+																																PRIVATE  ${PTSD_ROOT}dependencies/bullet/src/src/
 																																PRIVATE  ${PTSD_ROOT}dependencies/scripting/lua/include/
 																																PRIVATE  ${PTSD_ROOT}dependencies/scripting/
 																																PRIVATE  ${PTSD_ROOT}dependencies/CEGUI/src/cegui/include/

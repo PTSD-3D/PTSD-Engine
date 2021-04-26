@@ -24,6 +24,14 @@ namespace PTSD {
 	TransformComponent::TransformComponent() : Component(CmpId::Transform) {
 		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 	}
+	TransformComponent::TransformComponent(Vec3Placeholder p, Vec3Placeholder r, Vec3Placeholder s): Component(CmpId::Transform) 
+	{
+		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
+		setPosition(p);
+		setRotation(r);
+		setScale(s);
+	}
+
 
 	void TransformComponent::translate(Vec3Placeholder translation) { //moves the transform with a vec3
 		mNode->translate(translation.x, translation.y, translation.z, Ogre::Node::TS_WORLD);
