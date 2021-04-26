@@ -3,15 +3,16 @@
 ::además debería de buildear Ogre llamando a cmake con parametros y demás
 TITLE Build
 
-echo "Example: for C:\User\Things\Python39 introduce C:\User\Things"
-set /p inPy="Introduce the folder where PythonX.X is stored:"
+
+echo Introduce the folder where PythonX.X is stored
+set /p inPy="Example: for C:\User\Things\Python39 introduce C:\User\Things:   "
 
 cd dependencies\Ogre\
 call build.bat
 cd ..\CEGUI\
 call build.bat
 cd ..\bullet\
-call build.bat
+call build.bat %inPy%
 cd ..\..\
 
 echo Copiando DLLs de Ogre...

@@ -6,7 +6,7 @@ rem #aargh, see https://github.com/ValveSoftware/openvr/issues/412
 
 
 rem #find a python version (hopefully just 1) and use this
-set /p inPy="Introduce the folder where PythonX.X is stored:"
+set inPy=%1
 dir %inPy%\python* /b /ad > tmp1234.txt
 
 set /p myvar1= < tmp1234.txt
