@@ -2,7 +2,11 @@ local ns = reqNamespace;
 
 --Loads a scene after the whole engine has been initialized
 function ns.loadScene(manager, sceneTable)
-	for _, entData in pairs(sceneTable) do
+	local physicsConfig = sceneTable.SceneConfig.PhysicsConfig
+	setGravity(physicsConfig["Gravity"])
+	print(physicsConfig["Gravity"])
+	
+	for _, entData in pairs(sceneTable.Entities) do
 		local entityObject = ns.Entity()
 		entityObject:initialize()
 
