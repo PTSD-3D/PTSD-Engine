@@ -30,9 +30,10 @@ bld/
 build/
 vs2010/
 
-# Ignore all bin EXCEPT ASSETS
+# Ignore all bin EXCEPT ASSETS and Ogre cfg files
 [Bb]in/*
 ![Bb]in/assets/
+![Bb]in/*.cfg
 
 
 [Oo]bj/
