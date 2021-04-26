@@ -4,7 +4,7 @@ local ns = reqNamespace;
 function ns.loadScene(manager, sceneTable)
 	local physicsConfig = sceneTable.SceneConfig.PhysicsConfig
 	setGravity(physicsConfig["Gravity"])
-	print(physicsConfig["Gravity"])
+	LOG(tostring("Gravity: " .. physicsConfig["Gravity"]))
 	
 	for _, entData in pairs(sceneTable.Entities) do
 		local entityObject = ns.Entity()
