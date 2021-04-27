@@ -34,6 +34,8 @@ namespace PTSD {
 		void update(const float& deltaTime);
 		void shutdown();
 
+		void setGravity(float grav);
+
 		btBroadphaseInterface* getBroadphase() const { return mBroadphase; }
 		btDefaultCollisionConfiguration* getCollisionConfiguration() const { return mCollisionConfiguration; }
 		btCollisionDispatcher* getDispatcher() const { return mDispatcher; }
