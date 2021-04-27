@@ -78,8 +78,8 @@ namespace PTSD {
 	bool ScriptManager::update()
 	{
 		entityManager->update();
-		(*state)["manager"]["update"]((*state)["manager"], 1); //This and line above are both valid
-		(*state)["Update"]();
+		(*state)["Manager"]["update"]((*state)["Manager"], 1); //This and line above are both valid
+		//(*state)["Update"]();
 		//TODO exit state
 		return true;
 	}
