@@ -155,6 +155,9 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA Physics Components... @ScriptManager, BindPhysicsComponents()");
+		
+		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
+
 		return true;
 	}
 	bool ScriptManager::bindSoundComponents()
