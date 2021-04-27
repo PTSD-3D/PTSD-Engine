@@ -16,7 +16,8 @@ Scene = {
 		},
 		Transform = {position={x=-0,y=30,z=-100},rotation={x=-90,y=0,z=0},scale={x=1,y=1,z=1}},
 		Mesh = {mesh="Kirby.mesh", material="KirbyMat"}
-	}
+	},
+	Entity3=Enemy({transform={x=10,y=10,z=10}})
 }
 
 return Scene
