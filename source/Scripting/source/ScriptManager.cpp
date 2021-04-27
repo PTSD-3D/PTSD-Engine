@@ -52,14 +52,14 @@ namespace PTSD {
 		(*state).require_file("reqNamespace", "./assets/scripts/Engine/namespace.lua");
 		(*state).require_file("reqMiddleclass", "./assets/scripts/Engine/middleclass.lua");
 
-		//Events
-		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
-		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
-
 		//Engine components
 		(*state).require_file("reqComponent", "./assets/scripts/Engine/Component.lua");
 		(*state).require_file("reqEntity", "./assets/scripts/Engine/Entity.lua");
 		(*state).require_file("reqSystem", "./assets/scripts/Engine/System.lua");
+		//Events
+		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
+		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
+
 		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");

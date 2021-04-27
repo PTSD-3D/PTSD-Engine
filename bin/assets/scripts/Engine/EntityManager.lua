@@ -9,15 +9,15 @@ function EntityManager:initialize()
 	self.singleRequirements = {}
 	self.allRequirements = {}
 
-	--lists of entities organized by their components
+	--lists of entities organized by their components' names
 	self.entityLists = {}
 
 	self.eventManager = namespace.EventManager()
 
 	self.systems = {}
 
-	self.eventManager:addListener("ComponentRemoved", self, self.componentRemoved)
-	self.eventManager:addListener("ComponentAdded", self, self.componentAdded)
+	self.eventManager:addListener("ComponentRemovedEv", self, self.componentRemoved)
+	self.eventManager:addListener("ComponentAddedEv", self, self.componentAdded)
 end
 
 function EntityManager:addEntity(entity)
@@ -32,13 +32,11 @@ function EntityManager:addEntity(entity)
 	for _, component in pairs(entity.components) do
 		local componentName = component.class.name
 
-
 		--Add entity to each of the entityLists for each component, to be able to get it later
 		if not self.entityLists[componentName] then 
 			self.entityLists[componentName] = {}
 		end
 		self.entityLists[componentName][entity.id] = entity
-
 		--Add Entity to relevant Systems if all requirements are ok
 		if self.singleRequirements[componentName] then
 			for _, system in pairs(self.singleRequirements[componentName]) do
@@ -153,7 +151,7 @@ end
 function EntityManager:componentRemoved(event)
 
 	local entity = event.entity
-	local component = event.component
+	local component = event.componentName
 
 	--remove Entity from entity list pertaining to removed component
 	self.entityLists[component][entity.id] = nil
@@ -168,8 +166,11 @@ end
 
 function EntityManager:componentAdded(event)
 	local entity = event.entity
-	local component = event.component
+	local component = event.componentName
 
+	local msg = "entity " .. entity.id .. " has received component: " .. component
+	LOG(msg)
+	
 	-- Add the Entity to entity list of that component
 	if not self.entityLists[component] then self.entityLists[component] = {} end
 	self.entityLists[component][entity.id] = entity
@@ -184,12 +185,11 @@ end
 
 
 -- Returns list with specific component.
-function EntityManager:getEntitiesWithComponent(component)
-	if self.entityLists[component] then
-		return self.entityLists[component]
-	else
-		return {}
+function EntityManager:getEntitiesWithComponent(componentName)
+	if not self.entityLists[componentName] then
+		self.entityLists[componentName] = {}
 	end
+	return self.entityLists[componentName]
 end
 
 function EntityManager:checkRequirements(entity, system) 

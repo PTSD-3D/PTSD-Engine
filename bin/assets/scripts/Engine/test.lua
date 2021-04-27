@@ -4,6 +4,7 @@ local ns = reqNamespace
 eng.initialize({globals = false});
 
 eng.Component.create("playerMove", {"x","y","z"})
+eng.Component.create("topo")
 
 local MoveSystem = ns.class("MoveSystem",ns.System)
 
@@ -53,5 +54,10 @@ LOG("Manager created correctly")
 ns.loadScene(Manager, sampleScene)
 LOG("Scene loaded correctly")
 Manager:addSystem(MoveSystem())
+--Showing component Added event working
+local ents = Manager:getEntitiesWithComponent("playerMove")
+if ents ~= {} then
+	ents[1]:add(ns.Component.all["topo"]())
+end
 
 LOG("Test.lua completed")
