@@ -1,4 +1,5 @@
 #include "ScriptManager.h"
+#define SOL_ALL_SAFETIES_ON 1
 #include <sol/sol.hpp>
 #include "lua.hpp"
 #include "ECS.h"
@@ -14,13 +15,14 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "PhysicsManager.h"
 #include "PTSDVectors.h"
 #include "LogManager.h"
+#include "MeshComponent.h"
+#include "TransformComponent.h"
 
 namespace PTSD {
 	/**
 	 * \brief Creates the objects for lua state and entityManager
 	 */
-	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager())
-	{}
+	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager()){}
 
 	/*
 	 * \brief Frees up allocated memory
@@ -58,14 +60,14 @@ namespace PTSD {
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
-		if (bindLoggerComponents() &&
+		if (bindGenericComponents()&&
+			bindLoggerComponents() &&
 			bindGraphicsComponents() &&
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
 			bindSoundComponents() &&
 			bindInputComponents() &&
-			bindScriptingComponents() &&
-			bindGenericComponents()) {
+			bindScriptingComponents() ) {
 		}
 
 		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
@@ -76,12 +78,10 @@ namespace PTSD {
 	bool ScriptManager::update()
 	{
 		entityManager->update();
-		//state.script("manager:update(1)");
 		(*state)["manager"]["update"]((*state)["manager"], 1); //This and line above are both valid
 		(*state)["Update"]();
 		//TODO exit state
 		return true;
-		//return state["Exit"];
 	}
 
 	void ScriptManager::shutdown()
@@ -103,6 +103,10 @@ namespace PTSD {
 		entityManager->deleteEntity(entityID);
 		//Deletes entity in Lua
 		//Entity["Delete"]();
+	}
+	std::shared_ptr<Entity> ScriptManager::getEntity(UUID entityID)
+	{
+		return entityManager->getEntity(entityID);
 	}
 
 	bool ScriptManager::bindLoggerComponents()
@@ -128,7 +132,19 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
-		(*state).set_function("translate", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
+
+		auto luaMeshComponent = (*state).new_usertype<PTSD::MeshComponent>("MeshComponent", sol::no_constructor);
+		luaMeshComponent["setMesh"] = &PTSD::MeshComponent::setMesh;
+		luaMeshComponent["setMaterial"] = &PTSD::MeshComponent::setMaterial;
+		luaMeshComponent["getMesh"] = &PTSD::MeshComponent::getMesh;
+		luaMeshComponent["getMaterial"] = &PTSD::MeshComponent::getMaterial;
+
+		(*state).set_function("setMesh", [&](UUID id, const std::string& mesh, const std::string& mat){
+			return entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
+		});
+		
+		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("getWindowWidth", &PTSD::GraphicsManager::getWindowWidth, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("getWindowHeight", &PTSD::GraphicsManager::getWindowHeight, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::GraphicsManager::getInstance()->getCam());
@@ -185,6 +201,15 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
+
+		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+		
+		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
+		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::translate);
+
+		(*state).set_function("setTransform", [&](UUID id, Vec3Placeholder p, Vec3Placeholder r,Vec3Placeholder s){
+			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
+		});
 
 		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
