@@ -16,7 +16,6 @@ function ns.loadScene(manager, sceneTable)
 		--[[Entity is added to manager after adding components to prevent
 		firing componentAdded event various times--]]
 		manager:addEntity(entityObject)
-
 			if entData.Transform then
 				local location = entData.Transform.position
 				local p = vec3:new(location.x, location.y, location.z)

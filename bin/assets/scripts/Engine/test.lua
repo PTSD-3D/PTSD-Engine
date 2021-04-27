@@ -1,5 +1,4 @@
 local eng = reqEngine
-
 reqEngine.initialize({globals = true});
 
 eng.Component.create("playerMove", {"x","y","z"})

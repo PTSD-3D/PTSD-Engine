@@ -7,7 +7,6 @@
 #include <string>
 #include <iostream>
 #include <filesystem>
-namespace fs = std::filesystem;
 /*
 Include every PTSD-System to expose its public API to our Scripting state
 */
@@ -21,6 +20,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "MeshComponent.h"
 #include "TransformComponent.h"
 
+namespace fs = std::filesystem;
 namespace PTSD {
 	/**
 	 * \brief Creates the objects for lua state and entityManager
@@ -60,10 +60,12 @@ namespace PTSD {
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
 		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
-		// for (const auto & entry : fs::directory_iterator( "/assets/scripts/Client/Prefabs"))
-		// 	(*state).script_file(entry.path());
+		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
+		{
+			(*state).script_file(entry.path());
+		}
 
-		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
+		(*state).require_file("sampleScene", "./assets/scripts/Client/untitled.lua");
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
