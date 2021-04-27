@@ -1,6 +1,6 @@
 --Main Entity Manager class
-
-local EntityManager =  reqNamespace.class("EntityManager")
+local namespace = reqNamespace
+local EntityManager =  namespace.class("EntityManager")
 
 function EntityManager:initialize()
 	self.entities = {}
@@ -12,10 +12,12 @@ function EntityManager:initialize()
 	--lists of entities organized by their components
 	self.entityLists = {}
 
-	--TODO eventManager
+	self.eventManager = namespace.EventManager()
 
 	self.systems = {}
-	self.systems = {}
+
+	self.eventManager:addListener("ComponentRemoved", self, self.componentRemoved)
+	self.eventManager:addListener("ComponentAdded", self, self.componentAdded)
 end
 
 function EntityManager:addEntity(entity)
@@ -23,6 +25,9 @@ function EntityManager:addEntity(entity)
 	local nId = #self.entities + 1
 	entity.id = nId
 	self.entities[entity.id] = entity
+
+	--Assign entity's eventManager
+	entity.eventManager = self.eventManager;
 
 	for _, component in pairs(entity.components) do
 		local componentName = component.class.name
@@ -145,7 +150,38 @@ function EntityManager:update(...)
 	end
 end
 
--- TODO Component added and removed events
+function EntityManager:componentRemoved(event)
+
+	local entity = event.entity
+	local component = event.component
+
+	--remove Entity from entity list pertaining to removed component
+	self.entityLists[component][entity.id] = nil
+
+	--remove component from relevant systems
+	if self.allRequirements[component] then
+		for _, system in pairs(self.allRequirements[component]) do
+			system:componentRemoved(entity,component)
+		end
+	end
+end
+
+function EntityManager:componentAdded(event)
+	local entity = event.entity
+	local component = event.component
+
+	-- Add the Entity to entity list of that component
+	if not self.entityLists[component] then self.entityLists[component] = {} end
+	self.entityLists[component][entity.id] = entity
+
+	-- Add entity to requiring systems
+	if self.allRequirements[component] then
+		for _, system in pairs(self.allRequirements[component]) do
+			self:checkRequirements(entity, system)
+		end
+	end
+end
+
 
 -- Returns list with specific component.
 function EntityManager:getEntitiesWithComponent(component)

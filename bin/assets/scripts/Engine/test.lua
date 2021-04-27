@@ -47,10 +47,11 @@ function MoveSystem:update(dt)
 	end
 end
 
+LOG("Loading manager")
 Manager = eng.EntityManager()
-
+LOG("Manager created correctly")
 ns.loadScene(Manager, sampleScene)
-
+LOG("Scene loaded correctly")
 Manager:addSystem(MoveSystem())
 
 LOG("Test.lua completed")
