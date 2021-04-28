@@ -41,6 +41,11 @@ namespace PTSD {
 		delete mWorld;
 	}
 
+	void PhysicsManager::setGravity(float grav)
+	{
+		mWorld->setGravity(btVector3(0, grav, 0)); //3 dimensional gravity should not be needed. Could be changed easily.
+	}
+
 	//example scene
 	void PhysicsManager::testScene() {
 		mWorld->setGravity(btVector3(0, -10, 0));

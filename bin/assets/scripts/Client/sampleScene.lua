@@ -1,22 +1,16 @@
-local Scene = {}
-
-Scene = {
-	Entity1={
-		--Components are Lua-only components
-		--Table of tables, each subTable has name and arguments
-		Components = {
-			{name="playerMove", arguments={1,1,1}}
-		},
-		Transform = {position={x=0,y=0,z=-250},rotation={x=0,y=0,z=0},scale={x=1,y=1,z=1}},
-		Mesh = {mesh="ogrehead.mesh", material="KirbyMat"}
-	},
-	Entity2={
-		Components = {
-			{name="playerMove", arguments={1,1,1}}
-		},
-		Transform = {position={x=-0,y=30,z=-100},rotation={x=-90,y=0,z=0},scale={x=1,y=1,z=1}},
-		Mesh = {mesh="Kirby.mesh", material="KirbyMat"}
-	}
+local prefabs = reqPrefab 
+local sceneConfig = reqSceneConfigurations 
+local Scene={
+ Entities={	Enemy=prefabs.Enemy({
+		Transform = {position={x=-35.101280212402344,y=-7.906014442443848,z=11.627628326416016},rotation={x=221.15168985260806,y=-152.16575470710376,z=195.33558286557584},scale={x=2.098890542984009,y=2.098890542984009,z=2.098890781402588}}}),
+	Enemy_001=prefabs.Enemy({
+		Transform = {position={x=3.645761489868164,y=5.4532294273376465,z=-2.2724339962005615},rotation={x=-73.39715817944366,y=1.95311906014818,z=-45.04050427401726},scale={x=0.32247912883758545,y=0.3224791884422302,z=0.32247912883758545}}}),
+	Enemy_002=prefabs.Enemy({
+		Transform = {position={x=0.0,y=0.0,z=0.0},rotation={x=-69.79762116609027,y=3.274705169258641,z=-42.96770578545847},scale={x=1.8980841636657715,y=1.8980841636657715,z=1.8980841636657715}}}),
+	Enemy_003=prefabs.Enemy({
+		Transform = {position={x=-14.513557434082031,y=8.863394737243652,z=-7.8755083084106445},rotation={x=-61.1043681263623,y=5.8524428945703715,z=-37.76200197745238},scale={x=1.0855004787445068,y=1.0855004787445068,z=1.0855005979537964}}}),
+	Enemy_004=prefabs.Enemy({
+		Transform = {position={x=13.214509963989258,y=15.659820556640625,z=16.307580947875977},rotation={x=-32.49190314595141,y=-25.261184852819945,z=-52.22475679022513},scale={x=2.730506181716919,y=2.730506181716919,z=2.730506181716919}}})},
+		SceneConfig=sceneConfig.sampleScene({})
 }
-
 return Scene

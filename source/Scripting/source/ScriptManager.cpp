@@ -60,12 +60,13 @@ namespace PTSD {
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
 		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
+		(*state).require_file("reqSceneConfigurations", "./assets/scripts/Engine/Prefab.lua");
 		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
 		{
 			(*state).script_file(entry.path());
 		}
 
-		(*state).require_file("sampleScene", "./assets/scripts/Client/untitled.lua");
+		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
@@ -164,6 +165,9 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA Physics Components... @ScriptManager, BindPhysicsComponents()");
+		
+		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
+
 		return true;
 	}
 	bool ScriptManager::bindSoundComponents()

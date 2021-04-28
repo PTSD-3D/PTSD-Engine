@@ -1,6 +1,7 @@
 local pf = reqPrefab
+
+
 --Params holds required parameters to build an instance of this prefab. This will be populated with transform information from Blender via our script in /tools
-print("Reading Enemy")
 function pf.Enemy (params)
 	return{
 		Components = {
@@ -8,6 +9,6 @@ function pf.Enemy (params)
 			{name="playerMove", arguments={{x=1,y=0,z=0}}}
 		},
 		Transform = params.Transform,
-		Mesh = {mesh="Kirby.mesh", material="KirbyMat"}
+		Mesh = {mesh="Kirby.mesh", material="Red"}
 	}
 end
