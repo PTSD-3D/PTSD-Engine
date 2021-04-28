@@ -2,7 +2,7 @@ local eng = reqEngine
 
 reqEngine.initialize({globals = true});
 
-eng.Component.create("playerMove", {"x","y","z"})
+eng.Component.create("playerMove", {"x","y","z","r"})
 
 local MoveSystem = class("MoveSystem",System)
 
@@ -16,22 +16,27 @@ function MoveSystem:update(dt)
 		local vx = entity:get("playerMove").x;
 		local vy = entity:get("playerMove").y;
 		local vz = entity:get("playerMove").z;
+		local vr = entity:get("playerMove").r;
 
+		local mouseDirection = getMouseRelativePosition()
+		rot = vec3:new(0, -mouseDirection.x, 0) * vr;
 		local tr = entity.Transform;
+
+		tr:rotate(rot);
 		if keyPressed(PTSDKeys.A) then
-			dir = vec3:new(-vx, 0, 0)
+			dir = tr:getRight()*vx*dt
 			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.W) then
-			dir = vec3:new(0, 0, -vz)
+			dir = tr:getForward()*vz*dt
 			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.S) then
-			dir = vec3:new(0, 0, vz)
+			dir = tr:getForward()*-vz*dt
 			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.D) then
-			dir = vec3:new(vx, 0, 0)
+			dir = tr:getRight()*-vx*dt
 			tr:translate(dir)
 		end
 		if keyPressed(PTSDKeys.Shift) then

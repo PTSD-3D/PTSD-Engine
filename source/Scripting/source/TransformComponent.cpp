@@ -1,5 +1,5 @@
 #include "TransformComponent.h"
-
+#include <iostream>
 namespace PTSD {
 	//Methods to convert from and to quaternions and vec3
 	Vec3Placeholder TransformComponent::OgreQuatEuler(const Ogre::Quaternion& quaternion) const
@@ -93,6 +93,15 @@ namespace PTSD {
 	}
 	Vec3Placeholder TransformComponent::getScale() const { //Gets the scale of the transform
 		Ogre::Vector3 v = mNode->getScale();
+		return Vec3Placeholder(v.x, v.y, v.z);
+	}
+	Vec3Placeholder TransformComponent::getForward() const { //Gets the local forward vector
+		Ogre::Vector3 v = mNode->getLocalAxes().GetColumn(2);
+		std::cout << v.x <<" "<< v.z << std::endl;
+		return Vec3Placeholder(v.x, v.y, v.z);
+	}
+	Vec3Placeholder TransformComponent::getRight() const { //Gets the local right vector
+		Ogre::Vector3 v = mNode->getLocalAxes().GetColumn(0);
 		return Vec3Placeholder(v.x, v.y, v.z);
 	}
 	Ogre::SceneNode* TransformComponent::getNode() const { //Gets the node associated to the transform

@@ -162,7 +162,7 @@ namespace PTSD
 		// Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Kirby.mesh");		//ogrehead.mesh
 		// Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
 		// ogreNode->attachObject(ogreEntt);
-		// ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
+		//ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
 
 		// ogreEntt->setMaterialName("KirbyMat");	//This is for the test of Blender2Ogre	
 

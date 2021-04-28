@@ -41,6 +41,8 @@ namespace PTSD {
 		Vec3Placeholder getPosition() const;
 		Vec3Placeholder getRotation() const;
 		Vec3Placeholder getScale() const;
+		Vec3Placeholder getForward() const;
+		Vec3Placeholder getRight() const;
 		Ogre::SceneNode* getNode() const;
 	};
 }

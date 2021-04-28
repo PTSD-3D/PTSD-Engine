@@ -24,7 +24,7 @@
         translateCamera(dir)
       end
 
-      rotateCamera(mouseDirection * sensitivity)
+      --rotateCamera(mouseDirection * sensitivity)
 
       return true
     end

@@ -206,12 +206,15 @@ namespace PTSD {
 		
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::translate);
+		trComponent["rotate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::rotate);
+		trComponent["getForward"] = (&PTSD::TransformComponent::getForward);
+		trComponent["getRight"] = (&PTSD::TransformComponent::getRight);
 
 		(*state).set_function("setTransform", [&](UUID id, Vec3Placeholder p, Vec3Placeholder r,Vec3Placeholder s){
 			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
 		});
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z, sol::meta_function::multiplication, &Vec3Placeholder::operator*);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 
