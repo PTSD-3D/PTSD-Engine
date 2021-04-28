@@ -14,7 +14,6 @@ namespace PTSD
 		Entity* entity_ = nullptr;
 		Component(CmpId id) :
 			id_(id) {}
-		Entity* entity_ = nullptr;
 	public:
 		void setEntity(Entity* entity) { entity_ = entity; }
 		CmpId getId() { return id_; }

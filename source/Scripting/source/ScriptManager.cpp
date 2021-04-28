@@ -17,6 +17,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "LogManager.h"
 #include "MeshComponent.h"
 #include "TransformComponent.h"
+#include "Rigidbody.h"
 
 namespace PTSD {
 	/**
@@ -155,6 +156,17 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA Physics Components... @ScriptManager, BindPhysicsComponents()");
+
+		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::Rigidbody>("RigidbodyComponent", sol::no_constructor);
+		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::Rigidbody::setLinearVelocity;
+		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::Rigidbody::setAngularVelocity;
+		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::Rigidbody::getLinearVelocity;
+		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::Rigidbody::getAngularVelocity;
+		luaRigidbodyComponent["addForce"] = &PTSD::Rigidbody::addForce;
+
+		(*state).set_function("setRigidbody", [&](UUID id, Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec4Placeholder quat) {
+			return entityManager->getEntity(id).get()->addComponent<PTSD::Rigidbody>(size, mass, pos, type, trigger, quat);
+			});
 		
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
 

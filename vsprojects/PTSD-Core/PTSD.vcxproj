@@ -20,11 +20,10 @@
     <ClCompile Include="..\..\source\Logger\source\LogImpl.cpp" />
     <ClCompile Include="..\..\source\Logger\source\PTSDAssert.cpp" />
     <ClCompile Include="..\..\source\Logger\source\LogManager.cpp" />
-    <ClCompile Include="..\..\source\Physics\source\Collider.cpp" />
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp" />
-    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\MeshComponent.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\Sound\source\SoundManager.cpp" />
@@ -46,14 +45,13 @@
     <ClInclude Include="..\..\source\Logger\include\PTSDAssert.h" />
     <ClInclude Include="..\..\source\Logger\include\LogImpl.h" />
     <ClInclude Include="..\..\source\Logger\include\LogManager.h" />
-    <ClInclude Include="..\..\source\Physics\include\Collider.h" />
     <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h" />
-    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h" />
     <ClInclude Include="..\..\source\Scripting\include\Component.h" />
     <ClInclude Include="..\..\source\Scripting\include\ECS.h" />
     <ClInclude Include="..\..\source\Scripting\include\Entity.h" />
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\MeshComponent.h" />
+    <ClInclude Include="..\..\source\Scripting\include\Rigidbody.h" />
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundManager.h" />
@@ -65,6 +63,7 @@
   <ItemGroup>
     <None Include="..\..\bin\assets\scripts\Engine\Component.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\Entity.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\EntityLoader.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\EntityManager.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\initEngine.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\middleclass.lua" />

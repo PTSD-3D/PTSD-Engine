@@ -37,6 +37,7 @@ function ns.loadScene(manager, sceneTable)
 		end
 
 		if entData.Rigidbody ~= {} then
+		entityObject.RigidBody = setBoxRigidbody(entityObject.id, )
 			--Añadir el componente RigidBody jajasi
 		end
 	 end
