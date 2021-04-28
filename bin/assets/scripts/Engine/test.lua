@@ -2,7 +2,7 @@ local eng = reqEngine
 
 reqEngine.initialize({globals = true});
 
-eng.Component.create("playerMove", {"x","y","z","r","jump")
+eng.Component.create("playerMove", {"x","y","z","r","jump"})
 
 local MoveSystem = class("MoveSystem",System)
 
@@ -39,7 +39,7 @@ function MoveSystem:update(dt)
 			dir = tr:getRight()*-vx*dt
 			tr:translate(dir)
 		end
-		local rb = entity.Rigidbody
+		--local rb = entity.Rigidbody
 		--if rb.isgrounded()		Needs to check if the rb is on the ground, we can use a downwards raycast or the collision normals to see if it's the ground
 		if keyPressed(PTSDKeys.Space) then
 			--rb.addForce(0, jump, 0);
