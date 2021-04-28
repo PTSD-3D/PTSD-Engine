@@ -24,7 +24,7 @@ end
 
 local InputHandler = class("InputHandler")
 local KeyboardInputHandler = class("KeyboardInputHandler", InputHandler)
-function KeyboardInputHandler:initialize(a)
+function KeyboardInputHandler:initialize()
 	self.commands = {
 		up = MoveCommand:new(vec3:new(0,1,0)),
 		down = MoveCommand:new(vec3:new(0,-1,0)), --2d3d
@@ -37,6 +37,7 @@ function KeyboardInputHandler:initialize(a)
 	}
 	self.sideview = true
 end
+
 function KeyboardInputHandler:handleInput()
 	if keyPressed(PTSDKeys.W) then
 		return self.commands.up
@@ -61,51 +62,56 @@ function KeyboardInputHandler:handleInput()
 end
 
 local ControllerInputHandler = class("ControllerInputHandler", InputHandler)
-function ControllerInputHandler:initialize(deadzone)
+function ControllerInputHandler:initialize(dz)
 	self.commands = {
-		up = MoveCommand(vec3:new(0,1,0)), --2d3d
-		down = MoveCommand(vec3:new(0,-1,0)), --2d3d
+		up = MoveCommand:new(vec3:new(0,1,0)), --2d3d
+		down = MoveCommand:new(vec3:new(0,-1,0)), --2d3d
 
-		left = MoveCommand(vec3:new(0,0,-1)),--3d
-		right = MoveCommand(vec3:new(0,0,1)),--3d
+		left = MoveCommand:new(vec3:new(0,0,-1)),--3d
+		right = MoveCommand:new(vec3:new(0,0,1)),--3d
 
-		forward = MoveCommand(vec3:new(1,0,0)), --2d
-		backward = MoveCommand(vec3:new(-1,0,0)) --2d
+		forward = MoveCommand:new(vec3:new(1,0,0)), --2d
+		backward = MoveCommand:new(vec3:new(-1,0,0)) --2d
 	}
-	self.deadzone = deadzone
+	self.deadzone = dz
 	self.sideview = true
+	print("init correct")
 	--[[
 		subscribe to ChangeViewEvent to syncronize self.sideview
 	]]
 end
 function ControllerInputHandler:handleInput()
-	LOG("Handle Input - Controller")
+	print("antes")
+	local axis = controllerLeftAxis(0)
+	print("despues")
+	print("X:" .. axis.x .. " y: " .. axis.y)
+
 	--2D control method
-	if controllerLeftAxis().x > self.deadzone and self.sideview  then
-		return self.commands.forward , controllerLeftAxis().x
+	if axis.x > self.deadzone and self.sideview  then
+		return self.commands.forward --, axis.x
 	end
-	if controllerLeftAxis().x < -self.deadzone and self.sideview then
-		return self.commands.backward, controllerLeftAxis().x
+	if axis.x < -self.deadzone and self.sideview then
+		return self.commands.backward--, axis.x
 	end
 	--3D control method
-	if controllerLeftAxis().x > self.deadzone and not self.sideview then
-		return self.commands.right, controllerLeftAxis().x
+	if axis.x > self.deadzone and not self.sideview then
+		return self.commands.right--, axis.x
 	end
-	if controllerLeftAxis().x < -self.deadzone and not self.sideview then
-		return self.commands.left, controllerLeftAxis().x
+	if axis.x < -self.deadzone and not self.sideview then
+		return self.commands.left--, axis.x
 	end
 	----
-	if controllerLeftAxis().y > self.deadzone then
-		return self.commands.up, controllerLeftAxis().y
+	if axis.y > self.deadzone then
+		return self.commands.up--, axis.y
 	end
-	if controllerLeftAxis().y < -self.deadzone then
-		return self.commands.down, controllerLeftAxis().y
+	if axis.y < -self.deadzone then
+		return self.commands.down--, axis.y
 	end
 end
 
 function MoveSystem:init()
-		self.keyboardIH = KeyboardInputHandler:new("AAAAAAAAAAAAAA")
--- self.controllerIH = ControllerInputHandler(0.1)
+		self.keyboardIH = KeyboardInputHandler:new()
+		self.controllerIH = ControllerInputHandler:new(0.1)
 end
 
 function MoveSystem:update(dt)
@@ -118,11 +124,12 @@ function MoveSystem:update(dt)
 		local vy = entity:get("playerMove").y;
 		local vz = entity:get("playerMove").z;
 		local speed = vec3:new(vx,vy,vz)
-		local act = self.keyboardIH:handleInput()
-		act:execute(entity, dt)
-		-- local acc, offset = self.controllerIH:handleInput()	--Two variables for the first and second return
-		-- acc:execute(entity, dt*speed*offset)
-		-- LOG("HAHAHA4")
+		-- local act = self.keyboardIH:handleInput()
+		-- act:execute(entity, dt)
+
+		local acc = self.controllerIH:handleInput()	--Two variables for the first and second return
+		print(acc)
+		-- acc[0]:execute(entity, dt*speed*1)
 	end
 end
 
