@@ -40,7 +40,7 @@ function System:pickRequiredComponents(entity)
 			table.insert(components, entity:get(componentName))
 		end
 	end
-	return unpack(components)
+	return table.unpack(components)
 end
 
 return System

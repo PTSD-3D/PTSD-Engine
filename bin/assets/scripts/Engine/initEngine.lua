@@ -5,14 +5,14 @@ local function populateNamespace(ns)
     ns.class = reqMiddleclass
 
     -- Requiring all Events
-    --ns.ComponentAdded = require(folderOfThisFile .. "src.events.ComponentAdded")
-    --ns.ComponentRemoved = require(folderOfThisFile .. "src.events.ComponentRemoved")
+    ns.ComponentAdded = reqComponentAddedEvent
+    ns.ComponentRemoved = reqComponentRemovedEvent
 
     -- Requiring the engine
     ns.Entity = reqEntity
+    ns.EventManager = reqEventManager
     ns.EntityManager = reqEntityManager
     ns.System = reqSystem
-    --ns.EventManager = require(folderOfThisFile .. "src.EventManager")
     ns.Component = reqComponent
 end
 
@@ -33,6 +33,7 @@ function engine.initialize(opts)
             populateNamespace(_G)
         end
         engine.initialized = true
+        LOG("Engine initialized correctly!")
     else
         print('Engine is already initialized.')
     end

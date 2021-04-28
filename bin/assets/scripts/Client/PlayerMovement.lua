@@ -1,12 +1,10 @@
 local eng = reqEngine
-local ns = reqNamespace
 
-eng.initialize({globals = false});
+reqEngine.initialize({globals = true});
 
 eng.Component.create("playerMove", {"x","y","z"})
-eng.Component.create("topo")
 
-local MoveSystem = ns.class("MoveSystem",ns.System)
+local MoveSystem = class("MoveSystem",System)
 
 local dir = {
 		up = vec3:new(0,1,0),
@@ -26,41 +24,41 @@ function MoveSystem:requires()
 	return {"playerMove"}
 end
 
-local Command = ns.class("Command")	--Base class
-local Move = ns.class("Move", Command)
-local Change= ns.class("Change", Command)
-local Shoot= ns.class("Shoot", Command)
-local Action = ns.class("Action", Command)
+local Command = class("Command")	--Base class
+local MoveCommand = class("MoveCommand", Command)
+local EmitEventCommand = class("EmitEventCommand", Command)
 
-function Move:initialize(newDir)
+-- local ChangeViewCommand = class("ChangeViewCommand", Command)
+-- local ShootCommand = class("ShootCommand", Command)
+-- local EmitAction = class("EmitAction", Command)
+
+function MoveCommand:initialize(newDir)
 	self.dir= newDir
 end
-function Move:execute( entity, delta , speed )
+
+function MoveCommand:execute( entity, delta , speed )
 	local tr = entity.Transform
 	tr:translate(self.dir * delta * speed:magnitude())
 end
-function Action:execute()
-	--TODO Acción
-	LOG("Something")
+
+function EmitEventCommand:execute()
+	
 end
-function Shoot:execute()
-	--TODO Disparar
-	LOG("PEW")
+
+function ChangeViewCommand:execute()
+	sideview = not sideview
 end
-function Change:execute()
-	--TODO MoVer la camara de verdad
-	sideview = not sideview;
-	LOG("Change")
-	print(sideview)
-end
+
 function KeyboardHandleInput()
 	local direction = vec3:new(0,0,0)
-
-	if keyPressed(PTSDKeys.J) then
-		return Action:new()
-	end
 	if keyPressed(PTSDKeys.H) then
-		return Shoot:new()
+		return ShootCommand:new()
+	end
+	if keyPressed(PTSDKeys.J) then
+		return EmitAction:new()
+	end
+	if keyPressed(PTSDKeys.Space) then
+		return ChangeViewCommand:new()
 	end
 	if keyPressed(PTSDKeys.W) then
 		direction = direction + dir.up
@@ -70,12 +68,10 @@ function KeyboardHandleInput()
 	end
 	
 	if keyPressed(PTSDKeys.A) and sideview then
-	print(sideview)
-	direction = direction + dir.backward
+		direction = direction + dir.backward
 	end
 	if keyPressed(PTSDKeys.A) and not sideview then
-	print(sideview)
-	direction = direction + dir.left
+		direction = direction + dir.left
 	end
 
 	if keyPressed(PTSDKeys.D) and sideview then
@@ -85,11 +81,7 @@ function KeyboardHandleInput()
 		direction = direction + dir.right
 	end
 
-	if not keyRelease(PTSDKeys.SPACE) then
-		return Change:new()
-	end
-
-	return Move:new(direction:normalize())
+	return MoveCommand:new(direction:normalize())
 end
 
 
@@ -120,7 +112,7 @@ function ControllerHandleInput()
 		direction = direction + dir.down --, axis.y
 	end
 	
-	return Move:new(direction:normalize())
+	return MoveCommand:new(direction:normalize())
 end
 
 function MoveSystem:update(dt)
@@ -141,16 +133,8 @@ function MoveSystem:update(dt)
 	end
 end
 
-LOG("Loading manager")
-Manager = eng.EntityManager()
-LOG("Manager created correctly")
-ns.loadScene(Manager, sampleScene)
-LOG("Scene loaded correctly")
-Manager:addSystem(MoveSystem())
---Showing component Added event working
-local ents = Manager:getEntitiesWithComponent("playerMove")
-if ents ~= {} then
-	ents[1]:add(ns.Component.all["topo"]())
-end
+manager = eng.EntityManager()
 
-LOG("Test.lua completed")
+reqNamespace.loadScene(manager, sampleScene)
+
+manager:addSystem(MoveSystem())
