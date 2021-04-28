@@ -43,11 +43,6 @@ namespace PTSD
 		return nullptr;
 	}
 
-	/*void test_Rigidbody_Setup(std::shared_ptr<PTSD::Entity> sinbad) {
-		PTSD::Rigidbody* rb = sinbad->addComponent<PTSD::Rigidbody>(1, 1, Vec3Placeholder(1,1,1));
-		rb->setLinearVelocity(Vec3Placeholder(10, 0, 0));
-	}*/
-
 	static void test_Transform_Update(PTSD::TransformComponent* transform) {
 		// transform->translate(Vec3Placeholder(0.1, 0, 0));
 		// transform->rotate(Vec3Placeholder(0, 3, 0));
