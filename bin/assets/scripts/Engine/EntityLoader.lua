@@ -32,8 +32,22 @@ function ns.loadScene(manager, sceneTable)
 			local s = vec3:new(scale.x, scale.y, scale.z)
 			entityObject.Transform = setTransform(entityObject.id,p,r,s)
 		end
+
 		if entData.Mesh then
 			entityObject.Mesh = setMesh(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
 		end
-	end
+
+		if entData.Rigidbody then
+			local size = entData.Rigidbody.size
+			local s = vec3:new(size.x, size.y, size.z)
+
+			local position = entData.Rigidbody.position
+			local p = vec3:new(position.x, position.y, position.z)
+
+			local rotation = entData.Rigidbody.rotation
+			local r = vec4:new(rotation.x, rotation.y, rotation.z, rotation.w)
+
+			entityObject.Rigidbody = setRigidbody(entityObject.id, s, entData.Rigidbody.mass, p, entData.Rigidbody.type, entData.Rigidbody.trigger, r)
+		end
+	 end
 end

@@ -17,6 +17,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "LogManager.h"
 #include "MeshComponent.h"
 #include "TransformComponent.h"
+#include "RigidbodyComponent.h"
 
 namespace PTSD {
 	/**
@@ -162,6 +163,17 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA Physics Components... @ScriptManager, BindPhysicsComponents()");
+
+		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::RigidbodyComponent>("RigidbodyComponent", sol::no_constructor);
+		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::RigidbodyComponent::setLinearVelocity;
+		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::RigidbodyComponent::setAngularVelocity;
+		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::RigidbodyComponent::getLinearVelocity;
+		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
+		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
+
+		(*state).set_function("setRigidbody", [&](UUID id, Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec4Placeholder quat) {
+			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
+			});
 		
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
 
@@ -219,6 +231,7 @@ namespace PTSD {
 		});
 
 		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vec4Placeholder>("vec4", sol::constructors<Vec4Placeholder(double, double, double, double)>(), "x", &Vec4Placeholder::x, "y", &Vec4Placeholder::y, "z", &Vec4Placeholder::z, "w", &Vec4Placeholder::w);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 
