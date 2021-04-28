@@ -2,7 +2,7 @@ local eng = reqEngine
 
 reqEngine.initialize({globals = true});
 
-eng.Component.create("playerMove", {"x","y","z","r"})
+eng.Component.create("playerMove", {"x","y","z","r","jump")
 
 local MoveSystem = class("MoveSystem",System)
 
@@ -19,8 +19,8 @@ function MoveSystem:update(dt)
 		local vr = entity:get("playerMove").r;
 
 		local mouseDirection = getMouseRelativePosition()
-		rot = vec3:new(0, -mouseDirection.x, 0) * vr;
-		local tr = entity.Transform;
+		rot = vec3:new(0, -mouseDirection.x, 0) * vr
+		local tr = entity.Transform
 
 		tr:rotate(rot);
 		if keyPressed(PTSDKeys.A) then
@@ -39,14 +39,10 @@ function MoveSystem:update(dt)
 			dir = tr:getRight()*-vx*dt
 			tr:translate(dir)
 		end
-		if keyPressed(PTSDKeys.Shift) then
-			local material = entity.Mesh:getMaterial()
-			if material == "KirbyMat" then
-				material = "Red"
-			else
-				material="KirbyMat"
-			end
-			entity.Mesh:setMaterial(material);
+		local rb = entity.Rigidbody
+		--if rb.isgrounded()		Needs to check if the rb is on the ground, we can use a downwards raycast or the collision normals to see if it's the ground
+		if keyPressed(PTSDKeys.Space) then
+			--rb.addForce(0, jump, 0);
 		end
 	end
 end

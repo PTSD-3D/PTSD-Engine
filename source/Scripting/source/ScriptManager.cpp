@@ -187,7 +187,8 @@ namespace PTSD {
 			{"A", Scancode::SCANCODE_A},
 			{"S", Scancode::SCANCODE_S},
 			{"D", Scancode::SCANCODE_D},
-			{"Shift", Scancode::SCANCODE_LSHIFT}
+			{"Shift", Scancode::SCANCODE_LSHIFT},
+			{"Space", Scancode::SCANCODE_SPACE},
 			});
 
 		return true;
