@@ -41,6 +41,11 @@ namespace PTSD {
 		delete mWorld;
 	}
 
+	void PhysicsManager::setGravity(float grav)
+	{
+		mWorld->setGravity(btVector3(0, grav, 0)); //3 dimensional gravity should not be needed. Could be changed easily.
+	}
+
 	//example scene
 	void PhysicsManager::testScene() {
 		mWorld->setGravity(btVector3(0, -10, 0));
@@ -72,7 +77,7 @@ namespace PTSD {
 			}
 			std::string s = "World pos object " + std::to_string(j) + " = " + std::to_string(float(trans.getOrigin().getX())) + ", " +
 				std::to_string(float(trans.getOrigin().getY())) + ", " + std::to_string(float(trans.getOrigin().getZ())) + "\n";
-			LOG(s.c_str(), Trace);
+			//LOG(s.c_str(), Trace);
 		}
 	}
 

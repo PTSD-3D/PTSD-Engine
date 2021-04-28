@@ -11,6 +11,7 @@ namespace PTSD
 	private:
 		CmpId id_;
 	protected:
+		Entity* entity_ = nullptr;
 		Component(CmpId id) :
 			id_(id) {}
 		Entity* entity_ = nullptr;

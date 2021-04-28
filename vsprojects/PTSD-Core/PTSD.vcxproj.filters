@@ -79,12 +79,15 @@
     <Filter Include="Scripting\Scripts\Engine">
       <UniqueIdentifier>{c9bb1d3c-5b4c-4ce8-a8ba-7a9239354e22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripting\Headers\Components">
+      <UniqueIdentifier>{22509197-678e-4236-af5d-fdadfc5dec5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting\Source\Components">
+      <UniqueIdentifier>{da73f879-557f-4125-a2e0-e08a9dc5463e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp">
-      <Filter>Graphics\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Graphics\source\CameraImplementation.cpp">
       <Filter>Graphics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp">
@@ -103,6 +106,9 @@
       <Filter>Physics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp">
+      <Filter>Physics\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp">
@@ -135,24 +141,18 @@
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp">
       <Filter>Scripting\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp">
-      <Filter>Scripting\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Logger\source\PTSDAssert.cpp">
       <Filter>Logger\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Core\src\BtOgre.cpp">
-      <Filter>Core\Source</Filter>
+    <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp">
+      <Filter>Scripting\Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Scripting\source\Rigidbody.cpp">
-      <Filter>Scripting\Source</Filter>
+    <ClCompile Include="..\..\source\Scripting\source\MeshComponent.cpp">
+      <Filter>Scripting\Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
-      <Filter>Graphics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Graphics\include\CameraImplementation.h">
       <Filter>Graphics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h">
@@ -177,6 +177,9 @@
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h">
+      <Filter>Physics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h">
@@ -215,23 +218,20 @@
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h">
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Scripting\include\Component.h">
-      <Filter>Scripting\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ECS.h">
-      <Filter>Scripting\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h">
       <Filter>Scripting\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Logger\include\PTSDAssert.h">
       <Filter>Logger\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Core\include\BtOgre.h">
-      <Filter>Core\Headers</Filter>
+    <ClInclude Include="..\..\source\Scripting\include\Component.h">
+      <Filter>Scripting\Headers\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Scripting\include\Rigidbody.h">
-      <Filter>Scripting\Headers</Filter>
+    <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h">
+      <Filter>Scripting\Headers\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Scripting\include\MeshComponent.h">
+      <Filter>Scripting\Headers\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 #include <OgreEntity.h>
 #include "Rigidbody.h"
 //#include <Windows.h> //Please keep me commented if you are finished testing or Ricardo will kill you.
-
+#include "MeshComponent.h"
 namespace PTSD
 {
 	//This needs to be kept commented because Sleep() is a function from Windows, so it wouldn't work on Linux
@@ -34,13 +34,13 @@ namespace PTSD
 	}
 
 	static PTSD::TransformComponent* test_Transform_Setup(std::shared_ptr<PTSD::Entity> sinbad) {
-		PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
-		Ogre::Entity* ogreEntt = PTSD::GraphicsImplementation::getInstance()->getSceneMgr()->createEntity("ogrehead.mesh");
-		transform->getNode()->attachObject(ogreEntt);
-		transform->setPosition(10, 0, 0);
-		transform->setRotation(0, 90, 0);
-		transform->setScale(0.5, 0.5, 0.5);
-		return transform;
+		// PTSD::TransformComponent* transform = sinbad->addComponent<PTSD::TransformComponent>();
+		// sinbad->addComponent<PTSD::MeshComponent>("ogrehead.mesh");
+		// transform->setPosition(10, 0, 0);
+		// transform->setRotation(0, 90, 0);
+		// transform->setScale(0.5, 0.5, 0.5);
+		// return transform;
+		return nullptr;
 	}
 
 	void test_Rigidbody_Setup(std::shared_ptr<PTSD::Entity> sinbad) {
@@ -49,8 +49,8 @@ namespace PTSD
 	}
 
 	static void test_Transform_Update(PTSD::TransformComponent* transform) {
-		transform->translate(Vec3Placeholder(0.1, 0, 0));
-		transform->rotate(Vec3Placeholder(0, 3, 0));
+		// transform->translate(Vec3Placeholder(0.1, 0, 0));
+		// transform->rotate(Vec3Placeholder(0, 3, 0));
 		//PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Info);
 		//PTSD::LOG(std::to_string(transform->getRotation().y).c_str(), PTSD::Info);
 	}

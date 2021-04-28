@@ -89,7 +89,7 @@ BinDir="${PWD}/bin/";
 DependenciesDir="${PWD}/dependencies";
 OgreDir="${PWD}/dependencies/Ogre/";
 SpdlogDir="${PWD}/dependencies/spdlog/";
-LuaDir="${PWD}/dependencies/lua/lua-5.4.2/";
+LuaDir="${PWD}/dependencies/scripting/lua/lua-5.4.2/";
 BulletDir="${PWD}/dependencies/bullet/";
 CEGUI="${PWD}/dependencies/CEGUI/";
 
@@ -120,7 +120,7 @@ function buildOgreRelease(){
 	fi;
 
 	cd "${OgreDir}build";
-	printGreen "Configurando CMake" && cmake -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="1" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="1" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_TOOLS:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DCMAKE_BUILD_TYPE:STRING="RelWithDebInfo" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" "../src/" &> /dev/null;
+	printGreen "Configurando CMake" && cmake -DOGRE_CONFIG_ENABLE_ZIP:BOOL="1" -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR:BOOL="0" -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS:BOOL="1" -DOGRE_INSTALL_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM:BOOL="0" -DOGRE_BUILD_PLUGIN_DOT_SCENE:BOOL="0" -DOGRE_BUILD_COMPONENT_PROPERTY:BOOL="0" -DOGRE_BUILD_PLUGIN_BSP:BOOL="0" -DOGRE_INSTALL_TOOLS:BOOL="0" -DOGRE_BUILD_COMPONENT_BITES:BOOL="0" -DOGRE_BUILD_DEPENDENCIES:BOOL="1" -DOGRE_BUILD_RENDERSYSTEM_GL:BOOL="1" -DOGRE_BUILD_SAMPLES:BOOL="0" -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI:BOOL="0" -DOGRE_INSTALL_CMAKE:BOOL="0" -DOGRE_NODELESS_POSITIONING:BOOL="0" -DOGRE_BUILD_COMPONENT_VOLUME:BOOL="0" -DOGRE_BUILD_PLUGIN_STBI:BOOL="1" -DOGRE_BUILD_COMPONENT_TERRAIN:BOOL="0" -DOGRE_BUILD_PLUGIN_PCZ:BOOL="0" -DOGRE_BUILD_PLUGIN_PFX:BOOL="1" -DOGRE_BUILD_COMPONENT_OVERLAY:BOOL="0" -DOGRE_BUILD_TOOLS:BOOL="0" -DOGRE_BUILD_PLUGIN_OCTREE:BOOL="0" -DCMAKE_BUILD_TYPE:STRING="RelWithDebInfo" -DOGRE_ENABLE_PRECOMPILED_HEADERS:BOOL="0" -DOGRE_BUILD_COMPONENT_PAGING:BOOL="0" -DOGRE_BUILD_RTSHADERSYSTEM_SHADERS:BOOL="0" -DOGRE_INSTALL_DOCS:BOOL="0" "../src/" &> /dev/null;
 	printGreen "Building Ogre en Release" && cmake --build "." &>/dev/null & spinner 
 	printGreen "Installing Ogre en ${OgreDir}RelWithDebInfo/";
 
@@ -208,9 +208,11 @@ function buildCEGUIRelease(){
 		return;
 	fi;
 	cd "${CEGUI}build";
-	printGreen "Configuring CMake" && cmake -DCEGUI_HAS_FREETYPE:BOOL="1" -DCMAKE_BUILD_TYPE="Release" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/" &>/dev/null;
-	printGreen "Building CEGUI en Release \n---------------------------\n" && cmake  --build "." &  spinner 
-	printGreen "Installing Ogre en ${CEGUI}Release/";
+	printGreen "Configuring CMake" && cmake  -DCEGUI_FOUND_OGRE_VERSION_MAJOR=1 -DCEGUI_FOUND_OGRE_VERSION_MINOR=12 -DCEGUI_FOUND_OGRE_VERSION_PATCH=14 -DCMAKE_CXX_STANDARD=11 -DCEGUI_HAS_FREETYPE:BOOL="1" -DCMAKE_BUILD_TYPE="Release" -DOGRE_LIB_DBG:FILEPATH=${DependenciesDir}"/Ogre/Debug/lib/libOgreMain_d.so" -DCCACHE_FOUND:FILEPATH="CCACHE_FOUND-NOTFOUND" -DCEGUI_BUILD_APPLICATION_TEMPLATES:BOOL="0" -DOGRE_PLUGIN_DIR_DBG:STRING=${BinDir} -DOGRE_H_PATH:PATH=${OgreDir}"/src/OgreMain/include" -DOGRE_PLUGIN_DIR_REL:STRING="${BinDir}" -DOGRE_H_BUILD_SETTINGS_PATH:PATH="${OgreDir}/build/include" -DOGRE_LIB:FILEPATH="${OgreDir}RelWithDebInfo/lib/libOgreMain.so"  "../src/" &>/dev/null;
+	sed -i '/define CEGUI_OGRE_VERSION_MAJOR 0/c\#define CEGUI_OGRE_VERSION_MAJOR 1' ${CEGUI}build/cegui/include/CEGUI/Config.h
+	sed -i '/define CEGUI_OGRE_VERSION_MINOR 0/c\#define CEGUI_OGRE_VERSION_MINOR 12' ${CEGUI}build/cegui/include/CEGUI/Config.h
+	sed -i '/define CEGUI_OGRE_VERSION_PATCH 0/c\#define CEGUI_OGRE_VERSION_PATCH 14' ${CEGUI}build/cegui/include/CEGUI/Config.h
+	cmake  --build "." &  spinner 
 		
 	cp -r Dependencies ../RelWithDebInfo/Dependencies
 	cp -r cegui/include ../RelWithDebInfo/include
@@ -230,15 +232,18 @@ function buildBulletRelease(){
 	fi;
 
 	cd ${BulletDir}src;
-	printGreen "Executing bullet build_release.sh" && ./build_release.sh &>/dev/null;
-	cd ${BulletDir}src/build_release/;
-	cmake --install . &  spinner
-	cd ${BulletDir}RelWithDebInfo/lib;
-	cp	*LinearMath* ${BinDir}
-	cp	*BulletCollision* ${BinDir}
-	cp	*Bullet3Geometry* ${BinDir}
-	cp	*BulletDynamics* ${BinDir}
-	rm -rf ${BulletDir}src/build_release/;
+	printGreen "Executing bullet build_release.sh" && ./build_cmake_pybullet_double.sh &>/dev/null & spinner;
+	cd ./build3;
+	chmod +x ./premake4_linux64 
+	./premake4_linux64 --double gmake
+	cd ./gmake;
+	make;	
+	cd ${BulletDir}src/build_cmake/src;
+	cp	./*/*LinearMath.so* ${BinDir}
+	cp	./*/*BulletCollision.so* ${BinDir}
+	cp	./*/*Bullet3Geometry.so* ${BinDir}
+	cp	./*/*BulletDynamics.so* ${BinDir}
+	# rm -rf ${BulletDir}src/build_release/;
 }
 
 function buildBulletDebug(){

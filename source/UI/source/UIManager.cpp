@@ -53,9 +53,11 @@ namespace PTSD {
 	 */
 	bool UIManager::testCallback(const CEGUI::EventArgs& e)
 	{
-		mImplementation->setStaticImage("PrettyImage","TaharezLook/MiniHorzScrollLeftHover");
-		mImplementation->setText("PrettyText","ButtonTest pressed!");
+		mImplementation->setLayoutVisible("PrettyImage", false);
+		mImplementation->setLayoutVisible("PrettyText", false);
+		mImplementation->setLayoutVisible("PushButton", false);
 		mImplementation->setLayoutVisible("DemoWindow", false);
+		mImplementation->setMouseCursorVisible(false);
 		return true;
 	}
 
