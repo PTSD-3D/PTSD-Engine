@@ -16,7 +16,7 @@ namespace PTSD
 		Dynamic, Static, Kinematic, Trigger = 4
 	};
 
-	class Rigidbody: public Component {
+	class RigidbodyComponent: public Component {
 	private:
 		btRigidBody* mObj = nullptr;
 		BtOgre::RigidBodyState* rbState = nullptr;
@@ -24,8 +24,8 @@ namespace PTSD
 		bool trigger;
 		float mass;
 	public:
-		Rigidbody(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec4Placeholder quat = { 0,0,0,1 });
-		~Rigidbody() = default;
+		RigidbodyComponent(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec4Placeholder quat = { 0,0,0,1 });
+		~RigidbodyComponent() = default;
 
 		virtual void init();
 

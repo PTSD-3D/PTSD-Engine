@@ -144,7 +144,7 @@
     <ClCompile Include="..\..\source\Scripting\source\MeshComponent.cpp">
       <Filter>Scripting\Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Scripting\source\Rigidbody.cpp">
+    <ClCompile Include="..\..\source\Scripting\source\RigidbodyComponent.cpp">
       <Filter>Scripting\Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Core\src\BtOgre.cpp">
@@ -227,7 +227,7 @@
     <ClInclude Include="..\..\source\Scripting\include\MeshComponent.h">
       <Filter>Scripting\Headers\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Scripting\include\Rigidbody.h">
+    <ClInclude Include="..\..\source\Scripting\include\RigidbodyComponent.h">
       <Filter>Scripting\Headers\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Core\include\BtOgre.h">

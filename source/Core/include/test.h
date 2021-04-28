@@ -5,7 +5,6 @@
 #include "TransformComponent.h"
 #include "Entity.h"
 #include <OgreEntity.h>
-#include "Rigidbody.h"
 //#include <Windows.h> //Please keep me commented if you are finished testing or Ricardo will kill you.
 #include "MeshComponent.h"
 namespace PTSD

@@ -17,7 +17,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "LogManager.h"
 #include "MeshComponent.h"
 #include "TransformComponent.h"
-#include "Rigidbody.h"
+#include "RigidbodyComponent.h"
 
 namespace PTSD {
 	/**
@@ -157,15 +157,15 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Physics Components... @ScriptManager, BindPhysicsComponents()");
 
-		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::Rigidbody>("RigidbodyComponent", sol::no_constructor);
-		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::Rigidbody::setLinearVelocity;
-		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::Rigidbody::setAngularVelocity;
-		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::Rigidbody::getLinearVelocity;
-		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::Rigidbody::getAngularVelocity;
-		luaRigidbodyComponent["addForce"] = &PTSD::Rigidbody::addForce;
+		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::RigidbodyComponent>("RigidbodyComponent", sol::no_constructor);
+		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::RigidbodyComponent::setLinearVelocity;
+		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::RigidbodyComponent::setAngularVelocity;
+		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::RigidbodyComponent::getLinearVelocity;
+		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
+		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
 
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec4Placeholder quat) {
-			return entityManager->getEntity(id).get()->addComponent<PTSD::Rigidbody>(size, mass, pos, type, trigger, quat);
+			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
 		
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());

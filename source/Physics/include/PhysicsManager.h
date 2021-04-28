@@ -1,7 +1,7 @@
 #pragma once
 #include "PTSDVectors.h"
 #include "PTSDAssert.h"
-#include "Rigidbody.h"
+#include "RigidbodyComponent.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
