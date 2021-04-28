@@ -59,6 +59,15 @@ struct Vec3Placeholder
 	float x, y, z;
 	Vec3Placeholder(float x = 0, float y = 0, float z = 0):
 	x(x),y(y),z(z){};
+	Vec3Placeholder operator - (const Vec3Placeholder& v) const {
+		return(Vec3Placeholder(x - v.x, y - v.y,z-v.z));
+	}
+	Vec3Placeholder operator + (const Vec3Placeholder& v) const{
+		return(Vec3Placeholder(x + v.x, y + v.y,z+v.z));
+	}
+	Vec3Placeholder operator * (const float &f) const{
+		return(Vec3Placeholder(x * f, y * f,z*f));
+	}
 };
 
 struct Vec4Placeholder {

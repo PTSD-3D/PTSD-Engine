@@ -177,18 +177,38 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
-		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
 		(*state).set_function("getMouseRelativePosition", &PTSD::InputManager::getMouseRelativePosition, PTSD::InputManager::getInstance());
 		(*state).set_function("resetMouse", &PTSD::InputManager::cleanMouseDelta, PTSD::InputManager::getInstance());
+		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
+		(*state).set_function("mouseLeftClick", &PTSD::InputManager::mouseLeftClick, PTSD::InputManager::getInstance());
+		(*state).set_function("mouseRightClick", &PTSD::InputManager::mouseRightClick, PTSD::InputManager::getInstance());
+		//Bind sticks and triggers of a gamepad
+		(*state).set_function("controllerLeftTrigger", &PTSD::InputManager::controllerLeftTrigger, PTSD::InputManager::getInstance());
+		(*state).set_function("controllerRightTrigger", &PTSD::InputManager::controllerRightTrigger, PTSD::InputManager::getInstance());
+		(*state).set_function("controllerLeftAxis", &PTSD::InputManager::controllerLeftAxis, PTSD::InputManager::getInstance());
+		(*state).set_function("controllerRightAxis", &PTSD::InputManager::controllerRightAxis, PTSD::InputManager::getInstance());
 
 		//This should be expanded or reconsidered in the future.
+		//Binding of the keybord keys
 		(*state).new_enum<Scancode>("PTSDKeys", {
 			{"W", Scancode::SCANCODE_W},
 			{"A", Scancode::SCANCODE_A},
 			{"S", Scancode::SCANCODE_S},
 			{"D", Scancode::SCANCODE_D},
+			{"H", Scancode::SCANCODE_H},
+			{"J", Scancode::SCANCODE_J},
+			{"SPACE", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
+
+			//Binding of the controller buttons
+			(*state).new_enum<ControllerButton>("PTSDControllerButtons",{
+				{"A",ControllerButton::CONTROLLER_BUTTON_A},
+				{"B",ControllerButton::CONTROLLER_BUTTON_B},
+				{"Y",ControllerButton::CONTROLLER_BUTTON_Y},
+				{"START",ControllerButton::CONTROLLER_BUTTON_START}
+			});
+
 
 		return true;
 	}
@@ -211,7 +231,8 @@ namespace PTSD {
 			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
 		});
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z, 
+		sol::meta_function::multiplication, &Vec3Placeholder::operator*,sol::meta_function::subtraction, &Vec3Placeholder::operator-,sol::meta_function::addition, &Vec3Placeholder::operator+);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 
