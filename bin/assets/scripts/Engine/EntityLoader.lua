@@ -36,9 +36,17 @@ function ns.loadScene(manager, sceneTable)
 			entityObject.Mesh = setMesh(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
 		end
 
-		if entData.Rigidbody ~= {} then
-		entityObject.RigidBody = setBoxRigidbody(entityObject.id, )
-			--Añadir el componente RigidBody jajasi
+		if entData.Rigidbody then
+			local size = entData.Rigidbody.size
+			local s = vec3:new(size.x, size.y, size.z)
+
+			local position = entData.RigidBody.position
+			local p = vec3:new(position.x, position.y, position.z)
+
+			local rotation = entData.Rigidbody.rotation
+			local r = vec4:new(rotation.x, rotation.y, rotation.z, rotation.w)
+
+			entityObject.RigidBody = setRigidbody(entityObject.id, s, entData.RigidBody.mass, p, entData.RigidBody.type, entData.RigidBody.trigger, r)
 		end
 	 end
 end

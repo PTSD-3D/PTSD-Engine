@@ -14,7 +14,8 @@ Scene = {
 			{name="playerMove", arguments={1,1,1}}
 		},
 			Transform = {position={x=0,y=0,z=-250},rotation={x=0,y=0,z=0},scale={x=1,y=1,z=1}},
-			Mesh = {mesh="ogrehead.mesh", material="KirbyMat"}
+			Mesh = {mesh="ogrehead.mesh", material="KirbyMat"},
+			Rigidbody = {size={x=1,y=1,z=1},mass=1,position={x=0,y=0,z=0},type=0,trigger=false,rotation={x=0,y=0,z=0,w=1}}
 		},
 		Entity2={
 			Components = {
