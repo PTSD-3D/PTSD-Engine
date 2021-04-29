@@ -4,7 +4,9 @@
 #include "lua.hpp"
 #include "ECS.h"
 #include "EntityManager.h"
-
+#include <string>
+#include <iostream>
+#include <filesystem>
 /*
 Include every PTSD-System to expose its public API to our Scripting state
 */
@@ -19,6 +21,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "TransformComponent.h"
 #include "RigidbodyComponent.h"
 
+namespace fs = std::filesystem;
 namespace PTSD {
 	/**
 	 * \brief Creates the objects for lua state and entityManager
@@ -64,6 +67,13 @@ namespace PTSD {
 		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
+		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
+		(*state).require_file("reqSceneConfigurations", "./assets/scripts/Engine/Prefab.lua");
+		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
+		{
+			(*state).script_file(entry.path().string());
+		}
+
 		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
