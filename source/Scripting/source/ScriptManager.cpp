@@ -220,7 +220,8 @@ namespace PTSD {
 		(*state).set_function("controllerRightTrigger", &PTSD::InputManager::controllerRightTrigger, PTSD::InputManager::getInstance());
 		(*state).set_function("controllerLeftAxis", &PTSD::InputManager::controllerLeftAxis, PTSD::InputManager::getInstance());
 		(*state).set_function("controllerRightAxis", &PTSD::InputManager::controllerRightAxis, PTSD::InputManager::getInstance());
-		(*state).set_function("ControllerButtonPressed", &PTSD::InputManager::ControllerButtonPressed, PTSD::InputManager::getInstance());
+		(*state).set_function("controllerButtonPressed", &PTSD::InputManager::ControllerButtonPressed, PTSD::InputManager::getInstance());
+		(*state).set_function("controllerButtonJustPressed", &PTSD::InputManager::ControllerButtonJustPressed, PTSD::InputManager::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		//Binding of the keybord keys

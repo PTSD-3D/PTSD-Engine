@@ -23,6 +23,9 @@ local deadzone = 0.1
 function MoveSystem:requires() return { "playerMove" } end
 
 local Command = ns.class"Command"
+
+function Command:initialize() end
+
 -- Base class
 local Move = ns.class("Move", Command)
 local Change = ns.class("Change", Command)
@@ -65,15 +68,14 @@ function KeyboardHandleInput()
 	if keyPressed(PTSDKeys.A) and not sideview then direction = direction + dir.left end
 	if keyPressed(PTSDKeys.D) and not sideview then direction = direction + dir.right end
 	-- 
-	if keyPressed(PTSDKeys.J) or mouseRightClick() then return Action:new() end
-	if keyPressed(PTSDKeys.H) or mouseLeftClick() then return Shoot:new() end
-	if keyJustPressed(PTSDKeys.Space) then return Change:new() end
-	return Move:new(direction:normalize())
+	if keyPressed(PTSDKeys.J) or mouseRightClick() then return Action() end
+	if keyPressed(PTSDKeys.H) or mouseLeftClick() then return Shoot() end
+	if keyJustPressed(PTSDKeys.Space) then return Change() end
+	return Move(direction:normalize())
 end
 
 function ControllerHandleInput()
 	local axis = controllerLeftAxis(0)
-	print("x: " .. axis.x .. " y:" .. axis.y)
 	local direction = vec3:new(0, 0, 0)
 	-- Up and down
 	if axis.y < -deadzone then direction = direction + dir.up end
@@ -85,11 +87,11 @@ function ControllerHandleInput()
 	if axis.x > deadzone and not sideview then direction = direction + dir.right end
 	if axis.x < -deadzone and not sideview then direction = direction + dir.left end
 	-- Actions
-	if ControllerButtonPressed(PTSDControllerButtons.B) or controllerRightTrigger() then return Action:new() end
-	if ControllerButtonPressed(PTSDControllerButtons.A) or controllerLeftTrigger() then return Shoot:new() end
-	if ControllerButtonPressed(PTSDControllerButtons.Y) then return Change:new() end
-	print("x: " .. axis.x .. " y:" .. axis.y)
-	return Move:new(direction:normalize())
+	if controllerButtonJustPressed(0, PTSDControllerButtons.B) or controllerRightTrigger(0) > deadzone then return Action() end
+	if controllerButtonJustPressed(0, PTSDControllerButtons.A) or controllerLeftTrigger(0) > deadzone then return Shoot() end
+	if controllerButtonJustPressed(0, PTSDControllerButtons.Y) then return Change() end
+	-- print("L: " .. controllerLeftTrigger(0) .. " R:" .. controllerRightTrigger(0))
+	return Move(direction:normalize())
 end
 
 function MoveSystem:update(dt)
