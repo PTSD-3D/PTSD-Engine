@@ -41,6 +41,7 @@ namespace PTSD
 		// return transform;
 		return nullptr;
 	}
+
 	static void test_Transform_Update(PTSD::TransformComponent* transform) {
 		// transform->translate(Vec3Placeholder(0.1, 0, 0));
 		// transform->rotate(Vec3Placeholder(0, 3, 0));

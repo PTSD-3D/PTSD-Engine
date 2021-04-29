@@ -19,6 +19,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "LogManager.h"
 #include "MeshComponent.h"
 #include "TransformComponent.h"
+#include "RigidbodyComponent.h"
 
 namespace fs = std::filesystem;
 namespace PTSD {
@@ -54,9 +55,16 @@ namespace PTSD {
 
 		(*state).require_file("reqNamespace", "./assets/scripts/Engine/namespace.lua");
 		(*state).require_file("reqMiddleclass", "./assets/scripts/Engine/middleclass.lua");
+
+		//Engine components
 		(*state).require_file("reqComponent", "./assets/scripts/Engine/Component.lua");
 		(*state).require_file("reqEntity", "./assets/scripts/Engine/Entity.lua");
 		(*state).require_file("reqSystem", "./assets/scripts/Engine/System.lua");
+		//Events
+		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
+		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
+
+		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
 		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
@@ -88,8 +96,8 @@ namespace PTSD {
 	bool ScriptManager::update()
 	{
 		entityManager->update();
-		(*state)["manager"]["update"]((*state)["manager"], 1); //This and line above are both valid
-		(*state)["Update"]();
+		(*state)["Manager"]["update"]((*state)["Manager"], 1);
+		//(*state)["Update"]();
 		//TODO exit state
 		return true;
 	}
@@ -165,6 +173,17 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA Physics Components... @ScriptManager, BindPhysicsComponents()");
+
+		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::RigidbodyComponent>("RigidbodyComponent", sol::no_constructor);
+		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::RigidbodyComponent::setLinearVelocity;
+		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::RigidbodyComponent::setAngularVelocity;
+		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::RigidbodyComponent::getLinearVelocity;
+		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
+		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
+
+		(*state).set_function("setRigidbody", [&](UUID id, Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec4Placeholder quat) {
+			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
+			});
 		
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
 
@@ -222,6 +241,7 @@ namespace PTSD {
 		});
 
 		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vec4Placeholder>("vec4", sol::constructors<Vec4Placeholder(double, double, double, double)>(), "x", &Vec4Placeholder::x, "y", &Vec4Placeholder::y, "z", &Vec4Placeholder::z, "w", &Vec4Placeholder::w);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 

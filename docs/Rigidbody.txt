@@ -1,0 +1,15 @@
+(C++) -> Rigidbody(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec4Placeholder quat = { 0,0,0,1 });
+(LUA) -> Rigidbody = {size={x=1,y=1,z=1},mass=1,position={x=0,y=0,z=0},type=0,trigger=false,rotation={x=0,y=0,z=0,w=1}}
+
+>PARA ELEGIR EL SHAPE DEL RIGIDBODY<
+Hicimos solo un constructor independiente del shape por simplicidad y no tener 2 métodos duplicados para todo
+	>Cubo - En el parámetro size, darle valores con normalidad a cada componente del vector
+	>Esfera - Darle valor solo a la componente x y poner las otras a 0
+
+>PARA ELEGIR EL TIPO DE RIGIDBODY<
+El dinámico se mueve normalmente, el estático no se puede mover y el cinemático se mueve solo por código
+	>Dinámico - Parámetro type a 0
+	>Estático - Parámetro type a 1
+	>Cinemático - Parámetro type a 2
+Si queremos hacer un trigger, poner el booleano trigger a true. si no, ponerlo a false.
+
