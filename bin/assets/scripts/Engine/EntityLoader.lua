@@ -22,15 +22,11 @@ function ns.loadScene(manager, sceneTable)
 		if entData.Transform then
 			local location = entData.Transform.position
 			local p = vec3:new(location.x, location.y, location.z)
-			if entData.Transform then
-				local location = entData.Transform.position
-				local p = vec3:new(location.x, location.y, location.z)
-				local rotation = entData.Transform.rotation
-				local r = vec3:new(rotation.x, rotation.y, rotation.z)
-				local scale = entData.Transform.scale
-				local s = vec3:new(scale.x, scale.y, scale.z)
-				entityObject.Transform = setTransform(entityObject.id, p, r, s)
-			end
+			local rotation = entData.Transform.rotation
+			local r = vec3:new(rotation.x, rotation.y, rotation.z)
+			local scale = entData.Transform.scale
+			local s = vec3:new(scale.x, scale.y, scale.z)
+			entityObject.Transform = setTransform(entityObject.id, p, r, s)
 			if entData.Mesh then
 				entityObject.Mesh = setMesh(entityObject.id, entData.Mesh.mesh, entData.Mesh.material)
 			end
