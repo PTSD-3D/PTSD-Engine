@@ -207,6 +207,8 @@ namespace PTSD {
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
 		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
+		(*state).set_function("keyJustPressed", &PTSD::InputManager::keyJustDown, PTSD::InputManager::getInstance());
+		(*state).set_function("keyJustReleased", &PTSD::InputManager::keyJustUp, PTSD::InputManager::getInstance());
 		(*state).set_function("getMouseRelativePosition", &PTSD::InputManager::getMouseRelativePosition, PTSD::InputManager::getInstance());
 		(*state).set_function("resetMouse", &PTSD::InputManager::cleanMouseDelta, PTSD::InputManager::getInstance());
 
@@ -216,7 +218,8 @@ namespace PTSD {
 			{"A", Scancode::SCANCODE_A},
 			{"S", Scancode::SCANCODE_S},
 			{"D", Scancode::SCANCODE_D},
-			{"Shift", Scancode::SCANCODE_LSHIFT}
+			{"Shift", Scancode::SCANCODE_LSHIFT},
+			{"Space",Scancode::SCANCODE_SPACE}
 			});
 
 		return true;

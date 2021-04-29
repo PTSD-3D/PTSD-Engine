@@ -36,7 +36,7 @@ function MoveSystem:update(dt)
 			dir = vec3:new(vx, 0, 0)
 			tr:translate(dir)
 		end
-		if keyPressed(PTSDKeys.Shift) then
+		if keyJustPressed(PTSDKeys.Shift) then
 			local material = entity.Mesh:getMaterial()
 			if material == "KirbyMat" then
 				material = "Red"

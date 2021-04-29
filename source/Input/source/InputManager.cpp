@@ -121,6 +121,16 @@ namespace PTSD {
 		return mImplementation->isKeyUp(static_cast<SDL_Scancode>(key));
 	}
 
+	bool InputManager::keyJustDown(Scancode key)
+	{
+		return mImplementation->isKeyJustDown(static_cast<SDL_Scancode>(key));
+	}
+
+	bool InputManager::keyJustUp(Scancode key)
+	{
+		return mImplementation->isKeyJustUp(static_cast<SDL_Scancode>(key));
+	}
+
 	//Mouse
 
 	bool InputManager::mouseLeftClick() {
