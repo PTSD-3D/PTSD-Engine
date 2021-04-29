@@ -71,7 +71,7 @@ namespace PTSD {
 		(*state).require_file("reqSceneConfigurations", "./assets/scripts/Engine/Prefab.lua");
 		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
 		{
-			(*state).script_file(entry.path().c_str());
+			(*state).script_file(entry.path().string());
 		}
 
 		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
