@@ -1,5 +1,30 @@
 from string import Template
 import bpy
+import math
+def search_config_file(path, name):
+    try:
+        #Prefab exits, parse it and return it
+        with open(path+"/"+name+"-config.lua") as file:
+            t=(Template("sceneConfig.$funcName({})"));
+            return t.safe_substitute(funcName=name), True
+        #Prefab dosn't exits, make an empty entity
+    except IOError:
+        return ('''
+        {
+        PhysicsConfig={
+            Gravity = 5
+        }
+    }''', False)
+
+
+def write_config(f,path,name):
+    f.write("\t\tSceneConfig=")
+    ret = search_config_file(path,name)    
+    
+    f.write(ret[0])
+    
+    f.write("\n}\n")
+
 
 #Utility function that finds nth repetition of the substring in the string and returns it position.
 #used for the parsing of lua objects
@@ -22,8 +47,8 @@ def search_component(path, name):
     try:
         #Prefab exits, parse it and return it
         with open(path+"/"+name+".lua") as file:
-            read_data = file.read()
-            return clear_transform(read_data)
+            t=(Template("prefabs.$funcName({})"));
+            return t.safe_substitute(funcName=name), True
         #Prefab dosn't exits, make an empty entity
     except IOError:
         return ('''
@@ -31,43 +56,45 @@ def search_component(path, name):
             Components= {
             }
         }
-        ''')
+        ''', False)
         
 #Given the blender object it populates the entity with its position, rotation and scale
-def fill_component(o, entity):
-    transform = Template("\n"+
-'\t\t\t\t{name="position", arguments={$position}},\n'+
-'\t\t\t\t{name="rotation", arguments={$rotation}},\n'+
-'\t\t\t\t{name="scale", arguments={$scale}}$coma')
+def fill_component(o, entity,is_prefab):
+    transform = Template("\n\t\t"+'Transform = {position={$position},'+'rotation={$rotation},'+'scale={$scale}}')
     coma = ""
-    if entity.count("{")>2:
+    if entity.count("{")>2 and not is_prefab:
         coma=","
-    transform = transform.safe_substitute(position=("{0},{1},{2}".format(o.location.x,o.location.y,o.location.z)),
-    rotation=("{0},{1},{2}".format(o.rotation_euler[0],o.rotation_euler[1],o.rotation_euler[2])),
-    scale=("{0},{1},{2}".format(o.scale[0],o.scale[1],o.scale[2])), coma=coma)
-    start_of_components=find_nth(entity,"{", 2) #should point to the start of the components
-    entity = entity[:start_of_components+1]+transform+entity[start_of_components+1:]
+    transform = transform.safe_substitute(position=("x={0},y={1},z={2}".format(o.location.x,o.location.y,o.location.z)),
+    rotation=("x={0},y={1},z={2}".format(math.degrees(o.rotation_euler[0]),math.degrees(o.rotation_euler[1]),math.degrees(o.rotation_euler[2]))),
+    scale=("x={0},y={1},z={2}".format(o.scale[0],o.scale[1],o.scale[2])), coma=coma)
+    delimeter = 3 if is_prefab else 1
+    before_components=find_nth(entity,"{", delimeter) #should point to the start of the components
+    entity = entity[:before_components+1]+transform+entity[before_components+1:]
     return entity
 
 
 #Writes the blender secne in our lua scene format
 def write_scene():
-    scene_name=bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene for
+    scene_name=bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene
     objects = list(bpy.data.objects)			#Blender Objects on scene
-    path_to_prefabs="/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/bin/assets/scripts/Client" 			#This is where we will eventually put our "prefabs" 
+    path_to_prefabs="/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/bin/assets/scripts/Client/Prefabs" 			#This is where we will eventually put our "prefabs" 
     path_to_scene = "/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/bin/assets/scripts/Client"		#This is where we want our lua scene file to be written
     lua_file = path_to_scene+"/"+scene_name+".lua" 		#This is the name of the lua scene file, right now takes the name of the blend file and changes the extension to lua
     
     f = open(lua_file, "w+")
-    f.write("local Scene={\n")
+    f.write("local prefabs = reqPrefab \nlocal sceneConfig = reqSceneConfigurations \nlocal Scene={\n Entities={")
     i = 0
     for o in objects:
             prefab_name = o.name.split(".",1)[0]
-            prefab_string = "\t"+o.name.replace(".","_")+"="+fill_component(o,search_component(path_to_prefabs,prefab_name))
-            if i < (len(objects)-1):
-                    prefab_string = prefab_string+",\n"
+            component_position=search_component(path_to_prefabs,prefab_name)
+            prefab_string = "\t"+o.name.replace(".","_")+"="+fill_component(o,component_position[0],component_position[1])
+            if i < (len(objects)-1):    
+                prefab_string = prefab_string+",\n"
             f.write(prefab_string)
-    f.write("}\n return Scene\n")
+            i=i+1
+    f.write("},\n")
+    write_config(f,path_to_prefabs,scene_name)
+    f.write("return Scene\n")
     f.close()
 
 write_scene()

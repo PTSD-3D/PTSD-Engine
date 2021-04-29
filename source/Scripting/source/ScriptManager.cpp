@@ -4,7 +4,9 @@
 #include "lua.hpp"
 #include "ECS.h"
 #include "EntityManager.h"
-
+#include <string>
+#include <iostream>
+#include <filesystem>
 /*
 Include every PTSD-System to expose its public API to our Scripting state
 */
@@ -19,6 +21,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "TransformComponent.h"
 #include "RigidbodyComponent.h"
 
+namespace fs = std::filesystem;
 namespace PTSD {
 	/**
 	 * \brief Creates the objects for lua state and entityManager
@@ -64,6 +67,13 @@ namespace PTSD {
 		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
+		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
+		(*state).require_file("reqSceneConfigurations", "./assets/scripts/Engine/Prefab.lua");
+		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
+		{
+			(*state).script_file(entry.path().string());
+		}
+
 		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
@@ -196,6 +206,9 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
+		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
+		(*state).set_function("keyJustPressed", &PTSD::InputManager::keyJustDown, PTSD::InputManager::getInstance());
+		(*state).set_function("keyJustReleased", &PTSD::InputManager::keyJustUp, PTSD::InputManager::getInstance());
 		(*state).set_function("getMouseRelativePosition", &PTSD::InputManager::getMouseRelativePosition, PTSD::InputManager::getInstance());
 		(*state).set_function("resetMouse", &PTSD::InputManager::cleanMouseDelta, PTSD::InputManager::getInstance());
 		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
@@ -207,6 +220,7 @@ namespace PTSD {
 		(*state).set_function("controllerRightTrigger", &PTSD::InputManager::controllerRightTrigger, PTSD::InputManager::getInstance());
 		(*state).set_function("controllerLeftAxis", &PTSD::InputManager::controllerLeftAxis, PTSD::InputManager::getInstance());
 		(*state).set_function("controllerRightAxis", &PTSD::InputManager::controllerRightAxis, PTSD::InputManager::getInstance());
+		(*state).set_function("ControllerButtonPressed", &PTSD::InputManager::ControllerButtonPressed, PTSD::InputManager::getInstance());
 
 		//This should be expanded or reconsidered in the future.
 		//Binding of the keybord keys
@@ -217,7 +231,7 @@ namespace PTSD {
 			{"D", Scancode::SCANCODE_D},
 			{"H", Scancode::SCANCODE_H},
 			{"J", Scancode::SCANCODE_J},
-			{"SPACE", Scancode::SCANCODE_SPACE},
+			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
 

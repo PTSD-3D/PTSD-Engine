@@ -13,6 +13,7 @@ namespace PTSD {
 		for (int i = 0; i < kbSize; i++) {
 			kbState_.push_back(ButtonState::Up);
 		}
+		SDL_GameControllerAddMapping("03000000c01100000591000011010000,KROM Gamepad,a:b2,b:b1,x:b3,y:b0,back:b8,start:b9,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7,platform:Linux,");
 	}
 
 	InputImplementation::~InputImplementation() {
