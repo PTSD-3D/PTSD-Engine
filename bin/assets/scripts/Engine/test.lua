@@ -5,28 +5,24 @@ eng.Component.create("playerMove", { "x", "y", "z" })
 eng.Component.create"topo"
 local MoveSystem = ns.class("MoveSystem", ns.System)
 local dir = {
+	-- 2d3d
 	up = vec3:new(0, 1, 0),
 	down = vec3:new(0, -1, 0),
-	-- 2d3d
+	-- 3d
 	left = vec3:new(0, 0, -1),
-	-- 3d
 	right = vec3:new(0, 0, 1),
-	-- 3d
+	-- 2d
 	forward = vec3:new(1, 0, 0),
-	-- 2d
 	backward = vec3:new(-1, 0, 0)
-	-- 2d
 }
 local sideview = true
 local deadzone = 0.1
 
 function MoveSystem:requires() return { "playerMove" } end
-
+-- Base command class
 local Command = ns.class"Command"
-
 function Command:initialize() end
-
--- Base class
+-- Command types
 local Move = ns.class("Move", Command)
 local Change = ns.class("Change", Command)
 local Shoot = ns.class("Shoot", Command)
@@ -35,13 +31,12 @@ local Action = ns.class("Action", Command)
 function Move:initialize(newDir) self.dir = newDir end
 
 function Move:execute(entity, delta, speed)
-	local tr = entity.Transform
-	tr:translate(self.dir * delta * speed:magnitude())
+	entity.Transform:translate(self.dir * delta * speed:magnitude())
 end
 
 function Action:execute()
 	-- TODO Acción
-	LOG"Something"
+	LOG"Secondary"
 end
 
 function Shoot:execute()
@@ -50,13 +45,12 @@ function Shoot:execute()
 end
 
 function Change:execute()
-	-- TODO MoVer la camara de verdad
+	-- TODO Mover la camara de verdad
 	sideview = not sideview
 	LOG"Change"
-	print(sideview)
 end
 
-function KeyboardHandleInput()
+function KeyboardHandleInput()	--Read the input from a keyboard/mouse and sends a commad
 	local direction = vec3:new(0, 0, 0)
 	-- Up and down
 	if keyPressed(PTSDKeys.W) then direction = direction + dir.up end
@@ -67,14 +61,14 @@ function KeyboardHandleInput()
 	-- 3D control
 	if keyPressed(PTSDKeys.A) and not sideview then direction = direction + dir.left end
 	if keyPressed(PTSDKeys.D) and not sideview then direction = direction + dir.right end
-	-- 
-	if keyPressed(PTSDKeys.J) or mouseRightClick() then return Action() end
-	if keyPressed(PTSDKeys.H) or mouseLeftClick() then return Shoot() end
+	-- Actions (shoot, change, something)
+	if keyJustPressed(PTSDKeys.J) or mouseRightClick() then return Action() end
+	if keyJustPressed(PTSDKeys.H) or mouseLeftClick() then return Shoot() end
 	if keyJustPressed(PTSDKeys.Space) then return Change() end
 	return Move(direction:normalize())
 end
 
-function ControllerHandleInput()
+function ControllerHandleInput()	--Read the input from a gamepad and sends a commad
 	local axis = controllerLeftAxis(0)
 	local direction = vec3:new(0, 0, 0)
 	-- Up and down
@@ -90,7 +84,6 @@ function ControllerHandleInput()
 	if controllerButtonJustPressed(0, PTSDControllerButtons.B) or controllerRightTrigger(0) > deadzone then return Action() end
 	if controllerButtonJustPressed(0, PTSDControllerButtons.A) or controllerLeftTrigger(0) > deadzone then return Shoot() end
 	if controllerButtonJustPressed(0, PTSDControllerButtons.Y) then return Change() end
-	-- print("L: " .. controllerLeftTrigger(0) .. " R:" .. controllerRightTrigger(0))
 	return Move(direction:normalize())
 end
 
@@ -103,7 +96,6 @@ function MoveSystem:update(dt)
 		local action = KeyboardHandleInput()
 		if action then action:execute(entity, dt, speed) end
 		action = ControllerHandleInput()
-		-- Two variables for the first and second return
 		if action then action:execute(entity, dt, speed) end
 	end
 end
