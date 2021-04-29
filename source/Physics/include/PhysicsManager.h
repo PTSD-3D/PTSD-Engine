@@ -1,6 +1,7 @@
 #pragma once
 #include "PTSDVectors.h"
 #include "PTSDAssert.h"
+#include "RigidbodyComponent.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
@@ -8,7 +9,6 @@ class btCollisionDispatcher;
 class btSequentialImpulseConstraintSolver;
 class btDiscreteDynamicsWorld;
 class btRigidBody;
-class btCollisionObject;
 
 namespace PTSD {
 	class PhysicsManager
@@ -34,17 +34,17 @@ namespace PTSD {
 		void update(const float& deltaTime);
 		void shutdown();
 
+		void setGravity(float grav);
+
 		btBroadphaseInterface* getBroadphase() const { return mBroadphase; }
 		btDefaultCollisionConfiguration* getCollisionConfiguration() const { return mCollisionConfiguration; }
 		btCollisionDispatcher* getDispatcher() const { return mDispatcher; }
 		btSequentialImpulseConstraintSolver* getSolver() const { return mSolver; }
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
 
-		btRigidBody *addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
-		btRigidBody* addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
+		btRigidBody* addRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
 
-		btCollisionObject* addSphereCollider(float size);
-		btCollisionObject* addBoxCollider(Vec3Placeholder size);
+		void setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger);
 
 		PhysicsManager() { mInstance = this; }
 		~PhysicsManager() = default;

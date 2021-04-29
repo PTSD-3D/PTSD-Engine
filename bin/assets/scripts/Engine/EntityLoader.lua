@@ -2,7 +2,11 @@ local ns = reqNamespace;
 
 --Loads a scene after the whole engine has been initialized
 function ns.loadScene(manager, sceneTable)
-	for _, entData in pairs(sceneTable) do
+	local physicsConfig = sceneTable.SceneConfig.PhysicsConfig
+	setGravity(physicsConfig["Gravity"])
+	LOG(tostring("Gravity set to: " .. physicsConfig["Gravity"]), LogLevel.Trace, 0)
+	
+	for _, entData in pairs(sceneTable.Entities) do
 		local entityObject = ns.Entity()
 		entityObject:initialize()
 
@@ -17,9 +21,33 @@ function ns.loadScene(manager, sceneTable)
 		firing componentAdded event various times--]]
 		manager:addEntity(entityObject)
 
-		if entData.Mesh ~= {} then
-			--Add cpp mesh data to cpp entity
-			--xd(entData.Mesh[1])
+		if entData.Transform then
+			local location = entData.Transform.position
+			local p = vec3:new(location.x, location.y, location.z)
+
+			local rotation = entData.Transform.rotation
+			local r = vec3:new(rotation.x, rotation.y, rotation.z)
+
+			local scale = entData.Transform.scale
+			local s = vec3:new(scale.x, scale.y, scale.z)
+			entityObject.Transform = setTransform(entityObject.id,p,r,s)
+		end
+
+		if entData.Mesh then
+			entityObject.Mesh = setMesh(entityObject.id, entData.Mesh.mesh,entData.Mesh.material )
+		end
+
+		if entData.Rigidbody then
+			local size = entData.Rigidbody.size
+			local s = vec3:new(size.x, size.y, size.z)
+
+			local position = entData.Rigidbody.position
+			local p = vec3:new(position.x, position.y, position.z)
+
+			local rotation = entData.Rigidbody.rotation
+			local r = vec4:new(rotation.x, rotation.y, rotation.z, rotation.w)
+
+			entityObject.Rigidbody = setRigidbody(entityObject.id, s, entData.Rigidbody.mass, p, entData.Rigidbody.type, entData.Rigidbody.trigger, r)
 		end
 	 end
 end

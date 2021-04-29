@@ -68,12 +68,32 @@ Scene = {
 			{name="componentName1",arguments={101,102}},
 			{name="componentName2",arguments={1,1}}
 		},
-		Mesh = {"ogrehead.mesh"}
+		Transform = {position={x=0,y=0,z=-50},rotation={x=0,y=90,z=0},scale={x=1,y=1,z=1}},
+		Mesh = {mesh="ogrehead.mesh", material="kirby.mat"}
 	}
 }
 
 return Scene
 ```
+### Componentes de motor en lua
+* Mesh
+	* mesh = Nombre de la malla
+	* material = Nombre del material
+* Transform
+	* position
+	* rotation
+	* scale  
+
+Ejemplo de uso:
+```lua
+entity.Transform:translate(Vec3:new(1,0,0))
+enitty.Mesh:setMaterial("newMat")
+```
+To-Do:  
+* Actualizar blender script para que el transform se escriban como los tenemos ahora integrados en el motor.
+* Integrar los componentes de motor a la arquitectura de sistemas. (Con el _requires_ y el _entity:get("...")_).
+
+
 
 ---
 ## Credit where credit is due

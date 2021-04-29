@@ -1,31 +1,63 @@
 local eng = reqEngine
+local ns = reqNamespace
 
-reqEngine.initialize({globals = true});
+eng.initialize({globals = false});
 
-eng.Component.create("position", {"x", "y"}, {x = 0, y = 0})
-eng.Component.create("velocity",{"vx","vy"})
+eng.Component.create("playerMove", {"x","y","z"})
+eng.Component.create("topo")
 
-
-local MoveSystem = class("MoveSystem",System)
+local MoveSystem = ns.class("MoveSystem",ns.System)
 
 function MoveSystem:requires()
-	return {"position","velocity"}
+	return {"playerMove"}
 end
 
 function MoveSystem:update(dt)
 	for _, entity in pairs(self.targets) do
-		local position = entity:get("position")
-		local velocity = entity:get("velocity")
-		position.x = position.x + velocity.vx*dt
-		position.y = position.y + velocity.vy*dt
-		--print(position.x)
+		local dir;
+		local vx = entity:get("playerMove").x;
+		local vy = entity:get("playerMove").y;
+		local vz = entity:get("playerMove").z;
+
+		local tr = entity.Transform;
+		if keyPressed(PTSDKeys.A) then
+			dir = vec3:new(-vx, 0, 0)
+			tr:translate(dir)
+		end
+		if keyPressed(PTSDKeys.W) then
+			dir = vec3:new(0, 0, -vz)
+			tr:translate(dir)
+		end
+		if keyPressed(PTSDKeys.S) then
+			dir = vec3:new(0, 0, vz)
+			tr:translate(dir)
+		end
+		if keyPressed(PTSDKeys.D) then
+			dir = vec3:new(vx, 0, 0)
+			tr:translate(dir)
+		end
+		if keyPressed(PTSDKeys.Shift) then
+			local material = entity.Mesh:getMaterial()
+			if material == "KirbyMat" then
+				material = "Red"
+			else
+				material="KirbyMat"
+			end
+			entity.Mesh:setMaterial(material);
+		end
 	end
 end
 
-manager = eng.EntityManager()
+LOG("Loading manager")
+Manager = eng.EntityManager()
+LOG("Manager created correctly")
+ns.loadScene(Manager, sampleScene)
+LOG("Scene loaded correctly")
+Manager:addSystem(MoveSystem())
+--Showing component Added event working
+local ents = Manager:getEntitiesWithComponent("playerMove")
+if ents ~= {} then
+	ents[1]:add(ns.Component.all["topo"]())
+end
 
-reqNamespace.loadScene(manager, sampleScene)
-
---manager:addEntity(player)
-
-manager:addSystem(MoveSystem())
+LOG("Test.lua completed")

@@ -1,6 +1,6 @@
 --Main Entity Manager class
-
-local EntityManager =  reqNamespace.class("EntityManager")
+local namespace = reqNamespace
+local EntityManager =  namespace.class("EntityManager")
 
 function EntityManager:initialize()
 	self.entities = {}
@@ -9,13 +9,15 @@ function EntityManager:initialize()
 	self.singleRequirements = {}
 	self.allRequirements = {}
 
-	--lists of entities organized by their components
+	--lists of entities organized by their components' names
 	self.entityLists = {}
 
-	--TODO eventManager
+	self.eventManager = namespace.EventManager()
 
 	self.systems = {}
-	self.systems = {}
+
+	self.eventManager:addListener("ComponentRemovedEv", self, self.componentRemoved)
+	self.eventManager:addListener("ComponentAddedEv", self, self.componentAdded)
 end
 
 function EntityManager:addEntity(entity)
@@ -24,16 +26,17 @@ function EntityManager:addEntity(entity)
 	entity.id = nId
 	self.entities[entity.id] = entity
 
+	--Assign entity's eventManager
+	entity.eventManager = self.eventManager;
+
 	for _, component in pairs(entity.components) do
 		local componentName = component.class.name
-
 
 		--Add entity to each of the entityLists for each component, to be able to get it later
 		if not self.entityLists[componentName] then 
 			self.entityLists[componentName] = {}
 		end
 		self.entityLists[componentName][entity.id] = entity
-
 		--Add Entity to relevant Systems if all requirements are ok
 		if self.singleRequirements[componentName] then
 			for _, system in pairs(self.singleRequirements[componentName]) do
@@ -145,15 +148,48 @@ function EntityManager:update(...)
 	end
 end
 
--- TODO Component added and removed events
+function EntityManager:componentRemoved(event)
+
+	local entity = event.entity
+	local component = event.componentName
+
+	--remove Entity from entity list pertaining to removed component
+	self.entityLists[component][entity.id] = nil
+
+	--remove component from relevant systems
+	if self.allRequirements[component] then
+		for _, system in pairs(self.allRequirements[component]) do
+			system:componentRemoved(entity,component)
+		end
+	end
+end
+
+function EntityManager:componentAdded(event)
+	local entity = event.entity
+	local component = event.componentName
+
+	local msg = "entity " .. entity.id .. " has received component: " .. component
+	LOG(msg)
+	
+	-- Add the Entity to entity list of that component
+	if not self.entityLists[component] then self.entityLists[component] = {} end
+	self.entityLists[component][entity.id] = entity
+
+	-- Add entity to requiring systems
+	if self.allRequirements[component] then
+		for _, system in pairs(self.allRequirements[component]) do
+			self:checkRequirements(entity, system)
+		end
+	end
+end
+
 
 -- Returns list with specific component.
-function EntityManager:getEntitiesWithComponent(component)
-	if self.entityLists[component] then
-		return self.entityLists[component]
-	else
-		return {}
+function EntityManager:getEntitiesWithComponent(componentName)
+	if not self.entityLists[componentName] then
+		self.entityLists[componentName] = {}
 	end
+	return self.entityLists[componentName]
 end
 
 function EntityManager:checkRequirements(entity, system) 

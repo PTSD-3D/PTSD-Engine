@@ -71,7 +71,7 @@ namespace PTSD
 		#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
 			flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
 		#endif
-		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 25, 25, 800, 600, flags);
+		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 325, 325, 800, 600, flags);
 
 		SDL_SysWMinfo wmInfo;
 		SDL_GetVersion(&wmInfo.version);
@@ -140,6 +140,7 @@ namespace PTSD
 				type = i->first;
 				arch = Ogre::FileSystemLayer::resolveBundlePath(i->second);
 				Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch, type, sec);
+				LOG(("Added location"+sec).c_str());
 			}
 		}
 

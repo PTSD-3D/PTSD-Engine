@@ -3,8 +3,6 @@
 #include "LogManager.h"
 #include "btBulletCollisionCommon.h"
 #include "btBulletDynamicsCommon.h"
-#include "Collider.h" //for demonstration purposes
-#include "Rigidbody.h" //for demonstration purposes
 
 namespace PTSD {
 
@@ -30,7 +28,7 @@ namespace PTSD {
 	void PhysicsManager::update(const float& deltaTime) {
 		//generic deltaTime
 		mWorld->stepSimulation((deltaTime));
-		logActivity();
+		//logActivity();
 	}
 
 	void PhysicsManager::shutdown() {
@@ -41,9 +39,14 @@ namespace PTSD {
 		delete mWorld;
 	}
 
+	void PhysicsManager::setGravity(float grav)
+	{
+		mWorld->setGravity(btVector3(0, grav, 0)); //3 dimensional gravity should not be needed. Could be changed easily.
+	}
+
 	//example scene
 	void PhysicsManager::testScene() {
-		mWorld->setGravity(btVector3(0, -10, 0));
+		/*mWorld->setGravity(btVector3(0, -10, 0));
 
 		Rigidbody* rig = new Rigidbody({ 5,5,5 }, 1, { 0,100,0 });
 
@@ -51,7 +54,7 @@ namespace PTSD {
 
 		Collider* col2 = new Collider({ 5,5,5 });
 
-		rig->addForce({ 10,0,0 });
+		rig->addForce({ 10,0,0 });*/
 	}
 
 	//for debugging purposes, not meant to be in the final engine
@@ -70,41 +73,25 @@ namespace PTSD {
 			{
 				trans = obj->getWorldTransform();
 			}
-			//std::string s = "World pos object " + std::to_string(j) + " = " + std::to_string(float(trans.getOrigin().getX())) + ", " +
-			//	std::to_string(float(trans.getOrigin().getY())) + ", " + std::to_string(float(trans.getOrigin().getZ())) + "\n";
+			std::string s = "World pos object " + std::to_string(j) + " = " + std::to_string(float(trans.getOrigin().getX())) + ", " +
+				std::to_string(float(trans.getOrigin().getY())) + ", " + std::to_string(float(trans.getOrigin().getZ())) + "\n";
 			//LOG(s.c_str(), Trace);
 		}
 	}
 
-	btRigidBody* PhysicsManager::addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		btCollisionShape* shape = new btSphereShape(size);
+	btRigidBody* PhysicsManager::addRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+		btCollisionShape* shape = nullptr;
+		if (size.y == 0.0f && size.z == 0.0f)
+			shape = new btSphereShape(size.x);
+		else shape = new btBoxShape(btVector3(size.x, size.y, size.z));
 		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
 		btRigidBody* mObj = new btRigidBody(mass, state, shape);
 		mWorld->addRigidBody(mObj);
 		return mObj;
 	}
 
-	btRigidBody* PhysicsManager::addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
-		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
-		btRigidBody* mObj = new btRigidBody(mass, state, shape);
-		mWorld->addRigidBody(mObj);
-		return mObj;
-	}
-
-	btCollisionObject* PhysicsManager::addSphereCollider(float size) {
-		btCollisionObject* mObj = new btCollisionObject();
-		btCollisionShape* shape = new btSphereShape(size);
-		mObj->setCollisionShape(shape);
-		mWorld->addCollisionObject(mObj);
-		return mObj;
-	}
-
-	btCollisionObject* PhysicsManager::addBoxCollider(Vec3Placeholder size) {
-		btCollisionObject* mObj = new btCollisionObject();
-		btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
-		mObj->setCollisionShape(shape);
-		mWorld->addCollisionObject(mObj);
-		return mObj;
+	void PhysicsManager::setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger) {
+		if (trigger) rb->setCollisionFlags(type | CollisionFlags::Trigger);
+		else rb->setCollisionFlags(type);
 	}
 }

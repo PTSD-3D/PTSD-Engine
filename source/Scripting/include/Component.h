@@ -9,9 +9,9 @@ namespace PTSD
 	class Component
 	{
 	private:
-		Entity* entity_ = nullptr;
 		CmpId id_;
 	protected:
+		Entity* entity_ = nullptr;
 		Component(CmpId id) :
 			id_(id) {}
 	public:

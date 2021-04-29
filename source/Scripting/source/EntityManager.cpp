@@ -27,7 +27,10 @@ std::shared_ptr<PTSD::Entity> PTSD::EntityManager::createEntity(UUID entityID)
 	auto ent = entities_.insert({ entityID,std::make_shared<Entity>(entityID) });
 	return ent.first->second;
 }
-
+std::shared_ptr<PTSD::Entity> PTSD::EntityManager::getEntity(UUID entityID)
+{
+	return entities_[entityID];
+}
 void PTSD::EntityManager::deleteEntity(UUID entityID)
 {
 	auto it = entities_.find(entityID);
