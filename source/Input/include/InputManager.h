@@ -30,6 +30,8 @@ namespace PTSD {
 	//Keyboard
 		bool keyPressed(Scancode key);
 		bool keyRelease(Scancode key);
+		bool keyJustDown(Scancode key);
+		bool keyJustUp(Scancode key);
 		
 	//Mouse
 		bool mouseLeftClick();
