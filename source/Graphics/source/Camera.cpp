@@ -60,6 +60,8 @@ void PTSD::Camera::setPosition(Vec3Placeholder pos)
 	mNode->setPosition({ pos.x,pos.y,pos.z });
 }
 
+Ogre::SceneNode* PTSD::Camera::getNode() { return mNode; }
+
 /**
  * \brief rotates the camera in the x and y axis using mouse delta
  * \param dir rotation direction in angles
@@ -68,6 +70,31 @@ void PTSD::Camera::mouseRotate(Vector2D dir)
 {
 	cameraPitchNode->pitch(Ogre::Degree(-dir.getY()));
 	cameraYawNode->yaw(Ogre::Degree(-dir.getX()));
+
+	// We don't want the camera to do a full 360º rotation on the x-axis. It needs to be locked at 180º
+	float pitchAngle = (2 * Ogre::Degree(Ogre::Math::ACos(cameraPitchNode->getOrientation().w)).valueDegrees());
+
+	// Just to determine the sign of the angle we pick up above, the
+	// value itself does not interest us.
+	float pitchAngleSign = cameraPitchNode->getOrientation().x;
+
+	// Limit the pitch between -90 degress and +90 degrees, Quake3-style.
+	if (pitchAngle > 90.0f)
+	{
+		if (pitchAngleSign > 0)
+			// Set orientation to 90 degrees on X-axis.
+			cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
+				Ogre::Math::Sqrt(0.5f), 0, 0));
+		else if (pitchAngleSign < 0)
+			// Sets orientation to -90 degrees on X-axis.
+			cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
+				-Ogre::Math::Sqrt(0.5f), 0, 0));
+	}
+}
+
+void PTSD::Camera::mousePitch(float dir)
+{
+	cameraPitchNode->pitch(Ogre::Degree(-dir));
 
 	// We don't want the camera to do a full 360º rotation on the x-axis. It needs to be locked at 180º
 	float pitchAngle = (2 * Ogre::Degree(Ogre::Math::ACos(cameraPitchNode->getOrientation().w)).valueDegrees());

@@ -8,7 +8,7 @@ namespace PTSD {
 		Ogre::Radian x, y, z;
 		mx2.ToEulerAnglesYXZ(y, x, z);
 		Vec3Placeholder vect(x.valueAngleUnits(),y.valueAngleUnits(), z.valueAngleUnits());
-
+		
 		return vect;
 	}
 	Ogre::Quaternion TransformComponent::EulerToOgreQuat(const Vec3Placeholder& degreesVector) const
@@ -79,6 +79,15 @@ namespace PTSD {
 	void TransformComponent::setScale(float x, float y, float z) //Sets the scale of the transform with 3 floats
 	{
 		mNode->setScale(x, y, z);
+	}
+
+	void TransformComponent::setChildCamera() //Makes the camera move with the transform
+	{
+		Ogre::SceneNode* n = GraphicsImplementation::getInstance()->getCamera()->getNode();
+		GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
+		mNode->addChild(n);
+		n->setPosition(Ogre::Vector3(getPosition().x, getPosition().y, getPosition().z + 100));
+
 	}
 
 	//Getters

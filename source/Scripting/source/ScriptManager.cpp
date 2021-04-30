@@ -166,6 +166,7 @@ namespace PTSD {
 		(*state).set_function("getWindowWidth", &PTSD::GraphicsManager::getWindowWidth, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("getWindowHeight", &PTSD::GraphicsManager::getWindowHeight, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
 
 		return true;
 	}
@@ -241,6 +242,7 @@ namespace PTSD {
 		trComponent["rotate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::rotate);
 		trComponent["getForward"] = (&PTSD::TransformComponent::getForward);
 		trComponent["getRight"] = (&PTSD::TransformComponent::getRight);
+		trComponent["setChildCamera"] = (&PTSD::TransformComponent::setChildCamera);
 
 		(*state).set_function("setTransform", [&](UUID id, Vec3Placeholder p, Vec3Placeholder r,Vec3Placeholder s){
 			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
