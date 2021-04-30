@@ -73,27 +73,28 @@ function MoveSystem:ControllerHandleInput(entity,dt,speed)
 	local axis = controllerLeftAxis(0)
 	local direction = vec3:new(0, 0, 0)
 	-- Up and down
-	if axis.y < -deadzone then direction = direction + self.dirs.up end
-	if axis.y > deadzone then direction = direction + self.dirs.down end
+	if axis.y < -self.deadzone then direction = direction + self.dirs.up end
+	if axis.y > self.deadzone then direction = direction + self.dirs.down end
 	-- 2D control
-	if axis.x > deadzone and sideview then direction = direction + self.dirs.forward end
-	if axis.x < -deadzone and sideview then direction = direction + self.dirs.backward end
+	if axis.x > self.deadzone and self.sideview then direction = direction + self.dirs.forward end
+	if axis.x < -self.deadzone and self.sideview then direction = direction + self.dirs.backward end
 	-- 3D control
-	if axis.x > deadzone and not sideview then direction = direction + self.dirs.right end
-	if axis.x < -deadzone and not sideview then direction = direction + self.dirs.left end
+	if axis.x > self.deadzone and not self.sideview then direction = direction + self.dirs.right end
+	if axis.x < -self.deadzone and not self.sideview then direction = direction + self.dirs.left end
 	self:Move(entity, direction,dt,speed)
 
+	
 	-- Actions (shoot, change, something)
-	if controllerButtonJustPressed(0, PTSDControllerButtons.B) or controllerRightTrigger(0) > deadzone then
+	if controllerButtonJustPressed(0, PTSDControllerButtons.B) or controllerRightTrigger(0) > self.deadzone then
 		self:Action()
 	end
-	if controllerButtonJustPressed(0, PTSDControllerButtons.A) or controllerLeftTrigger(0) > deadzone then
+	if controllerButtonJustPressed(0, PTSDControllerButtons.A) or controllerLeftTrigger(0) > self.deadzone then
 		self:Shoot(entity, dt)
 	end
 	if controllerButtonJustPressed(0, PTSDControllerButtons.Y) then
 		self:Change()
 	end
-
+	
 end
 
 function MoveSystem:update(dt)
