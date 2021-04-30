@@ -69,7 +69,7 @@ function MoveSystem:KeyboardHandleInput(entity,dt,speed)
 end
 
 --Read the input from a gamepad and sends a commad
-function MoveSystem:ControllerHandleInput()	
+function MoveSystem:ControllerHandleInput(entity,dt,speed)
 	local axis = controllerLeftAxis(0)
 	local direction = vec3:new(0, 0, 0)
 	-- Up and down
@@ -104,7 +104,7 @@ function MoveSystem:update(dt)
 		local vz = playerMoveCom.z
 		local speed = vec3:new(vx, vy, vz)
 		self:KeyboardHandleInput(entity,dt,speed)
-		self:ControllerHandleInput()
+		self:ControllerHandleInput(entity,dt,speed)
 	end
 end
 
