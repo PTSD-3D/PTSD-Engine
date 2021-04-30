@@ -60,10 +60,9 @@ def search_component(path, name):
         
 #Given the blender object it populates the entity with its position, rotation and scale
 def fill_component(o, entity,is_prefab):
-    transform = Template("\n\t\t"+'Transform = {position={$position},'+'rotation={$rotation},'+'scale={$scale}}')
+    transform = Template("\n\t\t"+'Transform = {position={$position},'+'rotation={$rotation},'+'scale={$scale}}$coma')
     coma = ""
-    if entity.count("{")>2 and not is_prefab:
-			print("AAAAAAA")
+    if not is_prefab:
         coma=","
     transform = transform.safe_substitute(position=("x={0},y={1},z={2}".format(o.location.x,o.location.z,o.location.y)),
     rotation=("x={0},y={1},z={2}".format(math.degrees(o.rotation_euler[0]),math.degrees(o.rotation_euler[2]),math.degrees(o.rotation_euler[1]))),
@@ -76,7 +75,7 @@ def fill_component(o, entity,is_prefab):
 
 #Writes the blender secne in our lua scene format
 def write_scene():
-    scene_name=bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene
+    scene_name="sampleScene"#bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene
     objects = list(bpy.data.objects)			#Blender Objects on scene
     path_to_prefabs="/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/bin/assets/scripts/Client/Prefabs" 			#This is where we will eventually put our "prefabs" 
     path_to_scene = "/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/bin/assets/scripts/Client"		#This is where we want our lua scene file to be written
