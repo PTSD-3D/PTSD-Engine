@@ -60,13 +60,13 @@ def search_component(path, name):
         
 #Given the blender object it populates the entity with its position, rotation and scale
 def fill_component(o, entity,is_prefab):
-    transform = Template("\n\t\t"+'Transform = {position={$position},'+'rotation={$rotation},'+'scale={$scale}}')
+    transform = Template("\n\t\t"+'Transform = {position={$position},'+'rotation={$rotation},'+'scale={$scale}}$coma')
     coma = ""
-    if entity.count("{")>2 and not is_prefab:
+    if not is_prefab:
         coma=","
-    transform = transform.safe_substitute(position=("x={0},y={1},z={2}".format(o.location.x,o.location.y,o.location.z)),
-    rotation=("x={0},y={1},z={2}".format(math.degrees(o.rotation_euler[0]),math.degrees(o.rotation_euler[1]),math.degrees(o.rotation_euler[2]))),
-    scale=("x={0},y={1},z={2}".format(o.scale[0],o.scale[1],o.scale[2])), coma=coma)
+    transform = transform.safe_substitute(position=("x={0},y={1},z={2}".format(-o.location.x,o.location.z,o.location.y)),
+    rotation=("x={0},y={1},z={2}".format(-math.degrees(o.rotation_euler[0]),math.degrees(o.rotation_euler[2]),math.degrees(o.rotation_euler[1]))),
+    scale=("x={0},y={1},z={2}".format(o.scale[0],o.scale[2],o.scale[1])), coma=coma)
     delimeter = 3 if is_prefab else 1
     before_components=find_nth(entity,"{", delimeter) #should point to the start of the components
     entity = entity[:before_components+1]+transform+entity[before_components+1:]
@@ -75,10 +75,10 @@ def fill_component(o, entity,is_prefab):
 
 #Writes the blender secne in our lua scene format
 def write_scene():
-    scene_name=bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene
+    scene_name="sampleScene"#bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene
     objects = list(bpy.data.objects)			#Blender Objects on scene
-    path_to_prefabs="/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/bin/assets/scripts/Client/Prefabs" 			#This is where we will eventually put our "prefabs" 
-    path_to_scene = "/home/drathi/DEV/Uni-Tercero/P3/repo/PTSD-Engine/bin/assets/scripts/Client"		#This is where we want our lua scene file to be written
+    path_to_prefabs="D:\Escritorio\Apuntes\P3\Glock-The-Clock\GTC-Files\prefabs" 			#This is where we will eventually put our "prefabs" 
+    path_to_scene = "D:\Escritorio\Apuntes\P3\Glock-The-Clock\GTC-Files\scenes"		#This is where we want our lua scene file to be written
     lua_file = path_to_scene+"/"+scene_name+".lua" 		#This is the name of the lua scene file, right now takes the name of the blend file and changes the extension to lua
     
     f = open(lua_file, "w+")

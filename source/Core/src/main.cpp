@@ -53,7 +53,7 @@ int main()
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
 	//Initial LUA scripts
-	scriptingSystem->run("client/CameraScript.lua");
+	scriptingSystem->run("Client/CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
