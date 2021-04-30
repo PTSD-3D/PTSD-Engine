@@ -102,8 +102,8 @@ namespace Ogre {
         void removeAllLinkedSkeletonAnimationSources(void);
         const LinkedSkeletonAnimSourceList&
                     getLinkedSkeletonAnimationSources() const override;
-        OGRE_DEPRECATED LinkedSkeletonAnimSourceIterator
-            getLinkedSkeletonAnimationSourceIterator(void) const override;
+        /*OGRE_DEPRECATED LinkedSkeletonAnimSourceIterator
+            getLinkedSkeletonAnimationSourceIterator(void) const override;*/
 
         /// @copydoc Skeleton::_initAnimationState
         void _initAnimationState(AnimationStateSet* animSet);
