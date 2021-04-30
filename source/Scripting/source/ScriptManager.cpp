@@ -68,7 +68,6 @@ namespace PTSD {
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
 		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
-		(*state).require_file("reqSceneConfigurations", "./assets/scripts/Engine/Prefab.lua");
 		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
 		{
 			(*state).script_file(entry.path().string());
@@ -206,16 +205,19 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Input Components... @ScriptManager, BindInputComponents()");
 
+		//Keys
 		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
 		(*state).set_function("keyJustPressed", &PTSD::InputManager::keyJustDown, PTSD::InputManager::getInstance());
+		(*state).set_function("keyRelease", &PTSD::InputManager::keyRelease, PTSD::InputManager::getInstance());
 		(*state).set_function("keyJustReleased", &PTSD::InputManager::keyJustUp, PTSD::InputManager::getInstance());
+
+		//Mouse
 		(*state).set_function("getMouseRelativePosition", &PTSD::InputManager::getMouseRelativePosition, PTSD::InputManager::getInstance());
 		(*state).set_function("resetMouse", &PTSD::InputManager::cleanMouseDelta, PTSD::InputManager::getInstance());
-		(*state).set_function("keyPressed", &PTSD::InputManager::keyPressed, PTSD::InputManager::getInstance());
-		(*state).set_function("keyRelease", &PTSD::InputManager::keyRelease, PTSD::InputManager::getInstance());
 		(*state).set_function("mouseLeftClick", &PTSD::InputManager::mouseLeftClick, PTSD::InputManager::getInstance());
 		(*state).set_function("mouseRightClick", &PTSD::InputManager::mouseRightClick, PTSD::InputManager::getInstance());
-		//Bind sticks and triggers of a gamepad
+
+		//Gamepad
 		(*state).set_function("controllerLeftTrigger", &PTSD::InputManager::controllerLeftTrigger, PTSD::InputManager::getInstance());
 		(*state).set_function("controllerRightTrigger", &PTSD::InputManager::controllerRightTrigger, PTSD::InputManager::getInstance());
 		(*state).set_function("controllerLeftAxis", &PTSD::InputManager::controllerLeftAxis, PTSD::InputManager::getInstance());

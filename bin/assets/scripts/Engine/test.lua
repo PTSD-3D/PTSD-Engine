@@ -1,8 +1,11 @@
 local eng = reqEngine
 local ns = reqNamespace
+
 eng.initialize{ globals = false }
+
 eng.Component.create("playerMove", { "x", "y", "z" })
-eng.Component.create"topo"
+eng.Component.create("topo")
+
 local MoveSystem = ns.class("MoveSystem", ns.System)
 local dir = {
 	-- 2d3d
@@ -20,7 +23,7 @@ local deadzone = 0.1
 
 function MoveSystem:requires() return { "playerMove" } end
 -- Base command class
-local Command = ns.class"Command"
+local Command = ns.class("Command")
 function Command:initialize() end
 -- Command types
 local Move = ns.class("Move", Command)
@@ -100,13 +103,13 @@ function MoveSystem:update(dt)
 	end
 end
 
-LOG"Loading manager"
+LOG("Loading manager")
 Manager = eng.EntityManager()
-LOG"Manager created correctly"
+LOG("Manager created correctly")
 ns.loadScene(Manager, sampleScene)
-LOG"Scene loaded correctly"
+LOG("Scene loaded correctly")
 Manager:addSystem(MoveSystem())
 -- Showing component Added event working
 local ents = Manager:getEntitiesWithComponent"playerMove"
 if ents ~= {} then ents[1]:add(ns.Component.all["topo"]()) end
-LOG"Test.lua completed"
+LOG("Test.lua completed")
