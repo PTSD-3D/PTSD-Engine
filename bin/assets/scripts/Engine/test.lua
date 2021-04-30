@@ -1,10 +1,9 @@
-local eng = reqEngine
 local ns = reqNamespace
 
-eng.initialize{ globals = false }
+--eng.initialize{ globals = false }
 
-eng.Component.create("playerMove", { "x", "y", "z" })
-eng.Component.create("topo")
+--ns.Component.create("playerMove", { "x", "y", "z" })
+--ns.Component.create("topo")
 
 local MoveSystem = ns.class("MoveSystem", ns.System)
 local dir = {
@@ -104,7 +103,7 @@ function MoveSystem:update(dt)
 end
 
 LOG("Loading manager")
-Manager = eng.EntityManager()
+Manager = ns.EntityManager()
 LOG("Manager created correctly")
 ns.loadScene(Manager, sampleScene)
 LOG("Scene loaded correctly")

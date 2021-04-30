@@ -87,6 +87,13 @@ namespace PTSD {
 			bindScriptingComponents() ) {
 		}
 
+		//Engine initialization
+		(*state).script_file("./assets/scripts/Engine/Init.lua");
+
+		//Components and systems definitions
+		(*state).script_file("./assets/scripts/Client/ComponentsList.lua");
+		//(*state).script_file("./assets/scripts/Client/SystemsList.lua");
+
 		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
 
 		return true;
