@@ -9,49 +9,91 @@ local MoveSystem = ns.class("MoveSystem",ns.System)
 --data
 MoveSystem.sideview = true
 MoveSystem.deadzone = 0.1
+MoveSystem.dirs = {
+	-- 2d3d
+	up = vec3:new(0, 1, 0),
+	down = vec3:new(0, -1, 0),
+	-- 3d
+	left = vec3:new(0, 0, -1),
+	right = vec3:new(0, 0, 1),
+	-- 2d
+	forward = vec3:new(1, 0, 0),
+	backward = vec3:new(-1, 0, 0)
+}
 
 function MoveSystem:requires() return { "playerMove" } end
 
-function MoveSystem:KeyboardHandleInput()	--Read the input from a keyboard/mouse and sends a commad
-	print("owo")
-	--[[
-		local direction = vec3:new(0, 0, 0)
-	-- Up and down
-	if keyPressed(PTSDKeys.W) then direction = direction + dir.up end
-	if keyPressed(PTSDKeys.S) then direction = direction + dir.down end
-	-- 2D control
-	if keyPressed(PTSDKeys.A) and sideview then direction = direction + dir.backward end
-	if keyPressed(PTSDKeys.D) and sideview then direction = direction + dir.forward end
-	-- 3D control
-	if keyPressed(PTSDKeys.A) and not sideview then direction = direction + dir.left end
-	if keyPressed(PTSDKeys.D) and not sideview then direction = direction + dir.right end
-	-- Actions (shoot, change, something)
-	if keyJustPressed(PTSDKeys.J) or mouseRightClick() then return Action() end
-	if keyJustPressed(PTSDKeys.H) or mouseLeftClick() then return Shoot() end
-	if keyJustPressed(PTSDKeys.Space) then return Change() end
-	return Move(direction:normalize())
-	]]--
+function MoveSystem:Move(entity,dir, delta, speed)
+	entity.Transform:translate(dir * delta * speed:magnitude())
 end
 
-function MoveSystem:ControllerHandleInput()	--Read the input from a gamepad and sends a commad
-	--[[
+function MoveSystem:Shoot(entity, delta)
+	LOG("PEW")
+end
+
+function MoveSystem:Action()
+	LOG("Secondary")
+end
+
+function MoveSystem:Change()
+	self.sideview = not self.sideview
+	LOG("Changing view")
+end
+
+--Read the input from a keyboard/mouse and sends a commad
+function MoveSystem:KeyboardHandleInput(entity,dt,speed)
+	--Movement
+	local direction = vec3:new(0, 0, 0)
+	-- Up and down
+	if keyPressed(PTSDKeys.W) then direction = direction + self.dirs.up end
+	if keyPressed(PTSDKeys.S) then direction = direction + self.dirs.down end
+	-- 2D control
+	if keyPressed(PTSDKeys.A) and self.sideview then direction = direction + self.dirs.backward end
+	if keyPressed(PTSDKeys.D) and self.sideview then direction = direction + self.dirs.forward end
+	-- 3D control
+	if keyPressed(PTSDKeys.A) and not self.sideview then direction = direction + self.dirs.left end
+	if keyPressed(PTSDKeys.D) and not self.sideview then direction = direction + self.dirs.right end
+
+	self:Move(entity, direction,dt,speed)
+
+	-- Actions (shoot, change, something)
+	if keyJustPressed(PTSDKeys.J) or mouseRightClick() then
+		self:Action()
+	end
+	if keyJustPressed(PTSDKeys.H) or mouseLeftClick() then
+		self:Shoot(entity, dt)
+	end
+	if keyJustPressed(PTSDKeys.Space) then
+		self:Change()
+	end
+end
+
+--Read the input from a gamepad and sends a commad
+function MoveSystem:ControllerHandleInput()	
 	local axis = controllerLeftAxis(0)
 	local direction = vec3:new(0, 0, 0)
 	-- Up and down
-	if axis.y < -deadzone then direction = direction + dir.up end
-	if axis.y > deadzone then direction = direction + dir.down end
+	if axis.y < -deadzone then direction = direction + self.dirs.up end
+	if axis.y > deadzone then direction = direction + self.dirs.down end
 	-- 2D control
-	if axis.x > deadzone and sideview then direction = direction + dir.forward end
-	if axis.x < -deadzone and sideview then direction = direction + dir.backward end
+	if axis.x > deadzone and sideview then direction = direction + self.dirs.forward end
+	if axis.x < -deadzone and sideview then direction = direction + self.dirs.backward end
 	-- 3D control
-	if axis.x > deadzone and not sideview then direction = direction + dir.right end
-	if axis.x < -deadzone and not sideview then direction = direction + dir.left end
-	-- Actions
-	if controllerButtonJustPressed(0, PTSDControllerButtons.B) or controllerRightTrigger(0) > deadzone then return Action() end
-	if controllerButtonJustPressed(0, PTSDControllerButtons.A) or controllerLeftTrigger(0) > deadzone then return Shoot() end
-	if controllerButtonJustPressed(0, PTSDControllerButtons.Y) then return Change() end
-	return Move(direction:normalize())
-	]]--
+	if axis.x > deadzone and not sideview then direction = direction + self.dirs.right end
+	if axis.x < -deadzone and not sideview then direction = direction + self.dirs.left end
+	self:Move(entity, direction,dt,speed)
+
+	-- Actions (shoot, change, something)
+	if controllerButtonJustPressed(0, PTSDControllerButtons.B) or controllerRightTrigger(0) > deadzone then
+		self:Action()
+	end
+	if controllerButtonJustPressed(0, PTSDControllerButtons.A) or controllerLeftTrigger(0) > deadzone then
+		self:Shoot(entity, dt)
+	end
+	if controllerButtonJustPressed(0, PTSDControllerButtons.Y) then
+		self:Change()
+	end
+
 end
 
 function MoveSystem:update(dt)
@@ -61,10 +103,8 @@ function MoveSystem:update(dt)
 		local vy = playerMoveCom.y
 		local vz = playerMoveCom.z
 		local speed = vec3:new(vx, vy, vz)
-		local action = self.KeyboardHandleInput()
-		--if action then action:execute(entity, dt, speed) end
-		action = self.ControllerHandleInput()
-		--if action then action:execute(entity, dt, speed) end
+		self:KeyboardHandleInput(entity,dt,speed)
+		self:ControllerHandleInput()
 	end
 end
 
