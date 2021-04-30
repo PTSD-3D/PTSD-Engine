@@ -7,8 +7,6 @@
       --If we are using relative mouse position, this method returns the delta position of the mouse
       local mouseDirection = getMouseRelativePosition()
 
-      print("cosadeprueba")
-
       if keyPressed(PTSDKeys.A) then
         dir = vec3:new(-1, 0, 0)
         translateCamera(dir)

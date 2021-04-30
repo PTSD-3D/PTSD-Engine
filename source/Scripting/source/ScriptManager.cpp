@@ -181,11 +181,16 @@ namespace PTSD {
 		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
 		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
 
-		(*state).set_function("setRigidbody", [&](UUID id, Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec4Placeholder quat) {
+		(*state).set_function("setRigidbody", [&](UUID id, Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec3Placeholder quat) {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
 		
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
+		(*state).new_enum<CollisionFlags>("CollisionFlags", {
+			{"Dynamic", CollisionFlags::Dynamic},
+			{"Static", CollisionFlags::Static},
+			{"Kinematic", CollisionFlags::Kinematic}
+			});
 
 		return true;
 	}
