@@ -97,7 +97,7 @@ namespace PTSD {
 	{
 		entityManager->update();
 		(*state)["Manager"]["update"]((*state)["Manager"], 1);
-		//(*state)["Update"]();
+		(*state)["Update"]();
 		//TODO exit state
 		return true;
 	}

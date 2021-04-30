@@ -63,10 +63,11 @@ def fill_component(o, entity,is_prefab):
     transform = Template("\n\t\t"+'Transform = {position={$position},'+'rotation={$rotation},'+'scale={$scale}}')
     coma = ""
     if entity.count("{")>2 and not is_prefab:
+			print("AAAAAAA")
         coma=","
-    transform = transform.safe_substitute(position=("x={0},y={1},z={2}".format(o.location.x,o.location.y,o.location.z)),
-    rotation=("x={0},y={1},z={2}".format(math.degrees(o.rotation_euler[0]),math.degrees(o.rotation_euler[1]),math.degrees(o.rotation_euler[2]))),
-    scale=("x={0},y={1},z={2}".format(o.scale[0],o.scale[1],o.scale[2])), coma=coma)
+    transform = transform.safe_substitute(position=("x={0},y={1},z={2}".format(o.location.x,o.location.z,o.location.y)),
+    rotation=("x={0},y={1},z={2}".format(math.degrees(o.rotation_euler[0]),math.degrees(o.rotation_euler[2]),math.degrees(o.rotation_euler[1]))),
+    scale=("x={0},y={1},z={2}".format(o.scale[0],o.scale[2],o.scale[1])), coma=coma)
     delimeter = 3 if is_prefab else 1
     before_components=find_nth(entity,"{", delimeter) #should point to the start of the components
     entity = entity[:before_components+1]+transform+entity[before_components+1:]
