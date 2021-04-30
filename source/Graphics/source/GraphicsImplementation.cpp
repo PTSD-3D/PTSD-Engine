@@ -159,14 +159,14 @@ namespace PTSD
 
 		mCamera = new Camera({ 0,0,8 });	//new Camera({ 0,0,80 });
 
-		Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Nave.mesh");		//ogrehead.mesh
-		Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-		ogreNode->attachObject(ogreEntt);
-		ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
-		ogreNode->scale(Ogre::Vector3(1.0, 4.60, 1.0));
+		// Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Nave.mesh");		//ogrehead.mesh
+		// Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+		// ogreNode->attachObject(ogreEntt);
+		// ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
+		// ogreNode->scale(Ogre::Vector3(1.0, 4.60, 1.0));
 
 		
-		ogreEntt->setMaterialName("body");	//This is for the test of Blender2Ogre
+		// ogreEntt->setMaterialName("body");	//This is for the test of Blender2Ogre
 
 		mSceneMgr->setAmbientLight(Ogre::ColourValue(.1, .1, .1));	//Was (0.5, 0.5, 0.5)
 

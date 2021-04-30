@@ -280,7 +280,7 @@ namespace PTSD {
 			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
 		});
 
-		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3Placeholder::y, "z", &Vec3::z, 
+		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z, 
 		sol::meta_function::multiplication, &Vec3::operator*,sol::meta_function::subtraction, &Vec3::operator-,sol::meta_function::addition, &Vec3::operator+);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);

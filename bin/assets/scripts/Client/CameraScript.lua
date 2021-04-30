@@ -6,7 +6,6 @@ function Update(n)
 	local sensitivity = 1
 	-- Should be able to modify it from another class
 	-- If we are using relative mouse position, this method returns the delta position of the mouse
-	print"AAAAAA"
 	local mouseDirection = getMouseRelativePosition()
 	-- if keyPressed(PTSDKeys.A) then
 	-- dir = vec3:new(-1, 0, 0)
@@ -24,8 +23,6 @@ function Update(n)
 	-- dir = vec3:new(1, 0, 0)
 	-- translateCamera(dir)
 	-- end
-	print("x" .. mouseDirection.x)
-	print("y" .. mouseDirection.y)
 	rotateCamera(mouseDirection * sensitivity)
 	return true
 end

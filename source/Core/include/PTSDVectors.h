@@ -64,9 +64,9 @@ struct Vec3
 		return sqrt(x * x + y * y + z * z);
 	}
 
-	Vec3Placeholder normalize() {
+	Vec3 normalize() {
 
-		Vec3Placeholder r;
+		Vec3 r;
 		r.x = x;
 		r.y = y;
 		r.z = z;
@@ -81,14 +81,14 @@ struct Vec3
 
 	}
 
-	Vec3Placeholder operator - (const Vec3Placeholder& v) const {
-		return(Vec3Placeholder(x - v.x, y - v.y,z-v.z));
+	Vec3 operator - (const Vec3& v) const {
+		return(Vec3(x - v.x, y - v.y,z-v.z));
 	}
-	Vec3Placeholder operator + (const Vec3Placeholder& v) const{
-		return(Vec3Placeholder(x + v.x, y + v.y,z+v.z));
+	Vec3 operator + (const Vec3& v) const{
+		return(Vec3(x + v.x, y + v.y,z+v.z));
 	}
-	Vec3Placeholder operator * (const float &f) const{
-		return(Vec3Placeholder(x * f, y * f,z*f));
+	Vec3 operator * (const float &f) const{
+		return(Vec3(x * f, y * f,z*f));
 	}
 };
 

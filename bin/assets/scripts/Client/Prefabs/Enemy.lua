@@ -9,6 +9,6 @@ function pf.Enemy(params)
 			-- { name = "playerMove", arguments = { { x = 1, y = 0, z = 0 } } }
 		},
 		Transform = params.Transform,
-		Mesh = { mesh = "Kirby.mesh", material = "Red" }
+		Mesh = { mesh = "Nave.mesh", material = "body" }
 	}
 end
