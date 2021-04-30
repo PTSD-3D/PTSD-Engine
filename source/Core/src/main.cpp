@@ -53,7 +53,7 @@ int main()
 	PTSD::Camera* myCam = graphicsSystem->getCam();
 
 	//Initial LUA scripts
-	scriptingSystem->run("client/CameraScript.lua");
+	scriptingSystem->run("Client/CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
@@ -71,7 +71,8 @@ int main()
 			inputSystem->update();
 
 			physicsSystem->update(deltaTime);
-			graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
+			//scriptingSystem->run("client/CameraScript.lua");
+			//graphicsSystem->getCam()->translate({ 0,0,1 }); //To be deleted
       
 			soundSystem->update();
 			scriptingSystem->update();

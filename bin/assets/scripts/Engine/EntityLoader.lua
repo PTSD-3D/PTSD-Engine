@@ -36,7 +36,7 @@ function ns.loadScene(manager, sceneTable)
 				local position = entData.Rigidbody.position
 				local p = vec3:new(position.x, position.y, position.z)
 				local rotation = entData.Rigidbody.rotation
-				local r = vec4:new(rotation.x, rotation.y, rotation.z, rotation.w)
+				local r = vec3:new(rotation.x, rotation.y, rotation.z)
 				entityObject.Rigidbody = setRigidbody(entityObject.id, s, entData.Rigidbody.mass, p, entData.Rigidbody.type, entData.Rigidbody.trigger, r)
 			end
 		end
