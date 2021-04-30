@@ -8,9 +8,9 @@
 
 namespace PTSD
 {
-	RigidbodyComponent::RigidbodyComponent(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec4Placeholder quat) : 
+	RigidbodyComponent::RigidbodyComponent(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec3Placeholder rot) : 
 		Component(CmpId::RigidbodyC), trigger(trigger), mass(mass), type(type) {
-		mObj = PhysicsManager::getInstance()->addRigidBody(size, mass, pos, quat);
+		mObj = PhysicsManager::getInstance()->addRigidBody(size, mass, pos, degToRad(rot));
 		PhysicsManager::getInstance()->setCollisionFlags(mObj, type, trigger);
 	}
 

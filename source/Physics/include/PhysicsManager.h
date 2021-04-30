@@ -42,7 +42,7 @@ namespace PTSD {
 		btSequentialImpulseConstraintSolver* getSolver() const { return mSolver; }
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
 
-		btRigidBody* addRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat = { 0,0,0,1 });
+		btRigidBody* addRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec3Placeholder rot = { 0,0,0 });
 
 		void setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger);
 

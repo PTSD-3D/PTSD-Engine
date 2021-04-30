@@ -3,6 +3,7 @@
 #include <memory>
 #include "PTSDVectors.h"
 #include "Component.h"
+#include <SDL_stdinc.h>
 
 class btRigidBody;
 namespace BtOgre {
@@ -23,8 +24,11 @@ namespace PTSD
 		CollisionFlags type;
 		bool trigger;
 		float mass;
+		Vec3Placeholder degToRad(Vec3Placeholder deg) {
+			return { deg.x * 180 / (float)M_PI, deg.y * 180 / (float)M_PI, deg.z * 180 / (float)M_PI };
+		}
 	public:
-		RigidbodyComponent(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec4Placeholder quat = { 0,0,0,1 });
+		RigidbodyComponent(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec3Placeholder rot = { 0,0,0 });
 		~RigidbodyComponent() = default;
 
 		virtual void init();
