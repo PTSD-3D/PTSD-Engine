@@ -179,10 +179,10 @@ namespace PTSD {
 			return isKeyUp(SDL_GetScancodeFromKey(key));
 		}
 		inline bool isKeyJustDown(SDL_Keycode key) {
-			return kbState_[SDL_GetScancodeFromKey(key)] == ButtonState::JustDown;
+			return kbState_[key] == ButtonState::JustDown;
 		}
 		inline bool isKeyJustUp(SDL_Keycode key) {
-			return kbState_[SDL_GetScancodeFromKey(key)] == ButtonState::JustUp;
+			return kbState_[key] == ButtonState::JustUp;
 		}
 		//---------------------------------------------
 

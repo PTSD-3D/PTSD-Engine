@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\Core\src\BtOgre.cpp" />
     <ClCompile Include="..\..\source\Core\src\main.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
@@ -20,11 +21,10 @@
     <ClCompile Include="..\..\source\Logger\source\LogImpl.cpp" />
     <ClCompile Include="..\..\source\Logger\source\PTSDAssert.cpp" />
     <ClCompile Include="..\..\source\Logger\source\LogManager.cpp" />
-    <ClCompile Include="..\..\source\Physics\source\Collider.cpp" />
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp" />
-    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\MeshComponent.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\RigidbodyComponent.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\TransformComponent.cpp" />
     <ClCompile Include="..\..\source\Sound\source\SoundManager.cpp" />
@@ -34,6 +34,7 @@
     <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\Core\include\BtOgre.h" />
     <ClInclude Include="..\..\source\Core\include\PTSDVectors.h" />
     <ClInclude Include="..\..\source\Core\include\test.h" />
     <ClInclude Include="..\..\source\Graphics\include\Camera.h" />
@@ -46,14 +47,13 @@
     <ClInclude Include="..\..\source\Logger\include\PTSDAssert.h" />
     <ClInclude Include="..\..\source\Logger\include\LogImpl.h" />
     <ClInclude Include="..\..\source\Logger\include\LogManager.h" />
-    <ClInclude Include="..\..\source\Physics\include\Collider.h" />
     <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h" />
-    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h" />
     <ClInclude Include="..\..\source\Scripting\include\Component.h" />
     <ClInclude Include="..\..\source\Scripting\include\ECS.h" />
     <ClInclude Include="..\..\source\Scripting\include\Entity.h" />
     <ClInclude Include="..\..\source\Scripting\include\EntityManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\MeshComponent.h" />
+    <ClInclude Include="..\..\source\Scripting\include\RigidbodyComponent.h" />
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h" />
     <ClInclude Include="..\..\source\Scripting\include\TransformComponent.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundManager.h" />
@@ -65,6 +65,7 @@
   <ItemGroup>
     <None Include="..\..\bin\assets\scripts\Engine\Component.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\Entity.lua" />
+    <None Include="..\..\bin\assets\scripts\Engine\EntityLoader.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\EntityManager.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\initEngine.lua" />
     <None Include="..\..\bin\assets\scripts\Engine\middleclass.lua" />

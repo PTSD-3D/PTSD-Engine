@@ -1,11 +1,6 @@
-local Scene = {}
-
-Scene = {
-	SceneConfig = {
-		PhysicsConfig={
-			Gravity = 5
-		}
-	},
+local prefabs = reqPrefab
+local sceneConfig = reqSceneConfigurations
+local Scene = {
 	Entities = {
 		Entity1={
 			--Components are Lua-only components
@@ -25,5 +20,4 @@ Scene = {
 		-- }
 	}
 }
-
 return Scene
