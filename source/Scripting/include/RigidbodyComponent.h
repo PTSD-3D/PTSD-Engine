@@ -24,25 +24,25 @@ namespace PTSD
 		CollisionFlags type;
 		bool trigger;
 		float mass;
-		Vec3Placeholder degToRad(Vec3Placeholder deg) {
+		Vec3 degToRad(Vec3 deg) {
 			return { deg.x * 180 / (float)M_PI, deg.y * 180 / (float)M_PI, deg.z * 180 / (float)M_PI };
 		}
 	public:
-		RigidbodyComponent(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec3Placeholder rot = { 0,0,0 });
+		RigidbodyComponent(Vec3 size, float mass, Vec3 pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec3 rot = { 0,0,0 });
 		~RigidbodyComponent() = default;
 
 		virtual void init();
 
-		void setLinearVelocity(Vec3Placeholder vel);
-		void setAngularVelocity(Vec3Placeholder vel);
-		void addForce(Vec3Placeholder force, Vec3Placeholder ref = { 0,0,0 });
+		void setLinearVelocity(Vec3 vel);
+		void setAngularVelocity(Vec3 vel);
+		void addForce(Vec3 force, Vec3 ref = { 0,0,0 });
 
 		CollisionFlags getType() { return type; }
 		bool isTrigger() { return trigger; }
 		float getMass() { return mass; }
-		Vec3Placeholder getLinearVelocity();
-		Vec3Placeholder getAngularVelocity();
-		Vec3Placeholder getPos();
+		Vec3 getLinearVelocity();
+		Vec3 getAngularVelocity();
+		Vec3 getPos();
 		Vec4Placeholder getRot();		
 	};
 }

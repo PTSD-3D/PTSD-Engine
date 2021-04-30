@@ -79,7 +79,7 @@ namespace PTSD {
 		}
 	}
 
-	btRigidBody* PhysicsManager::addRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec3Placeholder rot) {
+	btRigidBody* PhysicsManager::addRigidBody(Vec3 size, float mass, Vec3 pos, Vec3 rot) {
 		btCollisionShape* shape = nullptr;
 		if (size.y == 0.0f && size.z == 0.0f)
 			shape = new btSphereShape(size.x);

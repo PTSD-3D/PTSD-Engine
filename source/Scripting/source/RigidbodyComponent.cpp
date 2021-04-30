@@ -8,7 +8,7 @@
 
 namespace PTSD
 {
-	RigidbodyComponent::RigidbodyComponent(Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec3Placeholder rot) : 
+	RigidbodyComponent::RigidbodyComponent(Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 rot) : 
 		Component(CmpId::RigidbodyC), trigger(trigger), mass(mass), type(type) {
 		mObj = PhysicsManager::getInstance()->addRigidBody(size, mass, pos, degToRad(rot));
 		PhysicsManager::getInstance()->setCollisionFlags(mObj, type, trigger);
@@ -19,31 +19,31 @@ namespace PTSD
 		mObj->setMotionState(rbState);
 	}
 
-	void RigidbodyComponent::setLinearVelocity(Vec3Placeholder vel) {
+	void RigidbodyComponent::setLinearVelocity(Vec3 vel) {
 		mObj->setLinearVelocity(btVector3(vel.x, vel.y, vel.z));
 	}
 
-	void RigidbodyComponent::setAngularVelocity(Vec3Placeholder vel) {
+	void RigidbodyComponent::setAngularVelocity(Vec3 vel) {
 		mObj->setAngularVelocity(btVector3(vel.x, vel.y, vel.z));
 	}
 
-	void RigidbodyComponent::addForce(Vec3Placeholder force, Vec3Placeholder ref) {
+	void RigidbodyComponent::addForce(Vec3 force, Vec3 ref) {
 		mObj->applyForce(btVector3(force.x, force.y, force.z), btVector3(ref.x, ref.y, ref.z));
 	}
 
-	Vec3Placeholder RigidbodyComponent::getLinearVelocity() {
+	Vec3 RigidbodyComponent::getLinearVelocity() {
 		btVector3 v = mObj->getLinearVelocity();
-		return Vec3Placeholder(v.getX(), v.getY(), v.getZ());
+		return Vec3(v.getX(), v.getY(), v.getZ());
 	}
 
-	Vec3Placeholder RigidbodyComponent::getAngularVelocity() {
+	Vec3 RigidbodyComponent::getAngularVelocity() {
 		btVector3 v = mObj->getAngularVelocity();
-		return Vec3Placeholder(v.getX(), v.getY(), v.getZ());
+		return Vec3(v.getX(), v.getY(), v.getZ());
 	}
 
-	Vec3Placeholder RigidbodyComponent::getPos() {
+	Vec3 RigidbodyComponent::getPos() {
 		btVector3 p = mObj->getWorldTransform().getOrigin();
-		return Vec3Placeholder(p.getX(), p.getY(), p.getZ());
+		return Vec3(p.getX(), p.getY(), p.getZ());
 	}
 
 	Vec4Placeholder RigidbodyComponent::getRot() {

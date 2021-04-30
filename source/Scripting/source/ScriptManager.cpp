@@ -181,7 +181,7 @@ namespace PTSD {
 		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
 		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
 
-		(*state).set_function("setRigidbody", [&](UUID id, Vec3Placeholder size, float mass, Vec3Placeholder pos, CollisionFlags type, bool trigger, Vec3Placeholder quat) {
+		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
 		
@@ -239,16 +239,16 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(float, float, float)>());
 		
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
-		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::translate);
+		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
 
-		(*state).set_function("setTransform", [&](UUID id, Vec3Placeholder p, Vec3Placeholder r,Vec3Placeholder s){
+		(*state).set_function("setTransform", [&](UUID id, Vec3 p, Vec3 r,Vec3 s){
 			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
 		});
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(double, double, double)>(), "x", &Vec3Placeholder::x, "y", &Vec3Placeholder::y, "z", &Vec3Placeholder::z);
+		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double)>(), "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z);
 		(*state).new_usertype<Vec4Placeholder>("vec4", sol::constructors<Vec4Placeholder(double, double, double, double)>(), "x", &Vec4Placeholder::x, "y", &Vec4Placeholder::y, "z", &Vec4Placeholder::z, "w", &Vec4Placeholder::w);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);

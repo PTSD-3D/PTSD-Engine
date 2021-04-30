@@ -35,12 +35,12 @@ namespace PTSD
 		Ogre::RenderWindow* mWindow;
 		Ogre::Viewport* mViewPort;
 	public:	
-		Camera(Vec3Placeholder v);
+		Camera(Vec3 v);
 		~Camera();
 		
-		void lookAt(Vec3Placeholder v);
-		void translate(Vec3Placeholder v);
-		void setPosition(Vec3Placeholder v);
+		void lookAt(Vec3 v);
+		void translate(Vec3 v);
+		void setPosition(Vec3 v);
 		void mouseRotate(Vector2D dir);
 	};
 }
