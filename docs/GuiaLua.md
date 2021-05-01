@@ -19,16 +19,16 @@ Para registrar una entidad basta con llamar a `addEntity(entity)` del manager y 
 
 ### Para crear un componente nuevo en un archivo:
 ```lua 
-local eng = reqEngine
+local ns = reqNamespace
 
-NombreComponente = eng.Component.create("nombreComponente",{"atributo1","atributo2"},{atributo1=valorDefault,atributo2=valorDefault})
+NombreComponente = ns.Component.create("nombreComponente",{"atributo1","atributo2"},{atributo1=valorDefault,atributo2=valorDefault})
 ```
 
 ### Para crear un sistema nuevo en un archivo:
 ```lua
-local eng = reqEngine
+local ns = reqNamespace
 
-NombreSistema = class("NombreSistema",System)
+NombreSistema = ns.class("NombreSistema",ns.System)
 
 function NombreSistema:requires()
 	return {"nombreComponenteRequerido1","nombreComponenteRequerido2"}

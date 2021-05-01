@@ -71,8 +71,7 @@ int main()
 			inputSystem->update();
 
 			physicsSystem->update(deltaTime);
-			//scriptingSystem->run("client/CameraScript.lua");
-			//graphicsSystem->getCam()->translate({ 0,0,1 }); //To be deleted
+			// graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
       
 			soundSystem->update();
 			scriptingSystem->update();
