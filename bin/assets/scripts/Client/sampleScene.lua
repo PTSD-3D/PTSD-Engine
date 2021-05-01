@@ -1,6 +1,11 @@
 local prefabs = reqPrefab
 local sceneConfig = reqSceneConfigurations
 local Scene = {
+	SceneConfig = {
+		PhysicsConfig={
+			Gravity = 5
+		}
+	},
 	Entities = {
 		Enemy = prefabs.Enemy{
 			Transform = {
