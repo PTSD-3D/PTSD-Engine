@@ -67,6 +67,14 @@ namespace PTSD {
         }
     }
 
+    int SoundManager::loadSound(const std::string& path, int soundType, float volume)
+    {
+        FMOD::Sound* fmodSound;
+        result = sys->createSound(path.c_str(), FMOD_3D_HEADRELATIVE, NULL, &fmodSound);
+        loadedSounds.push_back(fmodSound);
+        return loadedSounds.size() - 1;
+    }
+
     void SoundManager::playSound(const std::string& path, int soundType, float vol, bool loop) {
         currentChannel++;
         if (currentChannel > nChannels) currentChannel = 0;
@@ -95,6 +103,18 @@ namespace PTSD {
             std::string errMsg = path + " couldn't be added to its channelGroup. @SoundManager.cpp, PlaySound()";
             PTSD::LOG(errMsg.c_str(), PTSD::Error);
         }
+    }
+
+    void SoundManager::playSound(int id)
+    {
+        currentChannel++;
+        if (currentChannel > nChannels) currentChannel = 0;
+
+        FMOD::Sound* fmodSound = loadedSounds[id];
+
+        result = sys->playSound(fmodSound, genChannelGroups[0], false, &genChannels[currentChannel]);
+
+        result = genChannels[currentChannel]->setChannelGroup(genChannelGroups[0]);
     }
 
     void SoundManager::playSound(PTSD::Sound *sound)

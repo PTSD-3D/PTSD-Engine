@@ -29,6 +29,12 @@ end
 
 function MoveSystem:Shoot(entity, delta)
 	LOG("PEW")
+	print(Resources.Sounds.Oof.id)
+	print(Resources.Sounds.Oof.path)
+	Status,Error = pcall(playSound,Resources.Sounds.Oof.id)
+	if not Status then
+		print (Error)
+	end
 end
 
 function MoveSystem:Action()

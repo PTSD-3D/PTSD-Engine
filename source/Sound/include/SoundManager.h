@@ -16,7 +16,14 @@ namespace FMOD { //This is so we trick the .h into not exploding into pieces.
 	class Sound;
 }
 
-// enum FMOD_RESULT;
+struct SoundData { //This type structure will be used to store the sound information provided by the developer. See resources.lua
+	std::string path;
+	int soundType;
+	int soundChannel;
+	float volume;
+	SoundData(const std::string& path, int type,int channel,const float& volume):
+		path(path),soundType(type),soundChannel(channel),volume(volume){};
+};
 
 namespace PTSD {
 	enum SoundChannels {
@@ -32,6 +39,7 @@ namespace PTSD {
 		static SoundManager* mInstance;
 		FMOD::System* sys = nullptr;
 		//FMOD::ChannelGroup* genChannelGroup = nullptr;
+		std::vector<FMOD::Sound*> loadedSounds;
 		FMOD::ChannelGroup* musicChannelGroup = nullptr;
 		std::vector<FMOD::ChannelGroup*> genChannelGroups;
 		std::vector<FMOD::Channel*> genChannels;
@@ -50,6 +58,7 @@ namespace PTSD {
 			return mInstance;
 		}
 		void shutdown();
+		int loadSound(const std::string& path, int soundType, float volume);
 
 		//ChannelGroupManagement
 		//From each channelGroup, you can manage the volume of each sound Type (ambient, dialog...)
@@ -65,6 +74,7 @@ namespace PTSD {
 		//With these functions you can modify specific sounds.
 		void playSound(PTSD::Sound* sound);
 		void playSound(const std::string& path, int soundType, float vol = 1, bool loop = false);
+		void playSound(int id);
 		void pauseSound(PTSD::Sound* sound);
 		void resumeSound(PTSD::Sound* sound);
 		void muteSound(PTSD::Sound* sound);

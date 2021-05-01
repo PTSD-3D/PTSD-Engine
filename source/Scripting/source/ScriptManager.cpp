@@ -12,6 +12,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 */
 #include "InputManager.h"
 #include "GraphicsManager.h"
+#include "SoundManager.h"
 #include "Camera.h"
 #include "UIManager.h"
 #include "PhysicsManager.h"
@@ -75,6 +76,8 @@ namespace PTSD {
 
 		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
+		(*state).script_file("./assets/scripts/Client/resources.lua");
+		(*state).script_file("./assets/scripts/Engine/resourceLoader.lua");
 
 		//Binding of external functions
 		if (bindGenericComponents()&&
@@ -191,7 +194,7 @@ namespace PTSD {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
 		
-		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
+		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance());
 		(*state).new_enum<CollisionFlags>("CollisionFlags", {
 			{"Dynamic", CollisionFlags::Dynamic},
 			{"Static", CollisionFlags::Static},
@@ -204,6 +207,8 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA Sound Components... @ScriptManager, BindSoundComponents()");
+		(*state).set_function("PTSDLoadSound", &PTSD::SoundManager::loadSound, PTSD::SoundManager::getInstance());
+		(*state).set_function("playSound", sol::resolve<void(int)>(&PTSD::SoundManager::playSound), PTSD::SoundManager::getInstance());
 		return true;
 	}
 	bool ScriptManager::bindUIComponents()
