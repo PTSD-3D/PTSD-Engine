@@ -89,6 +89,12 @@ namespace PTSD {
         currentChannel++;
         if (currentChannel > nChannels) currentChannel = 0;
 
+        FMOD_MODE mode;
+    	do
+    	{
+            genChannels[currentChannel]->getMode(&mode);
+        } while (mode == FMOD_LOOP_NORMAL);
+
         FMOD::Sound* fmodSound;
         result = sys->createSound(path.c_str(), FMOD_3D_HEADRELATIVE, NULL, &fmodSound);
 
@@ -129,10 +135,16 @@ namespace PTSD {
         return currentChannel;
     }
 
+	void SoundManager::EndOfSound(int channel)
+    {
+	    
+    }
+
     void SoundManager::playSound(PTSD::Sound *sound)
     {
         playSound(sound->getPath(), sound->getSoundType(), sound->getVolume(), sound->getLoop());
         sound->setChannelPlayed(currentChannel);
+        genChannels[currentChannel]->setCallback((FMOD_CHANNELCONTROL_CALLBACK));
     }
 
     void SoundManager::pauseChannelGroup(int soundType)
@@ -302,9 +314,6 @@ namespace PTSD {
 
     void SoundManager::playMusic(const std::string& path, bool loop)
     {
-        bool needsToBeAdded = false;
-        if (musicChannel == nullptr) needsToBeAdded = true;
-
         FMOD::Sound* sound;
         result = sys->createSound(path.c_str(), FMOD_CREATESTREAM, NULL, &sound);
 
@@ -330,6 +339,38 @@ namespace PTSD {
             PTSD::LOG("Error at assigning musicChannel to its channelGroup @SoundManager.cpp, PlayMusic()", PTSD::Error);
         }
 
+    }
+
+    void SoundManager::playMusic(int id, bool loop)
+    {
+        SoundData soundData = loadedSounds[id];
+
+        if (loop) result = soundData.fmodSound->setMode(FMOD_LOOP_NORMAL);
+
+        if (result != FMOD_OK) {
+            std::string errMsg = soundData.path + " couldn't be looped. Error while trying to play the music. @SoundManager.cpp, PlayMusic()";
+            PTSD::LOG(errMsg.c_str(), PTSD::Error);
+        }
+
+        result = sys->playSound(soundData.fmodSound, musicChannelGroup, false, &musicChannel);
+
+        if (result != FMOD_OK) {
+            std::string errMsg = soundData.path + " couldn't be played. Error while trying to play the music. @SoundManager.cpp, PlayMusic()";
+            PTSD::LOG(errMsg.c_str(), PTSD::Error);
+        }
+
+        result = musicChannel->setChannelGroup(musicChannelGroup);
+
+        if (result != FMOD_OK) {
+            PTSD::LOG("Error at assigning musicChannel to its channelGroup @SoundManager.cpp, PlayMusic()", PTSD::Error);
+        }
+
+        result = musicChannel->setVolume(soundData.volume);
+
+        if (result != FMOD_OK) {
+            std::string errMsg = soundData.path + " 's volume be modified. Error while trying to play the music. @SoundManager.cpp, PlayMusic()";
+            PTSD::LOG(errMsg.c_str(), PTSD::Error);
+        }
     }
 
     void SoundManager::changeMusic(const std::string& path, bool loop)

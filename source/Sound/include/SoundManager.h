@@ -48,6 +48,7 @@ namespace PTSD {
 		int result;
 		int nChannels = 128; //ATM this is arbitrary. It could be configured by the developer.
 		int currentChannel = -1;
+		static void EndOfSound(int currentChannel);
 
 	public:
 		SoundManager() = default;
@@ -61,7 +62,7 @@ namespace PTSD {
 		void shutdown();
 		int loadSound(const std::string& path, int soundType, int channelType, float volume);
 
-		//ChannelGroupManagement
+		//Channel Group Management
 		//From each channelGroup, you can manage the volume of each sound Type (ambient, dialog...)
 		void pauseChannelGroup(int soundType);
 		void resumeChannelGroup(int soundType);
@@ -70,6 +71,12 @@ namespace PTSD {
 		void setChannelGroupVolume(int soundType, float vol);
 		void endChannelGroupSounds(int soundType);
 		bool isChannelGroupPaused(int soundType);
+
+		
+		//Individual Channel Management
+		bool muteChannel(int channelId);
+		bool resumeChannel(int channelId);
+		bool setChannelVolume(int channelId, float volume);
 
 		//Sound Management
 		//With these functions you can modify specific sounds.
@@ -88,6 +95,7 @@ namespace PTSD {
 		//Music Management
 		//Only 1 song can be played at a time. This could be improved upon in the future.
 		void playMusic(const std::string& path, bool loop);
+		void playMusic(int id, bool loop);
 		void changeMusic(const std::string& path, bool loop);
 		void pauseMusic();
 		void resumeMusic();

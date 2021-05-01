@@ -205,10 +205,32 @@ namespace PTSD {
 	}
 	bool ScriptManager::bindSoundComponents()
 	{
-		//Init everything
 		PTSD::LOG("Binding LUA Sound Components... @ScriptManager, BindSoundComponents()");
+
+		//Sound loading
 		(*state).set_function("PTSDLoadSound", &PTSD::SoundManager::loadSound, PTSD::SoundManager::getInstance());
+
+		//General-Use Sounds
 		(*state).set_function("playSound", sol::resolve<int(int)>(&PTSD::SoundManager::playSound), PTSD::SoundManager::getInstance());
+
+		//Music
+		(*state).set_function("playMusic", sol::resolve<void(int, bool)>(&PTSD::SoundManager::playMusic), PTSD::SoundManager::getInstance());
+		(*state).set_function("changeMusic", &PTSD::SoundManager::changeMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("isMusicPaused", &PTSD::SoundManager::isMusicPaused, PTSD::SoundManager::getInstance());
+		(*state).set_function("muteMusic", &PTSD::SoundManager::muteMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("pauseMusic", &PTSD::SoundManager::pauseMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("resumeMusic", &PTSD::SoundManager::resumeMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("setMusicVolume", &PTSD::SoundManager::setMusicVolume, PTSD::SoundManager::getInstance());
+		(*state).set_function("unmuteMusic", &PTSD::SoundManager::unmuteMusic, PTSD::SoundManager::getInstance());
+
+		//Channel group management
+		(*state).set_function("pauseChannelGroup", &PTSD::SoundManager::pauseChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("resumeChannelGroup", &PTSD::SoundManager::resumeChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("muteChannelGroup", &PTSD::SoundManager::muteChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("unmuteChannelGroup", &PTSD::SoundManager::unmuteChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("setChannelGroupVolume", &PTSD::SoundManager::setChannelGroupVolume, PTSD::SoundManager::getInstance());
+		(*state).set_function("isChannelGroupPaused", &PTSD::SoundManager::isChannelGroupPaused, PTSD::SoundManager::getInstance());
+		(*state).set_function("endChannelGroupSounds", &PTSD::SoundManager::endChannelGroupSounds, PTSD::SoundManager::getInstance());
 		return true;
 	}
 	bool ScriptManager::bindUIComponents()

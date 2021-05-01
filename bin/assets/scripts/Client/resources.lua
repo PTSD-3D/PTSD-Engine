@@ -20,7 +20,8 @@ Resources = {
 		},
 		PTSD_Anthem = {
 			path = "PTSD-Anthem.mp3", id, volume = 0.3
-		},		Clowing = {
+		},		
+		Clowning = {
 			path = "clowning-around.mp3", id, tipo=SoundType.Musica, volume = 0.3
 		}
 	},
