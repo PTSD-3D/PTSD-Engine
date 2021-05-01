@@ -1,6 +1,6 @@
 local ns = reqNamespace
 
---ns.loadSounds();
+ns.LoadSounds()
 ns.loadScene(Manager, sampleScene)
 LOG("Scene loaded correctly")
 -- Showing component Added event working

@@ -124,43 +124,46 @@ end
 function SoundSystem:onPlay(music)
 	if music.channel == -1 then 
 		--we play for the first time
-		print("playeo de primeras")
-		print(music.sound)
-		music.channel = playSound(music.sound)
+		music.channel = playSound(music.sound.id)
 	else
-		print("playeo resumos")
 		resumeChannel(music.channel)
 	end
-
-	print("ANTES")
-	print(music.channel)
 
 end
 
 function SoundSystem:onStop(music)
-	print("NO playeo")
 	pauseChannel(music.channel)
+end
+
+function SoundSystem:setVolume(music)
+	setChannelVolume(music.channel,music.volume)
 end
 
 function SoundSystem:update(dt)
 	for _, entity in pairs(self.targets) do
 		local music = entity:get("boombox")
 		if keyJustPressed(PTSDKeys.Q) then
-			print(music.isPlaying)
+			--it just cant be initialized to false srry
 			if music.isPlaying == nil then
 				music.isPlaying = false
 			end
 			if music.isPlaying then
-				print("letstop")
 				music.isPlaying = false
 				self:onStop(music)
 			else
-				print("letsplay")
 				music.isPlaying = true
 				self:onPlay(music)				
-				print("DESPS")
-				print(music.channel)
 			end
+		end
+		if music.channel == -1 then
+			return
+		end
+		if keyJustPressed(PTSDKeys.R) and music.volume <= 1 then
+			music.volume = music.volume + 0.1
+			self:setVolume(music)
+		elseif keyJustPressed(PTSDKeys.F) and music.volume > 0 then
+			music.volume = music.volume - 0.1
+			self:setVolume(music)
 		end
 	end
 end

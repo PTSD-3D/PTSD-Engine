@@ -5,9 +5,6 @@ function ns.loadScene(manager, sceneTable)
 	local physicsConfig = sceneTable.SceneConfig.PhysicsConfig
 	setGravity(physicsConfig["Gravity"])
 	LOG(tostring("Gravity set to: " .. physicsConfig["Gravity"]), LogLevel.Trace, 0)
-	print(Resources.Sounds.PTSD_Anthem.id)
-	print(Resources.Sounds.Oof.id)
-	print(Resources.Sounds.Clowning.id)
 	for _, entData in pairs(sceneTable.Entities) do
 		local entityObject = ns.Entity()
 		entityObject:initialize()

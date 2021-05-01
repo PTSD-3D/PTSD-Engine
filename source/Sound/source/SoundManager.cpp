@@ -304,35 +304,6 @@ namespace PTSD {
 		genChannels[channelId]->setVolume(volume);
 	}
 
-	void SoundManager::playMusic(const std::string& path, bool loop)
-	{
-		FMOD::Sound* sound;
-		result = sys->createSound(path.c_str(), FMOD_CREATESTREAM, NULL, &sound);
-
-		if (result != FMOD_OK) {
-			std::string errMsg = path + " couldn't be loaded. Please check the file's path @SoundManager.cpp, PlayMusic()";
-			PTSD::LOG(errMsg.c_str(), PTSD::Error);
-		}
-
-		if (loop) {
-			result = sound->setMode(FMOD_LOOP_NORMAL);
-		}
-
-		result = sys->playSound(sound, musicChannelGroup, false, &musicChannel);
-
-		if (result != FMOD_OK) {
-			std::string errMsg = path + " couldn't be played. Error while trying to play the music. @SoundManager.cpp, PlayMusic()";
-			PTSD::LOG(errMsg.c_str(), PTSD::Error);
-		}
-
-		result = musicChannel->setChannelGroup(musicChannelGroup);
-
-		if (result != FMOD_OK) {
-			PTSD::LOG("Error at assigning musicChannel to its channelGroup @SoundManager.cpp, PlayMusic()", PTSD::Error);
-		}
-
-	}
-
 	void SoundManager::playMusic(int id, bool loop)
 	{
 		SoundData soundData = loadedSounds[id];
@@ -367,13 +338,13 @@ namespace PTSD {
 		genChannels[currentChannel]->setCallback(SoundManager::EndOfSound(currentChannel));
 	}
 
-	void SoundManager::changeMusic(const std::string& path, bool loop)
+	void SoundManager::changeMusic(int id, bool loop)
 	{
 		FMOD::Sound* sound = nullptr;
 		musicChannel->getCurrentSound(&sound);
 		if (sound != nullptr) sound->release();
 
-		playMusic(path, loop);
+		playMusic(id, loop);
 	}
 
 	void SoundManager::pauseMusic()

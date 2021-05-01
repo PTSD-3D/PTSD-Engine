@@ -65,18 +65,6 @@ namespace PTSD {
 		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
 		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
 
-	
-
-		
-		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
-		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
-		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
-		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
-		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
-		{
-			(*state).script_file(entry.path().string());
-		}
-		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
 		if (bindGenericComponents()&&
@@ -93,6 +81,16 @@ namespace PTSD {
 		(*state).script_file("./assets/scripts/Client/resources.lua");
 		(*state).script_file("./assets/scripts/Engine/resourceLoader.lua");
 
+		//Prefabs and Scenes
+		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
+		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
+		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
+		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
+		for (const auto& entry : fs::directory_iterator("./assets/scripts/Client/Prefabs"))
+		{
+			(*state).script_file(entry.path().string());
+		}
+		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 
 		//Engine initialization
@@ -283,7 +281,8 @@ namespace PTSD {
 			{"H", Scancode::SCANCODE_H},
 			{"J", Scancode::SCANCODE_J},
 			{"Q", Scancode::SCANCODE_Q},
-			{"E", Scancode::SCANCODE_E},
+			{"R", Scancode::SCANCODE_R},
+			{"F", Scancode::SCANCODE_F},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
