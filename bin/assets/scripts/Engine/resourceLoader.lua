@@ -1,4 +1,3 @@
-local eng = reqEngine
 local ns = reqNamespace
 
 function ns.LoadSounds()
@@ -12,7 +11,7 @@ function ns.LoadSounds()
 			print (Error)
 		else
 			--local soundId = PTSDLoadSound(PATHS.Sound .. sound.path,sound.tipo, sound.volume or 1)
-			print(Error)
+			print("Resultado: " .. Error)
 			Resources.Sounds[key].id = Error
 		end
 	end

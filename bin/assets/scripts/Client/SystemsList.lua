@@ -29,10 +29,8 @@ end
 
 function MoveSystem:Shoot(entity, delta)
 	LOG("PEW")
-	Status,Error = pcall(playMusic,Resources.Sounds.Clowning.id, true)
-	if not Status then
-		print (Error)
-	end
+	local chan = playSound(Resources.Sounds.Oof.id)
+	setChannelVolume(chan,1)
 end
 
 function MoveSystem:Action()
@@ -115,6 +113,59 @@ end
 
 Manager:addSystem(MoveSystem())
 
+-----------------------------------------------------------
+
+local SoundSystem = ns.class("SoundSystem",ns.System)
+
+function SoundSystem:requires()
+	return {"boombox"}
+end
+
+function SoundSystem:onPlay(music)
+	if music.channel == -1 then 
+		--we play for the first time
+		print("playeo de primeras")
+		print(music.sound)
+		music.channel = playSound(music.sound)
+	else
+		print("playeo resumos")
+		resumeChannel(music.channel)
+	end
+
+	print("ANTES")
+	print(music.channel)
+
+end
+
+function SoundSystem:onStop(music)
+	print("NO playeo")
+	pauseChannel(music.channel)
+end
+
+function SoundSystem:update(dt)
+	for _, entity in pairs(self.targets) do
+		local music = entity:get("boombox")
+		if keyJustPressed(PTSDKeys.Q) then
+			print(music.isPlaying)
+			if music.isPlaying == nil then
+				music.isPlaying = false
+			end
+			if music.isPlaying then
+				print("letstop")
+				music.isPlaying = false
+				self:onStop(music)
+			else
+				print("letsplay")
+				music.isPlaying = true
+				self:onPlay(music)				
+				print("DESPS")
+				print(music.channel)
+			end
+		end
+	end
+end
+
+Manager:addSystem(SoundSystem())
 -----------------------------------------------------------
 
 LOG("Systems load completed", LogLevel.Info, 1)

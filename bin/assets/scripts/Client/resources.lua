@@ -19,7 +19,7 @@ Resources = {
 			path = "oof.mp3", id, tipo=SoundType.Sonido, soundChannel=SoundChannel.Dialogo, volume = 0.5
 		},
 		PTSD_Anthem = {
-			path = "PTSD-Anthem.mp3", id, volume = 0.3
+			path = "PTSD-Anthem.mp3", id, tipo = SoundType.Musica, volume = 0.3
 		},		
 		Clowning = {
 			path = "clowning-around.mp3", id, tipo=SoundType.Musica, volume = 0.3

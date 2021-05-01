@@ -1,4 +1,5 @@
 #pragma once
+#include <fmod_common.h>
 #include <vector>
 #include <string>
 
@@ -48,7 +49,7 @@ namespace PTSD {
 		int result;
 		int nChannels = 128; //ATM this is arbitrary. It could be configured by the developer.
 		int currentChannel = -1;
-		static void EndOfSound(int currentChannel);
+		static FMOD_CHANNELCONTROL_CALLBACK EndOfSound(int currentChannel);
 
 	public:
 		SoundManager() = default;
@@ -74,14 +75,12 @@ namespace PTSD {
 
 		
 		//Individual Channel Management
-		bool muteChannel(int channelId);
-		bool resumeChannel(int channelId);
-		bool setChannelVolume(int channelId, float volume);
+		void pauseChannel(int channelId);
+		void resumeChannel(int channelId);
+		void setChannelVolume(int channelId, float volume);
 
 		//Sound Management
 		//With these functions you can modify specific sounds.
-		void playSound(PTSD::Sound* sound);
-		void playSound(const std::string& path, int soundType, float vol = 1, bool loop = false);
 		int playSound(int id);
 		void pauseSound(PTSD::Sound* sound);
 		void resumeSound(PTSD::Sound* sound);

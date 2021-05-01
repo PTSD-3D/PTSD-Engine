@@ -65,6 +65,9 @@ namespace PTSD {
 		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
 		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
 
+	
+
+		
 		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
@@ -73,11 +76,7 @@ namespace PTSD {
 		{
 			(*state).script_file(entry.path().string());
 		}
-
-		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
-		(*state).script_file("./assets/scripts/Client/resources.lua");
-		(*state).script_file("./assets/scripts/Engine/resourceLoader.lua");
 
 		//Binding of external functions
 		if (bindGenericComponents()&&
@@ -89,6 +88,12 @@ namespace PTSD {
 			bindInputComponents() &&
 			bindScriptingComponents() ) {
 		}
+
+		//Resources
+		(*state).script_file("./assets/scripts/Client/resources.lua");
+		(*state).script_file("./assets/scripts/Engine/resourceLoader.lua");
+
+		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 
 		//Engine initialization
 		(*state).script_file("./assets/scripts/Engine/Init.lua");
@@ -231,6 +236,10 @@ namespace PTSD {
 		(*state).set_function("setChannelGroupVolume", &PTSD::SoundManager::setChannelGroupVolume, PTSD::SoundManager::getInstance());
 		(*state).set_function("isChannelGroupPaused", &PTSD::SoundManager::isChannelGroupPaused, PTSD::SoundManager::getInstance());
 		(*state).set_function("endChannelGroupSounds", &PTSD::SoundManager::endChannelGroupSounds, PTSD::SoundManager::getInstance());
+		(*state).set_function("pauseChannel", &PTSD::SoundManager::pauseChannel, PTSD::SoundManager::getInstance());
+		(*state).set_function("resumeChannel", &PTSD::SoundManager::resumeChannel, PTSD::SoundManager::getInstance());
+		(*state).set_function("setChannelVolume", &PTSD::SoundManager::setChannelVolume, PTSD::SoundManager::getInstance());
+		
 		return true;
 	}
 	bool ScriptManager::bindUIComponents()
@@ -273,6 +282,8 @@ namespace PTSD {
 			{"D", Scancode::SCANCODE_D},
 			{"H", Scancode::SCANCODE_H},
 			{"J", Scancode::SCANCODE_J},
+			{"Q", Scancode::SCANCODE_Q},
+			{"E", Scancode::SCANCODE_E},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});

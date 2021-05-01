@@ -6,6 +6,6 @@ local ns = reqNamespace
 LOG("Loading components...", LogLevel.Info, 1)
 
 ns.Component.create("playerMove",{"x","y","z"})
-ns.Component.create("topo")
+ns.Component.create("boombox",{"volume","isPlaying","sound","channel"})
 
 LOG("Components load completed", LogLevel.Info, 1)
