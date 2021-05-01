@@ -44,6 +44,7 @@ namespace PTSD {
 	//Controller
 		bool ControllerButtonPressed(int controllerID, ControllerButton button);
 		bool ControllerButtonReleased(int controllerID, ControllerButton button);
+		bool ControllerButtonJustPressed(int controllerID, ControllerButton button);
 		Vector2D controllerRightAxis(int controllerID);
 		Vector2D controllerLeftAxis(int controllerID);
 		float controllerLeftTrigger(int controllerID);
