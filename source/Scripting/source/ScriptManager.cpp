@@ -208,7 +208,7 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Sound Components... @ScriptManager, BindSoundComponents()");
 		(*state).set_function("PTSDLoadSound", &PTSD::SoundManager::loadSound, PTSD::SoundManager::getInstance());
-		(*state).set_function("playSound", sol::resolve<void(int)>(&PTSD::SoundManager::playSound), PTSD::SoundManager::getInstance());
+		(*state).set_function("playSound", sol::resolve<int(int)>(&PTSD::SoundManager::playSound), PTSD::SoundManager::getInstance());
 		return true;
 	}
 	bool ScriptManager::bindUIComponents()

@@ -14,7 +14,6 @@
 #include "SoundAttorney.h"
 
 namespace PTSD {
-
     SoundManager* SoundManager::mInstance = nullptr;
 
     int SoundManager::init()
@@ -67,11 +66,22 @@ namespace PTSD {
         }
     }
 
-    int SoundManager::loadSound(const std::string& path, int soundType, float volume)
+    int SoundManager::loadSound(const std::string& path, int soundType, int soundChannel, float volume)
     {
         FMOD::Sound* fmodSound;
-        result = sys->createSound(path.c_str(), FMOD_3D_HEADRELATIVE, NULL, &fmodSound);
-        loadedSounds.push_back(fmodSound);
+        
+        if (soundType == 0) { //Normal sound
+            result = sys->createSound(path.c_str(), FMOD_3D_HEADRELATIVE, NULL, &fmodSound);
+        }
+        else result = sys->createSound(path.c_str(), FMOD_CREATESTREAM, NULL, &fmodSound); //Music. This is so the clip sound is loaded by chunks. Music clips may be too big to be loaded in 1 go.
+
+        if (result != FMOD_OK) {
+            std::string errMsg = path + " couldn't be loaded. Please check the file's path @SoundManager.cpp, LoadSound()";
+            PTSD::LOG(errMsg.c_str(), PTSD::Error);
+        }
+        
+        SoundData soundData = SoundData(fmodSound, path, soundType, soundChannel, volume);
+        loadedSounds.push_back(soundData);
         return loadedSounds.size() - 1;
     }
 
@@ -105,16 +115,18 @@ namespace PTSD {
         }
     }
 
-    void SoundManager::playSound(int id)
+    int SoundManager::playSound(int id)
     {
         currentChannel++;
         if (currentChannel > nChannels) currentChannel = 0;
 
-        FMOD::Sound* fmodSound = loadedSounds[id];
+        SoundData soundData = loadedSounds[id];
 
-        result = sys->playSound(fmodSound, genChannelGroups[0], false, &genChannels[currentChannel]);
+        result = sys->playSound(soundData.fmodSound, genChannelGroups[soundData.soundChannel], false, &genChannels[currentChannel]);
 
-        result = genChannels[currentChannel]->setChannelGroup(genChannelGroups[0]);
+        result = genChannels[currentChannel]->setChannelGroup(genChannelGroups[soundData.soundChannel]);
+
+        return currentChannel;
     }
 
     void SoundManager::playSound(PTSD::Sound *sound)

@@ -7,7 +7,7 @@ function ns.LoadSounds()
 		print(sound)
 		local path = Resources.PATHS.Sound .. sound.path
 		print(path)
-		Status,Error = pcall(PTSDLoadSound, path,sound.tipo, sound.volume or 1)
+		Status,Error = pcall(PTSDLoadSound, path, sound.tipo, sound.soundChannel or 0, sound.volume or 1)
 		if not Status then
 			print (Error)
 		else
