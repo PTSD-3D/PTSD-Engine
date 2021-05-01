@@ -1,4 +1,5 @@
-local engine = reqNamespace
+local namespace = reqNamespace
+local engine = {}
 
 local function populateNamespace(ns)
     -- Requiring class
@@ -17,6 +18,7 @@ local function populateNamespace(ns)
 end
 
 function engine.initialize(opts)
+    LOG("Initializing engine...", LogLevel.Info, 0)
     if opts == nil then opts = {} end
     if not engine.initialized then
         engine.config = {
@@ -27,15 +29,15 @@ function engine.initialize(opts)
             engine.config[name] = val
         end
 
-        populateNamespace(engine)
+        populateNamespace(namespace)
 
         if engine.config.globals then
             populateNamespace(_G)
         end
         engine.initialized = true
-        LOG("Engine initialized correctly!")
+        LOG("Engine initialized correctly")
     else
-        print('Engine is already initialized.')
+        LOG("Engine is already initialized", LogLevel.Warning, 0)
     end
 end
 

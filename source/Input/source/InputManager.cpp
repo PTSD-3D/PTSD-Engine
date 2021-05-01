@@ -162,6 +162,9 @@ namespace PTSD {
 		return mImplementation->isButtonDown(controllerID, static_cast<SDL_GameControllerButton>(button));
 	}
 
+	bool InputManager::ControllerButtonJustPressed(int controllerID, ControllerButton button) {
+		return mImplementation->isButtonJustDown(controllerID, static_cast<SDL_GameControllerButton>(button));
+	}
 	bool InputManager::ControllerButtonReleased(int controllerID, ControllerButton button) {
 		return mImplementation->isButtonJustUp(controllerID, static_cast<SDL_GameControllerButton>(button));
 	}
