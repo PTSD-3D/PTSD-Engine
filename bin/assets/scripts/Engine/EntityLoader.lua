@@ -9,6 +9,7 @@ function ns.loadScene(manager, sceneTable)
 		local entityObject = ns.Entity()
 		entityObject:initialize()
 		-- Loads all components
+		print(entData.Transform)
 		if entData.Components ~= {} then
 			for _, compDetails in pairs(entData.Components) do
 				entityObject:add(ns.Component.all[compDetails["name"]](table.unpack(compDetails["arguments"])))
@@ -18,6 +19,7 @@ function ns.loadScene(manager, sceneTable)
 			Entity is added to manager after adding components to prevent
 			firing componentAdded event various times--
 		]]
+
 		manager:addEntity(entityObject)
 		if entData.Transform then
 			local location = entData.Transform.position
