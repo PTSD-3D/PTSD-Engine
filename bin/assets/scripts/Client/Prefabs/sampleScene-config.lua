@@ -2,7 +2,7 @@ local sceneConfig = reqSceneConfigurations
 function sceneConfig.sampleScene()
 	return {
 		PhysicsConfig = {
-			Gravity = 0
+			Gravity = -10
 		}
 	}
 end
