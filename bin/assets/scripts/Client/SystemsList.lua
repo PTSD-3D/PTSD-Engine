@@ -1,4 +1,5 @@
 local ns = reqNamespace
+local prefabs = reqPrefab
 
 --Define new systems here
 
@@ -29,6 +30,12 @@ end
 
 function MoveSystem:Shoot(entity, delta)
 	LOG("PEW")
+	ns.spawnEntity(Manager,prefabs.Bullet({
+		Transform = {
+			position={x=entity.Transform.position.x,y=entity.Transform.position.y,z=entity.Transform.position.z},
+			rotation={x=0.0,y=0.0,z=0.0},
+			scale={x=1,y= 1,z=1}}}
+	))
 end
 
 function MoveSystem:Action()
