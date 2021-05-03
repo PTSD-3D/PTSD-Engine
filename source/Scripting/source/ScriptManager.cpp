@@ -12,6 +12,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 */
 #include "InputManager.h"
 #include "GraphicsManager.h"
+#include "SoundManager.h"
 #include "Camera.h"
 #include "UIManager.h"
 #include "PhysicsManager.h"
@@ -64,7 +65,6 @@ namespace PTSD {
 		//Events
 		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
 		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
-
 		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
@@ -75,7 +75,7 @@ namespace PTSD {
 			(*state).script_file(entry.path().string());
 		}
 
-		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
+		//(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
@@ -88,6 +88,22 @@ namespace PTSD {
 			bindInputComponents() &&
 			bindScriptingComponents()) {
 		}
+
+		//Resources
+		(*state).script_file("./assets/scripts/Client/resources.lua");
+		(*state).script_file("./assets/scripts/Engine/resourceLoader.lua");
+
+		//Prefabs and Scenes
+		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
+		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
+		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
+		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
+		for (const auto& entry : fs::directory_iterator("./assets/scripts/Client/Prefabs"))
+		{
+			(*state).script_file(entry.path().string());
+		}
+		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
+		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
 
 		//Engine initialization
 		(*state).script_file("./assets/scripts/Engine/Init.lua");
@@ -192,8 +208,7 @@ namespace PTSD {
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
-
-		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
+		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance());
 		(*state).new_enum<CollisionFlags>("CollisionFlags", {
 			{"Dynamic", CollisionFlags::Dynamic},
 			{"Static", CollisionFlags::Static},
@@ -204,8 +219,36 @@ namespace PTSD {
 	}
 	bool ScriptManager::bindSoundComponents()
 	{
-		//Init everything
 		PTSD::LOG("Binding LUA Sound Components... @ScriptManager, BindSoundComponents()");
+
+		//Sound loading
+		(*state).set_function("PTSDLoadSound", &PTSD::SoundManager::loadSound, PTSD::SoundManager::getInstance());
+
+		//General-Use Sounds
+		(*state).set_function("playSound", sol::resolve<int(int)>(&PTSD::SoundManager::playSound), PTSD::SoundManager::getInstance());
+
+		//Music
+		(*state).set_function("playMusic", sol::resolve<void(int, bool)>(&PTSD::SoundManager::playMusic), PTSD::SoundManager::getInstance());
+		(*state).set_function("changeMusic", &PTSD::SoundManager::changeMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("isMusicPaused", &PTSD::SoundManager::isMusicPaused, PTSD::SoundManager::getInstance());
+		(*state).set_function("muteMusic", &PTSD::SoundManager::muteMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("pauseMusic", &PTSD::SoundManager::pauseMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("resumeMusic", &PTSD::SoundManager::resumeMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("setMusicVolume", &PTSD::SoundManager::setMusicVolume, PTSD::SoundManager::getInstance());
+		(*state).set_function("unmuteMusic", &PTSD::SoundManager::unmuteMusic, PTSD::SoundManager::getInstance());
+
+		//Channel group management
+		(*state).set_function("pauseChannelGroup", &PTSD::SoundManager::pauseChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("resumeChannelGroup", &PTSD::SoundManager::resumeChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("muteChannelGroup", &PTSD::SoundManager::muteChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("unmuteChannelGroup", &PTSD::SoundManager::unmuteChannelGroup, PTSD::SoundManager::getInstance());
+		(*state).set_function("setChannelGroupVolume", &PTSD::SoundManager::setChannelGroupVolume, PTSD::SoundManager::getInstance());
+		(*state).set_function("isChannelGroupPaused", &PTSD::SoundManager::isChannelGroupPaused, PTSD::SoundManager::getInstance());
+		(*state).set_function("endChannelGroupSounds", &PTSD::SoundManager::endChannelGroupSounds, PTSD::SoundManager::getInstance());
+		(*state).set_function("pauseChannel", &PTSD::SoundManager::pauseChannel, PTSD::SoundManager::getInstance());
+		(*state).set_function("resumeChannel", &PTSD::SoundManager::resumeChannel, PTSD::SoundManager::getInstance());
+		(*state).set_function("setChannelVolume", &PTSD::SoundManager::setChannelVolume, PTSD::SoundManager::getInstance());
+		
 		return true;
 	}
 	bool ScriptManager::bindUIComponents()
@@ -249,6 +292,9 @@ namespace PTSD {
 			{"D", Scancode::SCANCODE_D},
 			{"H", Scancode::SCANCODE_H},
 			{"J", Scancode::SCANCODE_J},
+			{"Q", Scancode::SCANCODE_Q},
+			{"R", Scancode::SCANCODE_R},
+			{"F", Scancode::SCANCODE_F},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});

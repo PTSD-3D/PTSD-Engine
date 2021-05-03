@@ -1,4 +1,5 @@
 #pragma once
+#include <fmod_common.h>
 #include <vector>
 #include <string>
 
@@ -16,7 +17,15 @@ namespace FMOD { //This is so we trick the .h into not exploding into pieces.
 	class Sound;
 }
 
-// enum FMOD_RESULT;
+struct SoundData { //This type structure will be used to store the sound information provided by the developer. See resources.lua
+	FMOD::Sound* fmodSound;
+	std::string path;
+	int soundType;
+	int soundChannel;
+	float volume;
+	SoundData(FMOD::Sound* fmodSound, const std::string& path, int type,int channel,const float& volume):
+		fmodSound(fmodSound), path(path),soundType(type),soundChannel(channel),volume(volume){};
+};
 
 namespace PTSD {
 	enum SoundChannels {
@@ -32,6 +41,7 @@ namespace PTSD {
 		static SoundManager* mInstance;
 		FMOD::System* sys = nullptr;
 		//FMOD::ChannelGroup* genChannelGroup = nullptr;
+		std::vector<SoundData> loadedSounds;
 		FMOD::ChannelGroup* musicChannelGroup = nullptr;
 		std::vector<FMOD::ChannelGroup*> genChannelGroups;
 		std::vector<FMOD::Channel*> genChannels;
@@ -39,6 +49,7 @@ namespace PTSD {
 		int result;
 		int nChannels = 128; //ATM this is arbitrary. It could be configured by the developer.
 		int currentChannel = -1;
+		static FMOD_CHANNELCONTROL_CALLBACK EndOfSound(int currentChannel);
 
 	public:
 		SoundManager() = default;
@@ -50,8 +61,9 @@ namespace PTSD {
 			return mInstance;
 		}
 		void shutdown();
+		int loadSound(const std::string& path, int soundType, int channelType, float volume);
 
-		//ChannelGroupManagement
+		//Channel Group Management
 		//From each channelGroup, you can manage the volume of each sound Type (ambient, dialog...)
 		void pauseChannelGroup(int soundType);
 		void resumeChannelGroup(int soundType);
@@ -61,10 +73,17 @@ namespace PTSD {
 		void endChannelGroupSounds(int soundType);
 		bool isChannelGroupPaused(int soundType);
 
+		
+		//Individual Channel Management
+		void pauseChannel(int channelId);
+		void resumeChannel(int channelId);
+		void setChannelVolume(int channelId, float volume);
+
 		//Sound Management
 		//With these functions you can modify specific sounds.
-		void playSound(PTSD::Sound* sound);
-		void playSound(const std::string& path, int soundType, float vol = 1, bool loop = false);
+		int playSound(int id);
+
+		//This is deprecated, but could be used in the future
 		void pauseSound(PTSD::Sound* sound);
 		void resumeSound(PTSD::Sound* sound);
 		void muteSound(PTSD::Sound* sound);
@@ -76,8 +95,8 @@ namespace PTSD {
 
 		//Music Management
 		//Only 1 song can be played at a time. This could be improved upon in the future.
-		void playMusic(const std::string& path, bool loop);
-		void changeMusic(const std::string& path, bool loop);
+		void playMusic(int id, bool loop);
+		void changeMusic(int id, bool loop);
 		void pauseMusic();
 		void resumeMusic();
 		void muteMusic();
