@@ -175,6 +175,9 @@ function SoundSystem:update(dt)
 	end
 end
 
+Manager:addSystem(SoundSystem())
+-----------------------------------------------------------
+
 local BulletSystem = ns.class("BulletSystem",ns.System)
 
 function BulletSystem:requires() return {"bullet"} end
@@ -191,9 +194,6 @@ function BulletSystem:update(dt)
 		end
 	end
 end
-
-Manager:addSystem(SoundSystem())
------------------------------------------------------------
 
 Manager:addSystem(BulletSystem())
 
