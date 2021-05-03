@@ -157,7 +157,6 @@ local camChild = false;
 
 function FirstPersonSystem:update(dt)
 	for _, entity in pairs(self.targets) do
-        print("a")
 		local tr = entity.Transform
 		local rb = entity.Rigidbody
 		local vel = entity:get("firstPersonMove").vel;
@@ -179,7 +178,7 @@ function FirstPersonSystem:update(dt)
 		--getting direction vector
 		local dir = vec3:new(0, 0, 0);
 		if keyPressed(PTSDKeys.A) then
-			dir = dir + tr:getRight()
+			dir = dir - tr:getRight()
 		end
 		if keyPressed(PTSDKeys.W) then
 			dir = dir + tr:getForward()
@@ -188,7 +187,7 @@ function FirstPersonSystem:update(dt)
 			dir = dir - tr:getForward()
 		end
 		if keyPressed(PTSDKeys.D) then
-			dir = dir - tr:getRight()
+			dir = dir + tr:getRight()
 		end
 
 		--making the velocity vector's magnitude equal to vel

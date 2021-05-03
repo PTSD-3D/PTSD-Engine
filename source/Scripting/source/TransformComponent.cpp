@@ -108,7 +108,7 @@ namespace PTSD {
 		return Vec3(v.x, v.y, v.z);
 	}
 	Vec3 TransformComponent::getRight() const { //Gets the local right vector
-		Ogre::Vector3 v = mNode->getLocalAxes().GetColumn(0);
+		Ogre::Vector3 v = -mNode->getLocalAxes().GetColumn(0);
 		return Vec3(v.x, v.y, v.z);
 	}
 	Ogre::SceneNode* TransformComponent::getNode() const { //Gets the node associated to the transform
