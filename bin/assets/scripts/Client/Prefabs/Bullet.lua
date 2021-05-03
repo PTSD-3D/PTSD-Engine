@@ -5,7 +5,7 @@ function pf.Bullet(params)
 	return {
 		Components = {
 			-- Example user defined components
-			{ name = "bulletDamage", arguments = {1} }
+			{ name = "bullet", arguments = {1,3,100} }
 		},
 		Transform = params.Transform,
 		Mesh = { mesh = "Kirby.mesh", material = "body" },
