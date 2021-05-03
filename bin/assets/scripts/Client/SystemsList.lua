@@ -64,10 +64,10 @@ function MoveSystem:KeyboardHandleInput(entity,dt,speed)
 	self:Move(entity, direction,dt,speed)
 
 	-- Actions (shoot, change, something)
-	if keyJustPressed(PTSDKeys.J) or mouseRightClick() then
+	if keyJustPressed(PTSDKeys.J) or mouseButtonJustPressed(PTSDMouseButton.Right) then
 		self:Action()
 	end
-	if keyJustPressed(PTSDKeys.H) or mouseLeftClick() then
+	if keyJustPressed(PTSDKeys.H) or  mouseButtonJustPressed(PTSDMouseButton.Left) then
 		self:Shoot(entity, dt)
 	end
 	if keyJustPressed(PTSDKeys.Space) then

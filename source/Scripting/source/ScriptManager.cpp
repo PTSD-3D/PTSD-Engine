@@ -20,13 +20,14 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "MeshComponent.h"
 #include "TransformComponent.h"
 #include "RigidbodyComponent.h"
+#include "PTSDVectors.h"
 
 namespace fs = std::filesystem;
 namespace PTSD {
 	/**
 	 * \brief Creates the objects for lua state and entityManager
 	 */
-	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager()){}
+	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager()) {}
 
 	/*
 	 * \brief Frees up allocated memory
@@ -68,7 +69,8 @@ namespace PTSD {
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
 		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
-		for (const auto & entry : fs::directory_iterator( "./assets/scripts/Client/Prefabs"))
+		(*state).require_file("reqSceneConfigurations", "./assets/scripts/Engine/Prefab.lua");
+		for (const auto& entry : fs::directory_iterator("./assets/scripts/Client/Prefabs"))
 		{
 			(*state).script_file(entry.path().string());
 		}
@@ -77,14 +79,14 @@ namespace PTSD {
 		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
 
 		//Binding of external functions
-		if (bindGenericComponents()&&
+		if (bindGenericComponents() &&
 			bindLoggerComponents() &&
 			bindGraphicsComponents() &&
 			bindPhysicsComponents() &&
 			bindUIComponents() &&
 			bindSoundComponents() &&
 			bindInputComponents() &&
-			bindScriptingComponents() ) {
+			bindScriptingComponents()) {
 		}
 
 		//Engine initialization
@@ -164,10 +166,10 @@ namespace PTSD {
 		luaMeshComponent["getMesh"] = &PTSD::MeshComponent::getMesh;
 		luaMeshComponent["getMaterial"] = &PTSD::MeshComponent::getMaterial;
 
-		(*state).set_function("setMesh", [&](UUID id, const std::string& mesh, const std::string& mat){
+		(*state).set_function("setMesh", [&](UUID id, const std::string& mesh, const std::string& mat) {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
-		});
-		
+			});
+
 		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("getWindowWidth", &PTSD::GraphicsManager::getWindowWidth, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("getWindowHeight", &PTSD::GraphicsManager::getWindowHeight, PTSD::GraphicsManager::getInstance());
@@ -190,7 +192,7 @@ namespace PTSD {
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
-		
+
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance()->getInstance());
 		(*state).new_enum<CollisionFlags>("CollisionFlags", {
 			{"Dynamic", CollisionFlags::Dynamic},
@@ -226,8 +228,9 @@ namespace PTSD {
 		//Mouse
 		(*state).set_function("getMouseRelativePosition", &PTSD::InputManager::getMouseRelativePosition, PTSD::InputManager::getInstance());
 		(*state).set_function("resetMouse", &PTSD::InputManager::cleanMouseDelta, PTSD::InputManager::getInstance());
-		(*state).set_function("mouseLeftClick", &PTSD::InputManager::mouseLeftClick, PTSD::InputManager::getInstance());
-		(*state).set_function("mouseRightClick", &PTSD::InputManager::mouseRightClick, PTSD::InputManager::getInstance());
+		(*state).set_function("mouseButtonPressed", &PTSD::InputManager::isMouseButtonDown, PTSD::InputManager::getInstance());
+		(*state).set_function("mouseButtonJustReleased", &PTSD::InputManager::isMouseButtonJustUp, PTSD::InputManager::getInstance());
+		(*state).set_function("mouseButtonJustPressed", &PTSD::InputManager::isMouseButtonJustDown, PTSD::InputManager::getInstance());
 
 		//Gamepad
 		(*state).set_function("controllerLeftTrigger", &PTSD::InputManager::controllerLeftTrigger, PTSD::InputManager::getInstance());
@@ -248,6 +251,12 @@ namespace PTSD {
 			{"J", Scancode::SCANCODE_J},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
+			});
+		//Mouse button enum
+		(*state).new_enum<MouseButton>("PTSDMouseButton", {
+			{"Left", MouseButton::Left},
+			{"Middle", MouseButton::Middle},
+			{"Right",  MouseButton::Right}
 			});
 
 			//Binding of the controller buttons
@@ -272,15 +281,15 @@ namespace PTSD {
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
 		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(float, float, float)>());
-		
-		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
+
+		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform", sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
 		trComponent["position"] = sol::property(&PTSD::TransformComponent::getPosition, sol::resolve<void(Vec3)>(&PTSD::TransformComponent::setPosition));
 		//Impressive development from Sol3
 
-		(*state).set_function("setTransform", [&](UUID id, Vec3 p, Vec3 r,Vec3 s){
-			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p,r,s);
-		});
+		(*state).set_function("setTransform", [&](UUID id, Vec3 p, Vec3 r, Vec3 s) {
+			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p, r, s);
+			});
 
 		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z, 
 		sol::meta_function::multiplication, &Vec3::operator*,sol::meta_function::subtraction, &Vec3::operator-,sol::meta_function::addition, &Vec3::operator+);

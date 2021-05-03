@@ -61,4 +61,7 @@ echo Copiando DLLs scripting...
 
 copy dependencies\scripting\lua\lua54.dll bin\ 1>NUL
 
+MSBuild .\PTSD.sln /p:Configuration=Release
+MSBuild .\PTSD.sln /p:Configuration=Debug
+
 PAUSE

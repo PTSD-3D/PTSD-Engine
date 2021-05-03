@@ -12,6 +12,13 @@ typedef int32_t Keycode;
 
 typedef enum
 {
+	Left=0,
+	Middle,
+	Right
+} MouseButton;
+
+typedef enum
+{
     SCANCODE_UNKNOWN = 0,
 
     /**
