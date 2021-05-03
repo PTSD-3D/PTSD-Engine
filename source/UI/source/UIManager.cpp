@@ -36,7 +36,7 @@ namespace PTSD {
 	{
 		if (inputInstance->mouseMotion()) mImplementation->injectMousePosition(
 			inputInstance->getMousePosition());
-		if (inputInstance->mouseLeftClick()) mImplementation->injectMouseLeftClick();
+		if (inputInstance->isMouseButtonDown(Left)) mImplementation->injectMouseLeftClick();
 	}
 
 	/**
