@@ -40,11 +40,11 @@ namespace PTSD {
 		void setScale(float x, float y, float z);
 		void setChildCamera();
 
-		Vec3Placeholder getPosition() const;
-		Vec3Placeholder getRotation() const;
-		Vec3Placeholder getScale() const;
-		Vec3Placeholder getForward() const;
-		Vec3Placeholder getRight() const;
+		Vec3 getPosition() const;
+		Vec3 getRotation() const;
+		Vec3 getScale() const;
+		Vec3 getForward() const;
+		Vec3 getRight() const;
 		Ogre::SceneNode* getNode() const;
 	};
 }

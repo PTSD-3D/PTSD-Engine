@@ -281,19 +281,20 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
-		(*state).new_usertype<Vec3Placeholder>("vec3", sol::constructors<Vec3Placeholder(float, float, float)>());
+		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(float, float, float)>());
 		
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
-		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::translate);
-		trComponent["rotate"] = (void (PTSD::TransformComponent::*)(Vec3Placeholder))(&PTSD::TransformComponent::rotate);
+		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
+		trComponent["position"] = sol::property(&PTSD::TransformComponent::getPosition, sol::resolve<void(Vec3)>(&PTSD::TransformComponent::setPosition));
+		trComponent["rotate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::rotate);
 		trComponent["getForward"] = (&PTSD::TransformComponent::getForward);
 		trComponent["getRight"] = (&PTSD::TransformComponent::getRight);
 		trComponent["setChildCamera"] = (&PTSD::TransformComponent::setChildCamera);
-
-		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform", sol::no_constructor);
-		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
-		trComponent["position"] = sol::property(&PTSD::TransformComponent::getPosition, sol::resolve<void(Vec3)>(&PTSD::TransformComponent::setPosition));
 		//Impressive development from Sol3
+
+		(*state).set_function("setTransform", [&](UUID id, Vec3 p, Vec3 r, Vec3 s) {
+			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p, r, s);
+		});
 
 		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z, 
 		sol::meta_function::multiplication, &Vec3::operator*,sol::meta_function::subtraction, &Vec3::operator-,sol::meta_function::addition, &Vec3::operator+);

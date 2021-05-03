@@ -23,7 +23,7 @@ function Update(n)
 	-- dir = vec3:new(1, 0, 0)
 	-- translateCamera(dir)
 	-- end
-	rotateCamera(mouseDirection * sensitivity)
+	-- rotateCamera(mouseDirection * sensitivity)
 	return true
 end
 -- Please keep this or Lua explodes

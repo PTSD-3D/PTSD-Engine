@@ -103,13 +103,13 @@ namespace PTSD {
 		Ogre::Vector3 v = mNode->getScale();
 		return Vec3(v.x, v.y, v.z);
 	}
-	Vec3Placeholder TransformComponent::getForward() const { //Gets the local forward vector
+	Vec3 TransformComponent::getForward() const { //Gets the local forward vector
 		Ogre::Vector3 v = mNode->getLocalAxes().GetColumn(2);
-		return Vec3Placeholder(v.x, v.y, v.z);
+		return Vec3(v.x, v.y, v.z);
 	}
-	Vec3Placeholder TransformComponent::getRight() const { //Gets the local right vector
+	Vec3 TransformComponent::getRight() const { //Gets the local right vector
 		Ogre::Vector3 v = mNode->getLocalAxes().GetColumn(0);
-		return Vec3Placeholder(v.x, v.y, v.z);
+		return Vec3(v.x, v.y, v.z);
 	}
 	Ogre::SceneNode* TransformComponent::getNode() const { //Gets the node associated to the transform
 		return mNode;

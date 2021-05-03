@@ -51,8 +51,8 @@ int main()
 
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
-	myCam->lookAt(Vec3Placeholder(0, 0, 1000));
-	myCam->setPosition(Vec3Placeholder (0, 0, 100));
+	myCam->lookAt(Vec3(0, 0, 1000));
+	myCam->setPosition(Vec3 (0, 0, 100));
 
 	//Initial LUA scripts
 	scriptingSystem->run("Client/CameraScript.lua");
