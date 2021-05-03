@@ -284,6 +284,8 @@ namespace PTSD {
 
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform", sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
+		trComponent["position"] = sol::property(&PTSD::TransformComponent::getPosition, sol::resolve<void(Vec3)>(&PTSD::TransformComponent::setPosition));
+		//Impressive development from Sol3
 
 		(*state).set_function("setTransform", [&](UUID id, Vec3 p, Vec3 r, Vec3 s) {
 			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p, r, s);
