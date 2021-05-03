@@ -10,7 +10,7 @@
  * \brief Creates a camera in pos
  * \param pos position
  */
-PTSD::Camera::Camera(Vec3Placeholder pos)
+PTSD::Camera::Camera(Vec3 pos)
 {
 	Ogre::SceneManager* mgr = GraphicsImplementation::getInstance()->getSceneMgr();
 	mCamera = mgr->createCamera("mainCam");
@@ -36,7 +36,7 @@ PTSD::Camera::~Camera() = default;
  * \brief looks to a world point
  * \param pt point
  */
-void PTSD::Camera::lookAt(Vec3Placeholder pt)
+void PTSD::Camera::lookAt(Vec3 pt)
 {
 	mNode->lookAt({ pt.x,pt.y,pt.z }, Ogre::Node::TS_WORLD);
 }
@@ -45,7 +45,7 @@ void PTSD::Camera::lookAt(Vec3Placeholder pt)
  * \brief moves in world coordinates
  * \param v movement vector
  */
-void PTSD::Camera::translate(Vec3Placeholder v)
+void PTSD::Camera::translate(Vec3 v)
 {
 	Ogre::Vector3 ogreVec = Ogre::Vector3(v.x, v.y, v.z);
 	mNode->translate(cameraYawNode->getOrientation() * cameraPitchNode->getOrientation() * ogreVec, Ogre::SceneNode::TS_LOCAL);
@@ -55,7 +55,7 @@ void PTSD::Camera::translate(Vec3Placeholder v)
  * \brief sets the world position of the camera
  * \param pos position
  */
-void PTSD::Camera::setPosition(Vec3Placeholder pos)
+void PTSD::Camera::setPosition(Vec3 pos)
 {
 	mNode->setPosition({ pos.x,pos.y,pos.z });
 }

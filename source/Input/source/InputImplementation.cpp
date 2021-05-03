@@ -13,6 +13,7 @@ namespace PTSD {
 		for (int i = 0; i < kbSize; i++) {
 			kbState_.push_back(ButtonState::Up);
 		}
+		SDL_GameControllerAddMapping("03000000c01100000591000011010000,KROM Gamepad,a:b2,b:b1,x:b3,y:b0,back:b8,start:b9,leftstick:b10,rightstick:b11,leftshoulder:b4,rightshoulder:b5,dpup:h0.1,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,leftx:a0,lefty:a1,rightx:a2,righty:a3,lefttrigger:b6,righttrigger:b7,platform:Linux,");
 	}
 
 	InputImplementation::~InputImplementation() {
@@ -151,8 +152,8 @@ namespace PTSD {
 		Uint8 i = 0;
 		bool bindFound = false;
 		int bindedAxis;
-		//hay que buscar el botón al que se corresponde
-		//porque SDL es una librería maravillosa y super intuitiva
+		//hay que buscar el botï¿½n al que se corresponde
+		//porque SDL es una librerï¿½a maravillosa y super intuitiva
 		while (!bindFound && i < SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_MAX) {
 			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForAxis(mGameControllers[whichOne], (SDL_GameControllerAxis)i);
 			if (b.value.axis == event.jaxis.axis) {
@@ -273,8 +274,8 @@ namespace PTSD {
 		Uint8 i = 0;
 		bool bindFound = false;
 		int bindedButton;
-		//hay que buscar el botón al que se corresponde
-		//porque SDL es una librería maravillosa y super intuitiva
+		//hay que buscar el botï¿½n al que se corresponde
+		//porque SDL es una librerï¿½a maravillosa y super intuitiva
 		while (!bindFound && i < SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_MAX) {
 			SDL_GameControllerButtonBind b = SDL_GameControllerGetBindForButton(mGameControllers[whichOne], (SDL_GameControllerButton)i);
 			if (b.value.button == event.cbutton.button) {
@@ -376,7 +377,7 @@ namespace PTSD {
 		}
 		SDL_JoystickEventState(SDL_ENABLE);
 		mBJoysticksInitialised = true;
-
+		LOG("Initializing game controller", PTSD::LogLevel::Warning, 0);
 		//std::cout << "Initialised " << m_gameControllers.size() << " joystick(s)";
 	}
 

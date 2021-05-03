@@ -73,9 +73,9 @@ namespace PTSD {
 		if (keyPressed(SCANCODE_A))cout << "Tecla a pulsada" << endl;
 		//if(keyRelease(SCANCODE_A))cout << "Tecla sin pulsar" << endl;
 
-		if (mouseLeftClick()) cout << "Click Izquierdo" << endl;
-		if (mouseRightClick()) cout << "Click Derecho" << endl;
-		if (mouseWheelClick()) cout << "Click Rueda del raton" << endl;
+		if (isMouseButtonJustDown(Left)) cout << "Click Izquierdo" << endl;
+		if (isMouseButtonJustDown(Right)) cout << "Click Derecho" << endl;
+		if (isMouseButtonJustDown(Middle)) cout << "Click Rueda del raton" << endl;
 
 		if (ControllerButtonPressed(0, CONTROLLER_BUTTON_A)) cout << "Boton A pulsado" << endl;
 		if (ControllerButtonReleased(0, CONTROLLER_BUTTON_A)) cout << "Boton A soltado" << endl;
@@ -131,20 +131,22 @@ namespace PTSD {
 		return mImplementation->isKeyJustUp(static_cast<SDL_Scancode>(key));
 	}
 
+	bool InputManager::isMouseButtonDown(MouseButton button)
+	{
+		return mImplementation->isMouseButtonDown(static_cast<MOUSEBUTTON>(button));
+	}
+
+	bool InputManager::isMouseButtonJustDown(MouseButton button)
+	{
+		return mImplementation->isMouseButtonJustDown(static_cast<MOUSEBUTTON>(button));
+	}
+
+	bool InputManager::isMouseButtonJustUp(MouseButton button)
+	{
+		return mImplementation->isMouseButtonJustUp(static_cast<MOUSEBUTTON>(button));
+	}
+
 	//Mouse
-
-	bool InputManager::mouseLeftClick() {
-		return mImplementation->isMouseButtonDown(MOUSEBUTTON::LEFT);
-	}
-
-	bool InputManager::mouseRightClick() {
-		return mImplementation->isMouseButtonDown(MOUSEBUTTON::RIGHT);
-	}
-
-	bool InputManager::mouseWheelClick() {
-		return mImplementation->isMouseButtonDown(MOUSEBUTTON::MIDDLE);
-	}
-
 	bool InputManager::mouseMotion() {
 		return mImplementation->mouseMotionEvent();
 	}
@@ -162,6 +164,9 @@ namespace PTSD {
 		return mImplementation->isButtonDown(controllerID, static_cast<SDL_GameControllerButton>(button));
 	}
 
+	bool InputManager::ControllerButtonJustPressed(int controllerID, ControllerButton button) {
+		return mImplementation->isButtonJustDown(controllerID, static_cast<SDL_GameControllerButton>(button));
+	}
 	bool InputManager::ControllerButtonReleased(int controllerID, ControllerButton button) {
 		return mImplementation->isButtonJustUp(controllerID, static_cast<SDL_GameControllerButton>(button));
 	}

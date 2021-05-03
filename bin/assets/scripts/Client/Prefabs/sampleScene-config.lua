@@ -1,4 +1,4 @@
-local sceneConfig = reqSceneConfigurations
+local sceneConfig = reqPrefab
 function sceneConfig.sampleScene()
 	return {
 		PhysicsConfig = {

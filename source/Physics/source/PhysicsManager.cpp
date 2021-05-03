@@ -79,12 +79,12 @@ namespace PTSD {
 		}
 	}
 
-	btRigidBody* PhysicsManager::addRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
+	btRigidBody* PhysicsManager::addRigidBody(Vec3 size, float mass, Vec3 pos, Vec3 rot) {
 		btCollisionShape* shape = nullptr;
 		if (size.y == 0.0f && size.z == 0.0f)
 			shape = new btSphereShape(size.x);
 		else shape = new btBoxShape(btVector3(size.x, size.y, size.z));
-		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
+		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(rot.x, rot.y, rot.z), btVector3(pos.x, pos.y, pos.z)));
 		btRigidBody* mObj = new btRigidBody(mass, state, shape);
 		mWorld->addRigidBody(mObj);
 		return mObj;

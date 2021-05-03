@@ -1,4 +1,0 @@
-{
-	Components= {},
-	Mesh={"barril.mesh"}
-}
