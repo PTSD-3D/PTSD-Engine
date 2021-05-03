@@ -1,8 +1,9 @@
 local ns = reqNamespace
-
---Define new systems here
+local prefabs = reqPrefab
 
 LOG("Loading systems...", LogLevel.Info, 1)
+
+--Define new systems here
 
 local MoveSystem = ns.class("MoveSystem",ns.System)
 
@@ -31,6 +32,12 @@ function MoveSystem:Shoot(entity, delta)
 	LOG("PEW")
 	local chan = playSound(Resources.Sounds.Oof.id)
 	setChannelVolume(chan,1)
+	ns.spawnEntity(Manager,prefabs.Bullet({
+		Transform = {
+			position={x=entity.Transform.position.x,y=entity.Transform.position.y,z=entity.Transform.position.z},
+			rotation={x=0.0,y=0.0,z=0.0},
+			scale={x=1,y= 1,z=1}}}
+	))
 end
 
 function MoveSystem:Action()
@@ -168,9 +175,29 @@ function SoundSystem:update(dt)
 	end
 end
 
+local BulletSystem = ns.class("BulletSystem",ns.System)
+
+function BulletSystem:requires() return {"bullet"} end
+
+function BulletSystem:update(dt)
+	for _, entity in pairs(self.targets) do
+		local bulletInfo = entity:get("bullet")
+		local movement = vec3:new(bulletInfo.speed*dt,0,0)
+		entity.Transform:translate(movement)
+		bulletInfo.lifetime = bulletInfo.lifetime - 1
+		if(bulletInfo.lifetime <= 0) then
+			--delete entity
+			Manager:removeEntity(entity)
+		end
+	end
+end
+
 Manager:addSystem(SoundSystem())
 -----------------------------------------------------------
 
+Manager:addSystem(BulletSystem())
+
+-----------------------------------------------------------
 LOG("Systems load completed", LogLevel.Info, 1)
 
 
