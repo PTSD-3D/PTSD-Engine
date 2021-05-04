@@ -1,28 +1,11 @@
 #!/bin/bash
 
-# -------------------------------- COLOR VARIABLES
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m' # No Color
-
-	 
-#   ------------------------------ UTILITY FUNCTIONS
-function printRed()
+function printStatus()
 {
-	for arg in "$@"; do
-		:
-		# printf "${RED}${arg}${NC}\n"
-	done
+	height=$(tput lines;)
+	height=$(echo "${height}/2" | bc)
+	printLogo ${height} 
 }
-
-function printGreen()
-{
-	for arg in "$@"; do
-	:
-		# printf "${GREEN}${arg}${NC}\n"
-	done
-}
-
 function printLogo()
 {
 	sz=${1}
@@ -50,12 +33,8 @@ spinner()
     printf "    \b\b\b\b"
 		echo -e "${GREEN}\xE2\x9C\x94${NC}"
 }
-function printStatus()
-{
-	height=$(tput lines;)
-	height=$(echo "${height}/2" | bc)
-	printLogo ${height} 
-}
+
+
 
 #Checks for dir, otherwise exit
 function checkOrFail(){
@@ -77,12 +56,6 @@ function checkAndCD(){
 	checkOrMake ${1};
 	cd "${1}";
 }
-#-------------------------------------------------------
-
-#-------------------------------------------------------#
-#                       Build Ogre                     	                    #
-#-------------------------------------------------------#
-
 
 # Setup and check dirs
 BinDir="${PWD}/bin/";
@@ -95,7 +68,6 @@ CEGUI="${PWD}/dependencies/CEGUI/";
 
 function setupDirectories()
 {
-	checkOrMake "${1}Debug"; 
 	checkOrMake "${1}RelWithDebInfo";
 	checkOrMake "${1}build";
 	checkOrFail "${1}src";

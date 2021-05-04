@@ -1,5 +1,7 @@
 #include "PhysicsManager.h"
 #include <string>
+#include <BtOgre.h>
+#include <OGRE/OgreVector3.h>
 #include "LogManager.h"
 #include "btBulletCollisionCommon.h"
 #include "btBulletDynamicsCommon.h"
@@ -19,8 +21,9 @@ namespace PTSD {
 		mInstance->mBroadphase = new btDbvtBroadphase();
 
 		mInstance->mSolver = new btSequentialImpulseConstraintSolver;
-
-		mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
+		auto world = new BtOgre::DynamicsWorld(Ogre::Vector3(0,0,0));
+		mInstance->mWorld = static_cast<btDiscreteDynamicsWorld*>(world-> getBtWorld());//new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
+		// mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
 
 		mInstance->testScene();
 	}
@@ -28,6 +31,7 @@ namespace PTSD {
 	void PhysicsManager::update(const float& deltaTime) {
 		//generic deltaTime
 		mWorld->stepSimulation((deltaTime));
+		// BtOgre::onTick(mWorld, deltaTime);
 		//logActivity();
 	}
 

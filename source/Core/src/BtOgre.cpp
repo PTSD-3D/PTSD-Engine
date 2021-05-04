@@ -14,7 +14,7 @@
  */
 
 #include "BtOgre.h"
-
+#include <stdio.h>
 using namespace Ogre;
 
 namespace BtOgre {
@@ -48,22 +48,22 @@ struct EntityCollisionListener
 
 static void onTick(btDynamicsWorld* world, btScalar timeStep)
 {
-	int numManifolds = world->getDispatcher()->getNumManifolds();
-	auto manifolds = world->getDispatcher()->getInternalManifoldPointer();
-    for (int i = 0; i < numManifolds; i++) {
-        btPersistentManifold* manifold = manifolds[i];
+	// int numManifolds = world->getDispatcher()->getNumManifolds();
+	// auto manifolds = world->getDispatcher()->getInternalManifoldPointer();
+  //   for (int i = 0; i < numManifolds; i++) {
+  //       btPersistentManifold* manifold = manifolds[i];
 
-        for (int j = 0; j < manifold->getNumContacts(); j++)
-        {
-			const btManifoldPoint& mp = manifold->getContactPoint(i);
-           	auto body0 = static_cast<EntityCollisionListener*>(manifold->getBody0()->getUserPointer());
-			auto body1 = static_cast<EntityCollisionListener*>(manifold->getBody1()->getUserPointer());
-			if(body0->listener)
-				body0->listener->contact(body1->entity, mp);
-			if(body1->listener)
-				body1->listener->contact(body0->entity, mp);
-        }
-    }
+  //       for (int j = 0; j < manifold->getNumContacts(); j++)
+  //       {
+	// 		const btManifoldPoint& mp = manifold->getContactPoint(i);
+  //          	auto body0 = static_cast<EntityCollisionListener*>(manifold->getBody0()->getUserPointer());
+	// 		auto body1 = static_cast<EntityCollisionListener*>(manifold->getBody1()->getUserPointer());
+	// 		if(body0->listener)
+	// 			body0->listener->contact(body1->entity, mp);
+	// 		if(body1->listener)
+	// 			body1->listener->contact(body0->entity, mp);
+  //       }
+  //   }
 }
 
 /// wrapper with automatic memory management

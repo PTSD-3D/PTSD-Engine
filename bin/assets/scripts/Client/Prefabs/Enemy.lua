@@ -11,5 +11,6 @@ function pf.Enemy(params)
 		},
 		Transform = params.Transform,
 		Mesh = { mesh = "Nave.mesh", material = "body" }
+		-- Rigidbody = {mass = 1, type=0, trigger	= false, position=params.Transform.position,rotation=params.Transform.rotation,size=params.Transform.scale}
 	}
 end
