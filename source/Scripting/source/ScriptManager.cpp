@@ -191,6 +191,8 @@ namespace PTSD {
 		(*state).set_function("getWindowHeight", &PTSD::GraphicsManager::getWindowHeight, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::GraphicsManager::getInstance()->getCam());
 
+		(*state).set_function("setMouseLocked", &PTSD::GraphicsManager::setMouseLocked, PTSD::GraphicsManager::getInstance());
+
 		return true;
 	}
 	bool ScriptManager::bindPhysicsComponents()

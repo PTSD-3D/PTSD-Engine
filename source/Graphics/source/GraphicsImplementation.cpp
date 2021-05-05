@@ -33,18 +33,17 @@
 #include "windows.h"
 #endif
 
-
 namespace PTSD
 {
-	GraphicsImplementation* GraphicsImplementation::mInstance = nullptr;
+	GraphicsImplementation *GraphicsImplementation::mInstance = nullptr;
 	/**
 	 * \brief Redirects OGRE logging system to PTSD-Logger
 	 */
 	void GraphicsImplementation::setupLogging()
 	{
 		//PTSD Logging, before init we will redirect everything to our own logger
-		Ogre::LogManager* logMgr = new Ogre::LogManager();
-		Ogre::Log* log = Ogre::LogManager::getSingleton().createLog("logs/Ogre.log", true, false, true);
+		Ogre::LogManager *logMgr = new Ogre::LogManager();
+		Ogre::Log *log = Ogre::LogManager::getSingleton().createLog("logs/Ogre.log", true, false, true);
 		log->addListener(new PTSDLogListener());
 		Ogre::LogManager::getSingleton().getDefaultLog()->logMessage("GET OUT OF MY SWAMP", Ogre::LML_WARNING);
 	}
@@ -68,9 +67,9 @@ namespace PTSD
 		if (SDL_InitSubSystem(SDL_INIT_VIDEO) != 0)
 			LOG("Unable to initialise SDL", LogLevel::Critical);
 		Uint32 flags = SDL_WINDOW_RESIZABLE;
-		#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
-			flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
-		#endif
+#if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+		flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
+#endif
 		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 325, 325, 800, 600, flags);
 
 		SDL_SysWMinfo wmInfo;
@@ -86,7 +85,7 @@ namespace PTSD
 		misc["externalWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));
 #else
 		SDL_GL_CreateContext(mSDLWindow);
-		if(!SDL_GL_GetCurrentContext())
+		if (!SDL_GL_GetCurrentContext())
 			LOG("Cannot create SDL_GL context", Critical);
 		misc["currentGLContext"] = Ogre::String("True");
 #endif
@@ -102,7 +101,9 @@ namespace PTSD
 	{
 		SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
 	}
-
+	void GraphicsImplementation::setMouseLocked(bool l) { 
+		SDL_SetRelativeMouseMode(l ? SDL_bool::SDL_TRUE : SDL_bool::SDL_FALSE);
+	}
 
 	/**
 	 * \brief Finds resources stated in resources.cfg
@@ -122,16 +123,17 @@ namespace PTSD
 		else
 		{
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
-				Ogre::FileSystemLayer::resolveBundlePath("./assets/"),
-				"FileSystem", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+					Ogre::FileSystemLayer::resolveBundlePath("./assets/"),
+					"FileSystem", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 		}
 
 		Ogre::String sec, type, arch;
 		// go through all specified resource groups
 		Ogre::ConfigFile::SettingsBySection_::const_iterator seci;
-		for (seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci) {
+		for (seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci)
+		{
 			sec = seci->first;
-			const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
+			const Ogre::ConfigFile::SettingsMultiMap &settings = seci->second;
 			Ogre::ConfigFile::SettingsMultiMap::const_iterator i;
 
 			// go through all resource paths
@@ -140,7 +142,7 @@ namespace PTSD
 				type = i->first;
 				arch = Ogre::FileSystemLayer::resolveBundlePath(i->second);
 				Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch, type, sec);
-				LOG(("Added location"+sec).c_str());
+				LOG(("Added location" + sec).c_str());
 			}
 		}
 
@@ -157,7 +159,7 @@ namespace PTSD
 
 		mSceneMgr = mRoot->createSceneManager();
 
-		mCamera = new Camera({ 0,0,8 });	//new Camera({ 0,0,80 });
+		mCamera = new Camera({0, 0, 8}); //new Camera({ 0,0,80 });
 
 		// Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Nave.mesh");		//ogrehead.mesh
 		// Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
@@ -165,17 +167,15 @@ namespace PTSD
 		// ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
 		// ogreNode->scale(Ogre::Vector3(1.0, 4.60, 1.0));
 
-		
 		// ogreEntt->setMaterialName("body");	//This is for the test of Blender2Ogre
 
-		mSceneMgr->setAmbientLight(Ogre::ColourValue(.1, .1, .1));	//Was (0.5, 0.5, 0.5)
+		mSceneMgr->setAmbientLight(Ogre::ColourValue(.1, .1, .1)); //Was (0.5, 0.5, 0.5)
 
-		Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-		Ogre::Light* light = mSceneMgr->createLight("MainLight");
+		Ogre::SceneNode *lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+		Ogre::Light *light = mSceneMgr->createLight("MainLight");
 		lightNode->setPosition(20, 80, 50);
 		lightNode->attachObject(light);
 	}
-
 
 	/**
 	 * \brief Pumps messages, needed for render loop
@@ -184,17 +184,16 @@ namespace PTSD
 	{
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			// Windows Message Loop (NULL means check all HWNDs belonging to this context)
-			MSG  msg;
-			while (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			}
- #elif OGRE_PLATFORM == OGRE_PLATFORM_LINUX
-				SDL_PumpEvents();
+		// Windows Message Loop (NULL means check all HWNDs belonging to this context)
+		MSG msg;
+		while (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+#elif OGRE_PLATFORM == OGRE_PLATFORM_LINUX
+		SDL_PumpEvents();
 #endif
-
 	}
 
 	void GraphicsImplementation::init()
@@ -221,14 +220,12 @@ namespace PTSD
 		{
 			LOG("Window is closed", LogLevel::Warning);
 			return false;
-
 		}
 
 		if (!mRoot->renderOneFrame())
 		{
 			LOG("Couldnt render frame", Error);
 			return false;
-
 		}
 
 		//deltaTime = current time - last rendered time

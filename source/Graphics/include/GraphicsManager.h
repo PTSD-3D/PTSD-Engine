@@ -36,5 +36,6 @@ namespace PTSD {
 		float getWindowWidth() const;
 		float getWindowHeight() const;
 		double getDeltaTime();
+		void setMouseLocked(bool);
 	};
 }
