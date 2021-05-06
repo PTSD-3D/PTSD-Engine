@@ -101,9 +101,6 @@ namespace PTSD
 	{
 		SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
 	}
-	void GraphicsImplementation::setMouseLocked(bool l) { 
-		SDL_SetRelativeMouseMode(l ? SDL_bool::SDL_TRUE : SDL_bool::SDL_FALSE);
-	}
 
 	/**
 	 * \brief Finds resources stated in resources.cfg

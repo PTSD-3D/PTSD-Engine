@@ -104,11 +104,6 @@ namespace PTSD {
 
 		SoundData soundData = loadedSounds[id];
 
-		printf("ME CAGO EN: %f\n",soundData.volume);
-		printf("ME CAGO EN: %f\n",soundData.volume);
-		printf("ME CAGO EN: %f\n",soundData.volume);
-		printf("ME CAGO EN: %f\n",soundData.volume);
-
 		genChannelGroups[soundData.soundChannel]->setVolume(soundData.volume);
 		result = sys->playSound(soundData.fmodSound, genChannelGroups[soundData.soundChannel], false, &genChannels[currentChannel]);
 

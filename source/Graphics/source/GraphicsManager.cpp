@@ -49,7 +49,5 @@ namespace PTSD {
 	{
 		return mImplementation->getDeltaTime();
 	}
-	void GraphicsManager::setMouseLocked(bool l){
-		return mImplementation->setMouseLocked(l);
-	}
+
 }

@@ -1,11 +1,12 @@
 #include "PhysicsManager.h"
 #include <string>
 #include <BtOgre.h>
-#include <OGRE/OgreVector3.h>
+#include <Ogre.h>
 #include "LogManager.h"
 #include "btBulletCollisionCommon.h"
 #include "btBulletDynamicsCommon.h"
-
+#include <BulletCollision/CollisionDispatch/btGhostObject.h>
+#include "ScriptManager.h"
 namespace PTSD {
 
 	PhysicsManager* PhysicsManager::mInstance = nullptr;
@@ -24,8 +25,10 @@ namespace PTSD {
 		auto world = new BtOgre::DynamicsWorld(Ogre::Vector3(0,0,0));
 		mInstance->mWorld = static_cast<btDiscreteDynamicsWorld*>(world-> getBtWorld());//new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
 		// mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
-
-		mInstance->testScene();
+		std::function<void(unsigned long,unsigned long, const btManifoldPoint&)> listener=[&](PTSD::UUID a,PTSD::UUID b, const btManifoldPoint& manifold){
+			mInstance->mScriptManager->sendCollisionEvent(a,b,manifold);
+		};
+		mInstance->mCollisionListener = new BtOgre::CollisionListener(listener);
 	}
 
 	void PhysicsManager::update(const float& deltaTime) {
@@ -48,18 +51,6 @@ namespace PTSD {
 		mWorld->setGravity(btVector3(0, grav, 0)); //3 dimensional gravity should not be needed. Could be changed easily.
 	}
 
-	//example scene
-	void PhysicsManager::testScene() {
-		/*mWorld->setGravity(btVector3(0, -10, 0));
-
-		Rigidbody* rig = new Rigidbody({ 5,5,5 }, 1, { 0,100,0 });
-
-		Collider* col = new Collider(5);
-
-		Collider* col2 = new Collider({ 5,5,5 });
-
-		rig->addForce({ 10,0,0 });*/
-	}
 
 	//for debugging purposes, not meant to be in the final engine
 	void PhysicsManager::logActivity() {
@@ -93,7 +84,6 @@ namespace PTSD {
 		mWorld->addRigidBody(mObj);
 		return mObj;
 	}
-
 	void PhysicsManager::setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger) {
 		if (trigger) rb->setCollisionFlags(type | CollisionFlags::Trigger);
 		else rb->setCollisionFlags(type);

@@ -15,6 +15,7 @@
 
 #include "BtOgre.h"
 #include <stdio.h>
+#include "Entity.h"
 using namespace Ogre;
 
 namespace BtOgre
@@ -41,11 +42,7 @@ namespace BtOgre
 		return shape;
 	}
 
-	struct EntityCollisionListener
-	{
-		const Ogre::MovableObject *entity;
-		CollisionListener *listener;
-	};
+
 
 	static void onTick(btDynamicsWorld *world, btScalar timeStep)
 	{
@@ -60,10 +57,10 @@ namespace BtOgre
 				const btManifoldPoint &mp = manifold->getContactPoint(i);
 				auto body0 = static_cast<EntityCollisionListener *>(manifold->getBody0()->getUserPointer());
 				auto body1 = static_cast<EntityCollisionListener *>(manifold->getBody1()->getUserPointer());
-				// if (body0->listener)
-				// 	body0->listener->contact(body1->entity, mp);
-				// if (body1->listener)
-				// 	body1->listener->contact(body0->entity, mp);
+				if (body0->listener)
+					body0->listener->contact(body0->id,body1->id, mp);
+				if (body1->listener)
+					body1->listener->contact(body1->id,body0->id, mp);
 			}
 		}
 	}
@@ -130,7 +127,7 @@ namespace BtOgre
 
 		auto rb = new btRigidBody(mass, state, cs, inertia);
 		mBtWorld->addRigidBody(rb);
-		rb->setUserPointer(new EntityCollisionListener{ent, listener});
+		// rb->setUserPointer(new EntityCollisionListener(ent, listener));
 
 		// transfer ownership to node
 		auto bodyWrapper = std::make_shared<RigidBody>(rb, mBtWorld);
