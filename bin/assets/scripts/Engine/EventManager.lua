@@ -42,14 +42,9 @@ function EventManager:removeListener(eventName, listener)
 end
 
 function EventManager:fireEvent(event)
-	print("MIRA RICKY")
-	print(event)
 	local name = event.class.name
-	print(name)
-	print(self.eventListeners[name])
 	if self.eventListeners[name] then
 		for _, listener in pairs(self.eventListeners[name]) do
-			print(listener[2])
 			listener[2](listener[1],event)
 		end
 	end

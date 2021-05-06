@@ -17,8 +17,6 @@ local function populateNamespace(ns)
     ns.EntityManager = reqEntityManager
     ns.System = reqSystem
     ns.Component = reqComponent
-		ns.Pepito = ns.EventManager()
-		-- ns.Pepito:
 end
 
 function engine.initialize(opts)

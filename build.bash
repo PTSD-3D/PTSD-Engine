@@ -198,6 +198,6 @@ setupDirectories ${BulletDir};
 
 buildAll &>/dev/null;
 checkAndCD ./build
-cmake ../CMakeProjects/
+cmake -DCMAKE_BUILD_TYPE=Debug ../CMakeProjects/
 cmake --build . -- -j 4 
 exit 0;

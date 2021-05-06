@@ -43,13 +43,6 @@ function ns.loadScene(manager, sceneTable)
 	local physicsConfig = sceneTable.SceneConfig.PhysicsConfig
 	setGravity(physicsConfig["Gravity"])
 	LOG(tostring("Gravity set to: " .. physicsConfig["Gravity"]), LogLevel.Trace, 0)
-	local lockMouse = sceneTable.SceneConfig.LockMouse
-	setMouseLocked(lockMouse)
-	if  lockMouse then
-		LOG("Mouse locked", LogLevel.Trace, 0)
-	else
-		LOG("Mouse not locked", LogLevel.Trace, 0)
-	end
 	for _, entData in pairs(sceneTable.Entities) do
 		local entityObject = ns.Entity()
 		entityObject:initialize()
