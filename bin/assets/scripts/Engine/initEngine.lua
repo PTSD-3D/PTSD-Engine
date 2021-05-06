@@ -1,7 +1,6 @@
 local namespace = reqNamespace
 local engine = {}
 
-
 local function populateNamespace(ns)
     -- Requiring class
     ns.class = reqMiddleclass

@@ -49,5 +49,4 @@ namespace PTSD {
 	{
 		return mImplementation->getDeltaTime();
 	}
-
 }

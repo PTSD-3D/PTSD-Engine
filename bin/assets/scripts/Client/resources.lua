@@ -16,13 +16,13 @@ Resources = {
 	},
 	Sounds = {
 		Oof = {
-			path = "oof.mp3", id, tipo=SoundType.Sonido, soundChannel=SoundChannel.Dialogo, volume = 0.005
+			path = "oof.mp3", id, tipo=SoundType.Sonido, soundChannel=SoundChannel.Dialogo, volume = 0.5
 		},
 		PTSD_Anthem = {
-			path = "PTSD-Anthem.mp3", id, tipo = SoundType.Musica, volume = 0.03
+			path = "PTSD-Anthem.mp3", id, tipo = SoundType.Musica, volume = 0.3
 		},		
 		Clowning = {
-			path = "clowning-around.mp3", id, tipo=SoundType.Musica, volume = 0.03
+			path = "clowning-around.mp3", id, tipo=SoundType.Musica, volume = 0.3
 		}
 	},
 	Meshes = {
