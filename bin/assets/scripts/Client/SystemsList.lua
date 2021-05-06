@@ -29,6 +29,13 @@ function MoveSystem:Move(entity,dir, delta, speed)
 end
 
 function MoveSystem:Shoot(entity, delta)
+	if(self.count == nil) then
+		self.count=0;
+	end
+	if(self.count == 0) then
+		self.count=1;
+		return nil;
+	end
 	LOG("PEW")
 	local chan = playSound(Resources.Sounds.Oof.id)
 	setChannelVolume(chan,1)
@@ -38,6 +45,7 @@ function MoveSystem:Shoot(entity, delta)
 			rotation={x=0.0,y=0.0,z=0.0},
 			scale={x=1,y= 1,z=1}}}
 	))
+	self.count=0;
 end
 
 function MoveSystem:Action()
@@ -182,6 +190,16 @@ local BulletSystem = ns.class("BulletSystem",ns.System)
 
 function BulletSystem:requires() return {"bullet"} end
 
+function BulletSystem:initialize()
+		ns.System.initialize(self)
+		ns.Pepito:addListener("CollisionEv", self, self.Collision)
+end
+function BulletSystem:Collision(ev)
+	print("SELLAMA")
+	print(ev.entityAID)
+	print(ev.entityBID)
+	print(ev.manifold)
+end
 function BulletSystem:update(dt)
 	for _, entity in pairs(self.targets) do
 		local bulletInfo = entity:get("bullet")

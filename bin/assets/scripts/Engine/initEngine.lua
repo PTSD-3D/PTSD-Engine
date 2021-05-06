@@ -1,6 +1,7 @@
 local namespace = reqNamespace
 local engine = {}
 
+
 local function populateNamespace(ns)
     -- Requiring class
     ns.class = reqMiddleclass
@@ -8,6 +9,7 @@ local function populateNamespace(ns)
     -- Requiring all Events
     ns.ComponentAdded = reqComponentAddedEvent
     ns.ComponentRemoved = reqComponentRemovedEvent
+    ns.Collision = reqCollisionEvent
 
     -- Requiring the engine
     ns.Entity = reqEntity
@@ -15,6 +17,8 @@ local function populateNamespace(ns)
     ns.EntityManager = reqEntityManager
     ns.System = reqSystem
     ns.Component = reqComponent
+		ns.Pepito = ns.EventManager()
+		-- ns.Pepito:
 end
 
 function engine.initialize(opts)
