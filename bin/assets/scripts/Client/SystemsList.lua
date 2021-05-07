@@ -185,20 +185,49 @@ function BulletSystem:requires() return {"bullet"} end
 function BulletSystem:initialize()
 		ns.System.initialize(self)
 		Manager.eventManager:addListener("CollisionEv", self, self.Collision)
+		self.factor = 1
+		self.collided = {}
 end
+
+function BulletSystem:CheckCollided(ev)
+	if not self.collided[ev.entityAID] then
+		self.collided[ev.entityAID] = {}
+	end
+	if not self.collided[ev.entityBID] then
+		self.collided[ev.entityABID] = {}
+	end
+end
+
+function BulletSystem:CollisionTest(id)
+	local ent = Manager:getEntity(id)
+	ent.Mesh:setMaterial("Red")
+	ent.Transform:translate(vec3:new(self.factor*10*math.random(-1,1),self.factor*10*math.random(-1,1),self.factor*10*math.random(-1,1)))
+end
+
 function BulletSystem:Collision(ev)
-	ev:print()
+	self:CheckCollided(ev)
+	if not (self.collided[ev.entityAID][ev.entityBID] and self.collided[ev.entityBID][ev.entityAID]) then
+		ev:print()
+		
+		self:CollisionTest(ev.entityAID)
+		self:CollisionTest(ev.entityBID)
+		
+		self.collided[ev.entityAID][ev.entityBID]  = true
+		self.collided[ev.entityBID][ev.entityAID] = true
+		
+		self.factor = self.factor+1
+	end
 end
 function BulletSystem:update(dt)
 	for _, entity in pairs(self.targets) do
 		local bulletInfo = entity:get("bullet")
+		if(bulletInfo.lifetime > 0) then
 		local movement = vec3:new(bulletInfo.speed*dt,0,0)
 		entity.Transform:translate(movement)
 		bulletInfo.lifetime = bulletInfo.lifetime - 1
-		if(bulletInfo.lifetime <= 0) then
-			Manager:removeEntity(entity)
 		end
 	end
+	self.collided = {}
 end
 
 Manager:addSystem(BulletSystem())
