@@ -184,40 +184,21 @@ function BulletSystem:requires() return {"bullet"} end
 
 function BulletSystem:initialize()
 		ns.System.initialize(self)
-		Manager.eventManager:addListener("CollisionEv", self, self.Collision)
 		self.factor = 1
-		self.collided = {}
 end
 
-function BulletSystem:CheckCollided(ev)
-	if not self.collided[ev.entityAID] then
-		self.collided[ev.entityAID] = {}
-	end
-	if not self.collided[ev.entityBID] then
-		self.collided[ev.entityBID] = {}
-	end
-end
-
-function BulletSystem:CollisionTest(id)
-	local ent = Manager:getEntity(id)
+function BulletSystem:onCollision(ent, other, col)
 	ent.Mesh:setMaterial("Red")
-	ent.Transform:translate(vec3:new(self.factor*10*math.random(-1,1),self.factor*10*math.random(-1,1),self.factor*10*math.random(-1,1)))
+	other.Mesh:setMaterial("Red")
+	ent.Transform:translate(vec3:new(self.factor*math.random(1),self.factor*math.random(1),self.factor*math.random(1)))
+	other.Transform:translate(vec3:new(self.factor*-1*math.random(1),self.factor*-1*math.random(1),self.factor*-1*math.random(1)))
+	print("Collision Points:")
+	for i,v in ipairs(col) do
+		v:print("\t"..i..": ")
+	end	
+	self.factor = self.factor+1
 end
 
-function BulletSystem:Collision(ev)
-	self:CheckCollided(ev)
-	if not (self.collided[ev.entityAID][ev.entityBID] and self.collided[ev.entityBID][ev.entityAID]) then
-		ev:print()
-		
-		self:CollisionTest(ev.entityAID)
-		self:CollisionTest(ev.entityBID)
-		
-		self.collided[ev.entityAID][ev.entityBID]  = true
-		self.collided[ev.entityBID][ev.entityAID] = true
-		
-		self.factor = self.factor+1
-	end
-end
 function BulletSystem:update(dt)
 	for _, entity in pairs(self.targets) do
 		local bulletInfo = entity:get("bullet")

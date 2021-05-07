@@ -55,7 +55,7 @@ namespace PTSD {
 	 */
 	bool ScriptManager::init() {
 		//Lua state initialization
-		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table, sol::lib::debug, sol::lib::package);
+		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table, sol::lib::debug, sol::lib::package, sol::lib::string);
 
 		(*state).require_file("reqNamespace", "./assets/scripts/Engine/namespace.lua");
 		(*state).require_file("reqMiddleclass", "./assets/scripts/Engine/middleclass.lua");
@@ -123,7 +123,10 @@ namespace PTSD {
 	bool ScriptManager::update()
 	{
 		entityManager->update();
-		(*state)["Manager"]["update"]((*state)["Manager"], 1);
+		sol::protected_function_result result = (*state)["Manager"]["update"]((*state)["Manager"], 1);
+		if(!result.valid())
+			throw std::runtime_error(((sol::error)result).what());
+
 		(*state)["Update"]();
 		//TODO exit state
 		return true;
@@ -155,7 +158,9 @@ namespace PTSD {
 	}
 	void ScriptManager::sendCollisionEvent(UUID a, UUID b, const btManifoldPoint& manifold)
 	{
-		(*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["reqNamespace"]["Collision"](a,b,manifold));
+		auto result = (*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["reqNamespace"]["Collision"](a,b,manifold));
+		if(!result.valid())
+			throw std::runtime_error(((sol::error)result).what());
 	}
 	bool ScriptManager::bindLoggerComponents()
 	{

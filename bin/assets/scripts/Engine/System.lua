@@ -6,9 +6,9 @@ function System:initialize()
 	self.targets = {}
 	self.active = true
 end
-
 --virtual methods to be redefined by other systems
 function System:requires() return {} end
+function System:onCollision(entA, entB, collision) end
 
 function System:onAddEntity(entity) end
 
@@ -41,6 +41,11 @@ function System:pickRequiredComponents(entity)
 		end
 	end
 	return table.unpack(components)
+end
+
+--Takes an entity or an entityid returns True if the entity is afected by the system
+function System:isTraget(entity)
+	return self.targets[tonumber(entity) or entity.id] or false
 end
 
 return System
