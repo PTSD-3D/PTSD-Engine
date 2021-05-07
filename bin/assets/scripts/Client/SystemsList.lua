@@ -194,7 +194,7 @@ function BulletSystem:CheckCollided(ev)
 		self.collided[ev.entityAID] = {}
 	end
 	if not self.collided[ev.entityBID] then
-		self.collided[ev.entityABID] = {}
+		self.collided[ev.entityBID] = {}
 	end
 end
 
