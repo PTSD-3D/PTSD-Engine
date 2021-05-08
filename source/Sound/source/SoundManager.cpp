@@ -89,7 +89,7 @@ namespace PTSD {
 	{
 		currentChannel++;
 		//If we run out of channels, we override the oldest one. Life's a cycle baby.
-		if (currentChannel > nChannels)
+		if (currentChannel >= nChannels)
 			currentChannel = 0;
 
 		//We wont overwrite looping sounds
