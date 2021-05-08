@@ -21,9 +21,11 @@ function EntityManager:initialize()
 	self.eventManager:addListener("ComponentAddedEv", self, self.componentAdded)
 	self.eventManager:addListener("CollisionEv", self, self.registerCollision)
 end
+
 function EntityManager:getEntity(id)
 	return self.entities[id]
 end
+
 function EntityManager:addEntity(entity)
 	-- Assign entity's id
 	local nId = #self.entities + 1

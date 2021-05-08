@@ -44,7 +44,7 @@ function System:pickRequiredComponents(entity)
 end
 
 --Takes an entity or an entityid returns True if the entity is afected by the system
-function System:isTraget(entity)
+function System:isTarget(entity)
 	return self.targets[tonumber(entity) or entity.id] or false
 end
 
