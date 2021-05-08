@@ -124,9 +124,10 @@ namespace PTSD {
 	{
 		entityManager->update();
 		sol::protected_function_result result = (*state)["Manager"]["update"]((*state)["Manager"], 1);
-		if(!result.valid())
-			throw std::runtime_error(((sol::error)result).what());
-
+		if (!result.valid()) {
+			sol::error err = result;
+			throw std::runtime_error(err.what());
+		}
 		(*state)["Update"]();
 		//TODO exit state
 		return true;
@@ -159,8 +160,10 @@ namespace PTSD {
 	void ScriptManager::sendCollisionEvent(UUID a, UUID b, const btManifoldPoint& manifold)
 	{
 		auto result = (*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["reqNamespace"]["Collision"](a,b,manifold));
-		if(!result.valid())
-			throw std::runtime_error(((sol::error)result).what());
+		if (!result.valid()) {
+			sol::error err = result;
+			throw std::runtime_error(err.what());
+		}
 	}
 	bool ScriptManager::bindLoggerComponents()
 	{

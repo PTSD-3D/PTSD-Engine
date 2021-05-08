@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\Core\src\BtOgre.cpp" />
     <ClCompile Include="..\..\source\Core\src\main.cpp" />
+    <ClCompile Include="..\..\source\Core\src\PTSDVectors.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsManager.cpp" />
