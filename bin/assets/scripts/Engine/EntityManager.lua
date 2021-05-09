@@ -173,14 +173,12 @@ function EntityManager:registerCollision(ev)
 end
 
 function EntityManager:NotifyCollisions(system)
-	for _, ent in ipairs(self.entities) do
-		if system:isTraget(ent.id) then
-			local t = self.collisions[ent.id]
-			if t then
-				for i, other in pairs(t) do
-						local itable = self.collisions[ent.id][i]
-						system:onCollision(itable.entA, itable.entB, itable.points)
-				end
+	for _, ent in pairs(system.targets) do
+		local t = self.collisions[ent.id]
+		if t then
+			for i, other in pairs(t) do
+				local itable = self.collisions[ent.id][i]
+				system:onCollision(itable.entA, itable.entB, itable.points)
 			end
 		end
 	end
