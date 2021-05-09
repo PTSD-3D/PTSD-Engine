@@ -89,7 +89,7 @@ namespace PTSD {
 	{
 		currentChannel++;
 		//If we run out of channels, we override the oldest one. Life's a cycle baby.
-		if (currentChannel > nChannels)
+		if (currentChannel >= nChannels)
 			currentChannel = 0;
 
 		//We wont overwrite looping sounds
@@ -104,11 +104,13 @@ namespace PTSD {
 
 		SoundData soundData = loadedSounds[id];
 
+		genChannelGroups[soundData.soundChannel]->setVolume(soundData.volume);
 		result = sys->playSound(soundData.fmodSound, genChannelGroups[soundData.soundChannel], false, &genChannels[currentChannel]);
 
 		result = genChannels[currentChannel]->setChannelGroup(genChannelGroups[soundData.soundChannel]);
 
 		genChannels[currentChannel]->setCallback(SoundManager::EndOfSound(currentChannel));
+
 
 		return currentChannel;
 	}

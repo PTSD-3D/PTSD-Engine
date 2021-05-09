@@ -8,6 +8,7 @@ local function populateNamespace(ns)
     -- Requiring all Events
     ns.ComponentAdded = reqComponentAddedEvent
     ns.ComponentRemoved = reqComponentRemovedEvent
+    ns.Collision = reqCollisionEvent
 
     -- Requiring the engine
     ns.Entity = reqEntity

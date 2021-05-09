@@ -150,6 +150,9 @@
     <ClCompile Include="..\..\source\Core\src\BtOgre.cpp">
       <Filter>Core\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Core\src\PTSDVectors.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">

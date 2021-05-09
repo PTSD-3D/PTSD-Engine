@@ -17,6 +17,7 @@ namespace PTSD
 	void RigidbodyComponent::init() {
 		rbState = new BtOgre::RigidBodyState(entity_->getComponent<TransformComponent>(CmpId::Transform)->getNode());
 		mObj->setMotionState(rbState);
+		mObj->setUserPointer((void*)(new BtOgre::EntityCollisionListener(PhysicsManager::getInstance()->getCollisionListener(), entity_->getID())));
 	}
 
 	void RigidbodyComponent::setLinearVelocity(Vec3 vel) {

@@ -16,6 +16,8 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "Camera.h"
 #include "UIManager.h"
 #include "PhysicsManager.h"
+#include "btBulletCollisionCommon.h"
+#include "btBulletDynamicsCommon.h"
 #include "PTSDVectors.h"
 #include "LogManager.h"
 #include "MeshComponent.h"
@@ -53,7 +55,7 @@ namespace PTSD {
 	 */
 	bool ScriptManager::init() {
 		//Lua state initialization
-		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table, sol::lib::debug);
+		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table, sol::lib::debug, sol::lib::package, sol::lib::string);
 
 		(*state).require_file("reqNamespace", "./assets/scripts/Engine/namespace.lua");
 		(*state).require_file("reqMiddleclass", "./assets/scripts/Engine/middleclass.lua");
@@ -65,6 +67,7 @@ namespace PTSD {
 		//Events
 		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
 		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
+		(*state).require_file("reqCollisionEvent", "./assets/scripts/Engine/Events/Collision.lua");
 		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
 		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
 		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
@@ -113,14 +116,18 @@ namespace PTSD {
 		(*state).script_file("./assets/scripts/Client/SystemsList.lua");
 
 		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
-
+		PhysicsManager::getInstance()->setScriptManager(this); // Neded for collision callbacks
 		return true;
 	}
 
 	bool ScriptManager::update()
 	{
 		entityManager->update();
-		(*state)["Manager"]["update"]((*state)["Manager"], 1);
+		sol::protected_function_result result = (*state)["Manager"]["update"]((*state)["Manager"], 1);
+		if (!result.valid()) {
+			sol::error err = result;
+			throw std::runtime_error(err.what());
+		}
 		(*state)["Update"]();
 		//TODO exit state
 		return true;
@@ -150,7 +157,14 @@ namespace PTSD {
 	{
 		return entityManager->getEntity(entityID);
 	}
-
+	void ScriptManager::sendCollisionEvent(UUID a, UUID b, const btManifoldPoint& manifold)
+	{
+		auto result = (*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["reqNamespace"]["Collision"](a,b,manifold));
+		if (!result.valid()) {
+			sol::error err = result;
+			throw std::runtime_error(err.what());
+		}
+	}
 	bool ScriptManager::bindLoggerComponents()
 	{
 		//Init everything
@@ -191,6 +205,7 @@ namespace PTSD {
 		(*state).set_function("getWindowHeight", &PTSD::GraphicsManager::getWindowHeight, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::GraphicsManager::getInstance()->getCam());
 
+
 		return true;
 	}
 	bool ScriptManager::bindPhysicsComponents()
@@ -214,7 +229,9 @@ namespace PTSD {
 			{"Static", CollisionFlags::Static},
 			{"Kinematic", CollisionFlags::Kinematic}
 			});
-
+		auto manifold = (*state).new_usertype<btManifoldPoint>("manifold", sol::no_constructor);
+		manifold["pointA"] = &btManifoldPoint::m_localPointA;
+		manifold["pointB"] = &btManifoldPoint::m_localPointB;
 		return true;
 	}
 	bool ScriptManager::bindSoundComponents()
@@ -326,7 +343,6 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
 
-		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(float, float, float)>());
 
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform", sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
@@ -337,8 +353,10 @@ namespace PTSD {
 			return entityManager->getEntity(id).get()->addComponent<TransformComponent>(p, r, s);
 			});
 
-		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z, 
+		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double),Vec3(float, float, float), Vec3(btVector3&)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z, 
 		sol::meta_function::multiplication, &Vec3::operator*,sol::meta_function::subtraction, &Vec3::operator-,sol::meta_function::addition, &Vec3::operator+);
+
+		(*state).script("function vec3:__tostring__() return '{x: '..self.x ..' y:' .. self.y ' z:' .. self.z .. '} end'");
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 		(*state).new_usertype<Vec4Placeholder>("vec4", sol::constructors<Vec4Placeholder(double, double, double, double)>(), "x", &Vec4Placeholder::x, "y", &Vec4Placeholder::y, "z", &Vec4Placeholder::z, "w", &Vec4Placeholder::w);
