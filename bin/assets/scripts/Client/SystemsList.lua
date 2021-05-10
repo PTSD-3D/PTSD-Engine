@@ -202,10 +202,11 @@ end
 function BulletSystem:update(dt)
 	for _, entity in pairs(self.targets) do
 		local bulletInfo = entity:get("bullet")
-		if(bulletInfo.lifetime > 0) then
 		local movement = vec3:new(bulletInfo.speed*dt,0,0)
 		entity.Transform:translate(movement)
 		bulletInfo.lifetime = bulletInfo.lifetime - 1
+		if(bulletInfo.lifetime <= 0) then
+			Manager:removeEntity(entity)
 		end
 	end
 	self.collided = {}
