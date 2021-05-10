@@ -15,7 +15,6 @@ namespace PTSD {
 	class Entity {
 	private:
 		UUID id_;
-		bool active_;
 		EntityManager* entityManager_ = nullptr;
 		std::vector<std::unique_ptr<Component>> components_;
 		std::array<Component*, CmpId::MAXCOMPONENTS> componentPtrs_ = {};
@@ -39,7 +38,9 @@ namespace PTSD {
 			return componentPtrs_[id] != nullptr;
 		}
 
-		~Entity() { components_.clear(); }
+		~Entity() {
+			components_.clear();
+		}
 
 		//Runtime loop methods
 		void init()
@@ -68,12 +69,10 @@ namespace PTSD {
 				cmp->onCollisionExit(col);
 		}
 
-		//Getters and Setters
-		void setActive(bool active = true) { active_ = active; }
-		bool isActive() { return active_; }
 		UUID getID() { return id_; }
-		Entity(UUID id, bool active = true) :
-			id_(id), active_(active) {}
+		Entity(UUID id) : id_(id) {}
 		EntityManager* getManager() const { return entityManager_; }
+
+		void disableEntity();
 	};
 }

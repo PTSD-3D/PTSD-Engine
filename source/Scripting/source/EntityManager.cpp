@@ -36,6 +36,9 @@ void PTSD::EntityManager::deleteEntity(UUID entityID)
 	auto it = entities_.find(entityID);
 	if(it!=entities_.end())
 	{
+		//We make sure we hide the node and delete the rigibody before the trash collector takes care of everything else
+		//this is because if we wait there might be problems if we have to wait for the whole system to delete each individual component
+		it->second->disableEntity();
 		entities_.erase(it);
 	}
 }

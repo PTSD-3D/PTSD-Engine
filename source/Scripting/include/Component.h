@@ -20,6 +20,7 @@ namespace PTSD
 		CmpId getId() { return id_; }
 		virtual void init() {}
 		virtual void update() {}
+		virtual void disable() {}
 		virtual void onCollisionEnter(Collision* collision) {}
 		virtual void onCollisionStay(Collision* collision) {}
 		virtual void onCollisionExit(Collision* collision) {}

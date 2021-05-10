@@ -32,6 +32,7 @@ namespace PTSD
 		virtual ~RigidbodyComponent();
 
 		virtual void init();
+		virtual void disable() override;
 
 		void setLinearVelocity(Vec3 vel);
 		void setAngularVelocity(Vec3 vel);
