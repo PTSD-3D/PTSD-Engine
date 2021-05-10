@@ -7,7 +7,7 @@ namespace PTSD {
 		quaternion.ToRotationMatrix(mx2);
 		Ogre::Radian x, y, z;
 		mx2.ToEulerAnglesYXZ(y, x, z);
-		Vec3 vect(x.valueAngleUnits(),y.valueAngleUnits(), z.valueAngleUnits());
+		Vec3 vect(x.valueAngleUnits(), y.valueAngleUnits(), z.valueAngleUnits());
 
 		return vect;
 	}
@@ -23,7 +23,7 @@ namespace PTSD {
 	TransformComponent::TransformComponent() : Component(CmpId::Transform) {
 		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 	}
-	TransformComponent::TransformComponent(Vec3 p, Vec3 r, Vec3 s): Component(CmpId::Transform) 
+	TransformComponent::TransformComponent(Vec3 p, Vec3 r, Vec3 s) : Component(CmpId::Transform)
 	{
 		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 		setPosition(p);
@@ -44,7 +44,7 @@ namespace PTSD {
 	}
 	void TransformComponent::rotate(float x, float y, float z) { //changes orientation of the transform using 3 floats
 		Vec3 rotation = (x, y, z);					 // It has a little problem with rounding +-(0.00001)
-		Ogre::Quaternion q = EulerToOgreQuat(rotation);			
+		Ogre::Quaternion q = EulerToOgreQuat(rotation);
 		mNode->rotate(q, Ogre::Node::TS_LOCAL);
 	}
 	void TransformComponent::scale(Vec3 scale) { //adds or substracts from the actual scale with a vec3
@@ -69,7 +69,7 @@ namespace PTSD {
 
 	void TransformComponent::setRotation(float x, float y, float z) //Sets the rotation of the transform with 3 floats
 	{
-		Ogre::Quaternion q = EulerToOgreQuat(Vec3(x,y,z));
+		Ogre::Quaternion q = EulerToOgreQuat(Vec3(x, y, z));
 		mNode->setOrientation(q);
 	}
 	void TransformComponent::setScale(Vec3 scale) { //Sets the scale of the transform
