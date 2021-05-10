@@ -54,11 +54,42 @@ struct Vector2D {
 	}
 };
 
-struct Vec3Placeholder
+struct Vec3
 {
 	float x, y, z;
-	Vec3Placeholder(float x = 0, float y = 0, float z = 0):
+	Vec3(float x = 0, float y = 0, float z = 0):
 	x(x),y(y),z(z){};
+
+	inline float magnitude() const {
+		return sqrt(x * x + y * y + z * z);
+	}
+
+	Vec3 normalize() {
+
+		Vec3 r;
+		r.x = x;
+		r.y = y;
+		r.z = z;
+
+		float mag = magnitude();
+		if (mag > 0.0) {
+			r.x = r.x / mag;
+			r.y = r.y / mag;
+			r.z = r.z / mag;
+		}
+		return r;
+
+	}
+
+	Vec3 operator - (const Vec3& v) const {
+		return(Vec3(x - v.x, y - v.y,z-v.z));
+	}
+	Vec3 operator + (const Vec3& v) const{
+		return(Vec3(x + v.x, y + v.y,z+v.z));
+	}
+	Vec3 operator * (const float &f) const{
+		return(Vec3(x * f, y * f,z*f));
+	}
 };
 
 struct Vec4Placeholder {

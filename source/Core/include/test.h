@@ -41,9 +41,10 @@ namespace PTSD
 		// return transform;
 		return nullptr;
 	}
+
 	static void test_Transform_Update(PTSD::TransformComponent* transform) {
-		// transform->translate(Vec3Placeholder(0.1, 0, 0));
-		// transform->rotate(Vec3Placeholder(0, 3, 0));
+		// transform->translate(Vec3(0.1, 0, 0));
+		// transform->rotate(Vec3(0, 3, 0));
 		//PTSD::LOG(std::to_string(transform->getPosition().x).c_str(), PTSD::Info);
 		//PTSD::LOG(std::to_string(transform->getRotation().y).c_str(), PTSD::Info);
 	}
