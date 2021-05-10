@@ -1,11 +1,12 @@
 #include "PhysicsManager.h"
 #include <string>
+#include <BtOgre.h>
+#include <Ogre.h>
 #include "LogManager.h"
 #include "btBulletCollisionCommon.h"
 #include "btBulletDynamicsCommon.h"
-#include "Collider.h" //for demonstration purposes
-#include "Rigidbody.h" //for demonstration purposes
-
+#include <BulletCollision/CollisionDispatch/btGhostObject.h>
+#include "ScriptManager.h"
 namespace PTSD {
 
 	PhysicsManager* PhysicsManager::mInstance = nullptr;
@@ -21,16 +22,20 @@ namespace PTSD {
 		mInstance->mBroadphase = new btDbvtBroadphase();
 
 		mInstance->mSolver = new btSequentialImpulseConstraintSolver;
-
-		mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
-
-		mInstance->testScene();
+		auto world = new BtOgre::DynamicsWorld(Ogre::Vector3(0,0,0));
+		mInstance->mWorld = static_cast<btDiscreteDynamicsWorld*>(world-> getBtWorld());//new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
+		// mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
+		std::function<void(unsigned long,unsigned long, const btManifoldPoint&)> listener=[&](PTSD::UUID a,PTSD::UUID b, const btManifoldPoint& manifold){
+			mInstance->mScriptManager->sendCollisionEvent(a,b,manifold);
+		};
+		mInstance->mCollisionListener = new BtOgre::CollisionListener(listener);
 	}
 
 	void PhysicsManager::update(const float& deltaTime) {
 		//generic deltaTime
 		mWorld->stepSimulation((deltaTime));
-		logActivity();
+		// BtOgre::onTick(mWorld, deltaTime);
+		//logActivity();
 	}
 
 	void PhysicsManager::shutdown() {
@@ -46,18 +51,6 @@ namespace PTSD {
 		mWorld->setGravity(btVector3(0, grav, 0)); //3 dimensional gravity should not be needed. Could be changed easily.
 	}
 
-	//example scene
-	void PhysicsManager::testScene() {
-		mWorld->setGravity(btVector3(0, -10, 0));
-
-		Rigidbody* rig = new Rigidbody({ 5,5,5 }, 1, { 0,100,0 });
-
-		Collider* col = new Collider(5);
-
-		Collider* col2 = new Collider({ 5,5,5 });
-
-		rig->addForce({ 10,0,0 });
-	}
 
 	//for debugging purposes, not meant to be in the final engine
 	void PhysicsManager::logActivity() {
@@ -81,35 +74,18 @@ namespace PTSD {
 		}
 	}
 
-	btRigidBody* PhysicsManager::addSphereRigidBody(float size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		btCollisionShape* shape = new btSphereShape(size);
-		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
+	btRigidBody* PhysicsManager::addRigidBody(Vec3 size, float mass, Vec3 pos, Vec3 rot) {
+		btCollisionShape* shape = nullptr;
+		if (size.y == 0.0f && size.z == 0.0f)
+			shape = new btSphereShape(size.x);
+		else shape = new btBoxShape(btVector3(size.x, size.y, size.z));
+		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(rot.x, rot.y, rot.z), btVector3(pos.x, pos.y, pos.z)));
 		btRigidBody* mObj = new btRigidBody(mass, state, shape);
 		mWorld->addRigidBody(mObj);
 		return mObj;
 	}
-
-	btRigidBody* PhysicsManager::addBoxRigidBody(Vec3Placeholder size, float mass, Vec3Placeholder pos, Vec4Placeholder quat) {
-		btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
-		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(quat.x, quat.y, quat.z, quat.w), btVector3(pos.x, pos.y, pos.z)));
-		btRigidBody* mObj = new btRigidBody(mass, state, shape);
-		mWorld->addRigidBody(mObj);
-		return mObj;
-	}
-
-	btCollisionObject* PhysicsManager::addSphereCollider(float size) {
-		btCollisionObject* mObj = new btCollisionObject();
-		btCollisionShape* shape = new btSphereShape(size);
-		mObj->setCollisionShape(shape);
-		mWorld->addCollisionObject(mObj);
-		return mObj;
-	}
-
-	btCollisionObject* PhysicsManager::addBoxCollider(Vec3Placeholder size) {
-		btCollisionObject* mObj = new btCollisionObject();
-		btCollisionShape* shape = new btBoxShape(btVector3(size.x, size.y, size.z));
-		mObj->setCollisionShape(shape);
-		mWorld->addCollisionObject(mObj);
-		return mObj;
+	void PhysicsManager::setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger) {
+		if (trigger) rb->setCollisionFlags(type | CollisionFlags::Trigger);
+		else rb->setCollisionFlags(type);
 	}
 }

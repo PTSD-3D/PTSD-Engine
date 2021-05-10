@@ -102,13 +102,7 @@
     <ClCompile Include="..\..\source\Input\source\InputManager.cpp">
       <Filter>Input\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\Collider.cpp">
-      <Filter>Physics\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp">
-      <Filter>Physics\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Physics\source\Rigidbody.cpp">
       <Filter>Physics\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Scripting\source\ScriptManager.cpp">
@@ -150,6 +144,15 @@
     <ClCompile Include="..\..\source\Scripting\source\MeshComponent.cpp">
       <Filter>Scripting\Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Scripting\source\RigidbodyComponent.cpp">
+      <Filter>Scripting\Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\src\BtOgre.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\src\PTSDVectors.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
@@ -173,13 +176,7 @@
     <ClInclude Include="..\..\source\Input\include\PTSDkeys.h">
       <Filter>Input\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\Collider.h">
-      <Filter>Physics\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Physics\include\PhysicsManager.h">
-      <Filter>Physics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Physics\include\Rigidbody.h">
       <Filter>Physics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Scripting\include\ScriptManager.h">
@@ -233,6 +230,12 @@
     <ClInclude Include="..\..\source\Scripting\include\MeshComponent.h">
       <Filter>Scripting\Headers\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Scripting\include\RigidbodyComponent.h">
+      <Filter>Scripting\Headers\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Core\include\BtOgre.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\bin\assets\scripts\Engine\Component.lua">
@@ -257,6 +260,9 @@
       <Filter>Scripting\Scripts\Engine</Filter>
     </None>
     <None Include="..\..\bin\assets\scripts\Engine\test.lua">
+      <Filter>Scripting\Scripts\Engine</Filter>
+    </None>
+    <None Include="..\..\bin\assets\scripts\Engine\EntityLoader.lua">
       <Filter>Scripting\Scripts\Engine</Filter>
     </None>
   </ItemGroup>

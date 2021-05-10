@@ -1,22 +1,25 @@
-local engine = reqNamespace
+local namespace = reqNamespace
+local engine = {}
 
 local function populateNamespace(ns)
     -- Requiring class
     ns.class = reqMiddleclass
 
     -- Requiring all Events
-    --ns.ComponentAdded = require(folderOfThisFile .. "src.events.ComponentAdded")
-    --ns.ComponentRemoved = require(folderOfThisFile .. "src.events.ComponentRemoved")
+    ns.ComponentAdded = reqComponentAddedEvent
+    ns.ComponentRemoved = reqComponentRemovedEvent
+    ns.Collision = reqCollisionEvent
 
     -- Requiring the engine
     ns.Entity = reqEntity
+    ns.EventManager = reqEventManager
     ns.EntityManager = reqEntityManager
     ns.System = reqSystem
-    --ns.EventManager = require(folderOfThisFile .. "src.EventManager")
     ns.Component = reqComponent
 end
 
 function engine.initialize(opts)
+    LOG("Initializing engine...", LogLevel.Info, 0)
     if opts == nil then opts = {} end
     if not engine.initialized then
         engine.config = {
@@ -27,14 +30,15 @@ function engine.initialize(opts)
             engine.config[name] = val
         end
 
-        populateNamespace(engine)
+        populateNamespace(namespace)
 
         if engine.config.globals then
             populateNamespace(_G)
         end
         engine.initialized = true
+        LOG("Engine initialized correctly")
     else
-        print('Engine is already initialized.')
+        LOG("Engine is already initialized", LogLevel.Warning, 0)
     end
 end
 

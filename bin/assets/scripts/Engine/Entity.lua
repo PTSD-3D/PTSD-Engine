@@ -14,9 +14,11 @@ end
 --Can only have one of each type
 function Entity:add(component)
 	local name = component.class.name
-	print(name)
+
 	if not self.components[name] then
 		self.components[name] = component
+		--Only fired if entity has already been added to the manager
+		--It's better performance-wise to add components before adding to manager
 		if self.eventManager then
 			self.eventManager:fireEvent(namespace.ComponentAdded(self,name))
 		end
