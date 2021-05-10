@@ -19,7 +19,6 @@ namespace PTSD {
 		EntityManager* entityManager_ = nullptr;
 		std::vector<std::unique_ptr<Component>> components_;
 		std::array<Component*, CmpId::MAXCOMPONENTS> componentPtrs_ = {};
-		//TODO add reference to lua entity
 	public:
 		//Component methods
 		template<typename T, typename ... TArgs>
@@ -39,6 +38,8 @@ namespace PTSD {
 		bool hasComponent(CmpId id) const {
 			return componentPtrs_[id] != nullptr;
 		}
+
+		~Entity() { components_.clear(); }
 
 		//Runtime loop methods
 		void init()

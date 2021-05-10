@@ -14,6 +14,11 @@ namespace PTSD
 		PhysicsManager::getInstance()->setCollisionFlags(mObj, type, trigger);
 	}
 
+	RigidbodyComponent::~RigidbodyComponent()
+	{
+
+	}
+
 	void RigidbodyComponent::init() {
 		rbState = new BtOgre::RigidBodyState(entity_->getComponent<TransformComponent>(CmpId::Transform)->getNode());
 		mObj->setMotionState(rbState);
