@@ -49,7 +49,7 @@ namespace PTSD {
 		Vector2D controllerLeftAxis(int controllerID);
 		float controllerLeftTrigger(int controllerID);
 		float controllerRightTrigger(int controllerID);
-		void update();
+		void update(bool& b);
 		void clean();
 		void cleanMouseDelta();
 	};

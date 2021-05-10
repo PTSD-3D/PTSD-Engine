@@ -68,7 +68,7 @@ int main()
 
 		accumulator += frameTime; //If we're lagging behind the game will be updated as many times as needed to catch up
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
-			inputSystem->update();
+			inputSystem->update(running);
 
 			physicsSystem->update(deltaTime);
 			// graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
@@ -82,7 +82,8 @@ int main()
 
 			// PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
-			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
+			if(running)
+				running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();

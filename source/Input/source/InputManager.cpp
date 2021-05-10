@@ -54,8 +54,8 @@ namespace PTSD {
 		return 0;
 	}
 
-	void InputManager::update() {
-		mImplementation->update();
+	void InputManager::update(bool& b) {
+		mImplementation->update(b);
 	}
 
 	void InputManager::clean()
