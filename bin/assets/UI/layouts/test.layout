@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,-4},{0,-1},{1,-4},{1,-1}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="TaharezLook/ProgressBar" name="DimensionBar" >
+            <Property name="Area" value="{{0,23},{0,65},{0,279},{0,97}}" />
+            <Property name="StepSize" value="0.01" />
+            <Property name="CurrentProgress" value="0.4" />
+        </Window>
+        <Window type="TaharezLook/StaticImage" name="Passive" >
+            <Property name="Area" value="{{0,717},{0,520},{0,792},{0,591}}" />
+            <Property name="Image" value="TaharezLook/ProgressBarRight" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="TaharezLook/StaticImage" name="Active" >
+            <Property name="Area" value="{{0,597},{0,487},{0,704},{0,592}}" />
+            <Property name="Image" value="TaharezLook/0Peephole" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="TaharezLook/StaticImage" name="StaticImage" >
+            <Property name="Area" value="{{0,23},{0,8},{0,71},{0,52}}" />
+            <Property name="Image" value="TaharezLook/0Life" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="TaharezLook/StaticImage" name="StaticImage2" >
+            <Property name="Area" value="{{0,90},{0,8},{0,138},{0,52}}" />
+            <Property name="Image" value="TaharezLook/0Life" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+        <Window type="TaharezLook/StaticImage" name="StaticImage3" >
+            <Property name="Area" value="{{0,152},{0,8},{0,200},{0,52}}" />
+            <Property name="Image" value="TaharezLook/0Life" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        </Window>
+    </Window>
+</GUILayout>

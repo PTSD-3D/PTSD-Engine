@@ -97,6 +97,7 @@ namespace PTSD {
 		loadScheme("TaharezLook.scheme");
 		loadFont("DejaVuSans-12.font");
 		loadLayout("TreeDemoTaharez.layout");
+		loadLayout("test.layout");
 	}
 
 	/**
