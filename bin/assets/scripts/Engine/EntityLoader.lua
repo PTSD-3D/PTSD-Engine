@@ -57,7 +57,7 @@ function ns.processSceneConfig(config)
 			local skybox = graphicsConfig.Skybox
 			if skybox.type == ns.SkyboxTypes.Skybox  then
 				setSkybox(skybox.enable, skybox.material, skybox.distance, skybox.renderFirst or true) --Default value of true
-			else if skybox.type == ns.SkyboxTypes.Skydome then
+			elseif skybox.type == ns.SkyboxTypes.Skydome then
 				setSkydome(skybox.enable, skybox.material, skybox.curvature, skybox.repetitions)
 			else
 				-- setSkyplane(skybox.enable, skybox.material, skybox.curvature, skybox.repetitions)
@@ -66,7 +66,6 @@ function ns.processSceneConfig(config)
 			--* Skybox (enable,material,distance, renderFirst)
 			--* Skydome (enable, material, curvature {recomended: 2-65}, tiled repetitions)
 			--* Skyplane (enable, plane, material, units, tiled repetitions)
-			end
 		end
 	end
 end
