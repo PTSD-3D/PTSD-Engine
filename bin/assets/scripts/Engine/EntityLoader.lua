@@ -40,7 +40,6 @@ end
 
 -- Calls engine functions based on config table
 function ns.processSceneConfig(config)
-
 	local physicsConfig = config.PhysicsConfig
 	if  physicsConfig then
 		setGravity(physicsConfig.Gravity)
