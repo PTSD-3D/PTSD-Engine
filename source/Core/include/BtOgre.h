@@ -19,6 +19,7 @@
 
 #include "btBulletDynamicsCommon.h"
 #include "Ogre.h"
+#include <functional>
 
 namespace BtOgre {
 
@@ -82,8 +83,16 @@ enum ColliderType
 
 struct CollisionListener
 {
+	CollisionListener(std::function<void(unsigned long,unsigned long, const btManifoldPoint&)> c) :contact(c){}
 	virtual ~CollisionListener() {}
-    virtual void contact(const Ogre::MovableObject* other, const btManifoldPoint& manifoldPoint) = 0;
+	// virtual void contact(const PTSD::UUID a, const PTSD::UUID b, const btManifoldPoint& manifoldPoint) = 0;
+	std::function<void(unsigned long,unsigned long, const btManifoldPoint&)> contact;
+};
+struct EntityCollisionListener
+{
+	EntityCollisionListener(CollisionListener*l, unsigned long long id) : listener(l), id(id){}
+	CollisionListener *listener;
+	unsigned long long id;
 };
 
 /// simplified wrapper with automatic memory management

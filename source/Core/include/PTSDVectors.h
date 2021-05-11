@@ -1,5 +1,9 @@
 #pragma once
 #include <cmath>
+#include "btBulletDynamicsCommon.h"
+#include <iostream>
+#include <sstream>
+#include <string>
 
 //Struct use for axis directions and operations
 struct Vector2D {
@@ -59,6 +63,8 @@ struct Vec3
 	float x, y, z;
 	Vec3(float x = 0, float y = 0, float z = 0):
 	x(x),y(y),z(z){};
+	Vec3(btVector3& v):
+	x(v.x()),y(v.y()),z(v.z()){};
 
 	inline float magnitude() const {
 		return sqrt(x * x + y * y + z * z);
@@ -91,6 +97,7 @@ struct Vec3
 		return(Vec3(x * f, y * f,z*f));
 	}
 };
+std::ostream& operator<<(std::ostream& os, const Vec3& r);
 
 struct Vec4Placeholder {
 	float x, y, z, w;

@@ -14,9 +14,21 @@ namespace PTSD
 		PhysicsManager::getInstance()->setCollisionFlags(mObj, type, trigger);
 	}
 
+	RigidbodyComponent::~RigidbodyComponent()
+	{
+		//LOG("deleting rb");
+		PhysicsManager::getInstance()->removeRigidBody(mObj);
+	}
+
 	void RigidbodyComponent::init() {
 		rbState = new BtOgre::RigidBodyState(entity_->getComponent<TransformComponent>(CmpId::Transform)->getNode());
 		mObj->setMotionState(rbState);
+		mObj->setUserPointer((void*)(new BtOgre::EntityCollisionListener(PhysicsManager::getInstance()->getCollisionListener(), entity_->getID())));
+	}
+
+	void RigidbodyComponent::disable()
+	{
+		PhysicsManager::getInstance()->removeCollision(mObj);
 	}
 
 	void RigidbodyComponent::setLinearVelocity(Vec3 vel) {

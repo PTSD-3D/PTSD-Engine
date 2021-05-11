@@ -37,7 +37,7 @@ namespace PTSD {
 		cout << "Buenas Tardes" << endl;
 	}
 
-	void InputImplementation::update() {
+	void InputImplementation::update(bool& running) {
 		SDL_Event event;
 
 		clearState();
@@ -75,7 +75,7 @@ namespace PTSD {
 				onControllerRemovedEvent(event);
 				break;
 			case SDL_QUIT:
-				//SDL_Game::instance()->exitGame();
+				running = false;
 				break;
 			}
 		}

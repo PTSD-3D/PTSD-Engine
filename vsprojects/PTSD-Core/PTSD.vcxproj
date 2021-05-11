@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\Core\src\BtOgre.cpp" />
     <ClCompile Include="..\..\source\Core\src\main.cpp" />
+    <ClCompile Include="..\..\source\Core\src\PTSDVectors.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsManager.cpp" />
@@ -22,6 +23,7 @@
     <ClCompile Include="..\..\source\Logger\source\PTSDAssert.cpp" />
     <ClCompile Include="..\..\source\Logger\source\LogManager.cpp" />
     <ClCompile Include="..\..\source\Physics\source\PhysicsManager.cpp" />
+    <ClCompile Include="..\..\source\Scripting\source\Entity.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\EntityManager.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\MeshComponent.cpp" />
     <ClCompile Include="..\..\source\Scripting\source\RigidbodyComponent.cpp" />
@@ -61,17 +63,6 @@
     <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
     <ClInclude Include="..\..\source\UI\include\UIManager.h" />
     <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\bin\assets\scripts\Engine\Component.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\Entity.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\EntityLoader.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\EntityManager.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\initEngine.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\middleclass.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\namespace.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\System.lua" />
-    <None Include="..\..\bin\assets\scripts\Engine\test.lua" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

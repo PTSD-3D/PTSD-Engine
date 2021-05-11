@@ -5,7 +5,7 @@
 namespace sol {
 	class state;
 }
-
+class btManifoldPoint;
 namespace PTSD
 {
 	using UUID = unsigned long;
@@ -33,7 +33,7 @@ namespace PTSD
 		void shutdown();
 
 		void run(const std::string& scriptFile);
-
+		void sendCollisionEvent(UUID, UUID, const btManifoldPoint&);
 		std::shared_ptr<Entity> createEntity(UUID entityID);
 		std::shared_ptr<Entity> getEntity(UUID entityID);
 		void deleteEntity(UUID entityID);

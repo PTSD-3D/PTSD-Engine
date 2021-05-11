@@ -8,6 +8,7 @@ local function populateNamespace(ns)
     -- Requiring all Events
     ns.ComponentAdded = reqComponentAddedEvent
     ns.ComponentRemoved = reqComponentRemovedEvent
+    ns.Collision = reqCollisionEvent
 
     -- Requiring the engine
     ns.Entity = reqEntity
@@ -15,6 +16,12 @@ local function populateNamespace(ns)
     ns.EntityManager = reqEntityManager
     ns.System = reqSystem
     ns.Component = reqComponent
+
+  --Requiring constants
+  ns.SkyboxTypes = {
+    Skybox = 1,
+    Skydome = 2
+  }
 end
 
 function engine.initialize(opts)

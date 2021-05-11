@@ -15,11 +15,9 @@ namespace PTSD {
 	class Entity {
 	private:
 		UUID id_;
-		bool active_;
 		EntityManager* entityManager_ = nullptr;
 		std::vector<std::unique_ptr<Component>> components_;
 		std::array<Component*, CmpId::MAXCOMPONENTS> componentPtrs_ = {};
-		//TODO add reference to lua entity
 	public:
 		//Component methods
 		template<typename T, typename ... TArgs>
@@ -38,6 +36,10 @@ namespace PTSD {
 		}
 		bool hasComponent(CmpId id) const {
 			return componentPtrs_[id] != nullptr;
+		}
+
+		~Entity() {
+			components_.clear();
 		}
 
 		//Runtime loop methods
@@ -67,12 +69,10 @@ namespace PTSD {
 				cmp->onCollisionExit(col);
 		}
 
-		//Getters and Setters
-		void setActive(bool active = true) { active_ = active; }
-		bool isActive() { return active_; }
 		UUID getID() { return id_; }
-		Entity(UUID id, bool active = true) :
-			id_(id), active_(active) {}
+		Entity(UUID id) : id_(id) {}
 		EntityManager* getManager() const { return entityManager_; }
+
+		void disableEntity();
 	};
 }

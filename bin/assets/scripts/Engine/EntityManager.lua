@@ -15,9 +15,15 @@ function EntityManager:initialize()
 	self.eventManager = namespace.EventManager()
 
 	self.systems = {}
+	self.collisions = {}
 
 	self.eventManager:addListener("ComponentRemovedEv", self, self.componentRemoved)
 	self.eventManager:addListener("ComponentAddedEv", self, self.componentAdded)
+	self.eventManager:addListener("CollisionEv", self, self.registerCollision)
+end
+
+function EntityManager:getEntity(id)
+	return self.entities[id]
 end
 
 function EntityManager:addEntity(entity)
@@ -74,6 +80,9 @@ function EntityManager:removeEntity(entity)
 		-- Finally remove entity
 		self.entities[entity.id] = nil
 	end
+
+	--Delete entity in cpp
+	PTSDDeleteEntity(entity.id)
 end
 
 function EntityManager:addSystem(system)
@@ -144,6 +153,36 @@ function EntityManager:update(...)
 	for _, system in ipairs(self.systems) do
 		if system.active then
 			system:update(...)
+		end
+		self:NotifyCollisions(system)
+	end
+	self.collisions = {}
+end
+
+function EntityManager:registerCollision(ev)
+	local entA = self:getEntity(ev.entityAID)
+	local entB = self:getEntity(ev.entityBID)
+	local manifold = ev.manifold
+	if entA.id > entB.id then
+		local a = entA
+		entA = entB
+		entB = a
+	end
+	if not self.collisions[entA.id] then self.collisions[entA.id] = {} end
+	if not self.collisions[entA.id][entB.id] then self.collisions[entA.id][entB.id] = {points = {}, entA = {}, entB = {}} end
+	self.collisions[entA.id][entB.id].entA = entA
+	self.collisions[entA.id][entB.id].entB = entB
+	table.insert(self.collisions[entA.id][entB.id].points, manifold)
+end
+
+function EntityManager:NotifyCollisions(system)
+	for _, ent in pairs(system.targets) do
+		local t = self.collisions[ent.id]
+		if t then
+			for i, other in pairs(t) do
+				local itable = self.collisions[ent.id][i]
+				system:onCollision(itable.entA, itable.entB, itable.points)
+			end
 		end
 	end
 end

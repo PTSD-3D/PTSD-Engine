@@ -73,12 +73,6 @@
     <Filter Include="Core\Source">
       <UniqueIdentifier>{5868f7a0-2ac8-4aa6-ba4b-12afc2e7b7c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripting\Scripts">
-      <UniqueIdentifier>{5678d39b-7abf-446d-ab81-6e3cd0016e94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scripting\Scripts\Engine">
-      <UniqueIdentifier>{c9bb1d3c-5b4c-4ce8-a8ba-7a9239354e22}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripting\Headers\Components">
       <UniqueIdentifier>{22509197-678e-4236-af5d-fdadfc5dec5b}</UniqueIdentifier>
     </Filter>
@@ -149,6 +143,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Core\src\BtOgre.cpp">
       <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Core\src\PTSDVectors.cpp">
+      <Filter>Core\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scripting\source\Entity.cpp">
+      <Filter>Scripting\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,34 +233,5 @@
     <ClInclude Include="..\..\source\Core\include\BtOgre.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\bin\assets\scripts\Engine\Component.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\Entity.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\EntityManager.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\initEngine.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\middleclass.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\namespace.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\System.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\test.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
-    <None Include="..\..\bin\assets\scripts\Engine\EntityLoader.lua">
-      <Filter>Scripting\Scripts\Engine</Filter>
-    </None>
   </ItemGroup>
 </Project>
