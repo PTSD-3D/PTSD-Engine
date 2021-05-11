@@ -84,6 +84,26 @@ namespace PTSD {
 		mWorld->addRigidBody(mObj);
 		return mObj;
 	}
+
+	void PhysicsManager::removeCollision(btRigidBody* body)
+	{
+		mWorld->removeCollisionObject(body);
+	}
+
+	void PhysicsManager::removeRigidBody(btRigidBody* body)
+	{
+		//Constraints not added
+
+		if (body->getMotionState()) {
+			delete body->getMotionState();
+		}
+
+		delete body->getCollisionShape();
+		delete (BtOgre::EntityCollisionListener*)body->getUserPointer();
+		mWorld->removeRigidBody(body);
+		delete body;
+	}
+
 	void PhysicsManager::setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger) {
 		if (trigger) rb->setCollisionFlags(type | CollisionFlags::Trigger);
 		else rb->setCollisionFlags(type);

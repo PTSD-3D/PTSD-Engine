@@ -150,8 +150,6 @@ namespace PTSD {
 	void ScriptManager::deleteEntity(UUID entityID)
 	{
 		entityManager->deleteEntity(entityID);
-		//Deletes entity in Lua
-		//Entity["Delete"]();
 	}
 	std::shared_ptr<Entity> ScriptManager::getEntity(UUID entityID)
 	{
@@ -339,6 +337,7 @@ namespace PTSD {
 	}
 	bool ScriptManager::bindScriptingComponents() {
 		(*state).set_function("PTSDCreateEntity", &PTSD::ScriptManager::createEntity, this);
+		(*state).set_function("PTSDDeleteEntity", &PTSD::ScriptManager::deleteEntity, this);
 
 		return true;
 	}

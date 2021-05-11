@@ -29,7 +29,6 @@ namespace PTSD {
 		btSequentialImpulseConstraintSolver* mSolver;
 		btDiscreteDynamicsWorld* mWorld;
 		BtOgre::CollisionListener* mCollisionListener;
-		void testScene();
 		void logActivity();
 	public:
 		void setScriptManager(ScriptManager* sm) {mScriptManager = sm;}
@@ -52,6 +51,9 @@ namespace PTSD {
 		BtOgre::CollisionListener* getCollisionListener() const {return mCollisionListener;}
 
 		btRigidBody* addRigidBody(Vec3 size, float mass, Vec3 pos, Vec3 rot = { 0,0,0 });
+
+		void removeCollision(btRigidBody* body);
+		void removeRigidBody(btRigidBody* body);
 
 		void setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger);
 

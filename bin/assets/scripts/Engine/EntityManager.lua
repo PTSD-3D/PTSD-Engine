@@ -80,6 +80,9 @@ function EntityManager:removeEntity(entity)
 		-- Finally remove entity
 		self.entities[entity.id] = nil
 	end
+
+	--Delete entity in cpp
+	PTSDDeleteEntity(entity.id)
 end
 
 function EntityManager:addSystem(system)

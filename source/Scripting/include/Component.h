@@ -15,11 +15,12 @@ namespace PTSD
 		Component(CmpId id) :
 			id_(id) {}
 	public:
+		virtual ~Component() = default;
 		void setEntity(Entity* entity) { entity_ = entity; }
 		CmpId getId() { return id_; }
 		virtual void init() {}
 		virtual void update() {}
-		virtual void destroy() {}
+		virtual void disable() {}
 		virtual void onCollisionEnter(Collision* collision) {}
 		virtual void onCollisionStay(Collision* collision) {}
 		virtual void onCollisionExit(Collision* collision) {}
