@@ -73,8 +73,6 @@ end
 
 -- Loads a scene after the whole engine has been initialized
 function ns.loadScene(manager, sceneTable)
-	-- local status, err = pcall(pe)
-	-- if not status then print(err) end
 	ns.processSceneConfig(sceneTable.SceneConfig)
 	for _, entData in pairs(sceneTable.Entities) do
 		local entityObject = ns.Entity()
