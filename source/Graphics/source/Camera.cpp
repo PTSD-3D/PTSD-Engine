@@ -5,7 +5,9 @@
 #include "GraphicsImplementation.h"
 #include <OgreViewport.h>
 #include <Ogre.h>
-
+#include "LogManager.h"
+#include <fstream>
+#include <iostream>
 /**
  * \brief Creates a camera in pos
  * \param pos position
@@ -90,3 +92,7 @@ void PTSD::Camera::mouseRotate(Vector2D dir)
 	}
 }
 
+void PTSD::Camera::debugPos()
+{
+	std::cout << mNode->getPosition().x << "  " << mNode->getPosition().y << "  " << mNode->getPosition().z << "\n"; //Please delete me or implement using PTSDLog
+}

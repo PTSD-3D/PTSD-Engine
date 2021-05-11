@@ -192,6 +192,7 @@ namespace PTSD {
 		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("cameraLookAt", &PTSD::Camera::lookAt, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("cameraSetPos", &PTSD::Camera::setPosition, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
 
 		return true;
 	}
