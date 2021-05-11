@@ -62,7 +62,7 @@ function ns.processSceneConfig(config)
 				setSkydome(skybox.enable, skybox.material, skybox.curvature, skybox.repetitions)
 			else
 				-- setSkyplane(skybox.enable, skybox.material, skybox.curvature, skybox.repetitions)
-					LOG("not supported skybox type", LogLevel.Error)
+				LOG("not supported skybox type", LogLevel.Error)
 			end
 			--* Skybox (enable,material,distance, renderFirst)
 			--* Skydome (enable, material, curvature {recomended: 2-65}, tiled repetitions)

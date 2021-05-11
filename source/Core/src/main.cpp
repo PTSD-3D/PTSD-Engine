@@ -41,13 +41,8 @@ int main()
 	PTSD::PhysicsManager* physicsSystem = PTSD::PhysicsManager::getInstance();
 	PTSD::UIManager* uiSystem = PTSD::UIManager::getInstance();
 	PTSD::SoundManager* soundSystem = PTSD::SoundManager::getInstance();
-	
-	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
-	scriptingSystem->init();
-	// auto sinbad = scriptingSystem->createEntity(0);
-	// sinbad->addComponent<PTSD::DebugComponent>();
 
-	//PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
+	scriptingSystem->init();
 
 	PTSD::LOG("All subsystems initialized");
 	PTSD::Camera* myCam = graphicsSystem->getCam();
@@ -71,7 +66,6 @@ int main()
 			inputSystem->update(running);
 
 			physicsSystem->update(deltaTime);
-			// graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
       
 			soundSystem->update();
 			scriptingSystem->update();
@@ -80,8 +74,8 @@ int main()
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 
-			// PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
+			//TODO move this to scripting
 			if(running)
 				running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}

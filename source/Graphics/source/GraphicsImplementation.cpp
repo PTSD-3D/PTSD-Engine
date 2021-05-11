@@ -252,10 +252,10 @@ namespace PTSD
 	{
 		SDL_SetRelativeMouseMode(locked ? SDL_bool::SDL_TRUE : SDL_bool::SDL_FALSE);
 	}
-		void GraphicsImplementation::setSceneSkybox(bool enabled, const std::string& material, float distance, bool renderFirst )
+	void GraphicsImplementation::setSceneSkybox(bool enabled, const std::string& material, float distance, bool renderFirst )
 	{
 		mSceneMgr->setSkyBox(enabled, material, distance, renderFirst);
-		}
+	}
 	void GraphicsImplementation::setSceneSkydome(bool enabled, const std::string& material, unsigned int curvature, unsigned int tiledRepetitions)
 	{
 		mSceneMgr->setSkyDome(enabled, material, curvature, tiledRepetitions);

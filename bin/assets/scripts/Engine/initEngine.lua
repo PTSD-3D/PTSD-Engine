@@ -17,11 +17,11 @@ local function populateNamespace(ns)
     ns.System = reqSystem
     ns.Component = reqComponent
 
-		--Requiring constants
-		ns.SkyboxTypes = {
-			Skybox = 1,
-			Skydome = 2
-		}
+  --Requiring constants
+  ns.SkyboxTypes = {
+    Skybox = 1,
+    Skydome = 2
+  }
 end
 
 function engine.initialize(opts)
