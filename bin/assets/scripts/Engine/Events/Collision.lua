@@ -1,4 +1,4 @@
-local namespace = reqNamespace
+local namespace = require('namespace')
 local CollisionEv = namespace.class("CollisionEv")
 
 function CollisionEv:initialize(entityAID, entityBID, manifold)

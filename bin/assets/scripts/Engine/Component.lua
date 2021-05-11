@@ -6,7 +6,7 @@ Component.all = {}
 -- Create a Component class with the specified name and fields
 -- which will automatically get a constructor accepting the fields as arguments
 function Component.create(name, fields, defaults)
-    local component = reqNamespace.class(name)
+    local component = require('namespace').class(name)
 
 	component.name = name
     if fields then

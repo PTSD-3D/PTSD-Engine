@@ -1,11 +1,15 @@
-local ns = reqNamespace
+local ns = require('namespace')
 
 ns.LoadSounds()
 LOG("Sounds loaded correctly")
-local status, ret = pcall(ns.loadScene, Manager, sampleScene)
+
+local status, ret = pcall(ns.loadScene, Manager, require('sampleScene'))
+print("f")
 if status then
+	print("uee")
 	LOG("Scene loaded correctly")
 else
+	print(ret)
 	local message = tostring("Fatal error loading scene: " .. ret)
 	LOG(message, LogLevel.Error, 1)
 end

@@ -1,4 +1,4 @@
-local ns = reqNamespace
+local ns = require('namespace')
 
 function ns.spawnEntity(manager, entData)
 	local entityObject = ns.Entity()
