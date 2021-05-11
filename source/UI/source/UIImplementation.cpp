@@ -67,6 +67,15 @@ namespace PTSD {
 		mRoot = nullptr;
 	}
 
+	void UIImplementation::setupResources()
+	{
+		CEGUI::ImageManager::setImagesetDefaultResourceGroup("Imagesets");
+		CEGUI::Font::setDefaultResourceGroup("Fonts");
+		CEGUI::Scheme::setDefaultResourceGroup("Schemes");
+		CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
+		CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
+	}
+
 	void UIImplementation::loadScheme(const std::string& filename)
 	{
 		CEGUI::SchemeManager::getSingleton().createFromFile(filename);

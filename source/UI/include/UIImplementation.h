@@ -45,6 +45,7 @@ namespace PTSD {
 		bool render(double deltaTime);
 		void shutdown();
 
+		void setupResources();
 		void loadScheme(const std::string& filename);
 		void loadFont(const std::string& filename);
 		void loadLayout(const std::string& filename);
