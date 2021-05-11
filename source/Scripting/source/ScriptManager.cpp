@@ -306,8 +306,6 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
-
-		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(float, float, float)>());
 		
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
