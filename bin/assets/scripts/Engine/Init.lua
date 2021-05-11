@@ -7,6 +7,7 @@ local res, err = pcall(eng.initialize,{globals=false})
 if not res then
 	print(err)
 end
+Namespace = ns
 Manager = ns.EntityManager()
 
 --Make sure EntityLoader exists

@@ -117,7 +117,7 @@ namespace PTSD {
 	}
 	void ScriptManager::sendCollisionEvent(UUID a, UUID b, const btManifoldPoint& manifold)
 	{
-		auto result = (*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["reqNamespace"]["Collision"](a,b,manifold));
+		auto result = (*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["Namespace"]["Collision"](a,b,manifold));
 		if (!result.valid()) {
 			sol::error err = result;
 			throw std::runtime_error(err.what());
