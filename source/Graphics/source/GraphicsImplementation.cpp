@@ -98,11 +98,6 @@ namespace PTSD
 		mRenderWindow->setVisible(true);
 	}
 
-	void GraphicsImplementation::setupMouse()
-	{
-		SDL_SetRelativeMouseMode(SDL_bool::SDL_TRUE);
-	}
-
 
 	/**
 	 * \brief Finds resources stated in resources.cfg
@@ -202,7 +197,6 @@ namespace PTSD
 		lastRenderTime = SDL_GetTicks();
 		setupLogging();
 		setupWindow();
-		setupMouse();
 		loadResources();
 		testScene();
 
@@ -253,5 +247,17 @@ namespace PTSD
 	void GraphicsImplementation::shutdown()
 	{
 		delete mRoot;
+	}
+	void GraphicsImplementation::setMouseLocked(bool locked)
+	{
+		SDL_SetRelativeMouseMode(locked ? SDL_bool::SDL_TRUE : SDL_bool::SDL_FALSE);
+	}
+	void GraphicsImplementation::setSceneSkybox(bool enabled, const std::string& material, float distance, bool renderFirst )
+	{
+		mSceneMgr->setSkyBox(enabled, material, distance, renderFirst);
+	}
+	void GraphicsImplementation::setSceneSkydome(bool enabled, const std::string& material, unsigned int curvature, unsigned int tiledRepetitions)
+	{
+		mSceneMgr->setSkyDome(enabled, material, curvature, tiledRepetitions);
 	}
 }
