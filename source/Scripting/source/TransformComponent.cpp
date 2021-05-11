@@ -83,6 +83,7 @@ namespace PTSD {
 
 	void TransformComponent::setChildCamera() //Makes the camera move with the transform
 	{
+		GraphicsImplementation::getInstance()->getCamera()->lookAt(Vec3(0, 0, 10000));
 		Ogre::SceneNode* n = GraphicsImplementation::getInstance()->getCamera()->getNode();
 		GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
 		mNode->addChild(n);
