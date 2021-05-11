@@ -36,5 +36,8 @@ namespace PTSD {
 		float getWindowWidth() const;
 		float getWindowHeight() const;
 		double getDeltaTime();
+		void setMouseLocked(bool locked);
+		void setSceneSkybox(bool enabled, const std::string& material, float distance, bool renderFirst );
+		void setSceneSkydome(bool enabled, const std::string& material, unsigned int curvature, unsigned int tiledRepetitions);
 	};
 }

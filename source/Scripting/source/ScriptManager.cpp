@@ -188,24 +188,28 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
-		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
-
+		//Mesh component
 		auto luaMeshComponent = (*state).new_usertype<PTSD::MeshComponent>("MeshComponent", sol::no_constructor);
 		luaMeshComponent["setMesh"] = &PTSD::MeshComponent::setMesh;
 		luaMeshComponent["setMaterial"] = &PTSD::MeshComponent::setMaterial;
 		luaMeshComponent["getMesh"] = &PTSD::MeshComponent::getMesh;
 		luaMeshComponent["getMaterial"] = &PTSD::MeshComponent::getMaterial;
-
 		(*state).set_function("setMesh", [&](UUID id, const std::string& mesh, const std::string& mat) {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
 			});
 
+		//Camera
 		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("getWindowWidth", &PTSD::GraphicsManager::getWindowWidth, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("getWindowHeight", &PTSD::GraphicsManager::getWindowHeight, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::GraphicsManager::getInstance()->getCam());
 
+		//MouseLock
+		(*state).set_function("setMouseLocked", &PTSD::GraphicsManager::setMouseLocked, PTSD::GraphicsManager::getInstance());
 
+		//Skybox and skydome
+		(*state).set_function("setSkybox", &GraphicsManager::setSceneSkybox, PTSD::GraphicsManager::getInstance());
+		(*state).set_function("setSkydome", &GraphicsManager::setSceneSkydome, PTSD::GraphicsManager::getInstance());
 		return true;
 	}
 	bool ScriptManager::bindPhysicsComponents()

@@ -49,4 +49,17 @@ namespace PTSD {
 	{
 		return mImplementation->getDeltaTime();
 	}
+	void GraphicsManager::setMouseLocked(bool locked)
+	{
+		mImplementation->setMouseLocked(locked);
+	}
+
+	void GraphicsManager::setSceneSkybox(bool enabled, const std::string& material, float distance, bool renderFirst )
+	{
+		mImplementation->setSceneSkybox(enabled, material, distance, renderFirst);
+		}
+	void GraphicsManager::setSceneSkydome(bool enabled, const std::string& material, unsigned int curvature, unsigned int tiledRepetitions)
+	{
+		mImplementation->setSceneSkydome(enabled, material, curvature, tiledRepetitions);
+	}
 }
