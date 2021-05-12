@@ -1,6 +1,6 @@
-local sceneConfig = reqPrefab
-local ns = reqNamespace
---TODO require
+local sceneConfig = require('Prefab')
+local ns = require('namespace')
+
 function sceneConfig.sampleScene()
 	return {
 		PhysicsConfig = {

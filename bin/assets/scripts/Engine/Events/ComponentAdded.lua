@@ -1,4 +1,4 @@
-local namespace = reqNamespace
+local namespace = require('namespace')
 local ComponentAddedEv = namespace.class("ComponentAddedEv")
 
 function ComponentAddedEv:initialize(entity, componentName)

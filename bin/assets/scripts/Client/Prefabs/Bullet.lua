@@ -1,4 +1,4 @@
-local pf = reqPrefab
+local pf = require('Prefab')
 
 -- Params holds required parameters to build an instance of this prefab. This will be populated with transform information from Blender via our script in /tools
 function pf.Bullet(params)

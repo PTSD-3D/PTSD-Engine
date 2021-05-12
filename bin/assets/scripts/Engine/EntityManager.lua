@@ -1,5 +1,5 @@
 --Main Entity Manager class
-local namespace = reqNamespace
+local namespace = require('namespace')
 local EntityManager =  namespace.class("EntityManager")
 
 function EntityManager:initialize()

@@ -1,5 +1,4 @@
-local namespace = reqNamespace
-namespace.class = reqMiddleclass
+local namespace = require('namespace')
 
 local Entity = namespace.class("Entity")
 
