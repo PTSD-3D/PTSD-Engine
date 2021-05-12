@@ -116,8 +116,7 @@ namespace PTSD {
 		Ogre::SceneNode* n = GraphicsImplementation::getInstance()->getCamera()->getNode();
 		GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
 		mNode->addChild(n);
-		n->setPosition(Ogre::Vector3(getPosition().x, getPosition().y, getPosition().z + 100));
-
+		n->setPosition(Ogre::Vector3(0, 2, 0));
 	}
 
 	//Getters
