@@ -1,4 +1,4 @@
-local namespace = reqNamespace
+local namespace = require('namespace')
 local EventManager = namespace.class("EventManager")
 
 function EventManager:initialize()

@@ -1,21 +1,21 @@
-local namespace = reqNamespace
+local namespace = require('namespace')
 local engine = {}
 
 local function populateNamespace(ns)
     -- Requiring class
-    ns.class = reqMiddleclass
+    ns.class = require('middleclass')
 
     -- Requiring all Events
-    ns.ComponentAdded = reqComponentAddedEvent
-    ns.ComponentRemoved = reqComponentRemovedEvent
-    ns.Collision = reqCollisionEvent
+    ns.ComponentAdded = require('ComponentAdded')
+    ns.ComponentRemoved = require('ComponentRemoved')
+    ns.Collision = require('Collision')
 
     -- Requiring the engine
-    ns.Entity = reqEntity
-    ns.EventManager = reqEventManager
-    ns.EntityManager = reqEntityManager
-    ns.System = reqSystem
-    ns.Component = reqComponent
+    ns.Entity = require('Entity')
+    ns.EventManager = require('EventManager')
+    ns.EntityManager = require('EntityManager')
+    ns.System = require('System')
+    ns.Component = require('Component')
 
   --Requiring constants
   ns.SkyboxTypes = {

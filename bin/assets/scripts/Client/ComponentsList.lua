@@ -1,4 +1,4 @@
-local ns = reqNamespace
+local ns = require('namespace')
 
 --Define new components here
 --ns.Component.create("compName",{"attrib1","attrib2"},{attrib1=defaultValue,attrib2=defaultValue})

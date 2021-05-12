@@ -1,8 +1,9 @@
-local ns = reqNamespace
+local ns = require('namespace')
 
 ns.LoadSounds()
 LOG("Sounds loaded correctly")
-local status, ret = pcall(ns.loadScene, Manager, sampleScene)
+
+local status, ret = pcall(ns.loadScene, Manager, require('sampleScene'))
 if status then
 	LOG("Scene loaded correctly")
 else
