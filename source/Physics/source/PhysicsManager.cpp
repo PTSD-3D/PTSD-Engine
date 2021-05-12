@@ -106,7 +106,6 @@ namespace PTSD {
 
 	void PhysicsManager::setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger) {
 		if (trigger) rb->setCollisionFlags(type | CollisionFlags::Trigger);
-		else if (type == CollisionFlags::Static) rb->setCollisionFlags(type | DISABLE_DEACTIVATION);
 		else rb->setCollisionFlags(type);
 	}
 }
