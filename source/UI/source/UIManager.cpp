@@ -23,7 +23,6 @@ namespace PTSD {
 	* create a root and load resources
 	* \param mRenderWindow target reference
 	*/
-
 	int UIManager::init() {
 		PTSD_ASSERT(mInstance == nullptr, "UIManager already initialized");
 		mInstance = new UIManager();
@@ -61,12 +60,13 @@ namespace PTSD {
 	{
 		if (PTSD::InputManager::getInstance()->mouseMotion()) injectMousePosition(
 			PTSD::InputManager::getInstance()->getMousePosition());
-		if (PTSD::InputManager::getInstance()->isMouseButtonDown(Left)) injectMouseLeftClick();
+		if (PTSD::InputManager::getInstance()->isMouseButtonJustDown(Left)) injectMouseLeftClick();
 	}
 
 	void UIManager::shutdown()
 	{
 		windowMngr->destroyAllWindows();
+		umap.clear();
 		mRoot = nullptr;
 	}
 
@@ -96,7 +96,7 @@ namespace PTSD {
 		CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
 	}
 	/**
-	* \brief Test Callback function which changes text and image
+	* \brief On button click event for every button
 	*/
 	bool UIManager::OnButtonClick(const CEGUI::EventArgs& e)
 	{
@@ -145,24 +145,6 @@ namespace PTSD {
 			break;
 		}
 	}
-
-	void UIManager::createText(const std::string& name, const std::string& text, Vector2D position, Vector2D size)
-	{
-		CEGUI::Window* myTextWindow = windowMngr->createWindow("TaharezLook/StaticText", name);
-		myTextWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
-		myTextWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
-		myTextWindow->setProperty("Text", text);
-		mRoot->addChild(myTextWindow);
-	}
-
-	void UIManager::createStaticImage(const std::string& name, const std::string& source, Vector2D position, Vector2D size)
-	{
-		CEGUI::Window* myImageWindow = windowMngr->createWindow("TaharezLook/StaticImage", name);
-		myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
-		myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
-		myImageWindow->setProperty("Image", source);
-		mRoot->addChild(myImageWindow);
-	}
 	/**
 	* \brief After creating a button, we associate default callbacks for a button
 	*/
@@ -198,37 +180,27 @@ namespace PTSD {
 		system->getDefaultGUIContext().getMouseCursor().setPosition(CEGUI::Vector2f(mousePosition.getX(), mousePosition.getY()));
 	}
 
-	void UIManager::setText(const std::string& name, const std::string& text)
+	void UIManager::changeText(const std::string& name, const std::string& text)
 	{
-		CEGUI::Window* myWindow = mRoot->getChild(name);
+		CEGUI::Window* myWindow = mRoot->getChildRecursive(name);
 		myWindow->setText(text);
 	}
 
-	void UIManager::setStaticImage(const std::string& name, const std::string& image)
+	void UIManager::changeStaticImage(const std::string& name, const std::string& image)
 	{
-		CEGUI::Window* myWindow = mRoot->getChild(name);
+		CEGUI::Window* myWindow = mRoot->getChildRecursive(name);
 		myWindow->setProperty("Image", image);
 	}
 
 	void UIManager::setWindowVisible(const std::string& name, bool visible)
 	{
-		CEGUI::Window* myWindow = mRoot->getChild(name);
+		CEGUI::Window* myWindow = mRoot->getChildRecursive(name);
 		myWindow->setVisible(visible);
 	}
 
 	void UIManager::setButtonFunction(const std::string& name, const std::string& functionName)
 	{
 		umap[name] = functionName;
-	}
-
-	CEGUI::Window* UIManager::getWindow(const std::string name)
-	{
-		return mRoot->getChild(name);
-	}
-
-	CEGUI::PushButton* UIManager::getPushButton(const std::string& name)
-	{
-		return static_cast<CEGUI::PushButton*>(mRoot->getChild(name));
 	}
 
 	void UIManager::injectMousePosition(Vector2D mousePosition)

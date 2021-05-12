@@ -38,6 +38,9 @@ local Resources = {
 		},
 		PauseLayout = {
 			path = "Pause.layout", type=UIFileType.Layout
+		},
+		TitleLayout = {
+			path = "Title.layout", type=UIFileType.Layout
 		}
 	},
 	Meshes = {

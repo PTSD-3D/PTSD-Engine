@@ -4,7 +4,7 @@
     <Window type="DefaultWindow" name="PauseWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Window type="TaharezLook/StaticText" name="StaticText" >
+        <Window type="TaharezLook/StaticText" name="PauseText" >
             <Property name="Area" value="{{0,364},{0,130},{0,454},{0,156}}" />
             <Property name="Font" value="DejaVuSans-24" />
             <Property name="Text" value="PAUSE" />

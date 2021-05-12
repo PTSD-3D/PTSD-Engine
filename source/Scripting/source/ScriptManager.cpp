@@ -261,8 +261,12 @@ namespace PTSD {
 
 		//Buttons
 		(*state).set_function("createButton", &PTSD::UIManager::createButton, PTSD::UIManager::getInstance());
-		(*state).set_function("setWindowVisible", &PTSD::UIManager::setWindowVisible, PTSD::UIManager::getInstance());
 		(*state).set_function("setButtonFunction", &PTSD::UIManager::setButtonFunction, PTSD::UIManager::getInstance());
+		
+		(*state).set_function("changeText", &PTSD::UIManager::changeText, PTSD::UIManager::getInstance());
+		(*state).set_function("changeStaticImage", &PTSD::UIManager::changeStaticImage, PTSD::UIManager::getInstance());
+		(*state).set_function("setWindowVisible", &PTSD::UIManager::setWindowVisible, PTSD::UIManager::getInstance());
+
 		(*state).set_function("setUIMouseCursor", &PTSD::UIManager::setUIMouseCursor, PTSD::UIManager::getInstance());
 		(*state).set_function("setUIMouseCursorVisible", &PTSD::UIManager::setUIMouseCursorVisible, PTSD::UIManager::getInstance());
 

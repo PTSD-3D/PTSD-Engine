@@ -78,20 +78,15 @@ namespace PTSD {
 		void loadLayout(const std::string& filename);
 		void loadUIFile(const std::string& path, UIFileType type);
 
-		void createText(const std::string& name, const std::string& text, Vector2D position, Vector2D size);
-		void createStaticImage(const std::string& name, const std::string& source, Vector2D position, Vector2D size);
 		void createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size);
 		void setUIMouseCursor(const std::string& name);
 		void setUIMouseCursorVisible(bool active);
 		void setUIMouseInitialPosition(Vector2D mousePosition);
-		void setText(const std::string& name, const std::string& text);
-		void setStaticImage(const std::string& name, const std::string& image);
+		void changeText(const std::string& name, const std::string& text);
+		void changeStaticImage(const std::string& name, const std::string& image);
 		void setWindowVisible(const std::string& name, bool visible);
 
 		void setButtonFunction(const std::string& name, const std::string& functionName);
-
-		CEGUI::Window* getWindow(const std::string name);
-		CEGUI::PushButton* getPushButton(const std::string& name);
 
 		void injectMousePosition(Vector2D mousePosition);
 		void injectMouseLeftClick();
