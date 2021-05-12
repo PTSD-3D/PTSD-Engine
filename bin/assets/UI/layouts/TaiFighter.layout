@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="DefaultWindow" name="DefaultWindow" >
+    <Window type="DefaultWindow" name="TaiFighterWindow" >
         <Property name="Area" value="{{0,-4},{0,-1},{1,-4},{1,-1}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="TaharezLook/ProgressBar" name="DimensionBar" >
@@ -36,7 +36,7 @@
         </Window>
         <Window type="TaharezLook/StaticText" name="StaticText" >
             <Property name="Area" value="{{0,10},{0,567},{0,179},{0,593}}" />
-            <Property name="Text" value="UI desing is my passion" />
+            <Property name="Text" value="UI design is my passion" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="HorzScrollPageSize" value="159" />
             <Property name="VertScrollPageSize" value="16" />

@@ -25,6 +25,14 @@ namespace Ogre {
 }
 
 namespace PTSD {
+	enum UIFileType
+	{
+		Scheme = 0,
+		Font,
+		Layout,
+		NonType, // really, really not recommended
+	};
+
 	class ScriptManager;
 	/**
 	 * \brief Singleton UI Manager
@@ -68,14 +76,14 @@ namespace PTSD {
 		void loadScheme(const std::string& filename);
 		void loadFont(const std::string& filename);
 		void loadLayout(const std::string& filename);
-		void loadResources();
+		void loadUIFile(const std::string& path, UIFileType type);
 
 		void createText(const std::string& name, const std::string& text, Vector2D position, Vector2D size);
 		void createStaticImage(const std::string& name, const std::string& source, Vector2D position, Vector2D size);
 		void createButton(const std::string& name, const std::string& text, Vector2D position, Vector2D size);
-		void setMouseCursor(const std::string& name);
-		void setMouseCursorVisible(bool active);
-		void setMouseInitialPosition(Vector2D mousePosition);
+		void setUIMouseCursor(const std::string& name);
+		void setUIMouseCursorVisible(bool active);
+		void setUIMouseInitialPosition(Vector2D mousePosition);
 		void setText(const std::string& name, const std::string& text);
 		void setStaticImage(const std::string& name, const std::string& image);
 		void setWindowVisible(const std::string& name, bool visible);
@@ -87,7 +95,5 @@ namespace PTSD {
 
 		void injectMousePosition(Vector2D mousePosition);
 		void injectMouseLeftClick();
-
-		void test();
 	};
 }

@@ -38,15 +38,6 @@ namespace PTSD {
 
 		mInstance->createRoot();
 
-		mInstance->mouseCursorName = "TaharezLook/MouseArrow";
-
-		mInstance->loadResources();
-
-		mInstance->setMouseCursor(mInstance->mouseCursorName);
-
-		mInstance->test();
-
-		mInstance->setMouseInitialPosition(PTSD::InputManager::getInstance()->getMousePosition());
 		return 0;
 	}
 
@@ -117,7 +108,6 @@ namespace PTSD {
 			mScriptManager->execute(umap[s]);
 		}
 
-		setMouseCursorVisible(false);
 		return true;
 	}
 
@@ -135,14 +125,25 @@ namespace PTSD {
 	{
 		CEGUI::Window* layout = windowMngr->loadLayoutFromFile(filename);
 		mRoot->addChild(layout);
+		layout->setVisible(false);
 	}
 
-	void UIManager::loadResources()
+	void UIManager::loadUIFile(const std::string& path, UIFileType type)
 	{
-		loadScheme("TaharezLook.scheme");
-		loadFont("DejaVuSans-12.font");
-		loadLayout("TreeDemoTaharez.layout");
-		loadLayout("test.layout");
+		switch (type)
+		{
+		case PTSD::UIFileType::Scheme:
+			loadScheme(path);
+			break;
+		case PTSD::UIFileType::Font:
+			loadFont(path);
+			break;
+		case PTSD::UIFileType::Layout:
+			loadLayout(path);
+			break;
+		default:
+			break;
+		}
 	}
 
 	void UIManager::createText(const std::string& name, const std::string& text, Vector2D position, Vector2D size)
@@ -178,20 +179,22 @@ namespace PTSD {
 		myButtonWindow->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(function));
 	}
 
-	void UIManager::setMouseCursor(const std::string& name)
+	void UIManager::setUIMouseCursor(const std::string& name)
 	{
+		mInstance->mouseCursorName = name;
 		system->getDefaultGUIContext().getMouseCursor().setDefaultImage(name);
-		setMouseCursorVisible(true);
+		setUIMouseCursorVisible(true);
+		setUIMouseInitialPosition(PTSD::InputManager::getInstance()->getMousePosition());
 	}
 
-	void UIManager::setMouseCursorVisible(bool active)
+	void UIManager::setUIMouseCursorVisible(bool active)
 	{
 		if (active) system->getDefaultGUIContext().getMouseCursor().setDefaultImage(mouseCursorName);
 		else system->getDefaultGUIContext().getMouseCursor().setDefaultImage(mouseCursorName + "Hidden");
-		setMouseInitialPosition(Vector2D(renderer->getDisplaySize().d_width / 2, renderer->getDisplaySize().d_height / 2));
+		setUIMouseInitialPosition(Vector2D(renderer->getDisplaySize().d_width / 2, renderer->getDisplaySize().d_height / 2));
 	}
 
-	void UIManager::setMouseInitialPosition(Vector2D mousePosition)
+	void UIManager::setUIMouseInitialPosition(Vector2D mousePosition)
 	{
 		system->getDefaultGUIContext().getMouseCursor().setPosition(CEGUI::Vector2f(mousePosition.getX(), mousePosition.getY()));
 	}
@@ -238,11 +241,5 @@ namespace PTSD {
 	void UIManager::injectMouseLeftClick()
 	{
 		system->getDefaultGUIContext().injectMouseButtonClick(CEGUI::LeftButton);
-	}
-
-	void UIManager::test()
-	{
-		createStaticImage("PrettyImage", "TaharezLook/UpArrow", Vector2D(renderer->getDisplaySize().d_width / 2, renderer->getDisplaySize().d_height / 2), Vector2D(50, 50));
-		createText("PrettyText", "Plane text", Vector2D(renderer->getDisplaySize().d_width / 1.5, renderer->getDisplaySize().d_height / 2), Vector2D(150, 50));
 	}
 }

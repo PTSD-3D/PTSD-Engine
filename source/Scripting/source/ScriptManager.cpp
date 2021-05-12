@@ -251,11 +251,20 @@ namespace PTSD {
 		PTSD::LOG("Binding LUA UI Components... @ScriptManager, BindUIComponents()");
 
 		//UI loading
+		(*state).new_enum("UIFileType",
+			"Scheme", UIFileType::Scheme,
+			"Font", UIFileType::Font,
+			"Layout", UIFileType::Layout,
+			"NONE", UIFileType::NonType);
+
+		(*state).set_function("PTSDLoadUIFile", &PTSD::UIManager::loadUIFile, PTSD::UIManager::getInstance());
 
 		//Buttons
 		(*state).set_function("createButton", &PTSD::UIManager::createButton, PTSD::UIManager::getInstance());
 		(*state).set_function("setWindowVisible", &PTSD::UIManager::setWindowVisible, PTSD::UIManager::getInstance());
 		(*state).set_function("setButtonFunction", &PTSD::UIManager::setButtonFunction, PTSD::UIManager::getInstance());
+		(*state).set_function("setUIMouseCursor", &PTSD::UIManager::setUIMouseCursor, PTSD::UIManager::getInstance());
+		(*state).set_function("setUIMouseCursorVisible", &PTSD::UIManager::setUIMouseCursorVisible, PTSD::UIManager::getInstance());
 
 		return true;
 	}
