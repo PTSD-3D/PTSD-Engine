@@ -166,9 +166,9 @@ namespace PTSD {
 	/**
 	* \brief After creating a button, we associate default callbacks for a button
 	*/
-	void UIManager::createButton(const std::string& name, const std::string& text, Vector2D position, Vector2D size)
+	void UIManager::createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size)
 	{
-		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(windowMngr->createWindow("TaharezLook/Button", name));
+		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(windowMngr->createWindow(source, name));
 		myButtonWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
 		myButtonWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
 		myButtonWindow->setText(text);

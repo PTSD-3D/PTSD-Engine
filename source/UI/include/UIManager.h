@@ -80,7 +80,7 @@ namespace PTSD {
 
 		void createText(const std::string& name, const std::string& text, Vector2D position, Vector2D size);
 		void createStaticImage(const std::string& name, const std::string& source, Vector2D position, Vector2D size);
-		void createButton(const std::string& name, const std::string& text, Vector2D position, Vector2D size);
+		void createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size);
 		void setUIMouseCursor(const std::string& name);
 		void setUIMouseCursorVisible(bool active);
 		void setUIMouseInitialPosition(Vector2D mousePosition);

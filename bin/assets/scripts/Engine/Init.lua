@@ -14,6 +14,7 @@ Manager = ns.EntityManager()
 require('EntityLoader')
 require('ComponentsList')
 require('SystemsList')
+require('UIcallbacks')
 
 --Resource load
 require('resourceLoader')
