@@ -43,6 +43,13 @@ namespace PTSD
 		mObj->applyForce(btVector3(force.x, force.y, force.z), btVector3(ref.x, ref.y, ref.z));
 	}
 
+	void RigidbodyComponent::setPosition(Vec3 position)
+	{
+		btTransform transform = mObj->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(position.x,position.y,position.z));
+		mObj->setCenterOfMassTransform(transform);
+	}
+
 	Vec3 RigidbodyComponent::getLinearVelocity() {
 		btVector3 v = mObj->getLinearVelocity();
 		return Vec3(v.getX(), v.getY(), v.getZ());

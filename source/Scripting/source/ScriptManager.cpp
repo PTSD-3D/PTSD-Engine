@@ -222,6 +222,7 @@ namespace PTSD {
 		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::RigidbodyComponent>("RigidbodyComponent", sol::no_constructor);
 		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::RigidbodyComponent::setLinearVelocity;
 		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::RigidbodyComponent::setAngularVelocity;
+		luaRigidbodyComponent["setPosition"] = &PTSD::RigidbodyComponent::setPosition;
 		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::RigidbodyComponent::getLinearVelocity;
 		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
 		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
@@ -318,6 +319,7 @@ namespace PTSD {
 			{"Q", Scancode::SCANCODE_Q},
 			{"R", Scancode::SCANCODE_R},
 			{"F", Scancode::SCANCODE_F},
+			{"T", Scancode::SCANCODE_T},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
