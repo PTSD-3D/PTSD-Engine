@@ -1,5 +1,4 @@
 #include "TransformComponent.h"
-
 namespace PTSD {
 	//Methods to convert from and to quaternions and vec3
 	Vec3 TransformComponent::OgreQuatEuler(const Ogre::Quaternion& quaternion) const
@@ -8,7 +7,7 @@ namespace PTSD {
 		quaternion.ToRotationMatrix(mx2);
 		Ogre::Radian x, y, z;
 		mx2.ToEulerAnglesYXZ(y, x, z);
-		Vec3 vect(x.valueAngleUnits(),y.valueAngleUnits(), z.valueAngleUnits());
+		Vec3 vect(x.valueAngleUnits(), y.valueAngleUnits(), z.valueAngleUnits());
 
 		return vect;
 	}
@@ -24,7 +23,7 @@ namespace PTSD {
 	TransformComponent::TransformComponent() : Component(CmpId::Transform) {
 		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 	}
-	TransformComponent::TransformComponent(Vec3 p, Vec3 r, Vec3 s): Component(CmpId::Transform) 
+	TransformComponent::TransformComponent(Vec3 p, Vec3 r, Vec3 s) : Component(CmpId::Transform)
 	{
 		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 		setPosition(p);
@@ -74,7 +73,7 @@ namespace PTSD {
 	}
 	void TransformComponent::rotate(float x, float y, float z) { //changes orientation of the transform using 3 floats
 		Vec3 rotation = (x, y, z);					 // It has a little problem with rounding +-(0.00001)
-		Ogre::Quaternion q = EulerToOgreQuat(rotation);			
+		Ogre::Quaternion q = EulerToOgreQuat(rotation);
 		mNode->rotate(q, Ogre::Node::TS_LOCAL);
 	}
 	void TransformComponent::scale(Vec3 scale) { //adds or substracts from the actual scale with a vec3
@@ -99,7 +98,7 @@ namespace PTSD {
 
 	void TransformComponent::setRotation(float x, float y, float z) //Sets the rotation of the transform with 3 floats
 	{
-		Ogre::Quaternion q = EulerToOgreQuat(Vec3(x,y,z));
+		Ogre::Quaternion q = EulerToOgreQuat(Vec3(x, y, z));
 		mNode->setOrientation(q);
 	}
 	void TransformComponent::setScale(Vec3 scale) { //Sets the scale of the transform
@@ -109,6 +108,16 @@ namespace PTSD {
 	void TransformComponent::setScale(float x, float y, float z) //Sets the scale of the transform with 3 floats
 	{
 		mNode->setScale(x, y, z);
+	}
+
+	void TransformComponent::setChildCamera() //Makes the camera move with the transform
+	{
+		GraphicsImplementation::getInstance()->getCamera()->lookAt(Vec3(0, 0, 10000));
+		Ogre::SceneNode* n = GraphicsImplementation::getInstance()->getCamera()->getNode();
+		GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
+		mNode->addChild(n);
+		n->setPosition(Ogre::Vector3(getPosition().x, getPosition().y, getPosition().z + 100));
+
 	}
 
 	//Getters
@@ -122,6 +131,14 @@ namespace PTSD {
 	}
 	Vec3 TransformComponent::getScale() const { //Gets the scale of the transform
 		Ogre::Vector3 v = mNode->getScale();
+		return Vec3(v.x, v.y, v.z);
+	}
+	Vec3 TransformComponent::getForward() const { //Gets the local forward vector
+		Ogre::Vector3 v = mNode->getLocalAxes().GetColumn(2);
+		return Vec3(v.x, v.y, v.z);
+	}
+	Vec3 TransformComponent::getRight() const { //Gets the local right vector
+		Ogre::Vector3 v = -mNode->getLocalAxes().GetColumn(0);
 		return Vec3(v.x, v.y, v.z);
 	}
 	Ogre::SceneNode* TransformComponent::getNode() const { //Gets the node associated to the transform

@@ -5,6 +5,7 @@
 #include "GraphicsImplementation.h"
 #include <OgreSceneManager.h>
 #include "Component.h"
+#include "Camera.h"
 
 namespace Ogre {
 	class SceneNode;
@@ -39,10 +40,13 @@ namespace PTSD {
 		void setRotation(float x, float y, float z);
 		void setScale(Vec3 scale);
 		void setScale(float x, float y, float z);
+		void setChildCamera();
 
 		Vec3 getPosition() const;
 		Vec3 getRotation() const;
 		Vec3 getScale() const;
+		Vec3 getRight() const;
+		Vec3 getForward() const;
 		Ogre::SceneNode* getNode() const;
 	};
 }
