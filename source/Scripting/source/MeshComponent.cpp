@@ -37,6 +37,12 @@ namespace PTSD {
 		PTSD::LOG(mMaterial_.c_str());
 		ob->setMaterialName(mMaterial_);
 	}
+
+	void MeshComponent::disable()
+	{
+		sceneNode->setVisible(false);
+	}
+
 	void MeshComponent::setMaterial(const std::string& material)
 	{
 		if (material != mMaterial_)

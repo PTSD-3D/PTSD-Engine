@@ -57,30 +57,6 @@ namespace PTSD {
 		//Lua state initialization
 		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table, sol::lib::debug, sol::lib::package, sol::lib::string);
 
-		(*state).require_file("reqNamespace", "./assets/scripts/Engine/namespace.lua");
-		(*state).require_file("reqMiddleclass", "./assets/scripts/Engine/middleclass.lua");
-
-		//Engine components
-		(*state).require_file("reqComponent", "./assets/scripts/Engine/Component.lua");
-		(*state).require_file("reqEntity", "./assets/scripts/Engine/Entity.lua");
-		(*state).require_file("reqSystem", "./assets/scripts/Engine/System.lua");
-		//Events
-		(*state).require_file("reqComponentAddedEvent", "./assets/scripts/Engine/Events/ComponentAdded.lua");
-		(*state).require_file("reqComponentRemovedEvent", "./assets/scripts/Engine/Events/ComponentRemoved.lua");
-		(*state).require_file("reqCollisionEvent", "./assets/scripts/Engine/Events/Collision.lua");
-		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
-		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
-		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
-		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
-		(*state).require_file("reqSceneConfigurations", "./assets/scripts/Engine/Prefab.lua");
-		for (const auto& entry : fs::directory_iterator("./assets/scripts/Client/Prefabs"))
-		{
-			(*state).script_file(entry.path().string());
-		}
-
-		//(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
-		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
-
 		//Binding of external functions
 		if (bindGenericComponents() &&
 			bindLoggerComponents() &&
@@ -92,28 +68,13 @@ namespace PTSD {
 			bindScriptingComponents()) {
 		}
 
-		//Resources
-		(*state).script_file("./assets/scripts/Client/resources.lua");
-		(*state).script_file("./assets/scripts/Engine/resourceLoader.lua");
+		//Engine initialization
+		(*state).script_file("./assets/scripts/Engine/Init.lua");
 
-		//Prefabs and Scenes
-		(*state).require_file("reqEventManager", "./assets/scripts/Engine/EventManager.lua");
-		(*state).require_file("reqEntityManager", "./assets/scripts/Engine/EntityManager.lua");
-		(*state).require_file("reqEngine", "./assets/scripts/Engine/initEngine.lua");
-		(*state).require_file("reqPrefab", "./assets/scripts/Engine/Prefab.lua");
 		for (const auto& entry : fs::directory_iterator("./assets/scripts/Client/Prefabs"))
 		{
 			(*state).script_file(entry.path().string());
 		}
-		(*state).script_file("./assets/scripts/Engine/EntityLoader.lua");
-		(*state).require_file("sampleScene", "./assets/scripts/Client/sampleScene.lua");
-
-		//Engine initialization
-		(*state).script_file("./assets/scripts/Engine/Init.lua");
-
-		//Components and systems definitions
-		(*state).script_file("./assets/scripts/Client/ComponentsList.lua");
-		(*state).script_file("./assets/scripts/Client/SystemsList.lua");
 
 		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
 		PhysicsManager::getInstance()->setScriptManager(this); // Neded for collision callbacks
@@ -128,7 +89,6 @@ namespace PTSD {
 			sol::error err = result;
 			throw std::runtime_error(err.what());
 		}
-		(*state)["Update"]();
 		//TODO exit state
 		return true;
 	}
@@ -150,8 +110,6 @@ namespace PTSD {
 	void ScriptManager::deleteEntity(UUID entityID)
 	{
 		entityManager->deleteEntity(entityID);
-		//Deletes entity in Lua
-		//Entity["Delete"]();
 	}
 	std::shared_ptr<Entity> ScriptManager::getEntity(UUID entityID)
 	{
@@ -159,7 +117,7 @@ namespace PTSD {
 	}
 	void ScriptManager::sendCollisionEvent(UUID a, UUID b, const btManifoldPoint& manifold)
 	{
-		auto result = (*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["reqNamespace"]["Collision"](a,b,manifold));
+		auto result = (*state)["Manager"]["eventManager"]["fireEvent"]((*state)["Manager"]["eventManager"],(*state)["Namespace"]["Collision"](a,b,manifold));
 		if (!result.valid()) {
 			sol::error err = result;
 			throw std::runtime_error(err.what());
@@ -188,25 +146,32 @@ namespace PTSD {
 		//Init everything
 		PTSD::LOG("Binding LUA Graphics Components... @ScriptManager, BindGraphicsComponents()");
 
-		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
-
+		//Mesh component
 		auto luaMeshComponent = (*state).new_usertype<PTSD::MeshComponent>("MeshComponent", sol::no_constructor);
 		luaMeshComponent["setMesh"] = &PTSD::MeshComponent::setMesh;
 		luaMeshComponent["setMaterial"] = &PTSD::MeshComponent::setMaterial;
 		luaMeshComponent["getMesh"] = &PTSD::MeshComponent::getMesh;
 		luaMeshComponent["getMaterial"] = &PTSD::MeshComponent::getMaterial;
-
 		(*state).set_function("setMesh", [&](UUID id, const std::string& mesh, const std::string& mat) {
 			return entityManager->getEntity(id).get()->addComponent<PTSD::MeshComponent>(mesh, mat);
 			});
 
+		//Camera
 		(*state).set_function("translateCamera", &PTSD::Camera::translate, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("getWindowWidth", &PTSD::GraphicsManager::getWindowWidth, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("getWindowHeight", &PTSD::GraphicsManager::getWindowHeight, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("rotateCamera", &PTSD::Camera::mouseRotate, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("cameraLookAt", &PTSD::Camera::lookAt, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("cameraSetPos", &PTSD::Camera::setPosition, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
 
+		//MouseLock
+		(*state).set_function("setMouseLocked", &PTSD::GraphicsManager::setMouseLocked, PTSD::GraphicsManager::getInstance());
 
+		//Skybox and skydome
+		(*state).set_function("setSkybox", &GraphicsManager::setSceneSkybox, PTSD::GraphicsManager::getInstance());
+		(*state).set_function("setSkydome", &GraphicsManager::setSceneSkydome, PTSD::GraphicsManager::getInstance());
 		return true;
 	}
 	bool ScriptManager::bindPhysicsComponents()
@@ -337,6 +302,7 @@ namespace PTSD {
 	}
 	bool ScriptManager::bindScriptingComponents() {
 		(*state).set_function("PTSDCreateEntity", &PTSD::ScriptManager::createEntity, this);
+		(*state).set_function("PTSDDeleteEntity", &PTSD::ScriptManager::deleteEntity, this);
 
 		return true;
 	}
@@ -344,8 +310,6 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
-
-		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(float, float, float)>());
 		
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);

@@ -41,19 +41,10 @@ int main()
 	PTSD::PhysicsManager* physicsSystem = PTSD::PhysicsManager::getInstance();
 	PTSD::UIManager* uiSystem = PTSD::UIManager::getInstance();
 	PTSD::SoundManager* soundSystem = PTSD::SoundManager::getInstance();
-	
-	//PTSD::test_Sound(soundSystem); //If you want to test this module, you need to go to test.h and also comment out everything there.
-	scriptingSystem->init();
-	// auto sinbad = scriptingSystem->createEntity(0);
-	// sinbad->addComponent<PTSD::DebugComponent>();
 
-	//PTSD::TransformComponent* transform = PTSD::test_Transform_Setup(sinbad); //To test this you also need test_Transform_Update in the loop
+	scriptingSystem->init();
 
 	PTSD::LOG("All subsystems initialized");
-	PTSD::Camera* myCam = graphicsSystem->getCam();
-
-	//Initial LUA scripts
-	scriptingSystem->run("Client/CameraScript.lua");
 
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
@@ -68,10 +59,9 @@ int main()
 
 		accumulator += frameTime; //If we're lagging behind the game will be updated as many times as needed to catch up
 		while (accumulator>= deltaTime) { //The loop is executed only if it's time to proccess another cycle
-			inputSystem->update();
+			inputSystem->update(running);
 
 			physicsSystem->update(deltaTime);
-			// graphicsSystem->getCam()->translate({ 0,0,0.1 }); //To be deleted
       
 			soundSystem->update();
 			scriptingSystem->update();
@@ -80,9 +70,10 @@ int main()
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
 
-			// PTSD::test_Transform_Update(transform);//To test this you also need test_Transform_Setup outside of the loop
 
-			running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
+			//TODO move this to scripting
+			if(running)
+				running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
 		}
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();

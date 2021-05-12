@@ -11,6 +11,7 @@ namespace PTSD {
 		MeshComponent(const std::string&);
 		MeshComponent(const std::string&, const std::string&);
 		virtual void init() override;
+		virtual void disable() override;
 		void setMesh(const std::string& mesh);
 		void setMaterial(const std::string& material);
 		const std::string getMesh() { return mMesh_; };

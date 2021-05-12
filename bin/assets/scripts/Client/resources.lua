@@ -1,16 +1,15 @@
-local prefabs = reqPrefab
-local sceneConfig = reqSceneConfigurations
 local SoundType = {
 	Sonido = 0,
 	Musica = 1
 }
+
 local SoundChannel = {
 	Ambiente = 0,
 	Dialogo = 1,
 	General = 2
 }
 
-Resources = {
+local Resources = {
 	PATHS = {
 		Sound = "./assets/sounds/"
 	},

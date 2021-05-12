@@ -29,9 +29,10 @@ namespace PTSD
 		}
 	public:
 		RigidbodyComponent(Vec3 size, float mass, Vec3 pos, CollisionFlags type = CollisionFlags::Dynamic, bool trigger = false, Vec3 rot = { 0,0,0 });
-		~RigidbodyComponent() = default;
+		virtual ~RigidbodyComponent();
 
 		virtual void init();
+		virtual void disable() override;
 
 		void setLinearVelocity(Vec3 vel);
 		void setAngularVelocity(Vec3 vel);

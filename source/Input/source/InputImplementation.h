@@ -149,7 +149,7 @@ namespace PTSD {
 		size_t createInput();
 
 		void Init();
-		void update();
+		void update(bool& running);
 
 		const int mJoystickDeadZone = 10000;
 		const int mTriggerDeadZone = 10000; //trigger deadzone equals threshold

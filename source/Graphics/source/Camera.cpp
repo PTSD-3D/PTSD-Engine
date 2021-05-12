@@ -5,7 +5,9 @@
 #include "GraphicsImplementation.h"
 #include <OgreViewport.h>
 #include <Ogre.h>
-
+#include "LogManager.h"
+#include <fstream>
+#include <iostream>
 /**
  * \brief Creates a camera in pos
  * \param pos position
@@ -71,7 +73,7 @@ void PTSD::Camera::mouseRotate(Vector2D dir)
 	cameraPitchNode->pitch(Ogre::Degree(-dir.getY()));
 	cameraYawNode->yaw(Ogre::Degree(-dir.getX()));
 
-	// We don't want the camera to do a full 360บ rotation on the x-axis. It needs to be locked at 180บ
+	// We don't want the camera to do a full 360ยบ rotation on the x-axis. It needs to be locked at 180ยบ
 	float pitchAngle = (2 * Ogre::Degree(Ogre::Math::ACos(cameraPitchNode->getOrientation().w)).valueDegrees());
 
 	// Just to determine the sign of the angle we pick up above, the
@@ -90,13 +92,19 @@ void PTSD::Camera::mouseRotate(Vector2D dir)
 			cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
 				-Ogre::Math::Sqrt(0.5f), 0, 0));
 	}
+}
+
+void PTSD::Camera::debugPos()
+{
+	std::cout << mNode->getPosition().x << "  " << mNode->getPosition().y << "  " << mNode->getPosition().z << "\n"; //Please delete me or implement using PTSDLog
+
 }
 
 void PTSD::Camera::mousePitch(float dir)
 {
 	cameraPitchNode->pitch(Ogre::Degree(-dir));
 
-	// We don't want the camera to do a full 360บ rotation on the x-axis. It needs to be locked at 180บ
+	// We don't want the camera to do a full 360ยบ rotation on the x-axis. It needs to be locked at 180ยบ
 	float pitchAngle = (2 * Ogre::Degree(Ogre::Math::ACos(cameraPitchNode->getOrientation().w)).valueDegrees());
 
 	// Just to determine the sign of the angle we pick up above, the
@@ -116,4 +124,3 @@ void PTSD::Camera::mousePitch(float dir)
 				-Ogre::Math::Sqrt(0.5f), 0, 0));
 	}
 }
-

@@ -14,7 +14,7 @@ namespace PTSD {
 	void PhysicsManager::init() {
 		PTSD_ASSERT(mInstance == nullptr, "PhysicsManager already initialized");
 		mInstance = new PhysicsManager();
-		
+
 		mInstance->mCollisionConfiguration = new btDefaultCollisionConfiguration();
 
 		mInstance->mDispatcher = new btCollisionDispatcher(mInstance->mCollisionConfiguration);
@@ -22,11 +22,11 @@ namespace PTSD {
 		mInstance->mBroadphase = new btDbvtBroadphase();
 
 		mInstance->mSolver = new btSequentialImpulseConstraintSolver;
-		auto world = new BtOgre::DynamicsWorld(Ogre::Vector3(0,0,0));
-		mInstance->mWorld = static_cast<btDiscreteDynamicsWorld*>(world-> getBtWorld());//new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
+		auto world = new BtOgre::DynamicsWorld(Ogre::Vector3(0, 0, 0));
+		mInstance->mWorld = static_cast<btDiscreteDynamicsWorld*>(world->getBtWorld());//new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
 		// mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
-		std::function<void(unsigned long,unsigned long, const btManifoldPoint&)> listener=[&](PTSD::UUID a,PTSD::UUID b, const btManifoldPoint& manifold){
-			mInstance->mScriptManager->sendCollisionEvent(a,b,manifold);
+		std::function<void(unsigned long, unsigned long, const btManifoldPoint&)> listener = [&](PTSD::UUID a, PTSD::UUID b, const btManifoldPoint& manifold) {
+			mInstance->mScriptManager->sendCollisionEvent(a, b, manifold);
 		};
 		mInstance->mCollisionListener = new BtOgre::CollisionListener(listener);
 	}
@@ -84,6 +84,26 @@ namespace PTSD {
 		mWorld->addRigidBody(mObj);
 		return mObj;
 	}
+
+	void PhysicsManager::removeCollision(btRigidBody* body)
+	{
+		mWorld->removeCollisionObject(body);
+	}
+
+	void PhysicsManager::removeRigidBody(btRigidBody* body)
+	{
+		//Constraints not added
+
+		if (body->getMotionState()) {
+			delete body->getMotionState();
+		}
+
+		delete body->getCollisionShape();
+		delete (BtOgre::EntityCollisionListener*)body->getUserPointer();
+		mWorld->removeRigidBody(body);
+		delete body;
+	}
+
 	void PhysicsManager::setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger) {
 		if (trigger) rb->setCollisionFlags(type | CollisionFlags::Trigger);
 		else rb->setCollisionFlags(type);

@@ -23,7 +23,9 @@ namespace PTSD {
 	public:
 		TransformComponent();
 		TransformComponent(Vec3 p, Vec3 r, Vec3 s);
-		~TransformComponent() = default;
+		~TransformComponent();
+
+		void DestroyNodeAndChildren(Ogre::SceneNode* node);
 
 		void translate(Vec3 translation);
 		void translate(float x, float y, float z);

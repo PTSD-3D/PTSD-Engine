@@ -1,5 +1,6 @@
-local ns = reqNamespace
-local prefabs = reqPrefab
+local ns = require('namespace')
+local prefabs = require('Prefab')
+local resources = require('resources')
 
 LOG("Loading systems...", LogLevel.Info, 1)
 
@@ -30,7 +31,7 @@ end
 
 function MoveSystem:Shoot(entity, delta)
 	LOG("PEW")
-	local chan = playSound(Resources.Sounds.Oof.id)
+	local chan = playSound(resources.Sounds.Oof.id)
 	setChannelVolume(chan,1)
 	ns.spawnEntity(Manager,prefabs.Bullet({
 		Transform = {
@@ -202,10 +203,11 @@ end
 function BulletSystem:update(dt)
 	for _, entity in pairs(self.targets) do
 		local bulletInfo = entity:get("bullet")
-		if(bulletInfo.lifetime > 0) then
 		local movement = vec3:new(bulletInfo.speed*dt,0,0)
 		entity.Transform:translate(movement)
 		bulletInfo.lifetime = bulletInfo.lifetime - 1
+		if(bulletInfo.lifetime <= 0) then
+			Manager:removeEntity(entity)
 		end
 	end
 	self.collided = {}

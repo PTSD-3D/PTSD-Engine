@@ -1,5 +1,5 @@
 --Main Entity Manager class
-local namespace = reqNamespace
+local namespace = require('namespace')
 local EntityManager =  namespace.class("EntityManager")
 
 function EntityManager:initialize()
@@ -80,6 +80,9 @@ function EntityManager:removeEntity(entity)
 		-- Finally remove entity
 		self.entities[entity.id] = nil
 	end
+
+	--Delete entity in cpp
+	PTSDDeleteEntity(entity.id)
 end
 
 function EntityManager:addSystem(system)
