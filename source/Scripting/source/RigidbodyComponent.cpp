@@ -32,6 +32,17 @@ namespace PTSD
 		mObj->applyForce(btVector3(force.x, force.y, force.z), btVector3(ref.x, ref.y, ref.z));
 	}
 
+	bool RigidbodyComponent::hasRayCastHit(Vec3 vec) {
+		//How raycast works: World->rayTest(origin point, destination point, callback)
+		//The callback has the information of the raycast (if it hit, how many hits, etc)
+		btVector3 origin = mObj->getWorldTransform().getOrigin();
+		btVector3 dest = origin + btVector3(vec.x, vec.y, vec.z);
+		btCollisionWorld::ClosestRayResultCallback rayCallback(origin, dest);
+		PhysicsManager::getInstance()->getWorld()->rayTest(origin, dest, rayCallback);
+		if (rayCallback.hasHit()) return true;
+		return false;
+	}
+
 	Vec3 RigidbodyComponent::getLinearVelocity() {
 		btVector3 v = mObj->getLinearVelocity();
 		return Vec3(v.getX(), v.getY(), v.getZ());
