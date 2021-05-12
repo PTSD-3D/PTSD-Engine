@@ -1,4 +1,4 @@
-local namespace = reqNamespace
+local namespace = require('namespace')
 
 local ComponentRemovedEv = namespace.class("ComponentRemovedEv")
 

@@ -10,7 +10,7 @@ namespace PTSD
 {
 	RigidbodyComponent::RigidbodyComponent(Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 rot) : 
 		Component(CmpId::RigidbodyC), trigger(trigger), mass(mass), type(type) {
-		mObj = PhysicsManager::getInstance()->addRigidBody(size, mass, pos, degToRad(rot));
+		mObj = PhysicsManager::getInstance()->addRigidBody(size, (type!=CollisionFlags::Static) ? mass : 0, pos, degToRad(rot));
 		PhysicsManager::getInstance()->setCollisionFlags(mObj, type, trigger);
 	}
 
