@@ -71,14 +71,14 @@ namespace PTSD {
 		void setupResources();
 		void setScriptManager(ScriptManager* sm) {mScriptManager = sm;}
 
-		bool OnButtonClick(const CEGUI::EventArgs& e);
+		bool onButtonClick(const CEGUI::EventArgs& e);
+		void registerForButtonsEvents(const std::string& name);
 
 		void loadScheme(const std::string& filename);
 		void loadFont(const std::string& filename);
 		void loadLayout(const std::string& filename);
 		void loadUIFile(const std::string& path, UIFileType type);
 
-		void createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size);
 		void setUIMouseCursor(const std::string& name);
 		void setUIMouseCursorVisible(bool active);
 		void setUIMouseInitialPosition(Vector2D mousePosition);

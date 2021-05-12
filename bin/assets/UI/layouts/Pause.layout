@@ -4,6 +4,27 @@
     <Window type="DefaultWindow" name="PauseWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="DragDropTarget" value="false" />
+        <Property name="RiseOnClickEnabled" value="false" />
+        <Window type="TaharezLook/Button" name="PushButton" >
+            <Property name="Area" value="{{0,339},{0,207},{0,482},{0,239}}" />
+            <Property name="Font" value="DejaVuSans-12" />
+            <Property name="Text" value="Cegui es facilito" />
+            <Property name="AlwaysOnTop" value="true" />
+        </Window>
+        <Window type="TaharezLook/Button" name="ExitButton" >
+            <Property name="Area" value="{{0,361},{0,299},{0,457},{0,331}}" />
+            <Property name="Font" value="DejaVuSans-12" />
+            <Property name="Text" value="Salir" />
+            <Property name="AlwaysOnTop" value="true" />
+        </Window>
+        <Window type="TaharezLook/FrameWindow" name="FrameWindow" >
+            <Property name="Area" value="{{0,192},{0,84},{0.3,377},{0.3,263}}" />
+            <Property name="Alpha" value="0.5" />
+            <Property name="DragDropTarget" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
+            <Property name="AutoRenderingSurface" value="false" />
+        </Window>
         <Window type="TaharezLook/StaticText" name="PauseText" >
             <Property name="Area" value="{{0,364},{0,130},{0,454},{0,156}}" />
             <Property name="Font" value="DejaVuSans-24" />
@@ -17,10 +38,6 @@
             <Property name="VertScrollPageSize" value="26" />
             <Property name="HorzScrollDocumentSize" value="87" />
             <Property name="VertScrollDocumentSize" value="31.0477" />
-        </Window>
-        <Window type="TaharezLook/FrameWindow" name="FrameWindow" >
-            <Property name="Area" value="{{0,194},{0,86},{0.3,379},{0.3,265}}" />
-            <Property name="Alpha" value="0.5" />
         </Window>
     </Window>
 </GUILayout>

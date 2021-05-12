@@ -98,7 +98,7 @@ namespace PTSD {
 	/**
 	* \brief On button click event for every button
 	*/
-	bool UIManager::OnButtonClick(const CEGUI::EventArgs& e)
+	bool UIManager::onButtonClick(const CEGUI::EventArgs& e)
 	{
 		const CEGUI::MouseEventArgs& we = static_cast<const CEGUI::MouseEventArgs&>(e);
 		CEGUI::String senderID = we.window->getName();
@@ -109,6 +109,14 @@ namespace PTSD {
 		}
 
 		return true;
+	}
+
+	void UIManager::registerForButtonsEvents(const std::string& name)
+	{
+		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(mRoot->getChildRecursive(name));
+		/*bind(function, reference for the execution of the function, placeholder for parameters)*/
+		auto function = std::bind(&PTSD::UIManager::onButtonClick, this, std::placeholders::_1);
+		myButtonWindow->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(function));
 	}
 
 	void UIManager::loadScheme(const std::string& filename)
@@ -144,21 +152,6 @@ namespace PTSD {
 		default:
 			break;
 		}
-	}
-	/**
-	* \brief After creating a button, we associate default callbacks for a button
-	*/
-	void UIManager::createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size)
-	{
-		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(windowMngr->createWindow(source, name));
-		myButtonWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
-		myButtonWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
-		myButtonWindow->setText(text);
-		mRoot->addChild(myButtonWindow);
-
-		/*bind(function, reference for the execution of the function, placeholder for parameters)*/
-		auto function = std::bind(&PTSD::UIManager::OnButtonClick, this, std::placeholders::_1);
-		myButtonWindow->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(function));
 	}
 
 	void UIManager::setUIMouseCursor(const std::string& name)
@@ -200,6 +193,7 @@ namespace PTSD {
 
 	void UIManager::setButtonFunction(const std::string& name, const std::string& functionName)
 	{
+		registerForButtonsEvents(name);
 		umap[name] = functionName;
 	}
 

@@ -34,7 +34,7 @@
             <Property name="Image" value="TaharezLook/0Life" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
         </Window>
-        <Window type="TaharezLook/StaticText" name="StaticText" >
+        <Window type="TaharezLook/StaticText" name="UIDesignText" >
             <Property name="Area" value="{{0,10},{0,567},{0,179},{0,593}}" />
             <Property name="Text" value="UI design is my passion" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
