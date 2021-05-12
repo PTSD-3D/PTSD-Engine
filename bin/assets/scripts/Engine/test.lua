@@ -12,4 +12,13 @@ end
 -- Showing component Added event working
 --local ents = Manager:getEntitiesWithComponent("playerMove")
 --if ents ~= {} then ents[1]:add(ns.Component.all["topo"]()) end
+createButton("PushButton", "CEGUI es facilito",vec2:new(300, 400), vec2:new(200, 50))
+setButtonFunction("PushButton","UICallback")
 LOG("Test.lua completed")
+
+function UICallback()
+	setWindowVisible("PrettyImage", false)
+	setWindowVisible("PrettyText", false)
+	setWindowVisible("PushButton", false)
+	setWindowVisible("DemoWindow", false)
+end

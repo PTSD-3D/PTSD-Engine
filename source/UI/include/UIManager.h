@@ -5,6 +5,8 @@
 #include "PTSDVectors.h"
 #include "PTSDAssert.h"
 
+using namespace std;
+
 namespace CEGUI {
 	class EventArgs;
 	class String;
@@ -23,9 +25,7 @@ namespace Ogre {
 }
 
 namespace PTSD {
-	class UIImplementation;
-	class InputManager;
-	class GraphicsManager;
+	class ScriptManager;
 	/**
 	 * \brief Singleton UI Manager
 	 */
@@ -33,12 +33,16 @@ namespace PTSD {
 	private:
 		static UIManager* mInstance;
 
+		ScriptManager* mScriptManager;
+
 		CEGUI::OgreRenderer* renderer;
 		CEGUI::Window* mRoot;
 		CEGUI::WindowManager* windowMngr;
 		CEGUI::System* system;
 		Vector2D lastMousePosition;
 		std::string mouseCursorName;
+
+		unordered_map<string, string> umap;
 
 	public:
 		UIManager() = default;
@@ -53,13 +57,14 @@ namespace PTSD {
 		static int init();
 		bool render();
 		void inputUpdate();
-		void registerForEvents();
-		bool OnButtonClick(const CEGUI::EventArgs& e);
 		void shutdown();
 		void createRoot();
-
 		void initLogger();
 		void setupResources();
+		void setScriptManager(ScriptManager* sm) {mScriptManager = sm;}
+
+		bool OnButtonClick(const CEGUI::EventArgs& e);
+
 		void loadScheme(const std::string& filename);
 		void loadFont(const std::string& filename);
 		void loadLayout(const std::string& filename);
@@ -71,10 +76,11 @@ namespace PTSD {
 		void setMouseCursor(const std::string& name);
 		void setMouseCursorVisible(bool active);
 		void setMouseInitialPosition(Vector2D mousePosition);
-		void setEvent(const std::string& name, std::function<bool(const CEGUI::EventArgs&)> function);
 		void setText(const std::string& name, const std::string& text);
 		void setStaticImage(const std::string& name, const std::string& image);
-		void setLayoutVisible(const std::string& name, bool visible);
+		void setWindowVisible(const std::string& name, bool visible);
+
+		void setButtonFunction(const std::string& name, const std::string& functionName);
 
 		CEGUI::Window* getWindow(const std::string name);
 		CEGUI::PushButton* getPushButton(const std::string& name);

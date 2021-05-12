@@ -47,7 +47,17 @@ namespace PTSD {
 
 		(*state).do_file("./assets/scripts/" + scriptFile);
 	}
-
+	/*
+	 * \brief Needed for CEGUI interaction with Lua
+	 */
+	void ScriptManager::execute(const std::string& functionName)
+	{
+		sol::protected_function_result result = (*state)[functionName]();
+		if (!result.valid()) {
+			sol::error err = result;
+			throw std::runtime_error(err.what());
+		}
+	}
 
 	/**
 	 * \brief Binds external functions to lua state and initializes main lua engine.
@@ -116,7 +126,8 @@ namespace PTSD {
 		(*state).script_file("./assets/scripts/Client/SystemsList.lua");
 
 		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
-		PhysicsManager::getInstance()->setScriptManager(this); // Neded for collision callbacks
+		PTSD::PhysicsManager::getInstance()->setScriptManager(this); // Neded for collision callbacks
+		PTSD::UIManager::getInstance()->setScriptManager(this); // Neded for CEGUI callbacks
 		return true;
 	}
 
@@ -278,6 +289,14 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding LUA UI Components... @ScriptManager, BindUIComponents()");
+
+		//UI loading
+
+		//Buttons
+		(*state).set_function("createButton", &PTSD::UIManager::createButton, PTSD::UIManager::getInstance());
+		(*state).set_function("setWindowVisible", &PTSD::UIManager::setWindowVisible, PTSD::UIManager::getInstance());
+		(*state).set_function("setButtonFunction", &PTSD::UIManager::setButtonFunction, PTSD::UIManager::getInstance());
+
 		return true;
 	}
 	bool ScriptManager::bindInputComponents()
