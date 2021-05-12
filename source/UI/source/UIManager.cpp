@@ -191,7 +191,6 @@ namespace PTSD {
 	{
 		if (active) system->getDefaultGUIContext().getMouseCursor().setDefaultImage(mouseCursorName);
 		else system->getDefaultGUIContext().getMouseCursor().setDefaultImage(mouseCursorName + "Hidden");
-		setUIMouseInitialPosition(Vector2D(renderer->getDisplaySize().d_width / 2, renderer->getDisplaySize().d_height / 2));
 	}
 
 	void UIManager::setUIMouseInitialPosition(Vector2D mousePosition)

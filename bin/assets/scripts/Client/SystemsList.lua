@@ -76,6 +76,10 @@ function MoveSystem:KeyboardHandleInput(entity,dt,speed)
 	if keyJustPressed(PTSDKeys.Space) then
 		self:Change()
 	end
+	-- UI Pause input
+	if keyJustPressed(PTSDKeys.P) then
+		ShowPauseUI();
+	end
 end
 
 --Read the input from a gamepad and sends a commad

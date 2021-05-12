@@ -306,6 +306,7 @@ namespace PTSD {
 			{"Q", Scancode::SCANCODE_Q},
 			{"R", Scancode::SCANCODE_R},
 			{"F", Scancode::SCANCODE_F},
+			{"P", Scancode::SCANCODE_P},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
