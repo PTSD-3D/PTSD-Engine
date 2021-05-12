@@ -253,13 +253,13 @@ namespace PTSD {
 		//UI loading
 		(*state).new_enum("UIFileType",
 			"Scheme", UIFileType::Scheme,
-			"Font", UIFileType::Font,
 			"Layout", UIFileType::Layout,
 			"NONE", UIFileType::NonType);
 
 		(*state).set_function("PTSDLoadUIFile", &PTSD::UIManager::loadUIFile, PTSD::UIManager::getInstance());
 
 		//Buttons
+		(*state).set_function("createButton", &PTSD::UIManager::createButton, PTSD::UIManager::getInstance());
 		(*state).set_function("setButtonFunction", &PTSD::UIManager::setButtonFunction, PTSD::UIManager::getInstance());
 		
 		(*state).set_function("changeText", &PTSD::UIManager::changeText, PTSD::UIManager::getInstance());

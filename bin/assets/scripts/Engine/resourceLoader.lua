@@ -29,10 +29,10 @@ function ns.LoadUIElements()
 		end
 	end
 
-	for key, UIFile in pairs(resources.UIFiles) do
-		local path = UIFile.path
+	for key, UILayout in pairs(resources.UILayouts) do
+		local path = UILayout.path
 
-		Status,Error = pcall(PTSDLoadUIFile, path, UIFile.type)
+		Status,Error = pcall(PTSDLoadUIFile, path, UILayout.type)
 		if not Status then
 			print (Error)
 		end

@@ -111,6 +111,17 @@ namespace PTSD {
 		return true;
 	}
 
+	void UIManager::createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size)
+	{
+		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(windowMngr->createWindow(source, name));
+		myButtonWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
+		myButtonWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
+		myButtonWindow->setText(text);
+		mRoot->addChild(myButtonWindow);
+
+		registerForButtonsEvents(name);
+	}
+
 	void UIManager::registerForButtonsEvents(const std::string& name)
 	{
 		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(mRoot->getChildRecursive(name));
@@ -122,11 +133,6 @@ namespace PTSD {
 	void UIManager::loadScheme(const std::string& filename)
 	{
 		CEGUI::SchemeManager::getSingleton().createFromFile(filename);
-	}
-
-	void UIManager::loadFont(const std::string& filename)
-	{
-		CEGUI::FontManager::getSingleton().createFromFile(filename);
 	}
 
 	void UIManager::loadLayout(const std::string& filename)
@@ -142,9 +148,6 @@ namespace PTSD {
 		{
 		case PTSD::UIFileType::Scheme:
 			loadScheme(path);
-			break;
-		case PTSD::UIFileType::Font:
-			loadFont(path);
 			break;
 		case PTSD::UIFileType::Layout:
 			loadLayout(path);
@@ -193,7 +196,6 @@ namespace PTSD {
 
 	void UIManager::setButtonFunction(const std::string& name, const std::string& functionName)
 	{
-		registerForButtonsEvents(name);
 		umap[name] = functionName;
 	}
 

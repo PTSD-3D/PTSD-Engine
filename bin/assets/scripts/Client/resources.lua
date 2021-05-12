@@ -29,10 +29,7 @@ local Resources = {
 			path = "TaharezLook.scheme", type=UIFileType.Scheme
 		}
 	},
-	UIFiles = {
-		DejaVuSans = {
-			path = "DejaVuSans-12.font", type=UIFileType.Font
-		},		
+	UILayouts = {	
 		TaiFighterLayout = {
 			path = "TaiFighter.layout", type=UIFileType.Layout
 		},
