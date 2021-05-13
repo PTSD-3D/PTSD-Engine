@@ -193,11 +193,13 @@ namespace PTSD {
 		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::RigidbodyComponent>("RigidbodyComponent", sol::no_constructor);
 		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::RigidbodyComponent::setLinearVelocity;
 		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::RigidbodyComponent::setAngularVelocity;
+		luaRigidbodyComponent["setPosition"] = &PTSD::RigidbodyComponent::setPosition;
 		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::RigidbodyComponent::getLinearVelocity;
 		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
 		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
 
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
+			PTSD_ASSERT((size.x > 0 && size.y > 0 && size.z> 0), "Escala negativa, animal");
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance());
@@ -242,7 +244,7 @@ namespace PTSD {
 		(*state).set_function("pauseChannel", &PTSD::SoundManager::pauseChannel, PTSD::SoundManager::getInstance());
 		(*state).set_function("resumeChannel", &PTSD::SoundManager::resumeChannel, PTSD::SoundManager::getInstance());
 		(*state).set_function("setChannelVolume", &PTSD::SoundManager::setChannelVolume, PTSD::SoundManager::getInstance());
-		
+
 		return true;
 	}
 	bool ScriptManager::bindUIComponents()
@@ -261,7 +263,7 @@ namespace PTSD {
 		//Buttons
 		(*state).set_function("createButton", &PTSD::UIManager::createButton, PTSD::UIManager::getInstance());
 		(*state).set_function("setButtonFunction", &PTSD::UIManager::setButtonFunction, PTSD::UIManager::getInstance());
-		
+
 		(*state).set_function("changeText", &PTSD::UIManager::changeText, PTSD::UIManager::getInstance());
 		(*state).set_function("changeStaticImage", &PTSD::UIManager::changeStaticImage, PTSD::UIManager::getInstance());
 		(*state).set_function("setWindowVisible", &PTSD::UIManager::setWindowVisible, PTSD::UIManager::getInstance());
@@ -309,6 +311,7 @@ namespace PTSD {
 			{"Q", Scancode::SCANCODE_Q},
 			{"R", Scancode::SCANCODE_R},
 			{"F", Scancode::SCANCODE_F},
+			{"T", Scancode::SCANCODE_T},
 			{"P", Scancode::SCANCODE_P},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
@@ -341,7 +344,7 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
-		
+
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
 		trComponent["position"] = sol::property(&PTSD::TransformComponent::getPosition, sol::resolve<void(Vec3)>(&PTSD::TransformComponent::setPosition));
@@ -356,7 +359,7 @@ namespace PTSD {
 		});
 
 		(*state).script("function vec3:__tostring__() return '{x: '..self.x ..' y:' .. self.y ' z:' .. self.z .. '} end'");
-		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double),Vec3(float, float, float), Vec3(btVector3&)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z, 
+		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double),Vec3(float, float, float), Vec3(btVector3&)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z,
 		sol::meta_function::multiplication, &Vec3::operator*,sol::meta_function::subtraction, &Vec3::operator-,sol::meta_function::addition, &Vec3::operator+);
 		(*state).new_usertype<Vec4Placeholder>("vec4", sol::constructors<Vec4Placeholder(double, double, double, double)>(), "x", &Vec4Placeholder::x, "y", &Vec4Placeholder::y, "z", &Vec4Placeholder::z, "w", &Vec4Placeholder::w);
 		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
