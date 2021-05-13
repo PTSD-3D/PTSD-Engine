@@ -78,7 +78,7 @@ function MoveSystem:KeyboardHandleInput(entity,dt,speed)
 	end
 	-- UI Pause input
 	if keyJustPressed(PTSDKeys.P) then
-		ShowPauseUI();
+		showPauseUI();
 	end
 end
 

@@ -1,4 +1,4 @@
-function ShowTaiFighterUI()
+function showTaiFighterUI()
 	setWindowVisible("TaiFighterWindow", true)
 	setWindowVisible("PauseWindow", false)
 	
@@ -10,7 +10,7 @@ function ShowTaiFighterUI()
 	setUIMouseCursorVisible(false);
 end
 
-function ShowPauseUI()
+function showPauseUI()
 	setWindowVisible("TaiFighterWindow", false)
 	setWindowVisible("PauseWindow", true)
 
@@ -22,6 +22,6 @@ function ShowPauseUI()
 	setUIMouseCursorVisible(true);
 end
 
-function ExitCallback()
+function exitCallback()
 	LOG("EXIT place holder")
 end
