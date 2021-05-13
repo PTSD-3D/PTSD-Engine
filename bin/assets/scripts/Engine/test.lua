@@ -20,12 +20,13 @@ end
 setUIMouseCursor("TaharezLook/MouseArrow")
 
 setWindowVisible("TitleWindow", true)
-setWindowVisible("PauseWindow", true)
 
 createButton("PushButton", "CEGUI es facilito", "TaharezLook/Button",vec2:new(300, 200), vec2:new(200, 50))
 setButtonFunction("PushButton","showTaiFighterUI")
 
 createButton("ExitButton", "Exit", "TaharezLook/Button",vec2:new(300, 300), vec2:new(200, 50))
 setButtonFunction("ExitButton","exitCallback")
+
+showTaiFighterUI()
 
 LOG("Test.lua completed")
