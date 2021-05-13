@@ -163,16 +163,12 @@ function EntityManager:registerCollision(ev)
 	local entA = self:getEntity(ev.entityAID)
 	local entB = self:getEntity(ev.entityBID)
 	local manifold = ev.manifold
-	if entA.id > entB.id then
-		local a = entA
-		entA = entB
-		entB = a
-	end
+	
 	if not self.collisions[entA.id] then self.collisions[entA.id] = {} end
-	if not self.collisions[entA.id][entB.id] then self.collisions[entA.id][entB.id] = {points = {}, entA = {}, entB = {}} end
-	self.collisions[entA.id][entB.id].entA = entA
-	self.collisions[entA.id][entB.id].entB = entB
-	table.insert(self.collisions[entA.id][entB.id].points, manifold)
+	if not self.collisions[entB.id] then self.collisions[entB.id] = {} end
+
+	self.collisions[entA.id][entB.id] =  {A = entA, B = entB, points=manifold}
+	self.collisions[entB.id][entA.id] =  {A = entB, B = entA, points=manifold}
 end
 
 function EntityManager:NotifyCollisions(system)
