@@ -124,7 +124,7 @@ namespace PTSD {
 	{
 		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(mRoot->getChildRecursive(name));
 		/*bind(function, reference for the execution of the function, placeholder for parameters)*/
-		auto function = std::bind(&PTSD::UIManager::onButtonClick, this, std::placeholders::_1);
+		CEGUI::SubscriberSlot function = [&](const CEGUI::EventArgs& e){return onButtonClick(e);};
 		myButtonWindow->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(function));
 	}
 
