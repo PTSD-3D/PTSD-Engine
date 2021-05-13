@@ -182,11 +182,13 @@ namespace PTSD {
 		auto luaRigidbodyComponent = (*state).new_usertype<PTSD::RigidbodyComponent>("RigidbodyComponent", sol::no_constructor);
 		luaRigidbodyComponent["setLinearVelocity"] = &PTSD::RigidbodyComponent::setLinearVelocity;
 		luaRigidbodyComponent["setAngularVelocity"] = &PTSD::RigidbodyComponent::setAngularVelocity;
+		luaRigidbodyComponent["setPosition"] = &PTSD::RigidbodyComponent::setPosition;
 		luaRigidbodyComponent["getLinearVelocity"] = &PTSD::RigidbodyComponent::getLinearVelocity;
 		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
 		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
 
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
+			PTSD_ASSERT((size.x > 0 && size.y > 0 && size.z> 0), "Escala negativa, animal");
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance());
@@ -278,6 +280,7 @@ namespace PTSD {
 			{"Q", Scancode::SCANCODE_Q},
 			{"R", Scancode::SCANCODE_R},
 			{"F", Scancode::SCANCODE_F},
+			{"T", Scancode::SCANCODE_T},
 			{"Space", Scancode::SCANCODE_SPACE},
 			{"Shift", Scancode::SCANCODE_LSHIFT}
 			});
