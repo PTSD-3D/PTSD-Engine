@@ -117,7 +117,6 @@ namespace PTSD {
 		GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
 		mNode->addChild(n);
 		n->setPosition(0, 25, -25);
-
 	}
 
 	//Getters

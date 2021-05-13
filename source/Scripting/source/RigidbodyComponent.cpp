@@ -52,6 +52,12 @@ namespace PTSD
 		PhysicsManager::getInstance()->getWorld()->rayTest(origin, dest, rayCallback);
 		if (rayCallback.hasHit()) return true;
 		return false;
+  }
+	void RigidbodyComponent::setPosition(Vec3 position)
+	{
+		btTransform transform = mObj->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(position.x,position.y,position.z));
+		mObj->setCenterOfMassTransform(transform);
 	}
 
 	Vec3 RigidbodyComponent::getLinearVelocity() {
