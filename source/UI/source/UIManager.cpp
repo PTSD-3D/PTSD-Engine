@@ -46,8 +46,6 @@ namespace PTSD {
 	 */
 	bool UIManager::render()
 	{
-		inputUpdate();
-
 		system->getDefaultGUIContext().injectTimePulse(PTSD::GraphicsManager::getInstance()->getDeltaTime());
 		system->renderAllGUIContexts();
 		return false;
@@ -56,7 +54,7 @@ namespace PTSD {
 	/**
 	 * \brief Process the input from PTSD::Input instance
 	 */
-	void UIManager::inputUpdate()
+	void UIManager::update()
 	{
 		if (PTSD::InputManager::getInstance()->mouseMotion()) injectMousePosition(
 			PTSD::InputManager::getInstance()->getMousePosition());

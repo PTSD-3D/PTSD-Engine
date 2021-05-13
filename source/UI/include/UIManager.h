@@ -64,7 +64,7 @@ namespace PTSD {
 
 		static int init();
 		bool render();
-		void inputUpdate();
+		void update();
 		void shutdown();
 		void createRoot();
 		void initLogger();

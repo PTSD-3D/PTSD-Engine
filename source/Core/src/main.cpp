@@ -64,6 +64,7 @@ int main()
 			physicsSystem->update(deltaTime);
       
 			soundSystem->update();
+			uiSystem->update();
 			scriptingSystem->update();
 
 			inputSystem->clean();
