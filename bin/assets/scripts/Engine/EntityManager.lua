@@ -177,7 +177,7 @@ function EntityManager:NotifyCollisions(system)
 		if t then
 			for i, other in pairs(t) do
 				local itable = self.collisions[ent.id][i]
-				system:onCollision(itable.entA, itable.entB, itable.points)
+				system:onCollision(itable.A, itable.B, itable.points)
 			end
 		end
 	end
