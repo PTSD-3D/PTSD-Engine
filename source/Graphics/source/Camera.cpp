@@ -94,7 +94,6 @@ void PTSD::Camera::mouseRotate(Vector2D dir)
 	}
 }
 
-
 void PTSD::Camera::debugPos()
 {
 	std::cout << mNode->getPosition().x << "  " << mNode->getPosition().y << "  " << mNode->getPosition().z << "\n"; //Please delete me or implement using PTSDLog
