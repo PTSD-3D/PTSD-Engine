@@ -33,6 +33,7 @@ namespace PTSD
 		void shutdown();
 
 		void run(const std::string& scriptFile);
+		void execute(const std::string& functionName);
 		void sendCollisionEvent(UUID, UUID, const btManifoldPoint&);
 		std::shared_ptr<Entity> createEntity(UUID entityID);
 		std::shared_ptr<Entity> getEntity(UUID entityID);

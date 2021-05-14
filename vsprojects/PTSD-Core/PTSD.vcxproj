@@ -33,7 +33,6 @@
     <ClCompile Include="..\..\source\Sound\source\Sound.cpp" />
     <ClCompile Include="..\..\source\Sound\source\SoundAttorney.cpp" />
     <ClCompile Include="..\..\source\UI\source\UIManager.cpp" />
-    <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Core\include\BtOgre.h" />
@@ -62,7 +61,6 @@
     <ClInclude Include="..\..\source\Sound\include\Sound.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
     <ClInclude Include="..\..\source\UI\include\UIManager.h" />
-    <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

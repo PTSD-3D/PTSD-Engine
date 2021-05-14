@@ -109,7 +109,7 @@ namespace PTSD
 		mFileSystemLayer = new Ogre::FileSystemLayer("./assets/");
 		Ogre::ConfigFile cf;
 
-		std::string resourcesPath = mFileSystemLayer->getConfigFilePath("../resources.cfg");
+		std::string resourcesPath = mFileSystemLayer->getConfigFilePath("resources.cfg");
 		if (Ogre::FileSystemLayer::fileExists(resourcesPath))
 		{
 			cf.load(resourcesPath);

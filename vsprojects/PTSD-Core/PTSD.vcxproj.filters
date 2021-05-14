@@ -105,9 +105,6 @@
     <ClCompile Include="..\..\source\Sound\source\SoundManager.cpp">
       <Filter>Sound\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp">
-      <Filter>Ui\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\UI\source\UIManager.cpp">
       <Filter>Ui\Source</Filter>
     </ClCompile>
@@ -183,9 +180,6 @@
       <Filter>Sound\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\UI\include\UIManager.h">
-      <Filter>Ui\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\UI\include\UIImplementation.h">
       <Filter>Ui\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Logger\include\LogImpl.h">

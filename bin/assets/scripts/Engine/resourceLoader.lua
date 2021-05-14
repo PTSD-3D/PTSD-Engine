@@ -15,3 +15,26 @@ function ns.LoadSounds()
 		end
 	end
 end
+
+function ns.LoadUIElements()
+	LOG("PRELOADING UI FILES")
+
+	--We must garantize the schemes to load first
+	for key, UIScheme in pairs(resources.UISchemes) do
+		local path = UIScheme.path
+
+		Status,Error = pcall(PTSDLoadUIFile, path, UIScheme.type)
+		if not Status then
+			print (Error)
+		end
+	end
+
+	for key, UILayout in pairs(resources.UILayouts) do
+		local path = UILayout.path
+
+		Status,Error = pcall(PTSDLoadUIFile, path, UILayout.type)
+		if not Status then
+			print (Error)
+		end
+	end
+end
