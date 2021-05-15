@@ -8,13 +8,15 @@ if not res then
 	print(err)
 end
 Namespace = ns
+ns.call("Fail requiring 'EngineUtilities '",require,'EngineUtilities')
+
 Manager = ns.EntityManager()
 
 --Make sure EntityLoader exists
-require('EntityLoader')
-require('ComponentsList')
-require('SystemsList')
-require('UIcallbacks')
+ns.call("Fail requiring 'EntityLoader '",require,'EntityLoader')
+ns.call("Fail requiring 'ComponentsList '",require,'ComponentsList')
+ns.call("Fail requiring 'SystemsList '",require,'SystemsList')
+ns.call("Fail requiring 'UIcallbacks '",require,'UIcallbacks')
 
 --Resource load
 require('resourceLoader')

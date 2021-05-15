@@ -2,8 +2,7 @@ local ns = require('namespace')
 
 ns.LoadSounds()
 LOG("Sounds loaded correctly")
-ns.LoadUIElements()
-LOG("UI elements loaded correctly")
+if (ns.call("Error loading UI",ns.LoadUIElements) ~= false) then LOG("UI elements loaded correctly") end
 
 local status, ret = pcall(ns.loadScene, Manager, require('sampleScene'))
 if status then
