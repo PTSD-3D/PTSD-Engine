@@ -42,7 +42,11 @@ int main()
 	PTSD::UIManager* uiSystem = PTSD::UIManager::getInstance();
 	PTSD::SoundManager* soundSystem = PTSD::SoundManager::getInstance();
 
-	scriptingSystem->init();
+	if(!scriptingSystem->init())
+	{
+		PTSD::LOG("Could not initialize the Script Manager", PTSD::LogLevel::Critical, 0);
+		return EXIT_FAILURE;
+	}
 
 	PTSD::LOG("All subsystems initialized");
 
@@ -79,5 +83,5 @@ int main()
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }

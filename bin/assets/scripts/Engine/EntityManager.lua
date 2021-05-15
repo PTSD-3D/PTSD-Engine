@@ -151,7 +151,7 @@ end
 
 function EntityManager:update(...)
 	for _, system in ipairs(self.systems) do
-		if system.active then
+		if system.active and system.update then
 			system:update(...)
 		end
 		self:NotifyCollisions(system)

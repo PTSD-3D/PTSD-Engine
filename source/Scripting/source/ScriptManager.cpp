@@ -86,7 +86,14 @@ namespace PTSD {
 			(*state).script_file(entry.path().string());
 		}
 
-		(*state).script_file("./assets/scripts/Engine/test.lua"); //Test file of engine initialization, any other code goes below...
+		auto result = (*state).script_file("./assets/scripts/Client/main.lua"); //Test file of engine initialization, any other code goes below...
+		if(!result.valid())
+		{
+			sol::error err =result;
+			PTSD::LOG("Something went wrong initialaizing Script Manager. Did you make a 'main.lua' file in Clients script folder? \n If not, check pull request #70 of the PTSD-Engine repository", PTSD::LogLevel::Critical,0);
+			PTSD::LOG(err.what(), PTSD::LogLevel::Critical, 0);
+			return false;
+		}
 		PTSD::PhysicsManager::getInstance()->setScriptManager(this); // Neded for collision callbacks
 		PTSD::UIManager::getInstance()->setScriptManager(this); // Neded for CEGUI callbacks
 		return true;

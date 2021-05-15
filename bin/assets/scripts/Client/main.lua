@@ -1,9 +1,6 @@
 local ns = require('namespace')
 
-ns.LoadSounds()
-LOG("Sounds loaded correctly")
-ns.LoadUIElements()
-LOG("UI elements loaded correctly")
+
 
 local status, ret = pcall(ns.loadScene, Manager, require('sampleScene'))
 if status then
@@ -29,4 +26,4 @@ setButtonFunction("ExitButton","exitCallback")
 
 showTaiFighterUI()
 
-LOG("Test.lua completed")
+LOG("main.lua completed")
