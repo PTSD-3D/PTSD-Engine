@@ -20,5 +20,9 @@ ns.call("Fail requiring 'UIcallbacks '",require,'UIcallbacks')
 
 --Resource load
 require('resourceLoader')
+	--Load Sounds
+if (ns.call("Error loading Sounds",ns.LoadSounds) ~= false) then LOG("Sounds loaded correctly") end
+	--Load UI
+if (ns.call("Error loading UI",ns.LoadUIElements) ~= false) then LOG("UI elements loaded correctly") end
 
 LOG("Initialized script engine correctly")
