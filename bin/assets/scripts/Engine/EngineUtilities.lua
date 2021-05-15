@@ -19,4 +19,20 @@ end
 --How to use and developer of the debugger: https://github.com/slembcke/debugger.lua
 ns.debugger = debugger
 
+function ns.printTable(table)
+	for index, data in pairs(table) do
+		if type(data) == "table" then
+			print(index)
+			for key, value in pairs(data) do
+				print('\t', key, value)
+			end
+		else
+			print(index,'\t', data)
+		end
+	end
+end
+
+function ns:print()
+	self.printTable(self)
+end
 

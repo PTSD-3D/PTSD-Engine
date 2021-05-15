@@ -28,4 +28,4 @@ setButtonFunction("ExitButton","exitCallback")
 
 showTaiFighterUI()
 
-LOG("Test.lua completed")
+LOG("main.lua completed")

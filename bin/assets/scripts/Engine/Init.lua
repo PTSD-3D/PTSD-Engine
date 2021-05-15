@@ -1,4 +1,4 @@
-package.path = "./assets/scripts/Client/?.lua;./assets/scripts/Engine/?.lua;./assets/scripts/Engine/Events/?.lua;./asse.luats/scripts/Client/Prefabs/?.lua"
+package.path = "./assets/scripts/Client/?.lua;./assets/scripts/Engine/?.lua;./assets/scripts/Engine/Events/?.lua;./assets/scripts/Client/Prefabs/?.lua"
 
 local eng = require('initEngine')
 local ns = require('namespace')
@@ -8,7 +8,7 @@ if not res then
 	print(err)
 end
 Namespace = ns
-ns.call("Fail requiring 'EngineUtilities '",require,'EngineUtilities')
+require('EngineUtilities')
 
 Manager = ns.EntityManager()
 
