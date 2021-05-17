@@ -139,7 +139,7 @@ namespace PTSD {
 #if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
 		flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
 #endif
-		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 325, 325, 800, 600, flags);
+		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 325, 325, 1152, 648, flags);
 
 		SDL_SysWMinfo wmInfo;
 		SDL_GetVersion(&wmInfo.version);
