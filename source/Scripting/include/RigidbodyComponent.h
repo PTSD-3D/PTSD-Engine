@@ -6,6 +6,7 @@
 #include <SDL_stdinc.h>
 
 class btRigidBody;
+class btCollisionShape;
 namespace BtOgre {
 	class RigidBodyState;
 }
@@ -20,6 +21,7 @@ namespace PTSD
 	class RigidbodyComponent: public Component {
 	private:
 		btRigidBody* mObj = nullptr;
+		btCollisionShape* mColShape = nullptr;
 		BtOgre::RigidBodyState* rbState = nullptr;
 		CollisionFlags type;
 		bool trigger;
@@ -46,6 +48,7 @@ namespace PTSD
 		Vec3 getLinearVelocity();
 		Vec3 getAngularVelocity();
 		Vec3 getPos();
-		Vec4Placeholder getRot();		
+		Vec4Placeholder getRot();
+		void setCollisionScale(Vec3 scale);
 	};
 }
