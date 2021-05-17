@@ -16,6 +16,7 @@ PTSD::Camera::Camera(Vec3 pos)
 {
 	Ogre::SceneManager* mgr = GraphicsImplementation::getInstance()->getSceneMgr();
 	mCamera = mgr->createCamera("mainCam");
+	mCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	mNode = mgr->getRootSceneNode()->createChildSceneNode();
 	mNode->setPosition({ pos.x,pos.y,pos.z });
 	cameraYawNode = mNode->createChildSceneNode();
@@ -30,6 +31,7 @@ PTSD::Camera::Camera(Vec3 pos)
 	mViewPort = GraphicsImplementation::getInstance()->getRenderWindow()->addViewport(mCamera);
 
 	mCamera->setAspectRatio(Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
+	mCamera->setOrthoWindow(150, 150);
 }
 
 PTSD::Camera::~Camera() = default;
