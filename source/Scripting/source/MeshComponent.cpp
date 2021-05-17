@@ -26,13 +26,13 @@ namespace PTSD {
 			(Ogre::Entity*)sceneNode->getAttachedObjects().at(0) : nullptr;
 		if (!ob)//Asumiendo que no vamos a tener varios objetos por malla.. 
 		{
-			sceneNode->attachObject(GraphicsImplementation::getInstance()->getSceneMgr()->createEntity(mMesh_));
+			sceneNode->attachObject(GraphicsManager::getInstance()->getSceneMgr()->createEntity(mMesh_));
 			ob = (Ogre::Entity*)sceneNode->getAttachedObject(0);
 		}
 		else
 		{
 			entity_->getComponent<TransformComponent>(Transform)->getNode()->detachObject((unsigned short int)0);
-			GraphicsImplementation::getInstance()->getSceneMgr()->createEntity(mMesh_);
+			GraphicsManager::getInstance()->getSceneMgr()->createEntity(mMesh_);
 		}
 		PTSD::LOG(mMaterial_.c_str());
 		ob->setMaterialName(mMaterial_);
@@ -57,7 +57,7 @@ namespace PTSD {
 		{
 			mMesh_ = mesh;
 			sceneNode->detachObject((unsigned short int)0);
-			GraphicsImplementation::getInstance()->getSceneMgr()->createEntity(mMesh_);
+			GraphicsManager::getInstance()->getSceneMgr()->createEntity(mMesh_);
 			getEntity()->setMaterialName(mMaterial_);
 		}
 	};
