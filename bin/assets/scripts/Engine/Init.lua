@@ -1,4 +1,4 @@
-package.path = "./assets/scripts/Client/?.lua;./assets/scripts/Engine/?.lua;./assets/scripts/Engine/Events/?.lua;./assets/scripts/Client/Prefabs/?.lua"
+package.path = "./assets/scripts/Client/?.lua;./assets/scripts/Engine/?.lua;./assets/scripts/Engine/Events/?.lua;./assets/scripts/Client/Prefabs/?.lua;./assets/scripts/Client/Systems/?.lua;./assets/scripts/Client/Events/?.lua"
 
 local eng = require('initEngine')
 local ns = require('namespace')
@@ -15,7 +15,9 @@ Manager = ns.EntityManager()
 --Make sure EntityLoader exists
 ns.call("Fail requiring 'EntityLoader '",require,'EntityLoader')
 ns.call("Fail requiring 'ComponentsList '",require,'ComponentsList')
+ns.call("Fail requiring 'EventsList '",require,'EventsList')
 ns.call("Fail requiring 'SystemsList '",require,'SystemsList')
+ns.call("Fail requiring 'PrefabsList '",require,'PrefabsList')
 ns.call("Fail requiring 'UIcallbacks '",require,'UIcallbacks')
 
 --Resource load

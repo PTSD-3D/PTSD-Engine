@@ -9,12 +9,8 @@ function ns.spawnEntity(manager, entData)
 			entityObject:add(ns.Component.all[compDetails["name"]](table.unpack(compDetails["arguments"])))
 		end
 	end
-	--[[
-		Entity is added to manager after adding components to prevent
-		firing componentAdded event various times--
-	]]
-	manager:addEntity(entityObject)
-	print(entityObject)
+	manager:registerEntity(entityObject)
+	--print(entityObject)
 	if entData.Transform then
 		local location = entData.Transform.position
 		local p = vec3:new(location.x, location.y, location.z)
@@ -36,6 +32,11 @@ function ns.spawnEntity(manager, entData)
 			entityObject.Rigidbody = setRigidbody(entityObject.id, s, entData.Rigidbody.mass, p, entData.Rigidbody.type, entData.Rigidbody.trigger, r)
 		end
 	end
+	--[[
+		Entity is added to manager after adding components to prevent
+		firing componentAdded event various times--
+	]]
+	manager:addEntity(entityObject)
 end
 
 -- Calls engine functions based on config table
