@@ -72,7 +72,7 @@ namespace PTSD {
 		void setScriptManager(ScriptManager* sm) {mScriptManager = sm;}
 
 		bool onButtonClick(const CEGUI::EventArgs& e);
-		void createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size);
+		void createButton(const std::string& name, const std::string& text, const std::string& source, const std::string& font, Vector2D position, Vector2D size);
 		void registerForButtonsEvents(const std::string& name);
 
 		void loadScheme(const std::string& filename);
