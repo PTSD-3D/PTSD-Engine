@@ -81,11 +81,6 @@ namespace PTSD {
 		//Engine initialization
 		(*state).script_file("./assets/scripts/Engine/Init.lua");
 
-		for (const auto& entry : fs::directory_iterator("./assets/scripts/Client/Prefabs"))
-		{
-			(*state).script_file(entry.path().string());
-		}
-
 		auto result = (*state).script_file("./assets/scripts/Client/main.lua"); //Test file of engine initialization, any other code goes below...
 		if(!result.valid())
 		{
