@@ -158,7 +158,7 @@ function EntityManager:update(...)
 	end
 	self.collisions = {}
 	if self.requestedSceneChange then
-		self:changeSceneImpl(self.newSceneName)
+		EntityManager:changeSceneImpl(self.newSceneName)
 	end
 end
 
@@ -177,9 +177,15 @@ function EntityManager:changeSceneImpl(name)
 	self.allRequirements = {}
 
 	self.systems = {}
+	self.collisions = {}
+	namespace.print(namespace)
+	removeCamera();
 	PTSDRemoveAllEntities();
-	require("SystemsList")
-	Namespace:changeScene(self, name)
+	namespace.call("system list", require ,"SystemsList")
+	local sceneTable=namespace.call("error requiring scene: ",require, name)
+	print(sceneTable)
+	namespace.printTable(sceneTable)
+	namespace.call("loading: ", namespace.loadScene, self, sceneTable)
 	self.requestedSceneChange = false;
 	self.newSceneName = "";
 	print("REEEEEEEEEE")
@@ -190,6 +196,10 @@ function EntityManager:registerCollision(ev)
 	local entB = self:getEntity(ev.entityBID)
 	local manifold = ev.manifold
 	
+	if not entA or not entB then
+		return
+	end
+
 	if not self.collisions[entA.id] then self.collisions[entA.id] = {} end
 	if not self.collisions[entB.id] then self.collisions[entB.id] = {} end
 
