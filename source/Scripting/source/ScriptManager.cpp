@@ -346,6 +346,7 @@ namespace PTSD {
 	bool ScriptManager::bindScriptingComponents() {
 		(*state).set_function("PTSDCreateEntity", &PTSD::ScriptManager::createEntity, this);
 		(*state).set_function("PTSDDeleteEntity", &PTSD::ScriptManager::deleteEntity, this);
+		(*state).set_function("PTSDRemoveAllEntities", &PTSD::EntityManager::removeAllEntities, entityManager);
 
 		return true;
 	}

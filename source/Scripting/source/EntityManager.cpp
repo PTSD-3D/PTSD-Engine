@@ -42,3 +42,9 @@ void PTSD::EntityManager::deleteEntity(UUID entityID)
 		entities_.erase(it);
 	}
 }
+
+void PTSD::EntityManager::removeAllEntities(){
+	for(auto it = entities_.begin(); it!=entities_.end();it++)
+		it->second->disableEntity();
+	entities_.clear();
+}

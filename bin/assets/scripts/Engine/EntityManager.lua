@@ -157,6 +157,28 @@ function EntityManager:update(...)
 		self:NotifyCollisions(system)
 	end
 	self.collisions = {}
+	if self.requestedSceneChange then
+		self:changeScene(self.newSceneName)
+	end
+end
+
+function EntityManager:changeSecne(name)
+	self.requestedSceneChange = true;
+	self.newSceneName = name;
+end
+
+function EntityManager:_changeScene(name)
+	self.entities = {};
+	self.entityLists = {};
+
+	--List of systems organized by their requirements
+	self.singleRequirements = {}
+	self.allRequirements = {}
+
+	self.systems = {}
+	PTSDRemoveAllEntities();
+	require("SystemsList")
+	Namespace:changeScene(self, name)
 end
 
 function EntityManager:registerCollision(ev)
