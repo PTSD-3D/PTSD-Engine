@@ -84,6 +84,7 @@ namespace PTSD {
 		void setUIMouseInitialPosition(Vector2D mousePosition);
 		void changeText(const std::string& name, const std::string& text);
 		void changeStaticImage(const std::string& name, const std::string& image);
+		void setProgressBarValue(const std::string& name, float value);
 		void setWindowVisible(const std::string& name, bool visible);
 
 		void setButtonFunction(const std::string& name, const std::string& functionName);

@@ -26,4 +26,6 @@ setButtonFunction("ExitButton","exitCallback")
 
 showTaiFighterUI()
 
+setProgressBarValue("DimensionBar", 0.2);
+
 LOG("main.lua completed")

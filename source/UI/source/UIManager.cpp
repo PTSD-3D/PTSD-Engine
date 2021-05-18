@@ -187,6 +187,12 @@ namespace PTSD {
 		myWindow->setProperty("Image", image);
 	}
 
+	void UIManager::setProgressBarValue(const std::string& name, float value)
+	{
+		CEGUI::ProgressBar* myProgressBarWindow = static_cast<CEGUI::ProgressBar*>(mRoot->getChildRecursive(name));
+		myProgressBarWindow->setProgress(value);
+	}
+
 	void UIManager::setWindowVisible(const std::string& name, bool visible)
 	{
 		CEGUI::Window* myWindow = mRoot->getChildRecursive(name);
