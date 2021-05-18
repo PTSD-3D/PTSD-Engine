@@ -37,6 +37,7 @@ namespace PTSD {
 	{
 		//Since Transform handles the base node for all ogre based things we do this here.
 		DestroyNodeAndChildren(mNode);
+		mNode = nullptr;
 	}
 
 	void TransformComponent::DestroyNodeAndChildren(Ogre::SceneNode* node)

@@ -183,7 +183,12 @@ namespace PTSD {
 		(*state).set_function("cameraSetPos", &PTSD::Camera::setPosition, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
-
+		(*state).set_function("removeCamera", [&](){
+			auto cam = PTSD::GraphicsManager::getInstance()->getCam()->getNode();
+			cam->getParent()->removeChild(cam);
+			PTSD::GraphicsManager::getInstance()->getSceneMgr()->getRootSceneNode()->addChild(cam);
+			// cam->removeAndDestroyAllChildren();
+		});
 		//MouseLock
 		(*state).set_function("setMouseLocked", &PTSD::GraphicsManager::setMouseLocked, PTSD::GraphicsManager::getInstance());
 
