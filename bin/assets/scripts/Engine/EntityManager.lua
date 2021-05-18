@@ -26,12 +26,19 @@ function EntityManager:getEntity(id)
 	return self.entities[id]
 end
 
-function EntityManager:addEntity(entity)
+-- assigns ids but does not trigger onAddEntitity
+function EntityManager:registerEntity(entity)
 	-- Assign entity's id
 	local nId = #self.entities + 1
 	entity.id = nId
 	self.entities[entity.id] = entity
 
+	--Register entity in cpp
+	PTSDCreateEntity(nId)
+end
+
+-- triggers onAddEntity
+function EntityManager:addEntity(entity)
 	--Assign entity's eventManager
 	entity.eventManager = self.eventManager;
 
@@ -51,9 +58,6 @@ function EntityManager:addEntity(entity)
 			end
 		end
 	end
-
-	--Register entity in cpp
-	PTSDCreateEntity(nId)
 end
 
 
