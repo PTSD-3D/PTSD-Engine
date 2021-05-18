@@ -2,19 +2,19 @@
 #include <OgreRenderWindow.h>
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
-#include "GraphicsImplementation.h"
 #include <OgreViewport.h>
 #include <Ogre.h>
 #include "LogManager.h"
 #include <fstream>
 #include <iostream>
+#include "GraphicsManager.h"
 /**
  * \brief Creates a camera in pos
  * \param pos position
  */
 PTSD::Camera::Camera(Vec3 pos)
 {
-	Ogre::SceneManager* mgr = GraphicsImplementation::getInstance()->getSceneMgr();
+	Ogre::SceneManager* mgr = GraphicsManager::getInstance()->getSceneMgr();
 	mCamera = mgr->createCamera("mainCam");
 	mCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	mNode = mgr->getRootSceneNode()->createChildSceneNode();
@@ -27,8 +27,8 @@ PTSD::Camera::Camera(Vec3 pos)
 	mCamera->setNearClipDistance(5);
 
 	//TODO Window abstraction
-	mWindow = GraphicsImplementation::getInstance()->getRenderWindow();
-	mViewPort = GraphicsImplementation::getInstance()->getRenderWindow()->addViewport(mCamera);
+	mWindow = GraphicsManager::getInstance()->getRenderWindow();
+	mViewPort = GraphicsManager::getInstance()->getRenderWindow()->addViewport(mCamera);
 
 	mCamera->setAspectRatio(Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
 	mCamera->setOrthoWindow(150, 150);

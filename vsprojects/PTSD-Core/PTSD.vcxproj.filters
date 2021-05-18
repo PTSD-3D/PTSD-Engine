@@ -84,9 +84,6 @@
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp">
       <Filter>Graphics\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp">
-      <Filter>Graphics\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Graphics\source\GraphicsManager.cpp">
       <Filter>Graphics\Source</Filter>
     </ClCompile>
@@ -150,9 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Graphics\include\Camera.h">
-      <Filter>Graphics\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h">
       <Filter>Graphics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp">

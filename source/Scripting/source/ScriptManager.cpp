@@ -81,11 +81,6 @@ namespace PTSD {
 		//Engine initialization
 		(*state).script_file("./assets/scripts/Engine/Init.lua");
 
-		for (const auto& entry : fs::directory_iterator("./assets/scripts/Client/Prefabs"))
-		{
-			(*state).script_file(entry.path().string());
-		}
-
 		auto result = (*state).script_file("./assets/scripts/Client/main.lua"); //Test file of engine initialization, any other code goes below...
 		if(!result.valid())
 		{
@@ -205,6 +200,7 @@ namespace PTSD {
 		luaRigidbodyComponent["getAngularVelocity"] = &PTSD::RigidbodyComponent::getAngularVelocity;
 		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
 		luaRigidbodyComponent["hasRayCastHit"] = &PTSD::RigidbodyComponent::hasRayCastHit;
+		luaRigidbodyComponent["setCollisionScale"] = &PTSD::RigidbodyComponent::setCollisionScale;
 
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
 			PTSD_ASSERT((size.x > 0 && size.y > 0 && size.z> 0), "Escala negativa, animal");

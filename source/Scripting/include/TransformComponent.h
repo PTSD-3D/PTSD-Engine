@@ -2,7 +2,6 @@
 
 #include <memory>
 #include "PTSDVectors.h"
-#include "GraphicsImplementation.h"
 #include <OgreSceneManager.h>
 #include "Component.h"
 #include "Camera.h"
