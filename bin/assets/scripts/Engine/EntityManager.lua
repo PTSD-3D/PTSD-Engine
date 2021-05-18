@@ -158,16 +158,17 @@ function EntityManager:update(...)
 	end
 	self.collisions = {}
 	if self.requestedSceneChange then
-		self:changeScene(self.newSceneName)
+		self:changeSceneImpl(self.newSceneName)
 	end
 end
 
-function EntityManager:changeSecne(name)
+function EntityManager:changeScene(name)
 	self.requestedSceneChange = true;
 	self.newSceneName = name;
 end
 
-function EntityManager:_changeScene(name)
+function EntityManager:changeSceneImpl(name)
+	print("ok")
 	self.entities = {};
 	self.entityLists = {};
 
@@ -179,6 +180,9 @@ function EntityManager:_changeScene(name)
 	PTSDRemoveAllEntities();
 	require("SystemsList")
 	Namespace:changeScene(self, name)
+	self.requestedSceneChange = false;
+	self.newSceneName = "";
+	print("REEEEEEEEEE")
 end
 
 function EntityManager:registerCollision(ev)
