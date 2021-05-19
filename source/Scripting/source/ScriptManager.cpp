@@ -276,6 +276,7 @@ namespace PTSD {
 
 		(*state).set_function("changeText", &PTSD::UIManager::changeText, PTSD::UIManager::getInstance());
 		(*state).set_function("changeStaticImage", &PTSD::UIManager::changeStaticImage, PTSD::UIManager::getInstance());
+		(*state).set_function("setProgressBarValue", &PTSD::UIManager::setProgressBarValue, PTSD::UIManager::getInstance());
 		(*state).set_function("setWindowVisible", &PTSD::UIManager::setWindowVisible, PTSD::UIManager::getInstance());
 
 		(*state).set_function("setUIMouseCursor", &PTSD::UIManager::setUIMouseCursor, PTSD::UIManager::getInstance());

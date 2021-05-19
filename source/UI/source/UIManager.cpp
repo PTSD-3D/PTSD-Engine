@@ -109,11 +109,12 @@ namespace PTSD {
 		return true;
 	}
 
-	void UIManager::createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size)
+	void UIManager::createButton(const std::string& name, const std::string& text, const std::string& source, const std::string& font, Vector2D position, Vector2D size)
 	{
 		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(windowMngr->createWindow(source, name));
 		myButtonWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
 		myButtonWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
+		myButtonWindow->setFont(font);
 		myButtonWindow->setText(text);
 		mRoot->addChild(myButtonWindow);
 
@@ -184,6 +185,12 @@ namespace PTSD {
 	{
 		CEGUI::Window* myWindow = mRoot->getChildRecursive(name);
 		myWindow->setProperty("Image", image);
+	}
+
+	void UIManager::setProgressBarValue(const std::string& name, float value)
+	{
+		CEGUI::ProgressBar* myProgressBarWindow = static_cast<CEGUI::ProgressBar*>(mRoot->getChildRecursive(name));
+		myProgressBarWindow->setProgress(value);
 	}
 
 	void UIManager::setWindowVisible(const std::string& name, bool visible)

@@ -72,7 +72,7 @@ namespace PTSD {
 		void setScriptManager(ScriptManager* sm) {mScriptManager = sm;}
 
 		bool onButtonClick(const CEGUI::EventArgs& e);
-		void createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size);
+		void createButton(const std::string& name, const std::string& text, const std::string& source, const std::string& font, Vector2D position, Vector2D size);
 		void registerForButtonsEvents(const std::string& name);
 
 		void loadScheme(const std::string& filename);
@@ -84,6 +84,7 @@ namespace PTSD {
 		void setUIMouseInitialPosition(Vector2D mousePosition);
 		void changeText(const std::string& name, const std::string& text);
 		void changeStaticImage(const std::string& name, const std::string& image);
+		void setProgressBarValue(const std::string& name, float value);
 		void setWindowVisible(const std::string& name, bool visible);
 
 		void setButtonFunction(const std::string& name, const std::string& functionName);
