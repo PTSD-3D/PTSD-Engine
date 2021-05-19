@@ -9,6 +9,7 @@ local function populateNamespace(ns)
     ns.ComponentAdded = require('ComponentAdded')
     ns.ComponentRemoved = require('ComponentRemoved')
     ns.Collision = require('Collision')
+    ns.ChangeSceneEvent = require('ChangeSceneEvent')
 
     -- Requiring the engine
     ns.Entity = require('Entity')

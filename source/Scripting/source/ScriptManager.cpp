@@ -81,7 +81,7 @@ namespace PTSD {
 		//Engine initialization
 		(*state).script_file("./assets/scripts/Engine/Init.lua");
 
-		auto result = (*state).script_file("./assets/scripts/Client/main.lua"); //Test file of engine initialization, any other code goes below...
+		auto result = (*state).script_file("./assets/scripts/Client/main.lua");
 		if(!result.valid())
 		{
 			sol::error err =result;
@@ -180,7 +180,8 @@ namespace PTSD {
 		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("removeCamera", [&](){
 			auto cam = PTSD::GraphicsManager::getInstance()->getCam()->getNode();
-			cam->getParent()->removeChild(cam);
+			if(cam->getParent() != nullptr)
+				cam->getParent()->removeChild(cam);
 			PTSD::GraphicsManager::getInstance()->getSceneMgr()->getRootSceneNode()->addChild(cam);
 			// cam->removeAndDestroyAllChildren();
 		});

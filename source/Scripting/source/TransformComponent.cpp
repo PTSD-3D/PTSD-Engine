@@ -59,8 +59,8 @@ namespace PTSD {
 			Ogre::SceneNode* pChildNode = static_cast<Ogre::SceneNode*>(itChild.getNext());
 			DestroyNodeAndChildren(pChildNode);
 		}
-		node->removeAndDestroyAllChildren();
-		GraphicsManager::getInstance()->getSceneMgr()->destroySceneNode(node);
+		if(node->isInSceneGraph())
+			GraphicsManager::getInstance()->getSceneMgr()->destroySceneNode(node);
 	}
 
 
