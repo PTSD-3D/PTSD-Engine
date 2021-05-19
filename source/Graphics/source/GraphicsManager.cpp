@@ -139,7 +139,7 @@ namespace PTSD {
 #if OGRE_PLATFORM == OGRE_PLATFORM_LINUX
 		flags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
 #endif
-		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 325, 325, 1152, 648, flags);
+		mSDLWindow = SDL_CreateWindow("PTSD Top Notch Engine", 325, 200, 1280, 720, flags);
 
 		SDL_SysWMinfo wmInfo;
 		SDL_GetVersion(&wmInfo.version);
@@ -160,7 +160,7 @@ namespace PTSD {
 #endif
 
 		//We create/hook Ogre to the SDL window
-		mRenderWindow = mRoot->createRenderWindow("PTSD Top Notch Engine", 800, 600, false, &misc);
+		mRenderWindow = mRoot->createRenderWindow("PTSD Top Notch Engine", 1280, 720, false, &misc);
 
 		mRenderWindow->setActive(true);
 		mRenderWindow->setVisible(true);
