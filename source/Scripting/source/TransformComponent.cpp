@@ -37,29 +37,41 @@ namespace PTSD {
 	{
 		//Since Transform handles the base node for all ogre based things we do this here.
 		DestroyNodeAndChildren(mNode);
+		mNode = nullptr;
 	}
 
 	void TransformComponent::DestroyNodeAndChildren(Ogre::SceneNode* node)
 	{
 		//Destroy all the attached objects
-		Ogre::SceneNode::ObjectIterator itObject = node->getAttachedObjectIterator();
+		for (auto elem : node->getAttachedObjects()) {
+			node->getCreator()->destroyMovableObject(elem);
+		}
+
+		//This way is now deprecated: refer to OgreSceneNode.h
+		/*Ogre::SceneNode::ObjectIterator itObject = node->getAttachedObjectIterator();
 
 		while (itObject.hasMoreElements())
 		{
 			Ogre::MovableObject* pObject = static_cast<Ogre::MovableObject*>(itObject.getNext());
 			node->getCreator()->destroyMovableObject(pObject);
-		}
+		}*/
 
 		// Recurse to child SceneNodes
-		Ogre::SceneNode::ChildNodeIterator itChild = node->getChildIterator();
+		for (auto child : node->getChildren()) {
+			DestroyNodeAndChildren(static_cast<Ogre::SceneNode*>(child));
+		}
+
+		//Old methods
+		/*Ogre::SceneNode::ChildNodeIterator itChild = node->getChildIterator();
 
 		while (itChild.hasMoreElements())
 		{
 			Ogre::SceneNode* pChildNode = static_cast<Ogre::SceneNode*>(itChild.getNext());
 			DestroyNodeAndChildren(pChildNode);
-		}
-		node->removeAndDestroyAllChildren();
-		GraphicsManager::getInstance()->getSceneMgr()->destroySceneNode(node);
+		}*/
+
+		if(node->isInSceneGraph())
+			GraphicsManager::getInstance()->getSceneMgr()->destroySceneNode(node);
 	}
 
 

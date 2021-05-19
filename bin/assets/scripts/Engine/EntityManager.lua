@@ -161,6 +161,39 @@ function EntityManager:update(...)
 		self:NotifyCollisions(system)
 	end
 	self.collisions = {}
+	--Check for requested change of scene, then change if needed
+	if self.requestedSceneChange then
+		self:changeSceneImpl(self.newSceneName)
+	end
+end
+
+--Sets flag so we can change scene at the end of next full loop, to avoid resetting in the middle of update
+function EntityManager:changeScene(name)
+	self.requestedSceneChange = true
+	self.newSceneName = name
+end
+
+function EntityManager:changeSceneImpl(name)
+	--fire event so everyone holding reference to entities, wich they should not, and everyone who needs to change their state can do so
+	self.eventManager:fireEvent(namespace.ChangeSceneEvent(name))
+	self.requestedSceneChange = false;
+
+	--remove all entities in lua side
+	for _, i in pairs(self.entities) do
+		self:removeEntity(i)
+	end
+
+	self.entityLists = {};
+	self.collisions = {}
+
+	--remove all entities in cpp side
+	removeCamera();
+	PTSDRemoveAllEntities();
+
+	--cache and load new scene
+	local sceneTable=namespace.call("error requiring scene: ",require, name)
+	namespace.call("loading: ", namespace.loadScene, self, sceneTable)
+	self.newSceneName = "";
 end
 
 function EntityManager:registerCollision(ev)
@@ -168,6 +201,10 @@ function EntityManager:registerCollision(ev)
 	local entB = self:getEntity(ev.entityBID)
 	local manifold = ev.manifold
 	
+	if not entA or not entB then
+		return
+	end
+
 	if not self.collisions[entA.id] then self.collisions[entA.id] = {} end
 	if not self.collisions[entB.id] then self.collisions[entB.id] = {} end
 

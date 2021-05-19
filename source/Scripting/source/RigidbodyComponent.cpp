@@ -19,7 +19,7 @@ namespace PTSD
 	RigidbodyComponent::~RigidbodyComponent()
 	{
 		//LOG("deleting rb");
-		PhysicsManager::getInstance()->removeRigidBody(mObj);
+		//PhysicsManager::getInstance()->removeRigidBody(mObj);
 	}
 
 	void RigidbodyComponent::init() {
