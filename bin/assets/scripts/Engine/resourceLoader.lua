@@ -15,3 +15,26 @@ function ns.LoadSounds()
 		end
 	end
 end
+
+function ns.LoadUIElements()
+	LOG("PRELOADING UI FILES")
+
+	if not resources.UISchemes then
+		LOG("Not UISchemes defined in resources. [resourceLoader.lua 23] ",LogLevel.Warning, 1 )
+		return false
+	end
+
+	--We must garantize the schemes to load first
+	for key, UIScheme in pairs(resources.UISchemes) do
+		local path = UIScheme.path
+		local correct = ns.call(tostring("Error loading resource ["..key .. "] in " .. path .. "\n"), PTSDLoadUIFile, path, UIScheme.type)
+		if correct == false then return false end;
+	end
+
+	for key, UILayout in pairs(resources.UILayouts) do
+		local path = UILayout.path
+		local correct = ns.call(tostring("Error loading layout ["..key .. "] in " .. path .. "\n"), PTSDLoadUIFile, path, UILayout.type)
+		if correct == false then return false end;
+	end
+	return true
+end

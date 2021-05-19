@@ -1,4 +1,6 @@
 #include "TransformComponent.h"
+#include "GraphicsManager.h"
+
 namespace PTSD {
 	//Methods to convert from and to quaternions and vec3
 	Vec3 TransformComponent::OgreQuatEuler(const Ogre::Quaternion& quaternion) const
@@ -21,11 +23,11 @@ namespace PTSD {
 	//
 
 	TransformComponent::TransformComponent() : Component(CmpId::Transform) {
-		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
+		mNode = GraphicsManager::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 	}
 	TransformComponent::TransformComponent(Vec3 p, Vec3 r, Vec3 s) : Component(CmpId::Transform)
 	{
-		mNode = GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
+		mNode = GraphicsManager::getInstance()->getSceneMgr()->getRootSceneNode()->createChildSceneNode();
 		setPosition(p);
 		setRotation(r);
 		setScale(s);
@@ -57,7 +59,7 @@ namespace PTSD {
 			DestroyNodeAndChildren(pChildNode);
 		}
 		node->removeAndDestroyAllChildren();
-		GraphicsImplementation::getInstance()->getSceneMgr()->destroySceneNode(node);
+		GraphicsManager::getInstance()->getSceneMgr()->destroySceneNode(node);
 	}
 
 
@@ -112,12 +114,11 @@ namespace PTSD {
 
 	void TransformComponent::setChildCamera() //Makes the camera move with the transform
 	{
-		GraphicsImplementation::getInstance()->getCamera()->lookAt(Vec3(0, 0, 10000));
-		Ogre::SceneNode* n = GraphicsImplementation::getInstance()->getCamera()->getNode();
-		GraphicsImplementation::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
+		GraphicsManager::getInstance()->getCam()->lookAt(Vec3(0, 0, 10000));
+		Ogre::SceneNode* n = GraphicsManager::getInstance()->getCam()->getNode();
+		GraphicsManager::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
 		mNode->addChild(n);
-		n->setPosition(Ogre::Vector3(getPosition().x, getPosition().y, getPosition().z + 100));
-
+		n->setPosition(0, 25, -25);
 	}
 
 	//Getters

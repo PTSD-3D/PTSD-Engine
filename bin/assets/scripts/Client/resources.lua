@@ -24,6 +24,22 @@ local Resources = {
 			path = "clowning-around.mp3", id, tipo=SoundType.Musica, volume = 0.3
 		}
 	},
+	UISchemes = {
+		TaharezLookScheme = {
+			path = "TaharezLook.scheme", type=UIFileType.Scheme
+		}
+	},
+	UILayouts = {	
+		TaiFighterLayout = {
+			path = "TaiFighter.layout", type=UIFileType.Layout
+		},
+		PauseLayout = {
+			path = "Pause.layout", type=UIFileType.Layout
+		},
+		TitleLayout = {
+			path = "Title.layout", type=UIFileType.Layout
+		}
+	},
 	Meshes = {
 		--si
 	}

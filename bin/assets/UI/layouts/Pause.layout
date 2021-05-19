@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="PauseWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="DragDropTarget" value="false" />
+        <Property name="RiseOnClickEnabled" value="false" />
+        <Window type="TaharezLook/FrameWindow" name="FrameWindow" >
+            <Property name="Area" value="{{0,260},{0,89},{0.3,611},{0.3,372}}" />
+            <Property name="Alpha" value="0.5" />
+            <Property name="UpdateMode" value="Never" />
+            <Property name="DragDropTarget" value="false" />
+            <Property name="ZOrderingEnabled" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
+            <Property name="WantsMultiClickEvents" value="false" />
+        </Window>
+        <Window type="TaharezLook/StaticText" name="PauseText" >
+            <Property name="Area" value="{{0,572},{0,132},{0,682},{0,172}}" />
+            <Property name="Font" value="DejaVuSans-24" />
+            <Property name="Text" value="PAUSE" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="TextColours" value="tl:FF00FF00 tr:FF00FF00 bl:FFFFFFFF br:FFFFFFFF" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="HorzScrollPageSize" value="110" />
+            <Property name="VertScrollPageSize" value="40" />
+            <Property name="HorzScrollDocumentSize" value="105" />
+            <Property name="VertScrollDocumentSize" value="37.25" />
+        </Window>
+    </Window>
+</GUILayout>

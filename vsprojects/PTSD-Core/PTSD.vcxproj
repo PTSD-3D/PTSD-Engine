@@ -15,7 +15,6 @@
     <ClCompile Include="..\..\source\Core\src\main.cpp" />
     <ClCompile Include="..\..\source\Core\src\PTSDVectors.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\Camera.cpp" />
-    <ClCompile Include="..\..\source\Graphics\source\GraphicsImplementation.cpp" />
     <ClCompile Include="..\..\source\Graphics\source\GraphicsManager.cpp" />
     <ClCompile Include="..\..\source\Input\source\InputImplementation.cpp" />
     <ClCompile Include="..\..\source\Input\source\InputManager.cpp" />
@@ -33,14 +32,12 @@
     <ClCompile Include="..\..\source\Sound\source\Sound.cpp" />
     <ClCompile Include="..\..\source\Sound\source\SoundAttorney.cpp" />
     <ClCompile Include="..\..\source\UI\source\UIManager.cpp" />
-    <ClCompile Include="..\..\source\UI\source\UIImplementation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Core\include\BtOgre.h" />
     <ClInclude Include="..\..\source\Core\include\PTSDVectors.h" />
     <ClInclude Include="..\..\source\Core\include\test.h" />
     <ClInclude Include="..\..\source\Graphics\include\Camera.h" />
-    <ClInclude Include="..\..\source\Graphics\include\GraphicsImplementation.h" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsLogger.hpp" />
     <ClInclude Include="..\..\source\Graphics\include\GraphicsManager.h" />
     <ClInclude Include="..\..\source\Input\include\InputManager.h" />
@@ -62,7 +59,6 @@
     <ClInclude Include="..\..\source\Sound\include\Sound.h" />
     <ClInclude Include="..\..\source\Sound\include\SoundAttorney.h" />
     <ClInclude Include="..\..\source\UI\include\UIManager.h" />
-    <ClInclude Include="..\..\source\UI\include\UIImplementation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -10,7 +10,9 @@ namespace PTSD
 {
 	RigidbodyComponent::RigidbodyComponent(Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 rot) : 
 		Component(CmpId::RigidbodyC), trigger(trigger), mass(mass), type(type) {
-		mObj = PhysicsManager::getInstance()->addRigidBody(size, (type!=CollisionFlags::Static) ? mass : 0, pos, degToRad(rot));
+		mObj = PhysicsManager::getInstance()->addRigidBody(size, (type!=CollisionFlags::Static) ? mass : 0, pos,&mColShape, degToRad(rot));
+		if (mColShape != nullptr)
+			LOG("CollisionShape assigned on Pimpl", Info);
 		PhysicsManager::getInstance()->setCollisionFlags(mObj, type, trigger);
 	}
 
@@ -43,6 +45,23 @@ namespace PTSD
 		mObj->applyForce(btVector3(force.x, force.y, force.z), btVector3(ref.x, ref.y, ref.z));
 	}
 
+	bool RigidbodyComponent::hasRayCastHit(Vec3 vec) {
+		//How raycast works: World->rayTest(origin point, destination point, callback)
+		//The callback has the information of the raycast (if it hit, how many hits, etc)
+		btVector3 origin = mObj->getWorldTransform().getOrigin();
+		btVector3 dest = origin + btVector3(vec.x, vec.y, vec.z);
+		btCollisionWorld::ClosestRayResultCallback rayCallback(origin, dest);
+		PhysicsManager::getInstance()->getWorld()->rayTest(origin, dest, rayCallback);
+		if (rayCallback.hasHit()) return true;
+		return false;
+  }
+	void RigidbodyComponent::setPosition(Vec3 position)
+	{
+		btTransform transform = mObj->getCenterOfMassTransform();
+		transform.setOrigin(btVector3(position.x,position.y,position.z));
+		mObj->setCenterOfMassTransform(transform);
+	}
+
 	Vec3 RigidbodyComponent::getLinearVelocity() {
 		btVector3 v = mObj->getLinearVelocity();
 		return Vec3(v.getX(), v.getY(), v.getZ());
@@ -61,5 +80,15 @@ namespace PTSD
 	Vec4Placeholder RigidbodyComponent::getRot() {
 		btQuaternion r = mObj->getWorldTransform().getRotation();
 		return Vec4Placeholder(r.getX(), r.getY(), r.getZ(), r.getW());
+	}
+
+	void RigidbodyComponent::setCollisionScale(Vec3 sc)
+	{
+		if (mColShape != nullptr) {
+			mColShape->setLocalScaling({ sc.x,sc.y,sc.z });
+			PhysicsManager::getInstance()->getWorld()->getCollisionWorld()->updateSingleAabb(mObj);
+		}
+		else
+			LOG("Collision shape was null", Error);
 	}
 }

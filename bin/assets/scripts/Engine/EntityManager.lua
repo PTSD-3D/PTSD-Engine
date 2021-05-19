@@ -26,12 +26,19 @@ function EntityManager:getEntity(id)
 	return self.entities[id]
 end
 
-function EntityManager:addEntity(entity)
+-- assigns ids but does not trigger onAddEntitity
+function EntityManager:registerEntity(entity)
 	-- Assign entity's id
 	local nId = #self.entities + 1
 	entity.id = nId
 	self.entities[entity.id] = entity
 
+	--Register entity in cpp
+	PTSDCreateEntity(nId)
+end
+
+-- triggers onAddEntity
+function EntityManager:addEntity(entity)
 	--Assign entity's eventManager
 	entity.eventManager = self.eventManager;
 
@@ -51,9 +58,6 @@ function EntityManager:addEntity(entity)
 			end
 		end
 	end
-
-	--Register entity in cpp
-	PTSDCreateEntity(nId)
 end
 
 
@@ -151,7 +155,7 @@ end
 
 function EntityManager:update(...)
 	for _, system in ipairs(self.systems) do
-		if system.active then
+		if system.active and system.update then
 			system:update(...)
 		end
 		self:NotifyCollisions(system)
@@ -163,16 +167,12 @@ function EntityManager:registerCollision(ev)
 	local entA = self:getEntity(ev.entityAID)
 	local entB = self:getEntity(ev.entityBID)
 	local manifold = ev.manifold
-	if entA.id > entB.id then
-		local a = entA
-		entA = entB
-		entB = a
-	end
+	
 	if not self.collisions[entA.id] then self.collisions[entA.id] = {} end
-	if not self.collisions[entA.id][entB.id] then self.collisions[entA.id][entB.id] = {points = {}, entA = {}, entB = {}} end
-	self.collisions[entA.id][entB.id].entA = entA
-	self.collisions[entA.id][entB.id].entB = entB
-	table.insert(self.collisions[entA.id][entB.id].points, manifold)
+	if not self.collisions[entB.id] then self.collisions[entB.id] = {} end
+
+	self.collisions[entA.id][entB.id] =  {A = entA, B = entB, points=manifold}
+	self.collisions[entB.id][entA.id] =  {A = entB, B = entA, points=manifold}
 end
 
 function EntityManager:NotifyCollisions(system)
@@ -181,7 +181,7 @@ function EntityManager:NotifyCollisions(system)
 		if t then
 			for i, other in pairs(t) do
 				local itable = self.collisions[ent.id][i]
-				system:onCollision(itable.entA, itable.entB, itable.points)
+				system:onCollision(itable.A, itable.B, itable.points)
 			end
 		end
 	end

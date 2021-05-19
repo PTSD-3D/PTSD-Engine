@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="TitleWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="TaharezLook/StaticText" name="Title" >
+            <Property name="Area" value="{{0,1},{0,7},{0,133},{0,44}}" />
+            <Property name="Font" value="DejaVuSans-24" />
+            <Property name="Text" value="TaiFighter" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="TextColours" value="tl:FFFF00FF tr:FF00FFFF bl:FFFFFFFF br:FFFFFFFF" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="HorzScrollPageSize" value="132" />
+            <Property name="VertScrollPageSize" value="37" />
+            <Property name="HorizontalAlignment" value="Centre" />
+            <Property name="HorzScrollDocumentSize" value="136" />
+            <Property name="VertScrollDocumentSize" value="31.0477" />
+        </Window>
+    </Window>
+</GUILayout>
