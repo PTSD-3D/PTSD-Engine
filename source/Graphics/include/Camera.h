@@ -45,5 +45,7 @@ namespace PTSD
 		void debugPos();
 		void mousePitch(float dir);
 		Ogre::SceneNode* getNode();
+		Vec3 getOrientation();
+
 	};
 }
