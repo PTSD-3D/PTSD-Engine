@@ -74,11 +74,8 @@ int main()
 			inputSystem->clean();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
 			accumulator -= deltaTime;
-
-
-			//TODO move this to scripting
-			if(running)
-				running = !inputSystem->keyPressed(Scancode::SCANCODE_ESCAPE);
+			if (running)
+				running = scriptingSystem->isRunning();
 		}
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();
