@@ -16,7 +16,6 @@ PTSD::Camera::Camera(Vec3 pos)
 {
 	Ogre::SceneManager* mgr = GraphicsManager::getInstance()->getSceneMgr();
 	mCamera = mgr->createCamera("mainCam");
-	mCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
 	mNode = mgr->getRootSceneNode()->createChildSceneNode();
 	mNode->setPosition({ pos.x,pos.y,pos.z });
 	cameraYawNode = mNode->createChildSceneNode();
@@ -29,9 +28,8 @@ PTSD::Camera::Camera(Vec3 pos)
 	//TODO Window abstraction
 	mWindow = GraphicsManager::getInstance()->getRenderWindow();
 	mViewPort = GraphicsManager::getInstance()->getRenderWindow()->addViewport(mCamera);
-
 	mCamera->setAspectRatio(Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
-	mCamera->setOrthoWindow(150, 150);
+	mCamera->setAutoAspectRatio(true);
 }
 
 PTSD::Camera::~Camera() = default;
@@ -125,4 +123,16 @@ void PTSD::Camera::mousePitch(float dir)
 			cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
 				-Ogre::Math::Sqrt(0.5f), 0, 0));
 	}
+}
+
+void PTSD::Camera::setOrtho(Vector2D window)
+{
+	Ogre::Real k = mViewPort->getActualWidth();
+	mCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
+	mCamera->setOrthoWindow(window.getX(), window.getY());
+}
+
+void PTSD::Camera::setPerspective()
+{
+	mCamera->setProjectionType(Ogre::PT_PERSPECTIVE);
 }
