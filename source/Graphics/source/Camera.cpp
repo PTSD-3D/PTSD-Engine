@@ -28,11 +28,21 @@ PTSD::Camera::Camera(Vec3 pos)
 	//TODO Window abstraction
 	mWindow = GraphicsManager::getInstance()->getRenderWindow();
 	mViewPort = GraphicsManager::getInstance()->getRenderWindow()->addViewport(mCamera);
-
 	mCamera->setAspectRatio(Ogre::Real(mViewPort->getActualWidth()) / Ogre::Real(mViewPort->getActualHeight()));
+	mCamera->setAutoAspectRatio(true);
 }
 
 PTSD::Camera::~Camera() = default;
+
+void PTSD::Camera::setNearClip(float clip)
+{
+	mCamera->setNearClipDistance(clip);
+}
+
+void PTSD::Camera::setFarClip(float clip)
+{
+	mCamera->setFarClipDistance(clip);
+}
 
 /**
  * \brief looks to a world point
@@ -123,4 +133,16 @@ void PTSD::Camera::mousePitch(float dir)
 			cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
 				-Ogre::Math::Sqrt(0.5f), 0, 0));
 	}
+}
+
+void PTSD::Camera::setOrtho(float orthoZoom)
+{
+	Ogre::Real k = mViewPort->getActualWidth();
+	mCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
+	mCamera->setOrthoWindow(mViewPort->getActualWidth() * orthoZoom, mViewPort->getActualHeight() * orthoZoom);
+}
+
+void PTSD::Camera::setPerspective()
+{
+	mCamera->setProjectionType(Ogre::PT_PERSPECTIVE);
 }
