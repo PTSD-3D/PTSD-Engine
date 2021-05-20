@@ -1,3 +1,7 @@
+#ifdef _WIN32
+#include "Windows.h"
+#endif
+
 #include <iostream>
 #include "LogManager.h"
 #include "PhysicsManager.h"
@@ -17,9 +21,16 @@
 	#define _DEBUG 1
 #endif // !-DNDEBUG
 
-
-int main()
-{
+#ifdef _DEBUG
+	int main(){
+#else
+#ifdef _WIN32
+	int WINAPI
+	WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow) {
+#else
+	int main(){
+#endif
+#endif
 	PTSD::Log* logSystem = new PTSD::Log();
 
 #ifdef _DEBUG
