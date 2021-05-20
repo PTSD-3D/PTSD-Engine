@@ -135,6 +135,64 @@ void PTSD::Camera::mousePitch(float dir)
 	}
 }
 
+Vec3 PTSD::Camera::getOrientation()
+{
+	Ogre::Vector3 v = mCamera->getRealDirection();
+	
+	Vec3 vect = { v.x,v.y,v.z };
+	
+	/*Ogre::Quaternion q = mCamera->getRealOrientation();
+
+	Ogre::Matrix3 mx2;
+	q.ToRotationMatrix(mx2);
+	Ogre::Radian x, y, z;
+	mx2.ToEulerAnglesYXZ(y, x, z);
+	Vec3 vect(x.valueAngleUnits(), y.valueAngleUnits(), z.valueAngleUnits());*/
+
+	//std::cout << vect.x << " " << vect.y << " " << vect.z << std::endl;
+
+	return vect;
+
+	//mNode->getOrientation();
+
+
+	//LOG("Entra getRay camera");
+	//Vec3 coord;
+
+	////coord.x = (((2.0f * x) / mWindow->getWidth()) - 1);
+	////coord.y = -(((2.0f * y) / mWindow->getHeight()) - 1);
+	//coord.x = x;
+	//coord.y = y;
+	//coord.z = 1.0f;
+
+	//// Back project the ray from screen to the far clip plane
+	//coord.x /= mCamera->getProjectionMatrix()[1][1];
+	//coord.y /= mCamera->getProjectionMatrix()[2][2];
+	//LOG("ProjM");
+
+	////btMatrix3x3 matinv;
+	////D3DXMatrixInverse(&matinv, NULL, &mCamera->getViewMatrix());
+
+	//auto matinv = mCamera->getViewMatrix().inverse();
+	//LOG("ViewMatInv");
+
+	//float farClip = mCamera->getFarClipDistance();
+	//coord = coord * farClip;
+
+	//LOG("FarClip");
+
+	//Vec3 newCoord;
+	////VOut.x = VIn.x * M.11 + VIn.y * M.21 + VIn.z * M.31 + M.41
+	////VOut.y = VIn.x * M.12 + VIn.y * M. 22 + VIn.z * M.32 + M.42
+	////VOut.z = VIn.x * M.13 + VIn.y * M.23 + VIn.z * M.33 + M.43
+	//newCoord.x = coord.x * matinv[1][1] + coord.y * matinv[2][1] + coord.z * matinv[3][1];
+	//newCoord.y = coord.x * matinv[1][2] + coord.y * matinv[2][2] + coord.z * matinv[3][2];
+	//newCoord.z = coord.x * matinv[1][3] + coord.y * matinv[2][3] + coord.z * matinv[3][3];
+
+	//LOG("Termina camera");
+
+}
+
 void PTSD::Camera::setOrtho(float orthoZoom)
 {
 	Ogre::Real k = mViewPort->getActualWidth();

@@ -41,7 +41,7 @@ namespace PTSD
 		void addForce(Vec3 force, Vec3 ref = { 0,0,0 });
 		bool hasRayCastHit(Vec3 vec);
 		void setPosition(Vec3 position);
-
+		
 		CollisionFlags getType() { return type; }
 		bool isTrigger() { return trigger; }
 		float getMass() { return mass; }

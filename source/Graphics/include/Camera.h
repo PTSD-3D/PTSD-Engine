@@ -49,5 +49,7 @@ namespace PTSD
 		void setOrtho(float orthoZoom);
 		void setPerspective();
 		Ogre::SceneNode* getNode();
+		Vec3 getOrientation();
+
 	};
 }
