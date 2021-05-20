@@ -173,10 +173,15 @@ function EntityManager:changeScene(name)
 	self.newSceneName = name
 end
 
+function EntityManager:getCurrentSceneName()
+	return self.currentScene 
+end
+
 function EntityManager:changeSceneImpl(name)
 	--fire event so everyone holding reference to entities, wich they should not, and everyone who needs to change their state can do so
 	self.eventManager:fireEvent(namespace.ChangeSceneEvent(name))
 	self.requestedSceneChange = false;
+	self.currentScene = name
 
 	--remove all entities in lua side
 	for _, i in pairs(self.entities) do
