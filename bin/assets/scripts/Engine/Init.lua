@@ -1,4 +1,4 @@
-package.path = "./assets/scripts/Client/?.lua;./assets/scripts/Engine/?.lua;./assets/scripts/Engine/Events/?.lua;./assets/scripts/Client/Prefabs/?.lua;./assets/scripts/Client/Systems/?.lua;./assets/scripts/Client/Events/?.lua"
+package.path = "./assets/scripts/Client/?.lua;./assets/scripts/Engine/?.lua;./assets/scripts/Engine/Events/?.lua;./assets/scripts/Client/Prefabs/?.lua;./assets/scripts/Client/Systems/?.lua;./assets/scripts/Client/Events/?.lua;./assets/scripts/Client/Scenes/?.lua"
 
 local eng = require('initEngine')
 local ns = require('namespace')

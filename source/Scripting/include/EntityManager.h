@@ -20,7 +20,7 @@ namespace PTSD
 		std::shared_ptr<Entity> createEntity(UUID entityID);
 		std::shared_ptr<Entity> getEntity(UUID entityID);
 		void deleteEntity(UUID entityID);
-		
+		void removeAllEntities();
 	};
 
 }

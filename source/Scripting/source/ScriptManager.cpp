@@ -81,7 +81,7 @@ namespace PTSD {
 		//Engine initialization
 		(*state).script_file("./assets/scripts/Engine/Init.lua");
 
-		auto result = (*state).script_file("./assets/scripts/Client/main.lua"); //Test file of engine initialization, any other code goes below...
+		auto result = (*state).script_file("./assets/scripts/Client/main.lua");
 		if(!result.valid())
 		{
 			sol::error err =result;
@@ -178,7 +178,13 @@ namespace PTSD {
 		(*state).set_function("cameraSetPos", &PTSD::Camera::setPosition, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
-
+		(*state).set_function("removeCamera", [&](){
+			auto cam = PTSD::GraphicsManager::getInstance()->getCam()->getNode();
+			if(cam->getParent() != nullptr)
+				cam->getParent()->removeChild(cam);
+			PTSD::GraphicsManager::getInstance()->getSceneMgr()->getRootSceneNode()->addChild(cam);
+			// cam->removeAndDestroyAllChildren();
+		});
 		//MouseLock
 		(*state).set_function("setMouseLocked", &PTSD::GraphicsManager::setMouseLocked, PTSD::GraphicsManager::getInstance());
 
@@ -270,6 +276,7 @@ namespace PTSD {
 
 		(*state).set_function("changeText", &PTSD::UIManager::changeText, PTSD::UIManager::getInstance());
 		(*state).set_function("changeStaticImage", &PTSD::UIManager::changeStaticImage, PTSD::UIManager::getInstance());
+		(*state).set_function("setProgressBarValue", &PTSD::UIManager::setProgressBarValue, PTSD::UIManager::getInstance());
 		(*state).set_function("setWindowVisible", &PTSD::UIManager::setWindowVisible, PTSD::UIManager::getInstance());
 
 		(*state).set_function("setUIMouseCursor", &PTSD::UIManager::setUIMouseCursor, PTSD::UIManager::getInstance());
@@ -341,6 +348,7 @@ namespace PTSD {
 	bool ScriptManager::bindScriptingComponents() {
 		(*state).set_function("PTSDCreateEntity", &PTSD::ScriptManager::createEntity, this);
 		(*state).set_function("PTSDDeleteEntity", &PTSD::ScriptManager::deleteEntity, this);
+		(*state).set_function("PTSDRemoveAllEntities", &PTSD::EntityManager::removeAllEntities, entityManager);
 
 		return true;
 	}

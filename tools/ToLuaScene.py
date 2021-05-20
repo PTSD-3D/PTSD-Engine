@@ -1,6 +1,7 @@
 from string import Template
 import bpy
 import math
+from os import path,getcwd
 def search_config_file(path, name):
     try:
         #Prefab exits, parse it and return it
@@ -72,17 +73,29 @@ def fill_component(o, entity,is_prefab):
     entity = entity[:before_components+1]+transform+entity[before_components+1:]
     return entity
 
+#Chooses the target game from ToLuaScene.cfg, stores in PTSD-Engine/tools/
+def load_game_path():
+    __location__ = path.realpath(
+    path.join(getcwd(), path.dirname(__file__)))
+    with open(path.join(__location__,'ToLuaScene.config'),"r") as file:
+       lines = file.readlines()
+    selection = int(lines[0])+1
+    print(selection)
+    return lines[selection]
+
 
 #Writes the blender secne in our lua scene format
 def write_scene():
     scene_name="sampleScene"#bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene
     objects = list(bpy.data.objects)			#Blender Objects on scene
-    path_to_prefabs="D:\Escritorio\Apuntes\P3\Glock-The-Clock\GTC-Files\prefabs" 			#This is where we will eventually put our "prefabs" 
-    path_to_scene = "D:\Escritorio\Apuntes\P3\Glock-The-Clock\GTC-Files\scenes"		#This is where we want our lua scene file to be written
-    lua_file = path_to_scene+"/"+scene_name+".lua" 		#This is the name of the lua scene file, right now takes the name of the blend file and changes the extension to lua
+    # path_to_game = load_game_path()
+    path_to_game=path.abspath('H:/Dev/Engines/Glock-The-Clock/GlockTheClock/')
+    path_to_prefabs=path.join(path_to_game,'assets/scripts/Client/Prefabs')			#This is where we will eventually put our "prefabs" 
+    path_to_scene = path.join(path_to_game,'assets/scripts/Client/')		#This is where we want our lua scene file to be written
+    lua_file = path.join(path_to_scene,scene_name+'.lua')		#This is the name of the lua scene file, right now takes the name of the blend file and changes the extension to lua
     
     f = open(lua_file, "w+")
-    f.write("local prefabs = reqPrefab \nlocal sceneConfig = reqSceneConfigurations \nlocal Scene={\n Entities={")
+    f.write("local prefabs = require('Prefab') \nlocal sceneConfig = require('Prefab') \nlocal Scene={\n Entities={")
     i = 0
     for o in objects:
             prefab_name = o.name.split(".",1)[0]

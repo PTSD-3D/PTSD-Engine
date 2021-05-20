@@ -26,7 +26,7 @@ namespace PTSD {
 	int UIManager::init() {
 		PTSD_ASSERT(mInstance == nullptr, "UIManager already initialized");
 		mInstance = new UIManager();
-		
+
 		mInstance->initLogger();
 
 		mInstance->renderer = &CEGUI::OgreRenderer::bootstrapSystem(*PTSD::GraphicsManager::getInstance()->getRenderWindow());
@@ -101,7 +101,7 @@ namespace PTSD {
 		const CEGUI::MouseEventArgs& we = static_cast<const CEGUI::MouseEventArgs&>(e);
 		CEGUI::String senderID = we.window->getName();
 		std::string s = senderID.c_str();
-		if (umap.count(s)>=1)
+		if (umap.count(s) >= 1)
 		{
 			mScriptManager->execute(umap[s]);
 		}
@@ -109,11 +109,12 @@ namespace PTSD {
 		return true;
 	}
 
-	void UIManager::createButton(const std::string& name, const std::string& text, const std::string& source, Vector2D position, Vector2D size)
+	void UIManager::createButton(const std::string& name, const std::string& text, const std::string& source, const std::string& font, Vector2D position, Vector2D size)
 	{
 		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(windowMngr->createWindow(source, name));
-		myButtonWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, position.getX()), CEGUI::UDim(0, position.getY())));
-		myButtonWindow->setSize(CEGUI::USize(CEGUI::UDim(0, size.getX()), CEGUI::UDim(0, size.getY())));
+		myButtonWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(position.getX(), 0), CEGUI::UDim(position.getY(), 0)));
+		myButtonWindow->setSize(CEGUI::USize(CEGUI::UDim(size.getX(), 0), CEGUI::UDim(size.getY(), 0)));
+		myButtonWindow->setFont(font);
 		myButtonWindow->setText(text);
 		mRoot->addChild(myButtonWindow);
 
@@ -124,7 +125,7 @@ namespace PTSD {
 	{
 		CEGUI::PushButton* myButtonWindow = static_cast<CEGUI::PushButton*>(mRoot->getChildRecursive(name));
 		/*bind(function, reference for the execution of the function, placeholder for parameters)*/
-		CEGUI::SubscriberSlot function = [&](const CEGUI::EventArgs& e){return onButtonClick(e);};
+		CEGUI::SubscriberSlot function = [&](const CEGUI::EventArgs& e) {return onButtonClick(e); };
 		myButtonWindow->subscribeEvent(CEGUI::PushButton::EventMouseClick, CEGUI::Event::Subscriber(function));
 	}
 
@@ -184,6 +185,12 @@ namespace PTSD {
 	{
 		CEGUI::Window* myWindow = mRoot->getChildRecursive(name);
 		myWindow->setProperty("Image", image);
+	}
+
+	void UIManager::setProgressBarValue(const std::string& name, float value)
+	{
+		CEGUI::ProgressBar* myProgressBarWindow = static_cast<CEGUI::ProgressBar*>(mRoot->getChildRecursive(name));
+		myProgressBarWindow->setProgress(value);
 	}
 
 	void UIManager::setWindowVisible(const std::string& name, bool visible)

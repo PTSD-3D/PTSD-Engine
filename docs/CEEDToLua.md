@@ -13,7 +13,7 @@
 * Las rutas de los ficheros están en PTSD-Engine\bin\assets\UI
 ## Cómo usar CEED
 * IMPORTANTE: CEED solo puede abrir .project, .layout y .imageset
-* Primero podemos abrir testProject.project desde CEED, este proyecto ya tiene configurada la ventana 800x600
+* Primero podemos abrir testProject.project desde CEED, este proyecto ya tiene configurada la ventana 1280x720
 * Después se podrán abrir y crear los diferentes .layout en CEED
 * Es importante que todos los elementos tengan nombres diferentes para luego identificarlos en LUA, incluso entre distintos .layout (Se pueden usar varios .layout a la vez)
 * Los botones se crean en LUA porque al crearlos en CEED, a veces en algunos lanzamientos funcionaban y en otros no.
@@ -28,8 +28,9 @@
 * Cambiar texto **changeText(name="Title",newText="TaiFighter")**
 * Cambiar imagen **changeStaticImage(name="NombreImagen",source="TaharezLook/CualquierNombreDel.imageset")**
 * Ocultar/Mostrar elementos (si se oculta el padre se ocultan los hijos) **setWindowVisible(name, true/false)**
-* Crear botón **createButton(name="PushButton", "Texto", source="TaharezLook/Button",vec2:new(x, y), vec2:new(w, h))**
+* Crear botón **createButton(name="PushButton", "Texto", source="TaharezLook/Button", fontName="DejaVuSans-24",vec2:new(x, y), vec2:new(w, h))**
 * Asociar callback a botón **setButtonFunction(name="NombreBoton","NombreFuncionEnUIcallbacks.lua")**
+* Cambiar valor de progress bar **setProgressBarValue(name="DimensionBar", value=0.2)**
 ## Crear una fuente
 * Se necesita el .ttf y .font (fijarse como están hechos los existentes en PTSD-Engine\bin\assets\UI\fonts) y añadirlo al .scheme como `<Font filename="NewFont-Size.font" />`
 ## Crear un imageset

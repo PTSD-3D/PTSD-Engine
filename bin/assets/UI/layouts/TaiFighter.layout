@@ -7,7 +7,7 @@
         <Window type="TaharezLook/ProgressBar" name="DimensionBar" >
             <Property name="Area" value="{{0,23},{0,65},{0,279},{0,97}}" />
             <Property name="StepSize" value="0.01" />
-            <Property name="CurrentProgress" value="0.4" />
+            <Property name="CurrentProgress" value="1" />
         </Window>
         <Window type="TaharezLook/StaticImage" name="Passive" >
             <Property name="Area" value="{{0,717},{0,520},{0,792},{0,591}}" />
