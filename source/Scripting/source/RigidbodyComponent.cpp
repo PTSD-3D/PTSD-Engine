@@ -62,14 +62,6 @@ namespace PTSD
 		mObj->setCenterOfMassTransform(transform);
 	}
 
-	Vec3 PTSD::RigidbodyComponent::getCamOrientation()
-	{
-		LOG("Entra getRay de rb");
-		Vec3 ray = GraphicsImplementation::getInstance()->getCamera()->getOrientation();
-		return ray;
-	}
-
-
 	Vec3 RigidbodyComponent::getLinearVelocity() {
 		btVector3 v = mObj->getLinearVelocity();
 		return Vec3(v.getX(), v.getY(), v.getZ());

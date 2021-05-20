@@ -127,15 +127,19 @@ void PTSD::Camera::mousePitch(float dir)
 
 Vec3 PTSD::Camera::getOrientation()
 {
-
-	Ogre::Quaternion q = mCamera->getRealOrientation();
+	Ogre::Vector3 v = mCamera->getRealDirection();
+	
+	Vec3 vect = { v.x,v.y,v.z };
+	
+	/*Ogre::Quaternion q = mCamera->getRealOrientation();
 
 	Ogre::Matrix3 mx2;
 	q.ToRotationMatrix(mx2);
 	Ogre::Radian x, y, z;
 	mx2.ToEulerAnglesYXZ(y, x, z);
-	Vec3 vect(x.valueAngleUnits(), y.valueAngleUnits(), z.valueAngleUnits());
+	Vec3 vect(x.valueAngleUnits(), y.valueAngleUnits(), z.valueAngleUnits());*/
 
+	//std::cout << vect.x << " " << vect.y << " " << vect.z << std::endl;
 
 	return vect;
 

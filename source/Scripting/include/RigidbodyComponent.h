@@ -42,7 +42,6 @@ namespace PTSD
 		bool hasRayCastHit(Vec3 vec);
 		void setPosition(Vec3 position);
 		
-		Vec3 getCamOrientation();
 		CollisionFlags getType() { return type; }
 		bool isTrigger() { return trigger; }
 		float getMass() { return mass; }

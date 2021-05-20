@@ -178,6 +178,7 @@ namespace PTSD {
 		(*state).set_function("cameraSetPos", &PTSD::Camera::setPosition, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("getCamOrientation", &PTSD::Camera::getOrientation, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("removeCamera", [&](){
 			auto cam = PTSD::GraphicsManager::getInstance()->getCam()->getNode();
 			if(cam->getParent() != nullptr)
@@ -207,7 +208,6 @@ namespace PTSD {
 		luaRigidbodyComponent["addForce"] = &PTSD::RigidbodyComponent::addForce;
 		luaRigidbodyComponent["hasRayCastHit"] = &PTSD::RigidbodyComponent::hasRayCastHit;
 		luaRigidbodyComponent["setCollisionScale"] = &PTSD::RigidbodyComponent::setCollisionScale;
-		luaRigidbodyComponent["getCamOrientation"] = &PTSD::RigidbodyComponent::getCamOrientation;
 
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
 			PTSD_ASSERT((size.x > 0 && size.y > 0 && size.z> 0), "Escala negativa, animal");
