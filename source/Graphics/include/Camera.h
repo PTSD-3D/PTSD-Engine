@@ -44,7 +44,7 @@ namespace PTSD
 		void mouseRotate(Vector2D dir);
 		void debugPos();
 		void mousePitch(float dir);
-		void setOrtho(Vector2D window);
+		void setOrtho(float orthoZoom);
 		void setPerspective();
 		Ogre::SceneNode* getNode();
 	};

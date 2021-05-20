@@ -125,11 +125,11 @@ void PTSD::Camera::mousePitch(float dir)
 	}
 }
 
-void PTSD::Camera::setOrtho(Vector2D window)
+void PTSD::Camera::setOrtho(float orthoZoom)
 {
 	Ogre::Real k = mViewPort->getActualWidth();
 	mCamera->setProjectionType(Ogre::PT_ORTHOGRAPHIC);
-	mCamera->setOrthoWindow(window.getX(), window.getY());
+	mCamera->setOrthoWindow(mViewPort->getActualWidth() * orthoZoom, mViewPort->getActualHeight() * orthoZoom);
 }
 
 void PTSD::Camera::setPerspective()
