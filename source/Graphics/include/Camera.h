@@ -38,12 +38,16 @@ namespace PTSD
 		Camera(Vec3 v);
 		~Camera();
 		
+		void setNearClip(float clip);
+		void setFarClip(float clip);
 		void lookAt(Vec3 v);
 		void translate(Vec3 v);
 		void setPosition(Vec3 v);
 		void mouseRotate(Vector2D dir);
 		void debugPos();
 		void mousePitch(float dir);
+		void setOrtho(float orthoZoom);
+		void setPerspective();
 		Ogre::SceneNode* getNode();
 		Vec3 getOrientation();
 

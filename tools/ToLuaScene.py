@@ -83,13 +83,17 @@ def load_game_path():
     print(selection)
     return lines[selection]
 
+def get_this_blend_path():
+    return path.dirname(path.dirname(path.realpath(__file__)))
+
 
 #Writes the blender secne in our lua scene format
 def write_scene():
-    scene_name="sampleScene"#bpy.path.basename(bpy.context.blend_data.filepath).split(".",1)[0]				#Name of the blender scene
+    scene_name=bpy.path.display_name_from_filepath(bpy.data.filepath) #Name of the blender scene
     objects = list(bpy.data.objects)			#Blender Objects on scene
-    # path_to_game = load_game_path()
-    path_to_game=path.abspath('H:/Dev/Engines/Glock-The-Clock/GlockTheClock/')
+
+    # .blend scenes should be in Game/assets/scenes
+    path_to_game=path.join(get_this_blend_path(),'../../')
     path_to_prefabs=path.join(path_to_game,'assets/scripts/Client/Prefabs')			#This is where we will eventually put our "prefabs" 
     path_to_scene = path.join(path_to_game,'assets/scripts/Client/')		#This is where we want our lua scene file to be written
     lua_file = path.join(path_to_scene,scene_name+'.lua')		#This is the name of the lua scene file, right now takes the name of the blend file and changes the extension to lua

@@ -30,7 +30,7 @@ namespace PTSD {
 	/**
 	 * \brief Creates the objects for lua state and entityManager
 	 */
-	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager()) {}
+	ScriptManager::ScriptManager() : state(new sol::state()), entityManager(new EntityManager()), _running(false) {}
 
 	/*
 	 * \brief Frees up allocated memory
@@ -64,6 +64,7 @@ namespace PTSD {
 	 * \return true if everything went OK.
 	 */
 	bool ScriptManager::init() {
+		_running = true;
 		//Lua state initialization
 		(*state).open_libraries(sol::lib::base, sol::lib::math, sol::lib::io, sol::lib::os, sol::lib::table, sol::lib::debug, sol::lib::package, sol::lib::string);
 
@@ -124,6 +125,16 @@ namespace PTSD {
 	{
 		entityManager->deleteEntity(entityID);
 	}
+	bool ScriptManager::isRunning()
+	{
+		return _running;
+	}
+
+	void ScriptManager::exitGame()
+	{
+		_running = false;
+	}
+
 	std::shared_ptr<Entity> ScriptManager::getEntity(UUID entityID)
 	{
 		return entityManager->getEntity(entityID);
@@ -179,6 +190,10 @@ namespace PTSD {
 		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("getCamOrientation", &PTSD::Camera::getOrientation, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("setOrthoProjection", &PTSD::Camera::setOrtho, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("setNearClipDistance", &PTSD::Camera::setNearClip, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("setFarClipDistance", &PTSD::Camera::setFarClip, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("setPerspectiveProjection", &PTSD::Camera::setPerspective, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("removeCamera", [&](){
 			auto cam = PTSD::GraphicsManager::getInstance()->getCam()->getNode();
 			if(cam->getParent() != nullptr)
@@ -357,6 +372,7 @@ namespace PTSD {
 	{
 		//Init everything
 		PTSD::LOG("Binding Generic Components... @ScriptManager, BindGenericComponents()");
+		(*state).set_function("ExitGame", &PTSD::ScriptManager::exitGame, this);
 
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
