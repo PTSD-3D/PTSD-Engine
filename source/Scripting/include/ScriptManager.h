@@ -16,6 +16,8 @@ namespace PTSD
 		sol::state* state;
 		EntityManager* entityManager;
 
+		bool _running;
+
 		bool bindLoggerComponents();
 		bool bindGraphicsComponents();
 		bool bindPhysicsComponents();
@@ -38,5 +40,8 @@ namespace PTSD
 		std::shared_ptr<Entity> createEntity(UUID entityID);
 		std::shared_ptr<Entity> getEntity(UUID entityID);
 		void deleteEntity(UUID entityID);
+
+		bool isRunning();
+		void exitGame();
 	};
 }
