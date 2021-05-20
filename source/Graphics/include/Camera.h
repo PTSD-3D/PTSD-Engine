@@ -38,6 +38,8 @@ namespace PTSD
 		Camera(Vec3 v);
 		~Camera();
 		
+		void setNearClip(float clip);
+		void setFarClip(float clip);
 		void lookAt(Vec3 v);
 		void translate(Vec3 v);
 		void setPosition(Vec3 v);

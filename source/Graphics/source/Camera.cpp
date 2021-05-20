@@ -34,6 +34,16 @@ PTSD::Camera::Camera(Vec3 pos)
 
 PTSD::Camera::~Camera() = default;
 
+void PTSD::Camera::setNearClip(float clip)
+{
+	mCamera->setNearClipDistance(clip);
+}
+
+void PTSD::Camera::setFarClip(float clip)
+{
+	mCamera->setFarClipDistance(clip);
+}
+
 /**
  * \brief looks to a world point
  * \param pt point
