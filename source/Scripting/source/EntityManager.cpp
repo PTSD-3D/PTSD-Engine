@@ -8,6 +8,7 @@ PTSD::EntityManager::EntityManager()
 
 PTSD::EntityManager::~EntityManager()
 {
+	entities_.clear();
 }
 
 void PTSD::EntityManager::init()

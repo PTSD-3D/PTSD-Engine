@@ -49,6 +49,32 @@ namespace PTSD {
 
 		return 0;
 	}
+	void GraphicsManager::shutdown(){
+
+		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("General");
+		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("Imagesets");
+		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("Fonts");
+		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("Schemes");
+		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("LookNFeel");
+		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("Layouts");
+		Ogre::ResourceGroupManager::getSingleton().shutdownAll();
+		
+		SDL_DestroyRenderer(SDL_GetRenderer(mSDLWindow));
+		SDL_GL_DeleteContext(SDL_GL_GetCurrentContext()); 
+		SDL_DestroyWindow(mSDLWindow);
+		SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
+		mRenderWindow->destroy();
+		mRoot->destroyRenderTarget(mRenderWindow);
+		mRoot->destroySceneManager(mSceneMgr);
+
+		// delete mRoot->getRenderSystem();
+		delete mRoot;
+
+		mRoot = nullptr;
+		mSceneMgr = nullptr;
+		mRenderWindow = nullptr;
+		SDL_Quit();
+	};
 
 	/**
 	 * \brief Renders a frame!
@@ -221,15 +247,6 @@ namespace PTSD {
 		mSceneMgr = mRoot->createSceneManager();
 
 		mCamera = new Camera({ 0,0,8 });	//new Camera({ 0,0,80 });
-
-		// Ogre::Entity* ogreEntt = mSceneMgr->createEntity("Nave.mesh");		//ogrehead.mesh
-		// Ogre::SceneNode* ogreNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-		// ogreNode->attachObject(ogreEntt);
-		// ogreNode->pitch(Ogre::Radian(Ogre::Degree(-90.0f)));	//For facing the camera
-		// ogreNode->scale(Ogre::Vector3(1.0, 4.60, 1.0));
-
-
-		// ogreEntt->setMaterialName("body");	//This is for the test of Blender2Ogre
 
 		mSceneMgr->setAmbientLight(Ogre::ColourValue(.1, .1, .1));	//Was (0.5, 0.5, 0.5)
 

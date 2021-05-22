@@ -4,6 +4,7 @@
 #include "ScriptManager.h"
 
 #include <CEGUI/CEGUI.h>
+#include <CEGUI/XMLParser.h>
 #include <CEGUI/Event.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <CEGUI/InputEvent.h>
@@ -63,8 +64,22 @@ namespace PTSD {
 
 	void UIManager::shutdown()
 	{
+
+
+		// CEGUI::SchemeManager::getSingleton().destroyAll();
+		// CEGUI::FontManager::getSingleton().destroyAll();
+		// CEGUI::WidgetLookManager::getSingletonPtr()->eraseAllWidgetLooks();
+		// CEGUI::ImageManager::getSingletonPtr()->destroyAll();
+		
+		mRoot->destroy();
+		system->destroy();
+		renderer->destroyAllTextures();
 		windowMngr->destroyAllWindows();
+
+		
+
 		umap.clear();
+		
 		mRoot = nullptr;
 	}
 

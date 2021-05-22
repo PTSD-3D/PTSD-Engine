@@ -11,6 +11,7 @@ namespace CEGUI {
 	class EventArgs;
 	class String;
 	class System;
+	class Scheme;
 	class EventArgs;
 	class OgreRenderer;
 	class WindowManager;
@@ -51,6 +52,7 @@ namespace PTSD {
 		std::string mouseCursorName;
 
 		unordered_map<string, string> umap;
+		vector<CEGUI::Scheme> mLoadedSchemes;
 
 	public:
 		UIManager() = default;

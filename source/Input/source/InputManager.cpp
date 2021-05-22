@@ -12,7 +12,7 @@ namespace PTSD {
 	int InputManager::init() {
 		PTSD_ASSERT(mInstance == nullptr, "InputManager already initialized");
 		mInstance = new InputManager();
-		SDL_Init(SDL_INIT_EVERYTHING);
+		SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER | SDL_INIT_JOYSTICK);
 
 		if (!SDL_WasInit(SDL_INIT_VIDEO))
 			SDL_InitSubSystem(SDL_INIT_VIDEO);
@@ -50,8 +50,13 @@ namespace PTSD {
 
 	int InputManager::Shutdown()
 	{
-		delete mImplementation;
-		return 0;
+		if(mInstance)
+		{
+			delete mInstance->mImplementation;
+			mInstance = nullptr;
+			return 0;
+		}
+		return 1;
 	}
 
 	void InputManager::update(bool& running) {

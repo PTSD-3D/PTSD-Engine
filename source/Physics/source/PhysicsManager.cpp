@@ -15,16 +15,9 @@ namespace PTSD {
 		PTSD_ASSERT(mInstance == nullptr, "PhysicsManager already initialized");
 		mInstance = new PhysicsManager();
 
-		mInstance->mCollisionConfiguration = new btDefaultCollisionConfiguration();
+		mInstance->btOgreWorld = new BtOgre::DynamicsWorld(Ogre::Vector3(0, 0, 0));
+		mInstance->mWorld = static_cast<btDiscreteDynamicsWorld*>(mInstance->btOgreWorld->getBtWorld());//new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
 
-		mInstance->mDispatcher = new btCollisionDispatcher(mInstance->mCollisionConfiguration);
-
-		mInstance->mBroadphase = new btDbvtBroadphase();
-
-		mInstance->mSolver = new btSequentialImpulseConstraintSolver;
-		auto world = new BtOgre::DynamicsWorld(Ogre::Vector3(0, 0, 0));
-		mInstance->mWorld = static_cast<btDiscreteDynamicsWorld*>(world->getBtWorld());//new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
-		// mInstance->mWorld = new btDiscreteDynamicsWorld(mInstance->mDispatcher, mInstance->mBroadphase, mInstance->mSolver, mInstance->mCollisionConfiguration);
 		std::function<void(unsigned long, unsigned long, const btManifoldPoint&)> listener = [&](PTSD::UUID a, PTSD::UUID b, const btManifoldPoint& manifold) {
 			mInstance->mScriptManager->sendCollisionEvent(a, b, manifold);
 		};
@@ -32,18 +25,11 @@ namespace PTSD {
 	}
 
 	void PhysicsManager::update(const float& deltaTime) {
-		//generic deltaTime
-		mWorld->stepSimulation((deltaTime));
-		// BtOgre::onTick(mWorld, deltaTime);
-		//logActivity();
+		mWorld->stepSimulation(deltaTime);
 	}
 
 	void PhysicsManager::shutdown() {
-		delete mCollisionConfiguration;
-		delete mDispatcher;
-		delete mBroadphase;
-		delete mSolver;
-		delete mWorld;
+		delete btOgreWorld;
 	}
 
 	void PhysicsManager::setGravity(float grav)

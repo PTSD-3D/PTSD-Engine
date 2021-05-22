@@ -109,15 +109,13 @@ namespace PTSD {
 
 	void ScriptManager::shutdown()
 	{
-		//Clean entity internal representation (?)
+		delete state;
+		state = nullptr;
 	}
 
 	std::shared_ptr<Entity> ScriptManager::createEntity(UUID entityID)
 	{
 		auto ent = entityManager->createEntity(entityID);
-		//Creates an entity in Lua and relates it to this pointer
-		//Entity["Start"]();
-
 		return ent;
 	}
 

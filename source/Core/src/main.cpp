@@ -91,5 +91,14 @@
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();
 	}
+
+	scriptingSystem->shutdown();
+	soundSystem->shutdown();
+	physicsSystem->shutdown();
+	uiSystem->shutdown();
+	inputSystem->Shutdown();
+	graphicsSystem->shutdown();
+
+
 	return EXIT_SUCCESS;
 }
