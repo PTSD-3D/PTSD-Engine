@@ -56,6 +56,11 @@ copy dependencies\CEGUI\build\bin\CEGUIOgreRenderer-0.dll bin\ 1>NUL
 copy dependencies\CEGUI\build\bin\CEGUIOgreRenderer-0_d.dll bin\ 1>NUL
 copy dependencies\CEGUI\src\dependencies\bin\libexpat.dll bin\ 1>NUL
 copy dependencies\CEGUI\src\dependencies\bin\libexpat_d.dll bin\ 1>NUL
+copy dependencies\CEGUI\build\bin\CEGUICoreWindowRendererSet.dll bin\ 1>NUL
+copy dependencies\CEGUI\build\bin\CEGUICoreWindowRendererSet_d.dll bin\ 1>NUL
+copy dependencies\CEGUI\build\bin\CEGUIExpatParser.dll bin\ 1>NUL
+copy dependencies\CEGUI\build\bin\CEGUIExpatParser_d.dll bin\ 1>NUL
+
 
 echo Copiando DLLs scripting...
 
