@@ -188,7 +188,6 @@ namespace PTSD {
 		(*state).set_function("cameraLookAt", &PTSD::Camera::lookAt, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("cameraSetPos", &PTSD::Camera::setPosition, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
-		(*state).set_function("pitchCamera", &PTSD::Camera::mousePitch, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("getCamOrientation", &PTSD::Camera::getOrientation, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("setOrthoProjection", &PTSD::Camera::setOrtho, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("setNearClipDistance", &PTSD::Camera::setNearClip, PTSD::GraphicsManager::getInstance()->getCam());
@@ -312,6 +311,7 @@ namespace PTSD {
 		(*state).set_function("keyJustReleased", &PTSD::InputManager::keyJustUp, PTSD::InputManager::getInstance());
 
 		//Mouse
+		(*state).set_function("getMousePosition", &PTSD::InputManager::getMousePosition, PTSD::InputManager::getInstance());
 		(*state).set_function("getMouseRelativePosition", &PTSD::InputManager::getMouseRelativePosition, PTSD::InputManager::getInstance());
 		(*state).set_function("resetMouse", &PTSD::InputManager::cleanMouseDelta, PTSD::InputManager::getInstance());
 		(*state).set_function("mouseButtonPressed", &PTSD::InputManager::isMouseButtonDown, PTSD::InputManager::getInstance());
@@ -391,7 +391,7 @@ namespace PTSD {
 		(*state).new_usertype<Vec3>("vec3", sol::constructors<Vec3(double, double, double),Vec3(float, float, float), Vec3(btVector3&)>(),"magnitude", &Vec3::magnitude,"normalize", &Vec3::normalize , "x", &Vec3::x, "y", &Vec3::y, "z", &Vec3::z,
 		sol::meta_function::multiplication, &Vec3::operator*,sol::meta_function::subtraction, &Vec3::operator-,sol::meta_function::addition, &Vec3::operator+);
 		(*state).new_usertype<Vec4Placeholder>("vec4", sol::constructors<Vec4Placeholder(double, double, double, double)>(), "x", &Vec4Placeholder::x, "y", &Vec4Placeholder::y, "z", &Vec4Placeholder::z, "w", &Vec4Placeholder::w);
-		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, sol::meta_function::subtraction, &Vector2D::operator-,
+		(*state).new_usertype<Vector2D>("vec2", sol::constructors<Vector2D(double, double)>(), "x", &Vector2D::x, "y", &Vector2D::y, "normalize", &Vector2D::normalize, sol::meta_function::subtraction, &Vector2D::operator-,
 			sol::meta_function::addition, &Vector2D::operator+, sol::meta_function::multiplication, &Vector2D::operator*);
 		return true;
 	}
