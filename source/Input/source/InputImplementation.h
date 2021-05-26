@@ -116,8 +116,8 @@ namespace PTSD {
 			mousePos_.x = event.motion.x;
 			mousePos_.y = event.motion.y;
 
-			mouseRelativePos_.x = event.motion.xrel;
-			mouseRelativePos_.y = event.motion.yrel;
+			mouseRelativePos_.x += event.motion.xrel;
+			mouseRelativePos_.y += event.motion.yrel;
 		}
 		inline void onMouseButtonChange(SDL_Event& event, bool isDown) {
 			isMouseButtonEvent_ = true;

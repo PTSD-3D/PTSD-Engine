@@ -349,18 +349,16 @@ namespace PTSD {
 			std::string errMsg = soundData.path + " 's volume be modified. Error while trying to play the music. @SoundManager.cpp, PlayMusic()";
 			PTSD::LOG(errMsg.c_str(), PTSD::Error);
 		}
-
-		genChannels[currentChannel]->setCallback(SoundManager::EndOfSound(currentChannel));
 	}
 
 	void SoundManager::changeMusic(int id, bool loop)
 	{
 		FMOD::Sound* sound = nullptr;
 		musicChannel->getCurrentSound(&sound);
-		if (sound != nullptr) sound->release();
+		if (sound != nullptr) musicChannel->stop();
 
 		playMusic(id, loop);
-	}
+	}	
 
 	void SoundManager::pauseMusic()
 	{
