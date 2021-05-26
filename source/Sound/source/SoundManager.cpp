@@ -71,6 +71,12 @@ namespace PTSD {
 		}
 		mInstance->sys->close();
 		mInstance->sys->release();
+
+		if (mInstance)
+		{
+			delete mInstance;
+			mInstance = nullptr;
+		}
 	}
 
 	int SoundManager::loadSound(const std::string& path, int soundType, int soundChannel, float volume)

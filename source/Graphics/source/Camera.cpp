@@ -33,9 +33,7 @@ PTSD::Camera::Camera(Vec3 pos)
 }
 
 PTSD::Camera::~Camera(){
-	delete mViewPort;
-	delete mCamera;
-	delete mNode;
+	//OgreRoot cleans this up
 };
 
 void PTSD::Camera::setNearClip(float clip)

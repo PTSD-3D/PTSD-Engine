@@ -52,6 +52,6 @@ namespace PTSD {
 		void setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger);
 
 		PhysicsManager() { mInstance = this; }
-		~PhysicsManager() = default;
+		~PhysicsManager(){};
 	};
 }

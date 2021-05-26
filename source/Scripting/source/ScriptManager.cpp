@@ -24,6 +24,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "TransformComponent.h"
 #include "RigidbodyComponent.h"
 #include "PTSDVectors.h"
+#include "CheckML.h"
 
 namespace fs = std::filesystem;
 namespace PTSD {

@@ -50,7 +50,6 @@ namespace PTSD {
 		return 0;
 	}
 	void GraphicsManager::shutdown(){
-
 		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("General");
 		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("Imagesets");
 		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("Fonts");
@@ -58,8 +57,8 @@ namespace PTSD {
 		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("LookNFeel");
 		Ogre::ResourceGroupManager::getSingleton().destroyResourceGroup("Layouts");
 		Ogre::ResourceGroupManager::getSingleton().shutdownAll();
-		
-		SDL_DestroyRenderer(SDL_GetRenderer(mSDLWindow));
+
+		//SDL_DestroyRenderer(SDL_GetRenderer(mSDLWindow)); <-- TODO ifdef linux
 		SDL_GL_DeleteContext(SDL_GL_GetCurrentContext()); 
 		SDL_DestroyWindow(mSDLWindow);
 		SDL_QuitSubSystem(SDL_INIT_EVERYTHING);
@@ -67,13 +66,27 @@ namespace PTSD {
 		mRoot->destroyRenderTarget(mRenderWindow);
 		mRoot->destroySceneManager(mSceneMgr);
 
+
 		// delete mRoot->getRenderSystem();
+		delete mCamera;
 		delete mRoot;
 
 		mRoot = nullptr;
 		mSceneMgr = nullptr;
 		mRenderWindow = nullptr;
 		SDL_Quit();
+
+		delete mFileSystemLayer;
+		delete mLogManager;
+		delete mLogListener;
+
+		
+
+		if (mInstance)
+		{
+			delete mInstance;
+			mInstance = nullptr;
+		}
 	};
 
 	/**
@@ -137,9 +150,10 @@ namespace PTSD {
 	void GraphicsManager::setupLogging()
 	{
 		//PTSD Logging, before init we will redirect everything to our own logger
-		Ogre::LogManager* logMgr = new Ogre::LogManager();
-		Ogre::Log* log = Ogre::LogManager::getSingleton().createLog("logs/Ogre.log", true, false, true);
-		log->addListener(new PTSDLogListener());
+		mLogManager = new Ogre::LogManager();
+		mLog = Ogre::LogManager::getSingleton().createLog("logs/Ogre.log", true, false, true);
+		mLogListener = new PTSDLogListener();
+		mLog->addListener(mLogListener);
 		Ogre::LogManager::getSingleton().getDefaultLog()->logMessage("GET OUT OF MY SWAMP", Ogre::LML_WARNING);
 	}
 

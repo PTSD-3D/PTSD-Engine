@@ -229,6 +229,9 @@ void OgreTexture::loadFromMemory(const void* buffer, const Sizef& buffer_size,
     d_size.d_width = d_texture->getWidth();
     d_size.d_height = d_texture->getHeight();
     d_dataSize = buffer_size;
+
+    delete[] bufferCopy;
+    delete pixelBox;
     updateCachedScaleValues();
 }
 

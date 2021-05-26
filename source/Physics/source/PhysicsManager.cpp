@@ -30,6 +30,13 @@ namespace PTSD {
 
 	void PhysicsManager::shutdown() {
 		delete btOgreWorld;
+		delete mInstance->mCollisionListener;
+
+		if (mInstance)
+		{
+			delete mInstance; 
+			mInstance = nullptr;
+		}
 	}
 
 	void PhysicsManager::setGravity(float grav)

@@ -40,6 +40,7 @@ namespace PTSD {
 
 		~Entity() {
 			components_.clear();
+			printf("OJO QUE ME BORRO: %p\n",this);
 		}
 
 		//Runtime loop methods

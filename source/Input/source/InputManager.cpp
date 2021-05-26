@@ -53,6 +53,7 @@ namespace PTSD {
 		if(mInstance)
 		{
 			delete mInstance->mImplementation;
+			delete mInstance;
 			mInstance = nullptr;
 			return 0;
 		}

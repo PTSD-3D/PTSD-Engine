@@ -12,8 +12,10 @@ namespace Ogre {
 	class Viewport;
 	class SceneNode;
 	class FileSystemLayer;
+	class Log;
+	class LogManager;
 }
-
+class PTSDLogListener;
 namespace PTSD {
 	class Camera;
 
@@ -37,6 +39,9 @@ namespace PTSD {
 
 		Camera* mCamera;
 		//Ogre::SceneNode* mLightNode, mCameraNode;
+		Ogre::Log* mLog;
+		Ogre::LogManager* mLogManager;
+		PTSDLogListener* mLogListener;
 
 		void setupLogging();
 		void setupWindow();

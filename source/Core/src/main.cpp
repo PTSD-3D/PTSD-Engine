@@ -23,6 +23,8 @@
 
 #ifdef _DEBUG
 	int main(){
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc(152776);
 #else
 #ifdef _WIN32
 	int WINAPI
@@ -93,12 +95,15 @@
 	}
 
 	scriptingSystem->shutdown();
+	delete scriptingSystem;
 	soundSystem->shutdown();
 	physicsSystem->shutdown();
 	uiSystem->shutdown();
 	inputSystem->Shutdown();
 	graphicsSystem->shutdown();
+	logSystem->shutdown();
 
+	delete logSystem;
 
 	return EXIT_SUCCESS;
 }
