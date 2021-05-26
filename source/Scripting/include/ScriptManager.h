@@ -31,7 +31,7 @@ namespace PTSD
 		virtual ~ScriptManager();
 
 		bool init();
-		bool update();
+		bool update(float dt);
 		void shutdown();
 
 		void run(const std::string& scriptFile);

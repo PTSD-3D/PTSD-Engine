@@ -95,10 +95,10 @@ namespace PTSD {
 		return true;
 	}
 
-	bool ScriptManager::update()
+	bool ScriptManager::update(float dt)
 	{
 		entityManager->update();
-		sol::protected_function_result result = (*state)["Manager"]["update"]((*state)["Manager"], 1);
+		sol::protected_function_result result = (*state)["Manager"]["update"]((*state)["Manager"],dt);
 		if (!result.valid()) {
 			sol::error err = result;
 			throw std::runtime_error(err.what());
