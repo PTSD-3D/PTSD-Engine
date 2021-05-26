@@ -15,7 +15,7 @@ namespace PTSD
 		Component(CmpId id) :
 			id_(id) {}
 	public:
-		virtual ~Component() { printf("Deleting Component\n"); };
+		virtual ~Component() {};
 		void setEntity(Entity* entity) { entity_ = entity; }
 		CmpId getId() { return id_; }
 		virtual void init() {}

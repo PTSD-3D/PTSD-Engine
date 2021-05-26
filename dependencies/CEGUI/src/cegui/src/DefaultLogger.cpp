@@ -61,7 +61,7 @@ DefaultLogger::~DefaultLogger(void)
 }
 
 //----------------------------------------------------------------------------//
-void DefaultLogger::logEvent(const std::string& message,
+void DefaultLogger::logEvent(const String& message,
                              LoggingLevel level /* = Standard */)
 {
     using namespace std;

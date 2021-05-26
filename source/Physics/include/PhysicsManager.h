@@ -44,7 +44,7 @@ namespace PTSD {
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
 		BtOgre::CollisionListener* getCollisionListener() const {return mCollisionListener;}
 
-		btRigidBody* addRigidBody(Vec3 size, float mass, Vec3 pos,btCollisionShape* shape, Vec3 rot = { 0,0,0 });
+		btRigidBody* addRigidBody(Vec3 size, float mass, Vec3 pos,btCollisionShape** shape, Vec3 rot = { 0,0,0 });
 
 		void removeCollision(btRigidBody* body);
 		void removeRigidBody(btRigidBody* body);
