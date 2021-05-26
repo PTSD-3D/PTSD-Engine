@@ -64,6 +64,7 @@
 	//GAME LOOP (all times in miliseconds)
 	bool running = true;
 	const Uint32 deltaTime = 33; //33 miliseconds per frame, ~30fps
+	const float deltaTimeSeconds = 0.03333;
 	Uint32 accumulator = 0;
 	Uint32 currentTime = SDL_GetTicks();
 	Uint32 newTime;
@@ -80,7 +81,7 @@
       
 			soundSystem->update();
 			uiSystem->update();
-			scriptingSystem->update();
+			scriptingSystem->update(deltaTimeSeconds);
 
 			inputSystem->clean();
 			//PTSD::LOG("update cycle complete", PTSD::Warning);
