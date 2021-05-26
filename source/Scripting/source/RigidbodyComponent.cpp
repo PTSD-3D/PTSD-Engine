@@ -10,7 +10,7 @@ namespace PTSD
 {
 	RigidbodyComponent::RigidbodyComponent(Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 rot) : 
 		Component(CmpId::RigidbodyC), trigger(trigger), mass(mass), type(type) {
-		mObj = PhysicsManager::getInstance()->addRigidBody(size, (type!=CollisionFlags::Static) ? mass : 0, pos,&mColShape, degToRad(rot));
+		mObj = PhysicsManager::getInstance()->addRigidBody(size, (type!=CollisionFlags::Static) ? mass : 0, pos,mColShape, degToRad(rot));
 		if (mColShape != nullptr)
 			LOG("CollisionShape assigned on Pimpl", Info);
 		PhysicsManager::getInstance()->setCollisionFlags(mObj, type, trigger);
@@ -18,8 +18,8 @@ namespace PTSD
 
 	RigidbodyComponent::~RigidbodyComponent()
 	{
-		//LOG("deleting rb");
-		//PhysicsManager::getInstance()->removeRigidBody(mObj);
+		PhysicsManager::getInstance()->removeRigidBody(mObj);
+		printf("Size:%d\n", sizeof(BtOgre::RigidBodyState));
 	}
 
 	void RigidbodyComponent::init() {
