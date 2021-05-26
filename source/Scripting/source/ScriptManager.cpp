@@ -249,8 +249,8 @@ namespace PTSD {
 		(*state).set_function("playSound", sol::resolve<int(int)>(&PTSD::SoundManager::playSound), PTSD::SoundManager::getInstance());
 
 		//Music
-		(*state).set_function("playMusic", sol::resolve<void(int, bool)>(&PTSD::SoundManager::playMusic), PTSD::SoundManager::getInstance());
-		(*state).set_function("changeMusic", sol::resolve<void(int, bool)>(&PTSD::SoundManager::changeMusic), PTSD::SoundManager::getInstance());
+		(*state).set_function("playMusic", &PTSD::SoundManager::playMusic, PTSD::SoundManager::getInstance());
+		(*state).set_function("changeMusic", &PTSD::SoundManager::changeMusic, PTSD::SoundManager::getInstance());
 		(*state).set_function("isMusicPaused", &PTSD::SoundManager::isMusicPaused, PTSD::SoundManager::getInstance());
 		(*state).set_function("muteMusic", &PTSD::SoundManager::muteMusic, PTSD::SoundManager::getInstance());
 		(*state).set_function("pauseMusic", &PTSD::SoundManager::pauseMusic, PTSD::SoundManager::getInstance());
