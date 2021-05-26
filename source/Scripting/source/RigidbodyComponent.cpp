@@ -19,11 +19,12 @@ namespace PTSD
 	RigidbodyComponent::~RigidbodyComponent()
 	{
 		PhysicsManager::getInstance()->removeRigidBody(mObj);
-		printf("Size:%d\n", sizeof(BtOgre::RigidBodyState));
 	}
 
 	void RigidbodyComponent::init() {
 		rbState = new BtOgre::RigidBodyState(entity_->getComponent<TransformComponent>(CmpId::Transform)->getNode());
+		if (mObj->getMotionState())
+			delete mObj->getMotionState();
 		mObj->setMotionState(rbState);
 		mObj->setUserPointer((void*)(new BtOgre::EntityCollisionListener(PhysicsManager::getInstance()->getCollisionListener(), entity_->getID())));
 	}
