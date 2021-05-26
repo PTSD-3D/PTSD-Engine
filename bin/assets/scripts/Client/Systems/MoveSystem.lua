@@ -19,6 +19,16 @@ MoveSystem.dirs = {
 	backward = vec3:new(-1, 0, 0)
 }
 
+function MoveSystem:onAddEntity(entity)
+	print(resources.Sounds.Clowning.id)
+
+	--I know this shouldn't be here but it's just a test.
+ 	playMusic(resources.Sounds.Clowning.id, true)
+	changeMusic(resources.Sounds.PTSD_Anthem.id, false)
+	pauseMusic()
+	--If this doesn't explode it's a good sign
+end
+
 function MoveSystem:requires() return { "playerMove" } end
 
 function MoveSystem:Move(entity,dir, delta, speed)
