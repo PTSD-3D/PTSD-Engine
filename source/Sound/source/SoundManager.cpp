@@ -342,7 +342,7 @@ namespace PTSD {
 	{
 		FMOD::Sound* sound = nullptr;
 		musicChannel->getCurrentSound(&sound);
-		if (sound != nullptr) sound->release();
+		if (sound != nullptr) musicChannel->stop();
 
 		playMusic(id, loop);
 	}	
