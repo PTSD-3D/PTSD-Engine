@@ -130,3 +130,16 @@ void PTSD::Camera::setPerspective()
 {
 	mCamera->setProjectionType(Ogre::PT_PERSPECTIVE);
 }
+
+Vec3 PTSD::Camera::getPosition() {
+	Ogre::Vector3 v = mCamera->getRealPosition();
+	return { v.x, v.y, v.z };
+}
+
+float PTSD::Camera::getOrthoWindowHeight() {
+	return mCamera->getOrthoWindowHeight();
+}
+
+float PTSD::Camera::getOrthoWindowWidth() {
+	return mCamera->getOrthoWindowWidth();
+}

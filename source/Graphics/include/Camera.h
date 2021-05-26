@@ -49,6 +49,8 @@ namespace PTSD
 		void setPerspective();
 		Ogre::SceneNode* getNode();
 		Vec3 getOrientation();
-
+		Vec3 getPosition();
+		float getOrthoWindowHeight();
+		float getOrthoWindowWidth();
 	};
 }
