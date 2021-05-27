@@ -187,6 +187,7 @@ namespace PTSD {
 		(*state).set_function("cameraLookAt", &PTSD::Camera::lookAt, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("cameraSetPos", &PTSD::Camera::setPosition, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("printCameraPos", &PTSD::Camera::debugPos, PTSD::GraphicsManager::getInstance()->getCam());
+		(*state).set_function("getCamDirection", &PTSD::Camera::getDirection, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("getCamOrientation", &PTSD::Camera::getOrientation, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("setOrthoProjection", &PTSD::Camera::setOrtho, PTSD::GraphicsManager::getInstance()->getCam());
 		(*state).set_function("setNearClipDistance", &PTSD::Camera::setNearClip, PTSD::GraphicsManager::getInstance()->getCam());
@@ -379,6 +380,7 @@ namespace PTSD {
 		sol::usertype<PTSD::TransformComponent> trComponent = (*state).new_usertype<PTSD::TransformComponent>("Transform",sol::no_constructor);
 		trComponent["translate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::translate);
 		trComponent["position"] = sol::property(&PTSD::TransformComponent::getPosition, sol::resolve<void(Vec3)>(&PTSD::TransformComponent::setPosition));
+		trComponent["rotation"] = sol::property(&PTSD::TransformComponent::getRotation, sol::resolve<void(Vec3)>(&PTSD::TransformComponent::setRotation));
 		trComponent["rotate"] = (void (PTSD::TransformComponent::*)(Vec3))(&PTSD::TransformComponent::rotate);
 		trComponent["getForward"] = (&PTSD::TransformComponent::getForward);
 		trComponent["getRight"] = (&PTSD::TransformComponent::getRight);

@@ -113,10 +113,23 @@ void PTSD::Camera::debugPos()
 }
 
 
-Vec3 PTSD::Camera::getOrientation()
+Vec3 PTSD::Camera::getDirection()
 {
 	Ogre::Vector3 v = mCamera->getRealDirection();
 	Vec3 vect = { v.x,v.y,v.z };
+
+	return vect;
+}
+
+Vec3 PTSD::Camera::getOrientation()
+{
+	Ogre::Quaternion quaternion = mCamera->getRealOrientation();
+	
+	Ogre::Matrix3 mx2;
+	quaternion.ToRotationMatrix(mx2);
+	Ogre::Radian x, y, z;
+	mx2.ToEulerAnglesYXZ(y, x, z);
+	Vec3 vect(x.valueAngleUnits(), y.valueAngleUnits(), z.valueAngleUnits());
 
 	return vect;
 }

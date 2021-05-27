@@ -76,7 +76,7 @@ namespace PTSD {
 		btDefaultMotionState* state = new btDefaultMotionState(btTransform(btQuaternion(rot.x, rot.y, rot.z), btVector3(pos.x, pos.y, pos.z)));
 		btRigidBody* mObj = new btRigidBody(mass, state, *shape);
 		mWorld->addRigidBody(mObj);
-
+		mObj->setActivationState(DISABLE_DEACTIVATION);
 		return mObj;
 	}
 
