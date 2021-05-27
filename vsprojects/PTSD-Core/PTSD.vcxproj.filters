@@ -221,5 +221,8 @@
     <ClInclude Include="..\..\source\Core\include\BtOgre.h">
       <Filter>Core\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Core\include\CheckML.h">
+      <Filter>Core\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

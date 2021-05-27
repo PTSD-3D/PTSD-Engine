@@ -91,6 +91,7 @@ struct CollisionListener
 struct EntityCollisionListener
 {
 	EntityCollisionListener(CollisionListener*l, unsigned long long id) : listener(l), id(id){}
+	virtual ~EntityCollisionListener() {};
 	CollisionListener *listener;
 	unsigned long long id;
 };

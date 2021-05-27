@@ -18,12 +18,13 @@ namespace PTSD
 
 	RigidbodyComponent::~RigidbodyComponent()
 	{
-		//LOG("deleting rb");
-		//PhysicsManager::getInstance()->removeRigidBody(mObj);
+		PhysicsManager::getInstance()->removeRigidBody(mObj);
 	}
 
 	void RigidbodyComponent::init() {
 		rbState = new BtOgre::RigidBodyState(entity_->getComponent<TransformComponent>(CmpId::Transform)->getNode());
+		if (mObj->getMotionState())
+			delete mObj->getMotionState();
 		mObj->setMotionState(rbState);
 		mObj->setUserPointer((void*)(new BtOgre::EntityCollisionListener(PhysicsManager::getInstance()->getCollisionListener(), entity_->getID())));
 	}
@@ -86,6 +87,7 @@ namespace PTSD
 	{
 		if (mColShape != nullptr) {
 			mColShape->setLocalScaling({ sc.x,sc.y,sc.z });
+			mObj->getCollisionShape()->setLocalScaling({ sc.x,sc.y,sc.z });
 			PhysicsManager::getInstance()->getWorld()->getCollisionWorld()->updateSingleAabb(mObj);
 		}
 		else

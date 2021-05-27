@@ -17,7 +17,9 @@ namespace PTSD
 		spdlog::level::level_enum spdLevel(PTSD::LogLevel level);
 		spdlog::level::level_enum mDefaultLevel;
 	public:
-		~LogImpl() = default;
+		~LogImpl() {
+			shutdown();
+		};
 
 		static LogImpl* getInstance()
 		{
@@ -27,7 +29,7 @@ namespace PTSD
 		}
 
 		void init(LogLevel lvl);
-
+		void shutdown();
 		std::shared_ptr<spdlog::logger> getLogger(size_t n);
 		size_t createLogger(const std::string& name, bool separateLog = false);
 	};

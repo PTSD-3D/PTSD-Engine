@@ -23,6 +23,11 @@
 
 #ifdef _DEBUG
 	int main(){
+#ifdef _WIN32 //Para Comprobar basura solo en windows y en debug
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc(152776); //<-- Si algo deja basura descomentar esta linea y poner de parámetro lo que sale entre {} en el output, así salta como error
+#endif
+
 #else
 #ifdef _WIN32
 	int WINAPI
@@ -92,5 +97,17 @@
 		graphicsSystem->renderFrame(); //The frame is rendered even if the game has not been updated (for faster machines)
 		uiSystem->render();
 	}
+
+	scriptingSystem->shutdown();
+	delete scriptingSystem;
+	soundSystem->shutdown();
+	physicsSystem->shutdown();
+	uiSystem->shutdown();
+	inputSystem->Shutdown();
+	graphicsSystem->shutdown();
+	logSystem->shutdown();
+
+	delete logSystem;
+
 	return EXIT_SUCCESS;
 }
