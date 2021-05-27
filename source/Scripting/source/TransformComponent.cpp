@@ -124,13 +124,13 @@ namespace PTSD {
 		mNode->setScale(x, y, z);
 	}
 
-	void TransformComponent::setChildCamera() //Makes the camera move with the transform
+	void TransformComponent::setChildCamera(Vec3 offset) //Makes the camera move with the transform
 	{
 		GraphicsManager::getInstance()->getCam()->lookAt(Vec3(0, 0, 10000));
 		Ogre::SceneNode* n = GraphicsManager::getInstance()->getCam()->getNode();
 		GraphicsManager::getInstance()->getSceneMgr()->getRootSceneNode()->removeChild(n);
 		mNode->addChild(n);
-		n->setPosition(0, 10, 0);
+		n->setPosition(offset.x, offset.y, offset.z);
 	}
 
 	//Getters
