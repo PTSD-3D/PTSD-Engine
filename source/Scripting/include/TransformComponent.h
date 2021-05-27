@@ -39,7 +39,7 @@ namespace PTSD {
 		void setRotation(float x, float y, float z);
 		void setScale(Vec3 scale);
 		void setScale(float x, float y, float z);
-		void setChildCamera();
+		void setChildCamera(Vec3 offset);
 
 		Vec3 getPosition() const;
 		Vec3 getRotation() const;
