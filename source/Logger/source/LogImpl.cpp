@@ -60,4 +60,11 @@ namespace PTSD
 		mLoggers.back()->set_level(mDefaultLevel);
 		return mLoggers.size() - 1;
 	}
+	void LogImpl::shutdown(){
+		if (mInstance)
+		{
+			mInstance = nullptr;
+			mLoggers.clear();
+		}
+	}
 }

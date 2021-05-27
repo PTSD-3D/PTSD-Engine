@@ -24,6 +24,7 @@ Include every PTSD-System to expose its public API to our Scripting state
 #include "TransformComponent.h"
 #include "RigidbodyComponent.h"
 #include "PTSDVectors.h"
+#include "CheckML.h"
 
 namespace fs = std::filesystem;
 namespace PTSD {
@@ -109,15 +110,13 @@ namespace PTSD {
 
 	void ScriptManager::shutdown()
 	{
-		//Clean entity internal representation (?)
+		delete state;
+		state = nullptr;
 	}
 
 	std::shared_ptr<Entity> ScriptManager::createEntity(UUID entityID)
 	{
 		auto ent = entityManager->createEntity(entityID);
-		//Creates an entity in Lua and relates it to this pointer
-		//Entity["Start"]();
-
 		return ent;
 	}
 
@@ -227,7 +226,7 @@ namespace PTSD {
 		luaRigidbodyComponent["setCollisionScale"] = &PTSD::RigidbodyComponent::setCollisionScale;
 
 		(*state).set_function("setRigidbody", [&](UUID id, Vec3 size, float mass, Vec3 pos, CollisionFlags type, bool trigger, Vec3 quat) {
-			PTSD_ASSERT((size.x > 0 && size.y > 0 && size.z> 0), "Escala negativa, animal");
+			PTSD_ASSERT((size.x > 0 && size.y > 0 && size.z> 0), "Escala negativa");
 			return entityManager->getEntity(id).get()->addComponent<PTSD::RigidbodyComponent>(size, mass, pos, type, trigger, quat);
 			});
 		(*state).set_function("setGravity", &PTSD::PhysicsManager::setGravity, PTSD::PhysicsManager::getInstance());

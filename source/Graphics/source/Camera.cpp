@@ -32,7 +32,9 @@ PTSD::Camera::Camera(Vec3 pos)
 	mCamera->setAutoAspectRatio(true);
 }
 
-PTSD::Camera::~Camera() = default;
+PTSD::Camera::~Camera(){
+	//OgreRoot cleans this up
+};
 
 void PTSD::Camera::setNearClip(float clip)
 {

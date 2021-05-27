@@ -60,9 +60,22 @@ namespace PTSD {
 
 	void SoundManager::shutdown()
 	{
+		for(auto it : loadedSounds)
+		{
+			it.fmodSound->release();
+		}
+		
 		for (int k = 0; k < ChannGroupCount; k++) {
 			genChannelGroups[k]->release();
 			musicChannelGroup->release();
+		}
+		mInstance->sys->close();
+		mInstance->sys->release();
+
+		if (mInstance)
+		{
+			delete mInstance;
+			mInstance = nullptr;
 		}
 	}
 

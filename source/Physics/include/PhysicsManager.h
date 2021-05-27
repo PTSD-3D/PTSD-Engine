@@ -13,6 +13,7 @@ class btGhostObject;
 namespace BtOgre{
 struct CollisionListener;
 struct EntityCollisionListener;
+class DynamicsWorld;
 }
 
 namespace PTSD {
@@ -23,10 +24,7 @@ namespace PTSD {
 		static PhysicsManager* mInstance;
 		ScriptManager * mScriptManager;
 
-		btBroadphaseInterface* mBroadphase;
-		btDefaultCollisionConfiguration* mCollisionConfiguration;
-		btCollisionDispatcher* mDispatcher;
-		btSequentialImpulseConstraintSolver* mSolver;
+		BtOgre::DynamicsWorld* btOgreWorld;
 		btDiscreteDynamicsWorld* mWorld;
 		BtOgre::CollisionListener* mCollisionListener;
 		void logActivity();
@@ -43,10 +41,6 @@ namespace PTSD {
 
 		void setGravity(float grav);
 
-		btBroadphaseInterface* getBroadphase() const { return mBroadphase; }
-		btDefaultCollisionConfiguration* getCollisionConfiguration() const { return mCollisionConfiguration; }
-		btCollisionDispatcher* getDispatcher() const { return mDispatcher; }
-		btSequentialImpulseConstraintSolver* getSolver() const { return mSolver; }
 		btDiscreteDynamicsWorld* getWorld() const { return mWorld; }
 		BtOgre::CollisionListener* getCollisionListener() const {return mCollisionListener;}
 
@@ -58,6 +52,6 @@ namespace PTSD {
 		void setCollisionFlags(btRigidBody* rb, CollisionFlags type, bool trigger);
 
 		PhysicsManager() { mInstance = this; }
-		~PhysicsManager() = default;
+		~PhysicsManager() {  };
 	};
 }

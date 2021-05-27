@@ -13,6 +13,8 @@ end
 --local ents = Manager:getEntitiesWithComponent("playerMove")
 --if ents ~= {} then ents[1]:add(ns.Component.all["topo"]()) end
 
+
+-- TODO: limpiar la memoria que dejan estas funciones de UI
 -- UI Usage example
 setUIMouseCursor("TaharezLook/MouseArrow")
 
