@@ -86,22 +86,22 @@ void PTSD::Camera::mouseRotate(Vector2D dir)
 	mCamera->yaw(Ogre::Degree(-dir.getX()));
 
 	// We don't want the camera to do a full 360º rotation on the x-axis. It needs to be locked at 180º
-	float pitchAngle = (2 * Ogre::Degree(Ogre::Math::ACos(cameraPitchNode->getOrientation().w)).valueDegrees());
+	float pitchAngle = (2 * Ogre::Degree(Ogre::Math::ACos(mCamera->getOrientation().w)).valueDegrees());
 
 	// Just to determine the sign of the angle we pick up above, the
 	// value itself does not interest us.
-	float pitchAngleSign = cameraPitchNode->getOrientation().x;
+	float pitchAngleSign = mCamera->getOrientation().x;
 
 	// Limit the pitch between -90 degress and +90 degrees, Quake3-style.
 	if (pitchAngle > 90.0f)
 	{
 		if (pitchAngleSign > 0)
 			// Set orientation to 90 degrees on X-axis.
-			cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
+			mCamera->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
 				Ogre::Math::Sqrt(0.5f), 0, 0));
 		else if (pitchAngleSign < 0)
 			// Sets orientation to -90 degrees on X-axis.
-			cameraPitchNode->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
+			mCamera->setOrientation(Ogre::Quaternion(Ogre::Math::Sqrt(0.5f),
 				-Ogre::Math::Sqrt(0.5f), 0, 0));
 	}
 }
