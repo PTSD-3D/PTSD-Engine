@@ -43,7 +43,7 @@ namespace PTSD {
 		mInstance->setupLogging();
 		mInstance->setupWindow();
 		mInstance->loadResources();
-		mInstance->testScene();
+		mInstance->sceneSetup();
 
 		LOG("Graphics system initialized");
 
@@ -255,7 +255,7 @@ namespace PTSD {
 		Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 	}
 
-	void GraphicsManager::testScene()
+	void GraphicsManager::sceneSetup()
 	{
 
 		mSceneMgr = mRoot->createSceneManager();
@@ -264,7 +264,7 @@ namespace PTSD {
 
 		mSceneMgr->setAmbientLight(Ogre::ColourValue(.1, .1, .1));	//Was (0.5, 0.5, 0.5)
 
-		Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+		Ogre::SceneNode* lightNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("MainLightNode");
 		Ogre::Light* light = mSceneMgr->createLight("MainLight");
 		lightNode->setPosition(20, 80, 50);
 		lightNode->attachObject(light);
@@ -289,5 +289,14 @@ namespace PTSD {
 		SDL_PumpEvents();
 #endif
 
+	}
+
+	void GraphicsManager::setAmbientLight(float r, float g, float b) {
+		mSceneMgr->setAmbientLight(Ogre::ColourValue(r, g, b));
+	}
+
+	void GraphicsManager::setLightOrientation(float x, float y, float z, float w) {
+		Ogre::SceneNode* lightNode = mSceneMgr->getSceneNode("MainLightNode");
+		lightNode->setOrientation(x, y, z, w);
 	}
 }

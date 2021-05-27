@@ -209,6 +209,10 @@ namespace PTSD {
 		//Skybox and skydome
 		(*state).set_function("setSkybox", &GraphicsManager::setSceneSkybox, PTSD::GraphicsManager::getInstance());
 		(*state).set_function("setSkydome", &GraphicsManager::setSceneSkydome, PTSD::GraphicsManager::getInstance());
+
+		//Lights
+		(*state).set_function("setAmbientLight", &GraphicsManager::setAmbientLight, PTSD::GraphicsManager::getInstance());
+		(*state).set_function("setLightOrientation", &GraphicsManager::setLightOrientation, PTSD::GraphicsManager::getInstance());
 		return true;
 	}
 	bool ScriptManager::bindPhysicsComponents()

@@ -45,9 +45,8 @@ namespace PTSD {
 
 		void setupLogging();
 		void setupWindow();
-		void setupMouse();
 		void loadResources();
-		void testScene();
+		void sceneSetup();
 		void msgPump();
 	public:
 		GraphicsManager() = default;
@@ -76,5 +75,7 @@ namespace PTSD {
 		void setMouseLocked(bool locked);
 		void setSceneSkybox(bool enabled, const std::string& material, float distance, bool renderFirst );
 		void setSceneSkydome(bool enabled, const std::string& material, unsigned int curvature, unsigned int tiledRepetitions);
+		void setAmbientLight(float r, float g, float b);
+		void setLightOrientation(float x, float y, float z, float w);
 	};
 }
